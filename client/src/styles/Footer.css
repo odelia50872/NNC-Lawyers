@@ -1,0 +1,94 @@
+/* Footer.css */
+.footer {
+    background-color: #111827;
+    color: #9ca3af;
+    padding: 3rem 2rem 1.5rem;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #1f2937;
+}
+
+.footer-section h3 {
+    color: #c9a84c;
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+}
+
+.footer-section h4 {
+    color: #fff;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #c9a84c;
+    display: inline-block;
+}
+
+.footer-section p {
+    margin-bottom: 0.6rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.9rem;
+}
+
+.footer-section a {
+    color: #9ca3af;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer-section a:hover {
+    color: #c9a84c;
+}
+
+.footer-nav-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+}
+
+.waze-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: #33ccff !important;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: opacity 0.2s !important;
+}
+
+.waze-link:hover {
+    opacity: 0.8;
+}
+
+.gmaps-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: #c9a84c !important;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: opacity 0.2s !important;
+}
+
+.gmaps-link:hover {
+    opacity: 0.8;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.78rem;
+    color: #4b5563;
+}

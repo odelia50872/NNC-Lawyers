@@ -1,0 +1,19 @@
+/* About.css */
+.about-page {
+    max-width: 900px;
+    margin: 3rem auto;
+    padding: 0 2rem;
+    direction: rtl;
+}
+
+.about-page h1 {
+    font-size: 2rem;
+    color: #1a1a2e;
+    margin-bottom: 1rem;
+}
+
+.about-page p {
+    font-size: 1.1rem;
+    color: #444;
+    line-height: 1.8;
+}
