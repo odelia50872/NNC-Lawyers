@@ -1,14 +1,13 @@
-const { queryGet, queryGetByField, queryPost, queryPut, queryDelete } = require('../services/SQLRequest');
+const { getUserByEmail, getAllUsers, getUserById, createUser, updateUser, deleteUser } = require('../services/userService');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const login = async (req, res) => {
     try {
         const { email, password } = req.body;
-        const rows = await queryGetByField('clients', 'email', email);
-        if (!rows.length) return res.status(401).json({ error: 'אימייל או סיסמה שגויים' });
+        const user = await getUserByEmail(email);
+        if (!user) return res.status(401).json({ error: 'אימייל או סיסמה שגויים' });
 
-        const user = rows[0];
         const valid = await bcrypt.compare(password, user.password_hash);
         if (!valid) return res.status(401).json({ error: 'אימייל או סיסמה שגויים' });
 
@@ -24,53 +23,50 @@ const login = async (req, res) => {
     }
 };
 
-const getAllUsers = async (req, res) => {
+const getAllUsersCtrl = async (req, res) => {
     try {
-        const users = await queryGet('clients');
+        const users = await getAllUsers();
         res.json(users);
     } catch (err) {
         res.status(500).json({ error: 'Failed to retrieve users' });
     }
 };
 
-const getUserById = async (req, res) => {
+const getUserByIdCtrl = async (req, res) => {
     try {
-        const rows = await queryGet('clients', req.params.id);
-        if (!rows.length) return res.status(404).json({ error: 'User not found' });
-        res.json(rows[0]);
+        const user = await getUserById(req.params.id);
+        if (!user) return res.status(404).json({ error: 'User not found' });
+        res.json(user);
     } catch (err) {
         res.status(500).json({ error: 'Failed to retrieve user' });
     }
 };
 
-const createUser = async (req, res) => {
+const createUserCtrl = async (req, res) => {
     try {
-        const { full_name, email, password, phone, role = 'client' } = req.body;
-        const password_hash = await bcrypt.hash(password, 10);
-        const result = await queryPost('clients', { full_name, email, password_hash, phone, role });
+        const result = await createUser(req.body);
         res.status(201).json({ id: result.insertId });
     } catch (err) {
         res.status(500).json({ error: 'Failed to create user' });
     }
 };
 
-const updateUser = async (req, res) => {
+const updateUserCtrl = async (req, res) => {
     try {
-        const { full_name, email, phone } = req.body;
-        await queryPut('clients', req.params.id, { full_name, email, phone });
+        await updateUser(req.params.id, req.body);
         res.json({ message: 'User updated successfully' });
     } catch (err) {
         res.status(500).json({ error: 'Failed to update user' });
     }
 };
 
-const deleteUser = async (req, res) => {
+const deleteUserCtrl = async (req, res) => {
     try {
-        await queryDelete('clients', req.params.id);
+        await deleteUser(req.params.id);
         res.json({ message: 'User deleted successfully' });
     } catch (err) {
         res.status(500).json({ error: 'Failed to delete user' });
     }
 };
 
-module.exports = { login, getAllUsers, getUserById, createUser, updateUser, deleteUser };
+module.exports = { login, getAllUsers: getAllUsersCtrl, getUserById: getUserByIdCtrl, createUser: createUserCtrl, updateUser: updateUserCtrl, deleteUser: deleteUserCtrl };
