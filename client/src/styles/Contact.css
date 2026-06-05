@@ -1,48 +1,195 @@
 /* Contact.css */
 .contact-page {
-    max-width: 700px;
-    margin: 3rem auto;
+    max-width: 1100px;
+    margin: 4rem auto;
     padding: 0 2rem;
-    direction: rtl;
 }
 
-.contact-page h1 {
-    font-size: 2rem;
-    color: #1a1a2e;
-    margin-bottom: 2rem;
+.contact-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 0;
+    align-items: stretch;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+
+.contact-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.contact-header h1 {
+    font-size: 2.2rem;
+    color: #111827;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.contact-subtitle {
+    color: #6b7280;
+    font-size: 1rem;
+}
+
+.contact-card {
+    background: #fff;
+    padding: 2.5rem;
+    border-top: 4px solid #c9a84c;
+}
+
+.contact-alert {
+    padding: 0.9rem 1.2rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+}
+
+.contact-alert.success {
+    background: #f0fdf4;
+    color: #166534;
+    border: 1px solid #bbf7d0;
+}
+
+.contact-alert.error {
+    background: #fef2f2;
+    color: #991b1b;
+    border: 1px solid #fecaca;
 }
 
 .contact-form {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.25rem;
 }
 
-.contact-form input,
-.contact-form textarea {
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.form-group label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #374151;
+}
+
+.form-group input,
+.form-group textarea {
     padding: 0.75rem 1rem;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 1rem;
-    direction: rtl;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    background: #f9fafb;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+    font-family: inherit;
 }
 
-.contact-form textarea {
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #c9a84c;
+    box-shadow: 0 0 0 3px rgba(201,168,76,0.15);
+    background: #fff;
+}
+
+.form-group textarea {
     resize: vertical;
-    min-height: 150px;
+    min-height: 140px;
 }
 
-.contact-form button {
-    padding: 0.75rem;
-    background-color: #1a1a2e;
+.contact-submit {
+    padding: 0.85rem;
+    background-color: #111827;
     color: #fff;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     font-size: 1rem;
+    font-weight: 600;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: background 0.2s, transform 0.1s;
+    letter-spacing: 0.5px;
 }
 
-.contact-form button:hover {
-    background-color: #2e2e5e;
+.contact-submit:hover {
+    background-color: #1f2937;
+    transform: translateY(-1px);
+}
+
+.contact-submit:active {
+    transform: translateY(0);
+}
+
+.contact-info-card {
+    background: #0f1624;
+    padding: 2.5rem 2rem;
+    border-top: 4px solid #c9a84c;
+    border-left: 3px solid #c9a84c;
+}
+
+.contact-info-card h3 {
+    font-size: 1rem;
+    color: #c9a84c;
+    margin-bottom: 1.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(201,168,76,0.3);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 700;
+}
+
+.contact-info-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.contact-info-list li {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 1.1rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+.contact-info-list li:last-child {
+    border-bottom: none;
+}
+
+.contact-info-name {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #9ca3af;
+    letter-spacing: 0.3px;
+}
+
+.contact-info-phone {
+    font-size: 1rem;
+    color: #fff;
+    font-weight: 700;
+    direction: ltr;
+    display: inline-block;
+}
+
+@media (max-width: 768px) {
+    .contact-layout {
+        grid-template-columns: 1fr;
+    }
+    .contact-info-card {
+        border-left: none;
+        border-bottom: 3px solid #c9a84c;
+    }
+    .form-row {
+        grid-template-columns: 1fr;
+    }
 }

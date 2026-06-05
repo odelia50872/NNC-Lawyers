@@ -1,7 +1,7 @@
 import { useLang } from '../../context/LanguageContext';
 import '../../styles/PracticeAreas.css';
 
-const ICONS = ['⚖️', '🏠', '🏢', '📋'];
+const ICONS = ['⚖️', '🏠', '🏢', '📋', '📜', '🌍'];
 
 function PracticeAreas() {
     const { t } = useLang();

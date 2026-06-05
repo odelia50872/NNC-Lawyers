@@ -1,19 +1,23 @@
 /* About.css */
 .about-page {
     max-width: 900px;
-    margin: 3rem auto;
+    margin: 4rem auto;
     padding: 0 2rem;
     direction: rtl;
 }
 
 .about-page h1 {
-    font-size: 2rem;
-    color: #1a1a2e;
-    margin-bottom: 1rem;
+    font-size: 2.2rem;
+    color: #111827;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid #c9a84c;
+    display: inline-block;
 }
 
 .about-page p {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     color: #444;
-    line-height: 1.8;
+    line-height: 1.9;
 }

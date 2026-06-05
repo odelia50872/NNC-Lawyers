@@ -1,8 +1,10 @@
 /* Footer.css */
 .footer {
-    background-color: #111827;
+    background-color: #0f1624;
     color: #9ca3af;
-    padding: 3rem 2rem 1.5rem;
+    padding: 3.5rem 2rem 1.5rem;
+    border-top: 3px solid #c9a84c;
+    margin-top: 4rem;
 }
 
 .footer-content {
@@ -11,23 +13,25 @@
     gap: 2.5rem;
     max-width: 1100px;
     margin: 0 auto;
-    padding-bottom: 2rem;
+    padding-bottom: 2.5rem;
     border-bottom: 1px solid #1f2937;
 }
 
 .footer-section h3 {
     color: #c9a84c;
-    font-size: 1.3rem;
-    letter-spacing: 1px;
-    margin-bottom: 0.5rem;
+    font-size: 1.4rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    font-style: italic;
+    margin-bottom: 0.75rem;
 }
 
 .footer-section h4 {
     color: #fff;
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
-    margin-bottom: 1rem;
+    letter-spacing: 2px;
+    margin-bottom: 1.25rem;
     padding-bottom: 0.5rem;
     border-bottom: 1px solid #c9a84c;
     display: inline-block;
@@ -38,7 +42,8 @@
     display: flex;
     align-items: center;
     gap: 0.6rem;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
+    color: #9ca3af;
 }
 
 .footer-section a {
@@ -91,4 +96,5 @@
     margin-top: 1.5rem;
     font-size: 0.78rem;
     color: #4b5563;
+    letter-spacing: 0.5px;
 }

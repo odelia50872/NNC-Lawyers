@@ -3,9 +3,15 @@ import { SiWaze } from 'react-icons/si';
 import { useLang } from '../context/LanguageContext';
 import '../styles/Footer.css';
 
-const WAZE_URL = 'https://waze.com/ul?q=קדיש+לוז+8+ירושלים';
-const GMAPS_URL = 'https://www.google.com/maps/search/?api=1&query=קדיש+לוז+8+ירושלים';
-const GMAIL_URL = 'https://mail.google.com/mail/?view=cm&to=office@nnc-law.co.il';
+const phoneIsrael = '02-6437311';
+const phoneFrance = '+33 177505913';
+const fax = '02-6439798';
+const email = 'nnc@nnc-law.com';
+const address = 'רחוב קדיש לוז 8, ירושלים';
+
+const WAZE_URL = `https://waze.com/ul?q=${encodeURIComponent(address)}&navigate=yes`;
+const GMAPS_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
+const GMAIL_URL = `https://mail.google.com/mail/?view=cm&to=${email}`;
 
 function Footer() {
     const { t } = useLang();
@@ -29,18 +35,19 @@ function Footer() {
 
                 <div className="footer-section">
                     <h4>{t.footer.contact}</h4>
-                    <p><FaPhone /> {t.footer.israel}: 02-6437311</p>
-                    <p><FaPhone /> {t.footer.france}: +33-XXXXXXXXX</p>
-                    <p><FaFax /> {t.footer.fax}: 02-6439798</p>
+                    <p><FaPhone /> {t.footer.israel}: {phoneIsrael}</p>
+                    <p><FaPhone /> {t.footer.france}: {phoneFrance}</p>
+                    <p><FaFax /> {t.footer.fax}: {fax}</p>
                     <p>
                         <FaEnvelope />
-                        <a href={GMAIL_URL} target="_blank" rel="noreferrer">office@nnc-law.co.il</a>
+                        <a href={GMAIL_URL} target="_blank" rel="noreferrer">{email}</a>
                     </p>
                 </div>
 
                 <div className="footer-section">
                     <h4><FaClock /> {t.footer.hours}</h4>
-                    <p>{t.footer.sunThu}</p>
+                    <p>{t.footer.sun}</p>
+                    <p>{t.footer.monThu}</p>
                     <p>{t.footer.fri}</p>
                     <p>{t.footer.sat}</p>
                 </div>

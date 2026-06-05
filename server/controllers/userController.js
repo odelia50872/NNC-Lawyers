@@ -1,4 +1,4 @@
-const { getUserByEmail, getAllUsers, getUserById, createUser, updateUser, deleteUser } = require('../services/userService');
+const { getUserByEmail, getAllUsers: getAllUsersService, getUserById: getUserByIdService, createUser: createUserService, updateUser: updateUserService, deleteUser: deleteUserService } = require('../services/userService');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -23,18 +23,18 @@ const login = async (req, res) => {
     }
 };
 
-const getAllUsersCtrl = async (req, res) => {
+const getAllUsers = async (req, res) => {
     try {
-        const users = await getAllUsers();
+        const users = await getAllUsersService();
         res.json(users);
     } catch (err) {
         res.status(500).json({ error: 'Failed to retrieve users' });
     }
 };
 
-const getUserByIdCtrl = async (req, res) => {
+const getUserById = async (req, res) => {
     try {
-        const user = await getUserById(req.params.id);
+        const user = await getUserByIdService(req.params.id);
         if (!user) return res.status(404).json({ error: 'User not found' });
         res.json(user);
     } catch (err) {
@@ -42,31 +42,31 @@ const getUserByIdCtrl = async (req, res) => {
     }
 };
 
-const createUserCtrl = async (req, res) => {
+const createUser = async (req, res) => {
     try {
-        const result = await createUser(req.body);
+        const result = await createUserService(req.body);
         res.status(201).json({ id: result.insertId });
     } catch (err) {
         res.status(500).json({ error: 'Failed to create user' });
     }
 };
 
-const updateUserCtrl = async (req, res) => {
+const updateUser = async (req, res) => {
     try {
-        await updateUser(req.params.id, req.body);
+        await updateUserService(req.params.id, req.body);
         res.json({ message: 'User updated successfully' });
     } catch (err) {
         res.status(500).json({ error: 'Failed to update user' });
     }
 };
 
-const deleteUserCtrl = async (req, res) => {
+const deleteUser = async (req, res) => {
     try {
-        await deleteUser(req.params.id);
+        await deleteUserService(req.params.id);
         res.json({ message: 'User deleted successfully' });
     } catch (err) {
         res.status(500).json({ error: 'Failed to delete user' });
     }
 };
 
-module.exports = { login, getAllUsers: getAllUsersCtrl, getUserById: getUserByIdCtrl, createUser: createUserCtrl, updateUser: updateUserCtrl, deleteUser: deleteUserCtrl };
+module.exports = { login, getAllUsers, getUserById, createUser, updateUser, deleteUser };
