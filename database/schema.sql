@@ -49,8 +49,9 @@ CREATE TABLE IF NOT EXISTS financial_reports (
 -- נתוני דוגמה - לקוח
 -- ================================================
 
-INSERT INTO clients (full_name, email, password_hash, phone, role)
-VALUES ('לקוח לדוגמה', 'client@nnc-law.co.il', 'hashed_password', '050-0000000', 'client');
+INSERT INTO clients (full_name, email, password_hash, phone, role) VALUES
+('לקוח לדוגמה',  'client@nnc-law.co.il', '$2b$10$rB7eT9ddyRf7nv3XpdoBzuGv44QT2MM.JIE1udpDU1U/mq.JTUuvy', '050-0000000', 'client'),
+('מנהל מערכת',   'admin@nnc-law.co.il',  '$2b$10$Pw4CRVET6i29KX.m8sNQte0dn5PPszRJf5USbAk0FGvB2SFgRodc6',  '050-1111111', 'admin');
 
 -- ================================================
 -- נתוני דוגמה - דוחות כספיים 2024

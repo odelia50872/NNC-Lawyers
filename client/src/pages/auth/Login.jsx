@@ -41,7 +41,7 @@ function Login() {
         const valid = validate();
         if (!valid) return;
         try {
-            const response = await api.post('login', { email, password });
+            const response = await api.post('auth/login', { email, password });
             const { user } = response.data;
             login(user);
             const path = user.role === 'admin' ? '/admin/dashboard' : '/client/dashboard';
