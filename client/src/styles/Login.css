@@ -68,3 +68,37 @@
 .login-form button:active {
     transform: translateY(0);
 }
+
+
+.login-popup {
+    position: fixed;
+    top: 5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #0f1624;
+    color: #c9a84c;
+    padding: 0.9rem 2rem;
+    border-radius: 10px;
+    border: 1px solid #c9a84c;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    z-index: 1000;
+    white-space: nowrap;
+    animation: slideDown 0.35s ease forwards;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateX(-50%) translateY(-16px); }
+    to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+.login-popup.fading {
+    animation: fadeOut 0.5s ease forwards;
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to   { opacity: 0; transform: translateX(-50%) translateY(-8px); }
+}

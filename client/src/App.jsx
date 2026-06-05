@@ -1,5 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
 import PublicLayout from './components/PublicLayout';
+import ProtectedRoute from './components/ProtectedRoute';
 
 import Home from './pages/public/Home';
 import About from './pages/public/About';
@@ -17,6 +19,7 @@ import Login from './pages/auth/Login';
 
 function App() {
   return (
+    <AuthProvider>
     <Routes>
       <Route element={<PublicLayout />}>
         <Route path="/" element={<Home />} />
@@ -27,12 +30,17 @@ function App() {
         <Route path="/login" element={<Login />} />
       </Route>
 
-      <Route path="/client/dashboard" element={<ClientDashboard />} />
-      <Route path="/client/cases" element={<ClientCases />} />
+      <Route element={<ProtectedRoute allowedRoles={['client', 'admin']} />}>
+        <Route path="/client/dashboard" element={<ClientDashboard />} />
+        <Route path="/client/cases" element={<ClientCases />} />
+      </Route>
 
-      <Route path="/admin/dashboard" element={<AdminDashboard />} />
-      <Route path="/admin/clients" element={<AdminClients />} />
+      <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route path="/admin/clients" element={<AdminClients />} />
+      </Route>
     </Routes>
+    </AuthProvider>
   );
 }
 

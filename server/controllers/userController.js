@@ -1,3 +1,5 @@
+
+
 const { getUserByEmail, getAllUsers: getAllUsersService, getUserById: getUserByIdService, createUser: createUserService, updateUser: updateUserService, deleteUser: deleteUserService } = require('../services/userService');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -17,7 +19,13 @@ const login = async (req, res) => {
             { expiresIn: '30m' }
         );
 
-        res.json({ token, user: { id: user.id, full_name: user.full_name, email: user.email, role: user.role } });
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict',
+            maxAge: 30 * 60 * 1000
+        });
+        res.json({ user: { id: user.id, full_name: user.full_name, email: user.email, role: user.role } });
     } catch (err) {
         res.status(500).json({ error: 'Login failed', details: err.message });
     }

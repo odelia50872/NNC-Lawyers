@@ -72,7 +72,13 @@ const translations = {
             email: 'אימייל',
             password: 'סיסמה',
             submit: 'התחבר',
+            emailRequired: 'אימייל הוא שדה חובה',
+            emailInvalid: 'פורמט אימייל לא תקין',
+            passwordRequired: 'סיסמה היא שדה חובה',
+            passwordShort: 'סיסמה חייבת להכיל לפחות 6 תווים',
+            failed: 'התחברות נכשלה',
         },
+        unauthorized: 'אין לך הרשאה לגשת לדף זה',
     },
     fr: {
         nav: {
@@ -147,7 +153,13 @@ const translations = {
             email: 'Email',
             password: 'Mot de passe',
             submit: 'Se connecter',
+            emailRequired: 'L\'email est obligatoire',
+            emailInvalid: 'Format d\'email invalide',
+            passwordRequired: 'Le mot de passe est obligatoire',
+            passwordShort: 'Le mot de passe doit contenir au moins 6 caractères',
+            failed: 'Échec de la connexion',
         },
+        unauthorized: 'Vous n\'avez pas accès à cette page',
     },
 };
 
