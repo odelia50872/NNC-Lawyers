@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { FaPhone } from 'react-icons/fa';
 import { useLang } from '../../context/LanguageContext';
 import { api } from '../../API/APIService';
 import '../../styles/Contact.css';
@@ -41,10 +42,13 @@ function Contact() {
                         {t.contact.contacts.map((c, i) => (
                             <li key={i}>
                                 <span className="contact-info-name">{c.name}</span>
-                                <span className="contact-info-phone">{c.phone}</span>
                             </li>
                         ))}
                     </ul>
+                    <div className="contact-info-phone">
+                        <div className="contact-phone-icon"><FaPhone /></div>
+                        <span>{t.contact.contacts[0].phone}</span>
+                    </div>
                 </div>
 
                 <div className="contact-card">

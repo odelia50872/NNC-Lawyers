@@ -1,6 +1,7 @@
 /* Login.css */
-.login-page {
+.login-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 80vh;
@@ -8,37 +9,53 @@
     direction: rtl;
 }
 
+.login-box {
+    width: 100%;
+    max-width: 560px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-box h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
 .login-form {
     background: #fff;
     padding: 3rem 2.5rem;
-    border-radius: 12px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    border-radius: 14px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.12);
     width: 100%;
-    max-width: 420px;
+    max-width: 560px;
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 0.5rem;
     border-top: 4px solid #c9a84c;
 }
 
-.login-form h2 {
-    text-align: center;
-    color: #111827;
-    font-size: 1.6rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
+.login-form label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 0.1rem;
 }
 
 .login-form input {
-    padding: 0.75rem 1rem;
+    padding: 1rem 1.2rem;
     border: 1px solid #e5e7eb;
     border-radius: 8px;
-    font-size: 0.95rem;
+    font-size: 1rem;
     direction: rtl;
     background: #f9fafb;
     outline: none;
     transition: border-color 0.2s, box-shadow 0.2s;
     font-family: inherit;
+    margin-bottom: 0.75rem;
 }
 
 .login-form input:focus {
@@ -47,25 +64,26 @@
     background: #fff;
 }
 
-.login-form button {
-    padding: 0.85rem;
+.login-form button[type="submit"] {
+    margin-top: 1rem;
+    padding: 1rem;
     background-color: #111827;
     color: #fff;
     border: none;
     border-radius: 8px;
-    font-size: 1rem;
+    font-size: 1.05rem;
     font-weight: 600;
     cursor: pointer;
     transition: background 0.2s, transform 0.1s;
     letter-spacing: 0.5px;
 }
 
-.login-form button:hover {
-    background-color: #1f2937;
+.login-form button[type="submit"]:hover {
+    background-color: #c9a84c;
     transform: translateY(-1px);
 }
 
-.login-form button:active {
+.login-form button[type="submit"]:active {
     transform: translateY(0);
 }
 
@@ -73,11 +91,13 @@
     position: relative;
     display: flex;
     align-items: center;
+    margin-bottom: 0.75rem;
 }
 
 .password-wrapper input {
     width: 100%;
     padding-left: 2.5rem;
+    margin-bottom: 0;
 }
 
 .toggle-password {
@@ -86,13 +106,24 @@
     background: none;
     border: none;
     cursor: pointer;
-    font-size: 1rem;
     padding: 0;
-    color: #888;
+    color: #9ca3af;
     transform: none !important;
     box-shadow: none !important;
+    outline: none;
+    transition: color 0.2s;
 }
 
+.toggle-password:hover {
+    color: #c9a84c;
+}
+
+.toggle-password:focus,
+.toggle-password:focus-visible {
+    outline: none;
+    background: none;
+    box-shadow: none !important;
+}
 
 .login-popup {
     position: fixed;

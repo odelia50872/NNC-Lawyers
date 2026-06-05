@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
+import { LanguageProvider } from './context/LanguageContext';
 import PublicLayout from './components/PublicLayout';
 import ProtectedRoute from './components/ProtectedRoute';
 
@@ -19,6 +20,7 @@ import Login from './pages/auth/Login';
 
 function App() {
   return (
+    <LanguageProvider>
     <AuthProvider>
     <Routes>
       <Route element={<PublicLayout />}>
@@ -41,6 +43,7 @@ function App() {
       </Route>
     </Routes>
     </AuthProvider>
+    </LanguageProvider>
   );
 }
 

@@ -14,22 +14,36 @@ const translations = {
         },
         about: {
             title: 'אודות המשרד',
-            body: 'משרד עורכי הדין NNC Law מתמחה במשפט מסחרי ומספק שירות מקצועי ואישי ללקוחותיו.',
+            subtitle: 'מקצועיות, ניסיון ואמינות',
+            body: 'משרד עורכי הדין NNC Law הוקם על ידי עו"ד נקש פדהאל ז׳אן-לוק, מתמחה במתן שירות משפטי מקצועי ואישי ללקוחותיו בישראל ובצרפת.',
+            section1Title: 'אודות המשרד',
+            section1: 'משרד NNC Law הוקם על ידי עו"ד נקש פדהאל ז׳אן-לוק, ומתמחה במתן שירות משפטי מקצועי ואישי ללקוחותיו בישראל ובצרפת. המשרד מעניק ייעוץ משפטי מקיף במגוון תחומים: משפחה, מקרקעין, דיני תאגידים, נוטריון וייפוי כוח מתמשך. בזכות שנים רבות של ניסיון מצבר ומקצועיות גבוהה, רכשנו מוניטין של הצלחה מוכחת בעיני לקוחותינו.',
+            section2Title: 'גישת המשרד',
+            section2: 'גישתנו המקצועית מבוססת על שילוב בין מומחיות משפטית גבוהה לבין הבנת צרכיו הייחודיים של כל לקוח. אנו מאמינים ששירות משפטי מצוין מתחיל בהקשבה מלאה, בשקיפות ובישרות. משרדנו מלווה לקוחותיו בכל שלב ומספק פתרונות מעשיים ויעילים.',
+            section3Title: 'פעילות בינלאומית',
+            section3: 'בזכות התמחותו בדין הצרפתי והישראלי, משרד NNC Law מעניק פתרונות משפטיים ייחודיים ללקוחות ישראלים וצרפתים. אנו מטפלים בעסקאות חוצר גבול, בירושות, הסכמים דו לאומיים ועיזבון נכסים, תוך שימושים בהבנת העולם המשפטי הגלובלי.',
         },
         team: {
             title: 'הצוות שלנו',
+            members: [
+                { name: 'מזכירות', role: 'קבלת פנים ותיאום לקוחות', gender: 'female' },
+                { name: 'עו"ד פדאהל נקש', role: 'עורך דין | נוטר | מייסד המשרד', gender: 'male' },
+                { name: 'עו"ד מיכאל נקש', role: 'עורך דין', gender: 'male' },
+                { name: 'עו"ד יעל קובי', role: 'עורכת דין', gender: 'female' },
+                { name: 'יוסף קובי', role: 'שירות ניהול דירות', gender: 'male' },
+            ],
         },
         practiceAreas: {
             title: 'תחומי עיסוק',
             subtitle: 'אנו מעניקים ייעוץ משפטי מקצועי במגוון תחומי המשפט',
             items: [
-                { title: 'דיני משפחה', desc: 'צוואות ,הסכמי ממוןבין בני זוג, ירושות.' },
-                { title: 'דיני מקרקעין', desc: 'עסקאות נדל"ן, רישום זכויות, חוזי שכירות ורכישה.' },
+                { title: 'דיני משפחה', desc: 'צוואות, הסכמי ממון בין בני זוג, ירושות.' },
+                { title: 'דיני מקרקעין', desc: 'עסקאות נדל"ן, רישום זכויות, חוזי שכירות ורכישה, בדיקות הסכמי פינוי בינוי ותמ"א 38 עבור לקוחות פרטיים וחברתיים.' },
                 { title: 'דיני תאגידים', desc: 'הקמת חברות, עמותות, חוזים מסחריים וייעוץ עסקי שוטף.' },
                 { title: 'ייפוי כוח מתמשך', desc: 'תכנון עתידי לניהול ענייניך האישיים והרפואיים.' },
-                { title: 'נוטריון', desc: 'אימות מסמכים,תרגומים(עברית - צרפתית),אישור העתק,טיפול באפוסטיל(גם דגיטלי) ייפוי כוח ועוד שירותי נוטריון מקצועיים.' },
-                { title: 'חוות דעת בדין הזר ', desc: '.מתן חוו"ד לבתי המשפט בארץ בדין הזר הצרפתי וכן חוו"ד בדין הזר  הישראלי לבתי המשפט בצרפת ' },
-                { title: 'ניהול דירות', desc: '  ניהול השכרת דירות, בדיקת עמידת השוכרים, ערבים, בדיקת בטיחות, טיפול בתיקונים ושיפוצים' }
+                { title: 'נוטריון', desc: 'אימות מסמכים, תרגומים (עברית - צרפתית), אישור העתק, טיפול באפוסטיל (גם דיגיטלי), ייפוי כוח ועוד שירותי נוטריון מקצועיים.' },
+                { title: 'חוות דעת בדין הזר', desc: 'מתן חוות דעת לבתי המשפט בארץ בדין הזר הצרפתי, וכן חוות דעת בדין הזר הישראלי לבתי המשפט בצרפת.' },
+                { title: 'ניהול דירות', desc: 'ניהול השכרת דירות, בדיקת עמידת השוכרים, ערבים, בדיקת בטיחות, טיפול בתיקונים ושיפוצים.' }
             ],
         },
         contact: {
@@ -95,17 +109,31 @@ const translations = {
         },
         about: {
             title: 'À propos du cabinet',
-            body: 'Le cabinet NNC Law est spécialisé en droit des affaires et offre un service professionnel et personnalisé à ses clients.',
+            subtitle: 'Professionnalisme, expérience et confiance',
+            body: 'Le cabinet NNC Law a été fondé par Mr Nakache Pedaël Jean-Luc, spécialisé dans la prestation de services juridiques professionnels et personnalisés à ses clients en Israël et en France.',
+            section1Title: 'À propos du cabinet',
+            section1: 'NNC Law est un cabinet d\'avocats prestigieux et professionnel, offrant des conseils juridiques complets à ses clients dans de nombreux domaines du droit. Le cabinet est spécialisé en droit de la famille, immobilier, droit des sociétés, notariat et procuration continue. Grâce à de nombreuses années d\'expérience et d\'expertise de haut niveau, nous avons acquis une réputation de succès avéré aux yeux de nos clients.',
+            section2Title: 'Notre approche',
+            section2: 'Notre approche professionnelle est fondée sur une combinaison entre une expertise juridique de haut niveau et une compréhension des besoins spécifiques de chaque client. Nous croyons qu\'un service juridique d\'excellence commence par une écoute attentive, la transparence et l\'honnêteté. Notre cabinet accompagne ses clients à chaque étape et fournit des solutions pratiques et efficaces, conduisant aux meilleurs résultats.',
+            section3Title: 'Activité internationale',
+            section3: 'Grâce à sa maîtrise du droit français et israélien, le cabinet NNC Law offre des solutions juridiques uniques aux clients israéliens et français. Nous traitons les transactions transfrontalières, les successions, les accords bilatéraux et la gestion d\'actifs, avec une compréhension approfondie du monde juridique mondial.',
         },
         team: {
             title: 'Notre équipe',
+            members: [
+                { name: 'Secrétariat', role: 'Accueil et coordination des clients', gender: 'female' },
+                { name: 'Mr Pedaël Nakache', role: 'Avocat | Notaire | Fondateur du cabinet', gender: 'male' },
+                { name: 'Mr Michaël Nakache', role: 'Avocat', gender: 'male' },
+                { name: 'Mme Yaël Kobi', role: 'Avocate', gender: 'female' },
+                { name: 'Yossef Kobi', role: 'Service de gestion locative', gender: 'male' },
+            ],
         },
         practiceAreas: {
             title: 'Domaines de pratique',
             subtitle: 'Nous offrons des conseils juridiques professionnels dans divers domaines du droit',
             items: [
                 { title: 'Droit de la famille', desc: 'Testaments, contrats de mariage, successions.' },
-                { title: 'Droit immobilier', desc: 'Transactions immobilières, enregistrement des droits, baux et contrats d\'achat.' },
+                { title: 'Droit immobilier', desc: 'Transactions immobilières, enregistrement des droits, baux et contrats d\'achat, vérification des accords de rénovation urbaine (Pinui Binui) et TAMA 38 pour clients particuliers et professionnels.' },
                 { title: 'Droit des sociétés', desc: 'Création de sociétés, associations, contrats commerciaux et conseil juridique continu.' },
                 { title: 'Procuration continue', desc: 'Planification anticipée pour la gestion de vos affaires personnelles et médicales.' },
                 { title: 'Notaire', desc: 'Authentification de documents, traductions (hébreu - français), copie certifiée, apostille (y compris digitale), procuration et autres services notariaux professionnels.' },
