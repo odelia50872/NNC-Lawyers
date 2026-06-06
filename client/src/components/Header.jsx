@@ -1,6 +1,7 @@
 import { Link, NavLink } from 'react-router-dom';
 import { useLang } from '../context/LanguageContext';
 import LanguageSwitcher from './LanguageSwitcher';
+import logo from '../assets/small-logo.jpg';
 import '../styles/Header.css';
 
 function Header() {
@@ -9,7 +10,10 @@ function Header() {
     return (
         <header className="header">
             <div className="header-inner">
-                <Link to="/" className="header-logo">NNC Law</Link>
+                <Link to="/" className="header-logo">
+                    <img src={logo} alt="NNC Law" className="header-logo-img" />
+                    <span style={{ direction: 'ltr', unicodeBidi: 'bidi-override' }}>⋂⋂C LAW</span>
+                </Link>
                 <nav className="header-nav">
                     <NavLink to="/about" className={({ isActive }) => isActive ? 'active' : ''}>{t.nav.about}</NavLink>
                     <NavLink to="/team" className={({ isActive }) => isActive ? 'active' : ''}>{t.nav.team}</NavLink>

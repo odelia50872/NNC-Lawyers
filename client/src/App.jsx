@@ -24,7 +24,7 @@ function App() {
     <AuthProvider>
     <Routes>
       <Route element={<PublicLayout />}>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<About />} />
         <Route path="/about" element={<About />} />
         <Route path="/practice-areas" element={<PracticeAreas />} />
         <Route path="/team" element={<Team />} />

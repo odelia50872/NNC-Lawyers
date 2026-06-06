@@ -20,7 +20,7 @@ function Footer() {
             <div className="footer-content">
 
                 <div className="footer-section">
-                    <h3>NNC Law</h3>
+                    <h3 style={{ direction: 'ltr', unicodeBidi: 'bidi-override', textAlign: 'right' }}>⋂⋂C LAW</h3>
                     <p>{t.footer.firmName}</p>
                     <p>{t.footer.address}</p>
                     <div className="footer-nav-links">
@@ -54,7 +54,7 @@ function Footer() {
 
             </div>
             <p className="footer-bottom">
-                &copy; {new Date().getFullYear()} NNC Law. {t.footer.rights}.
+                &copy; {new Date().getFullYear()} NNC LAW. {t.footer.rights}.
             </p>
         </footer>
     );
