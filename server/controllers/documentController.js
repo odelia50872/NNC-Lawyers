@@ -1,0 +1,32 @@
+const { getByClientId, create: createDoc, remove: removeDoc } = require('../services/documentService');
+
+const makeController = (table) => ({
+    getByClient: async (req, res) => {
+        try {
+            const rows = await getByClientId(table)(req.params.clientId);
+            res.json(rows);
+        } catch (err) {
+            res.status(500).json({ error: err.message });
+        }
+    },
+    create: async (req, res) => {
+        try {
+            const { client_id, title, year } = req.body;
+            const file_url = `${process.env.SERVER_URL || 'http://localhost:3000'}/uploads/${req.file.filename}`;
+            const result = await createDoc(table)({ client_id, title, year, file_url });
+            res.status(201).json({ id: result.insertId });
+        } catch (err) {
+            res.status(500).json({ error: err.message });
+        }
+    },
+    remove: async (req, res) => {
+        try {
+            await removeDoc(table)(req.params.id);
+            res.json({ message: 'Deleted' });
+        } catch (err) {
+            res.status(500).json({ error: err.message });
+        }
+    }
+});
+
+module.exports = { makeController };

@@ -9,9 +9,16 @@ function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
-    const { login } = useAuth();
+    const { login, user, loading } = useAuth();
     const navigate = useNavigate();
     const { t } = useLang();
+
+    useEffect(() => {
+        if (!loading && user) {
+            const path = user.role === 'admin' ? '/admin/dashboard' : '/client/dashboard';
+            navigate(path, { replace: true });
+        }
+    }, [user, loading]);
     const location = useLocation();
     const [popup, setPopup] = useState(location.state?.message || null);
     const [popupFading, setPopupFading] = useState(false);

@@ -84,7 +84,24 @@
     transform: translateY(-1px);
 }
 
-.lang-btn {
+.header-logout-btn {
+    background: transparent;
+    border: 1px solid #c9a84c;
+    color: #c9a84c;
+    padding: 0.45rem 1.1rem;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.88rem;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    letter-spacing: 0.5px;
+    font-family: inherit;
+}
+
+.header-logout-btn:hover {
+    background-color: #c9a84c;
+    color: #0f1624;
+
     background: transparent;
     border: 1px solid #c9a84c;
     color: #c9a84c;

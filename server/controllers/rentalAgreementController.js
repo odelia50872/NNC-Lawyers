@@ -1,8 +1,8 @@
-const { getReportsByClientId: getReports, createReport, deleteReport } = require('../services/financialReportService');
+const { getAgreementsByClientId, createAgreement, deleteAgreement } = require('../services/rentalAgreementService');
 
-const getReportsByClientId = async (req, res) => {
+const getByClient = async (req, res) => {
     try {
-        const rows = await getReports(req.params.clientId);
+        const rows = await getAgreementsByClientId(req.params.clientId);
         res.json(rows);
     } catch (err) {
         res.status(500).json({ error: err.message });
@@ -13,7 +13,7 @@ const create = async (req, res) => {
     try {
         const { client_id, title, year } = req.body;
         const file_url = `${process.env.SERVER_URL || 'http://localhost:3000'}/uploads/${req.file.filename}`;
-        const result = await createReport({ client_id, title, year, file_url });
+        const result = await createAgreement({ client_id, title, year, file_url });
         res.status(201).json({ id: result.insertId });
     } catch (err) {
         res.status(500).json({ error: err.message });
@@ -22,11 +22,11 @@ const create = async (req, res) => {
 
 const remove = async (req, res) => {
     try {
-        await deleteReport(req.params.id);
+        await deleteAgreement(req.params.id);
         res.json({ message: 'Deleted' });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
 };
 
-module.exports = { getReportsByClientId, create, remove };
+module.exports = { getByClient, create, remove };

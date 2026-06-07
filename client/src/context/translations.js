@@ -6,6 +6,8 @@ const translations = {
             practiceAreas: 'תחומי עיסוק',
             contact: 'צור קשר',
             login: 'כניסת לקוחות',
+            logout: 'התנתק',
+            dashboard: 'האזור שלי',
         },
         home: {
             hero: 'משרד עורכי דין NNC Law',
@@ -93,6 +95,13 @@ const translations = {
             failed: 'התחברות נכשלה',
         },
         unauthorized: 'אין לך הרשאה לגשת לדף זה',
+        dashboard: {
+            title: 'האזור האישי שלך',
+            reports: 'דוחות כספיים',
+            agreements: 'הסכמי שכירות',
+            insurance: 'פוליסת ביטוח',
+            identity: 'תעודות זיהוי',
+        },
     },
     fr: {
         nav: {
@@ -101,6 +110,8 @@ const translations = {
             practiceAreas: 'Domaines',
             contact: 'Contact',
             login: 'Espace client',
+            logout: 'Se déconnecter',
+            dashboard: 'Mon espace',
         },
         home: {
             hero: 'Cabinet d\'avocats NNC Law',
@@ -188,6 +199,13 @@ const translations = {
             failed: 'Échec de la connexion',
         },
         unauthorized: 'Vous n\'avez pas accès à cette page',
+        dashboard: {
+            title: 'Votre espace personnel',
+            reports: 'Rapports financiers',
+            agreements: 'Contrats de location',
+            insurance: 'Police d\'assurance',
+            identity: 'Pièces d\'identité',
+        },
     },
 };
 

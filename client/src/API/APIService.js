@@ -9,6 +9,16 @@ const apiClient = axios.create({
     withCredentials: true,
 });
 
+apiClient.interceptors.response.use(
+    res => res,
+    err => {
+        if (err.response?.status === 401 && !err.config.url.includes('auth/me')) {
+            window.location.href = '/login';
+        }
+        return Promise.reject(err);
+    }
+);
+
 export const api = {
     get: (resource, params = {}) => apiClient.get(`/${resource}`, { params }),
     post: (resource, data) => apiClient.post(`/${resource}`, data),

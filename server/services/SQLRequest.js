@@ -1,6 +1,6 @@
 const db = require('../tools/db');
 
-const ALLOWED_TABLES = ['financial_reports', 'clients'];
+const ALLOWED_TABLES = ['financial_reports', 'clients', 'rental_agreements', 'identity_documents', 'insurance_policies'];
 
 const validateTable = (source) => {
     if (!ALLOWED_TABLES.includes(source)) throw new Error(`Invalid table: ${source}`);

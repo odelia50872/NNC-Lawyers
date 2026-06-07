@@ -30,16 +30,16 @@ function App() {
         <Route path="/team" element={<Team />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<Login />} />
-      </Route>
 
-      <Route element={<ProtectedRoute allowedRoles={['client', 'admin']} />}>
-        <Route path="/client/dashboard" element={<ClientDashboard />} />
-        <Route path="/client/cases" element={<ClientCases />} />
-      </Route>
+        <Route element={<ProtectedRoute allowedRoles={['client', 'admin']} />}>
+          <Route path="/client/dashboard" element={<ClientDashboard />} />
+          <Route path="/client/cases" element={<ClientCases />} />
+        </Route>
 
-      <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
-        <Route path="/admin/dashboard" element={<AdminDashboard />} />
-        <Route path="/admin/clients" element={<AdminClients />} />
+        <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route path="/admin/clients" element={<AdminClients />} />
+        </Route>
       </Route>
     </Routes>
     </AuthProvider>
