@@ -99,7 +99,7 @@ CREATE TABLE insurance_policies (
 -- ================================================
 
 INSERT INTO clients (full_name, email, password_hash, phone, role) VALUES
-('מנהל מערכת',             'admin@nnc-law.co.il',   '$2b$10$Pw4CRVET6i29KX.m8sNQte0dn5PPszRJf5USbAk0FGvB2SFgRodc6', '050-1111111', 'admin'),
+('מנהל מערכת',             'admin@nnc-law.co.il',   '$2b$10$LNAeyyn6lf.T9PSqhhqAKeqNv2w8mpIRyYSiM6kcUlpCwhX3xaN12', '050-1111111', 'admin'),
 ("חג'ג' רבקה ואהרון שרה", 'chajaj@nnc-law.co.il',  '$2b$10$f.WT2IjVWyrEJt.ns7xd1..EikcdSAZ.Q1TNJvbMmx7fEUY0QeYUy', '050-2222222', 'client');
 
 -- ================================================

@@ -12,6 +12,9 @@ function Login() {
     const { login, user, loading } = useAuth();
     const navigate = useNavigate();
     const { t } = useLang();
+    const location = useLocation();
+    const [popup, setPopup] = useState(location.state?.message || null);
+    const [popupFading, setPopupFading] = useState(false);
 
     useEffect(() => {
         if (!loading && user) {
@@ -19,10 +22,7 @@ function Login() {
             navigate(path, { replace: true });
         }
     }, [user, loading]);
-    const location = useLocation();
-    const [popup, setPopup] = useState(location.state?.message || null);
-    const [popupFading, setPopupFading] = useState(false);
-
+    
     const showPopup = (msg) => {
         setPopup(msg);
         setPopupFading(false);
@@ -50,10 +50,7 @@ function Login() {
         if (!valid) return;
         try {
             const response = await api.post('auth/login', { email, password });
-            const { user } = response.data;
-            login(user);
-            const path = user.role === 'admin' ? '/admin/dashboard' : '/client/dashboard';
-            navigate(path, { replace: true });
+            login(response.data.user);
         } catch (err) {
             showPopup(err.response?.data?.error || t.login.failed);
             setEmail('');
