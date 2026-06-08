@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const path = require('path');
-const { getReportsByClientId, create, remove } = require('../controllers/financialReportController');
+const { getReportsByClientId, create, update, remove } = require('../controllers/financialReportController');
 const { verifyToken, verifyAdmin } = require('../middleware/authMiddleware');
 const { verifySelfOrAdmin } = require('../middleware/userMiddleware');
 
@@ -15,8 +15,9 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-router.get('/:clientId', verifyToken, verifySelfOrAdmin, getReportsByClientId);
-router.post('/',         verifyToken, verifyAdmin, upload.single('file'), create);
-router.delete('/:id',    verifyToken, verifyAdmin, remove);
+router.put('/doc/:id',        verifyToken, verifyAdmin, upload.single('file'), update);
+router.delete('/doc/:id',     verifyToken, verifyAdmin, remove);
+router.get('/:clientId',      verifyToken, verifySelfOrAdmin, getReportsByClientId);
+router.post('/',              verifyToken, verifyAdmin, upload.single('file'), create);
 
 module.exports = router;

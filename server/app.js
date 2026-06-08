@@ -20,6 +20,7 @@ app.use(express.json());
 app.use('/uploads', express.static('uploads'));
 
 app.use('/api/auth', authRoutes);
+app.use('/api/contact', contactRoutes);
 app.use('/api/clients', clientRoutes);
 app.use('/api/financial-reports', financialReportRoutes);
 app.use('/api/rental-agreements', rentalAgreementRoutes);

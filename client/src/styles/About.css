@@ -3,7 +3,6 @@
     max-width: 900px;
     margin: 4rem auto;
     padding: 0 2rem;
-    direction: rtl;
 }
 
 .about-header {
@@ -43,7 +42,7 @@
     border-radius: 12px;
     padding: 2rem 2.5rem;
     box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-    border-right: 4px solid #c9a84c;
+    border-inline-start: 4px solid #c9a84c;
 }
 
 .about-section h2 {

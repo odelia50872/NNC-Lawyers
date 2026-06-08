@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { api } from '../../API/APIService';
+import { FaTrashAlt, FaEdit } from 'react-icons/fa';
+import { useNotify } from '../notifications/NotificationContext';
 
 function AdminDocSection({ clients, endpoint, title, icon, accept }) {
     const [docs, setDocs] = useState([]);
@@ -9,6 +11,12 @@ function AdminDocSection({ clients, endpoint, title, icon, accept }) {
     const [year, setYear] = useState(new Date().getFullYear());
     const [file, setFile] = useState(null);
     const [showForm, setShowForm] = useState(false);
+    const [editDoc, setEditDoc] = useState(null);
+    const [editTitle, setEditTitle] = useState('');
+    const [editYear, setEditYear] = useState('');
+    const [editFile, setEditFile] = useState(null);
+    const [pendingAction, setPendingAction] = useState(null);
+    const notify = useNotify();
 
     useEffect(() => {
         if (!selectedClient) return setDocs([]);
@@ -22,26 +30,60 @@ function AdminDocSection({ clients, endpoint, title, icon, accept }) {
     }, {});
     const years = Object.keys(byYear).sort((a, b) => b - a);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const formData = new FormData();
-        formData.append('client_id', selectedClient);
-        formData.append('title', docTitle);
-        formData.append('year', year);
-        formData.append('file', file);
-        await axios.post(`${import.meta.env.VITE_API_URL}/${endpoint}`, formData, { withCredentials: true });
-        const res = await api.get(`${endpoint}/${selectedClient}`);
-        setDocs(res.data);
-        setDocTitle('');
-        setYear(new Date().getFullYear());
-        setFile(null);
-        setShowForm(false);
+    const confirmAction = (label, fn) => setPendingAction({ label, fn });
+
+    const executeAction = async () => {
+        await pendingAction.fn();
+        setPendingAction(null);
     };
 
-    const handleDelete = async (id) => {
-        if (!confirm('למחוק?')) return;
-        await api.delete(endpoint, id);
-        setDocs(prev => prev.filter(d => d.id !== id));
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        confirmAction('להוסיף את המסמך?', async () => {
+            const formData = new FormData();
+            formData.append('client_id', selectedClient);
+            formData.append('title', docTitle);
+            formData.append('year', year);
+            formData.append('file', file);
+            await axios.post(`${import.meta.env.VITE_API_URL}/${endpoint}`, formData, { withCredentials: true });
+            const res = await api.get(`${endpoint}/${selectedClient}`);
+            setDocs(res.data);
+            setDocTitle('');
+            setYear(new Date().getFullYear());
+            setFile(null);
+            setShowForm(false);
+            notify('המסמך נוסף בהצלחה', 'success');
+        });
+    };
+
+    const handleDelete = (id) => {
+        confirmAction('למחוק את המסמך?', async () => {
+            await api.delete(`${endpoint}/doc`, id);
+            setDocs(prev => prev.filter(d => d.id !== id));
+            notify('המסמך נמחק בהצלחה', 'success');
+        });
+    };
+
+    const openEdit = (doc) => {
+        setEditDoc(doc);
+        setEditTitle(doc.title);
+        setEditYear(doc.year);
+        setEditFile(null);
+    };
+
+    const handleUpdate = (e) => {
+        e.preventDefault();
+        confirmAction('לשמור את השינויים?', async () => {
+            const formData = new FormData();
+            formData.append('title', editTitle);
+            formData.append('year', editYear);
+            if (editFile) formData.append('file', editFile);
+            await axios.put(`${import.meta.env.VITE_API_URL}/${endpoint}/doc/${editDoc.id}`, formData, { withCredentials: true });
+            const res = await api.get(`${endpoint}/${selectedClient}`);
+            setDocs(res.data);
+            setEditDoc(null);
+            notify('המסמך עודכן בהצלחה', 'success');
+        });
     };
 
     return (
@@ -77,12 +119,43 @@ function AdminDocSection({ clients, endpoint, title, icon, accept }) {
                         {byYear[y].map(d => (
                             <li key={d.id} className="agreements-item">
                                 <a href={d.file_url} target="_blank" rel="noreferrer">{icon} {d.title}</a>
-                                <button className="admin-reports-del-btn" onClick={() => handleDelete(d.id)}>🗑</button>
+                                <div className="admin-doc-actions">
+                                    <button className="admin-edit-btn" onClick={() => openEdit(d)} title="עדכן"><FaEdit /></button>
+                                    <button className="admin-reports-del-btn" onClick={() => handleDelete(d.id)} title="מחק"><FaTrashAlt /></button>
+                                </div>
                             </li>
                         ))}
                     </ul>
                 </div>
             ))}
+
+            {pendingAction && (
+                <div className="admin-modal-overlay confirm" onClick={() => setPendingAction(null)}>
+                    <div className="admin-modal" onClick={e => e.stopPropagation()}>
+                        <button className="admin-modal-close" onClick={() => setPendingAction(null)}>✕</button>
+                        <h3>{pendingAction.label}</h3>
+                        <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'flex-end', marginTop: '1.5rem' }}>
+                            <button className="admin-reports-add-btn" onClick={() => setPendingAction(null)}>ביטול</button>
+                            <button className="admin-reports-save-btn" onClick={executeAction}>אשר</button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {editDoc && (
+                <div className="admin-modal-overlay" onClick={() => setEditDoc(null)}>
+                    <div className="admin-modal" onClick={e => e.stopPropagation()}>
+                        <button className="admin-modal-close" onClick={() => setEditDoc(null)}>✕</button>
+                        <h3>עדכון מסמך</h3>
+                        <form className="admin-reports-form" onSubmit={handleUpdate}>
+                            <input type="text" placeholder="כותרת" required value={editTitle} onChange={e => setEditTitle(e.target.value)} />
+                            <input type="number" placeholder="שנה" required value={editYear} onChange={e => setEditYear(e.target.value)} />
+                            <input type="file" accept={accept} onChange={e => setEditFile(e.target.files[0])} />
+                            <button type="submit" className="admin-reports-save-btn">עדכן</button>
+                        </form>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

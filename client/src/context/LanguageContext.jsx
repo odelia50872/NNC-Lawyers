@@ -4,7 +4,7 @@ import translations from './translations';
 const LanguageContext = createContext();
 
 export function LanguageProvider({ children }) {
-    const [lang, setLangState] = useState('he');
+    const [lang, setLangState] = useState(() => localStorage.getItem('lang') || 'he');
     const [fading, setFading] = useState(false);
     const t = translations[lang];
     const dir = lang === 'he' ? 'rtl' : 'ltr';
@@ -14,6 +14,7 @@ export function LanguageProvider({ children }) {
         setFading(true);
         setTimeout(() => {
             setLangState(newLang);
+            localStorage.setItem('lang', newLang);
             setFading(false);
         }, 250);
     };

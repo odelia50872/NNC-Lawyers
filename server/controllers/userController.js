@@ -14,7 +14,7 @@ const login = async (req, res) => {
         if (!valid) return res.status(401).json({ error: 'אימייל או סיסמה שגויים' });
 
         const token = jwt.sign(
-            { id: user.id, email: user.email, role: user.role },
+            { id: user.id, email: user.email, role: user.role, full_name: user.full_name },
             process.env.JWT_SECRET,
             { expiresIn: '30m' }
         );

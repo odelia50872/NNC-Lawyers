@@ -28,11 +28,18 @@ const translations = {
         team: {
             title: 'הצוות שלנו',
             members: [
-                { name: 'מזכירות', role: 'קבלת פנים ותיאום לקוחות', gender: 'female' },
-                { name: 'עו"ד פדאהל נקש', role: 'עורך דין | נוטר | מייסד המשרד', gender: 'male' },
-                { name: 'עו"ד מיכאל נקש', role: 'עורך דין', gender: 'male' },
-                { name: 'עו"ד יעל קובי', role: 'עורכת דין', gender: 'female' },
-                { name: 'יוסף קובי', role: 'שירות ניהול דירות', gender: 'male' },
+                { name: 'מזכירות', role: 'קבלת פנים ותיאום לקוחות', gender: 'female', bio: null },
+                { name: 'עו"ד פדאהל נקש', role: 'עורך דין | נוטר | מייסד המשרד', gender: 'male', bio: null },
+                {
+                    name: 'עו"ד מיכאל נקש', role: 'עורך דין', gender: 'male', bio: `לאחר שעלה לישראל עם הוריו בשנת 1992, קיבל עו"ד מיכאל נקש את תעודת הבגרות הישראלית, ולאחר מכן המשיך ללמוד מספר שנים לימודי קודש בישיבה ובכולל.
+
+בוגר הפקולטה למשפטים בקריית אונו, התקבל ללשכת עורכי הדין הישראלית בשנת 2012. לאחר מכן הצטרף למשרד המשפחתי בירושלים, שנוסד על ידי אביו, עו"ד פדאהל ז'אן-לוק נקש, שם הוא פועל מאז.
+
+במטרה להעניק ללקוחותיו ליווי משפטי מקיף ומעודכן, עבר בשנת 2019 הכשרה המסמיכה לעריכת ייפויי כוח מתמשכים, ובשנת 2026 קיבל את ההסמכה הנדרשת לתפקיד נוטריון.
+
+דובר עברית וצרפתית ברמת שפת אם, ובזכות הניסיון שצבר לצד אביו במהלך שנות ההתמחות והעבודה — מיכאל פועל בכלל תחומי המשרד ומלווה לקוחות ישראלים ובינלאומיים בטיפול בתיקיהם.` },
+                { name: 'עו"ד יעל קובי', role: 'עורכת דין', gender: 'female', bio: null },
+                { name: 'יוסף קובי', role: 'שירות ניהול דירות', gender: 'male', bio: null },
             ],
         },
         practiceAreas: {
@@ -65,10 +72,10 @@ const translations = {
                 { name: 'עו"ד פדאהל נקש' },
                 { name: 'עו"ד מיכאל נקש' },
                 { name: 'עו"ד יעל קובי' },
-                { name: 'שירות ניהול דירות יוסף קובי',},
+                { name: 'שירות ניהול דירות יוסף קובי', },
             ],
         },
-       footer: {
+        footer: {
             hours: 'שעות פעילות',
             sun: 'יום א׳:15:00 -9:00',
             monThu: 'ימים ב׳ - ה׳: 18:00- 09:00',
@@ -132,11 +139,18 @@ const translations = {
         team: {
             title: 'Notre équipe',
             members: [
-                { name: 'Secrétariat', role: 'Accueil et coordination des clients', gender: 'female' },
-                { name: 'Mr Pedaël Nakache', role: 'Avocat | Notaire | Fondateur du cabinet', gender: 'male' },
-                { name: 'Mr Michaël Nakache', role: 'Avocat', gender: 'male' },
-                { name: 'Mme Yaël Kobi', role: 'Avocate', gender: 'female' },
-                { name: 'Yossef Kobi', role: 'Service de gestion locative', gender: 'male' },
+                { name: 'Secrétariat', role: 'Accueil et coordination des clients', gender: 'female', bio: null },
+                { name: 'Mr Pedaël Nakache', role: 'Avocat | Notaire | Fondateur du cabinet', gender: 'male', bio: null },
+                {
+                    name: 'Mr Michaël Nakache', role: 'Avocat', gender: 'male', bio: `Après avoir immigré en Israël avec ses parents en 1992, Maître Michaël NAKACHE obtient son baccalauréat israélien avant de poursuivre plusieurs années d'études religieuses en Yéchiva puis en Collel.
+
+Diplômé de la faculté de droit de Kyriat Ono, il est admis au Barreau israélien en 2012. Il rejoint alors le cabinet familial de Jérusalem, fondé par son père, Maître Pédael Jean-Luc NAKACHE, où il exerce depuis lors.
+
+Soucieux d'offrir à ses clients un accompagnement juridique complet et actualisé, il suit en 2019 la formation habilitant à la rédaction des procurations continues (« Ypouy Koach Mitmacheh »), puis obtient en 2026, la qualification nécessaire à l'exercice des fonctions de notaire.
+
+Parfaitement bilingue en français et en hébreu, et bénéficiant de l'expérience de son père acquis durant ses années de stage et de fonction, Michaël intervient dans l'ensemble des domaines de compétence du cabinet et accompagne une clientèle israélienne et internationale dans le traitement de ses dossiers.` },
+                { name: 'Mme Yaël Kobi', role: 'Avocate', gender: 'female', bio: null },
+                { name: 'Yossef Kobi', role: 'Service de gestion locative', gender: 'male', bio: null },
             ],
         },
         practiceAreas: {
@@ -149,7 +163,7 @@ const translations = {
                 { title: 'Procuration continue', desc: 'Planification anticipée pour la gestion de vos affaires personnelles et médicales.' },
                 { title: 'Notaire', desc: 'Authentification de documents, traductions (hébreu - français), copie certifiée, apostille (y compris digitale), procuration et autres services notariaux professionnels.' },
                 { title: 'Consultation auprès des tribunaux', desc: 'Fourniture d\'avis juridiques aux tribunaux israéliens en droit français, ainsi qu\'en droit israélien aux tribunaux français.' },
-                { title: 'Gestion locative', desc: 'Gestion de la location de biens immobiliers, vérification des locataires et garants, contrôle de sécurité, gestion des réparations et rénovations.' },
+                { title: 'Gestion locative et administration de biens immobiliers', desc: 'Gestion de la location de biens immobiliers, vérification des locataires et garants, contrôle de sécurité, gestion des réparations et rénovations.' },
             ],
         },
         contact: {
@@ -168,7 +182,7 @@ const translations = {
                 { name: 'Secrétariat', phone: '02-6437311' },
                 { name: 'Mr Pedaël Nakache' },
                 { name: 'Mr Michaël Nakache' },
-                { name: 'Mme Yaël Kobi'},
+                { name: 'Mme Yaël Kobi' },
                 { name: 'Gestion immobilière Yossef Kobi', },
             ],
         },

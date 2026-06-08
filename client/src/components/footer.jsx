@@ -22,7 +22,7 @@ function Footer() {
             <div className="footer-content">
 
                 <div className="footer-section">
-                    <h3 style={{ direction: 'ltr', unicodeBidi: 'bidi-override', textAlign: 'right' }}>⋂⋂C LAW</h3>
+                    <h3 style={{ direction: 'ltr', unicodeBidi: 'bidi-override' }}>⋂⋂C LAW</h3>
                     <p>{t.footer.firmName}</p>
                     <p>{t.footer.address}</p>
                     <div className="footer-nav-links">

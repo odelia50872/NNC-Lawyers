@@ -1,4 +1,4 @@
-const { getByClientId, create: createDoc, remove: removeDoc } = require('../services/documentService');
+const { getByClientId, create: createDoc, remove: removeDoc, update: updateDoc } = require('../services/documentService');
 
 const makeController = (table) => ({
     getByClient: async (req, res) => {
@@ -15,6 +15,17 @@ const makeController = (table) => ({
             const file_url = `${process.env.SERVER_URL || 'http://localhost:3000'}/uploads/${req.file.filename}`;
             const result = await createDoc(table)({ client_id, title, year, file_url });
             res.status(201).json({ id: result.insertId });
+        } catch (err) {
+            res.status(500).json({ error: err.message });
+        }
+    },
+    update: async (req, res) => {
+        try {
+            const { title, year } = req.body;
+            const data = { title, year };
+            if (req.file) data.file_url = `${process.env.SERVER_URL || 'http://localhost:3000'}/uploads/${req.file.filename}`;
+            await updateDoc(table)(req.params.id, data);
+            res.json({ message: 'Updated' });
         } catch (err) {
             res.status(500).json({ error: err.message });
         }

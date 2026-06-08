@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { LanguageProvider } from './context/LanguageContext';
+import { NotificationProvider } from './components/notifications/NotificationContext';
 import PublicLayout from './components/PublicLayout';
 import ProtectedRoute from './components/ProtectedRoute';
 
@@ -19,6 +20,7 @@ import Login from './pages/auth/Login';
 function App() {
   return (
     <LanguageProvider>
+    <NotificationProvider>
     <AuthProvider>
     <Routes>
       <Route element={<PublicLayout />}>
@@ -40,6 +42,7 @@ function App() {
       </Route>
     </Routes>
     </AuthProvider>
+    </NotificationProvider>
     </LanguageProvider>
   );
 }
