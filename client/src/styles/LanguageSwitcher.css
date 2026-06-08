@@ -1,0 +1,62 @@
+/* LanguageSwitcher.css */
+.lang-switcher {
+    position: relative;
+    outline: none;
+    display: inline-block;
+}
+
+.lang-current {
+    background: transparent;
+    border: 1px solid rgba(201,168,76,0.4);
+    color: #c9a84c;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+    transition: background 0.2s, color 0.2s;
+}
+
+.lang-current:hover {
+    background: #c9a84c;
+    color: #0f1624;
+}
+
+.lang-dropdown {
+    position: absolute;
+    top: calc(100% + 4px);
+    right: 0;
+    background: #0f1624;
+    border: 1px solid #c9a84c;
+    border-radius: 6px;
+    overflow: hidden;
+    animation: slideDown 0.2s ease forwards;
+    z-index: 9999;
+    min-width: 100%;
+}
+
+.lang-dropdown-item {
+    display: block;
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: #c9a84c;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 0.5rem 0.75rem;
+    letter-spacing: 0.5px;
+    transition: background 0.2s;
+    white-space: nowrap;
+}
+
+.lang-dropdown-item:hover {
+    background: #c9a84c;
+    color: #0f1624;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}

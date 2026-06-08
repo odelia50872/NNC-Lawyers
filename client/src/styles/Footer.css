@@ -1,0 +1,100 @@
+/* Footer.css */
+.footer {
+    background-color: #0f1624;
+    color: #9ca3af;
+    padding: 1.2rem 2rem 0.6rem;
+    border-top: 3px solid #c9a84c;
+    margin-top: 4rem;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding-bottom: 1.2rem;
+    border-bottom: 1px solid #1f2937;
+}
+
+.footer-section h3 {
+    color: #c9a84c;
+    font-size: 1.4rem;
+    font-weight: 300;
+    font-family: 'Nunito', sans-serif;
+    letter-spacing: 3px;
+    margin-bottom: 0.4rem;
+}
+
+.footer-section h4 {
+    color: #fff;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 0.6rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid #c9a84c;
+    display: inline-block;
+}
+
+.footer-section p {
+    margin-bottom: 0.3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.88rem;
+    color: #9ca3af;
+}
+
+.footer-section a {
+    color: #9ca3af;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer-section a:hover {
+    color: #c9a84c;
+}
+
+.footer-nav-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.waze-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: #33ccff !important;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: opacity 0.2s !important;
+}
+
+.waze-link:hover {
+    opacity: 0.8;
+}
+
+.gmaps-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: #c9a84c !important;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: opacity 0.2s !important;
+}
+
+.gmaps-link:hover {
+    opacity: 0.8;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 0.8rem;
+    font-size: 0.78rem;
+    color: #4b5563;
+    letter-spacing: 0.5px;
+}

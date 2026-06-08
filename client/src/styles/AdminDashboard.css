@@ -1,0 +1,128 @@
+/* AdminDashboard.css */
+.admin-dashboard {
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 0 2rem;
+    direction: rtl;
+}
+
+.admin-dashboard h1 {
+    font-size: 2rem;
+    color: #1a1a2e;
+    margin-bottom: 2rem;
+}
+
+.admin-reports {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.admin-reports-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.admin-reports-header h2 {
+    font-size: 1.4rem;
+    color: #0f1624;
+    margin: 0;
+}
+
+.admin-reports-select {
+    padding: 0.45rem 0.85rem;
+    border: 1px solid #c9a84c;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    background: #fff;
+    cursor: pointer;
+}
+
+.admin-reports-add-btn {
+    background: #0f1624;
+    color: #c9a84c;
+    border: 1px solid #c9a84c;
+    padding: 0.4rem 1rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.admin-reports-add-btn:hover {
+    background: #c9a84c;
+    color: #0f1624;
+}
+
+.admin-reports-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    background: #f9f7f0;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+.admin-reports-form input,
+.admin-reports-form select {
+    padding: 0.4rem 0.7rem;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 0.88rem;
+    width: 130px;
+}
+
+.admin-reports-save-btn {
+    background: #c9a84c;
+    color: #0f1624;
+    border: none;
+    padding: 0.4rem 1.2rem;
+    border-radius: 6px;
+    font-weight: 700;
+    cursor: pointer;
+    align-self: flex-end;
+}
+
+.admin-reports-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    direction: rtl;
+}
+
+.admin-reports-table th {
+    background: #f4f0e6;
+    color: #0f1624;
+    padding: 0.55rem 0.75rem;
+    text-align: right;
+    font-weight: 600;
+    border-bottom: 2px solid #c9a84c;
+}
+
+.admin-reports-table td {
+    padding: 0.55rem 0.75rem;
+    border-bottom: 1px solid #f0f0f0;
+    color: #333;
+    text-align: right;
+}
+
+.admin-reports-table tr:hover td {
+    background: #f9f7f0;
+}
+
+.admin-reports-del-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+}
+
+.admin-reports-del-btn:hover {
+    opacity: 1;
+}

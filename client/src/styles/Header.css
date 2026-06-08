@@ -1,0 +1,120 @@
+/* Header.css */
+.header {
+    background-color: #0f1624;
+    padding: 0 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.5);
+    border-bottom: 2px solid #c9a84c;
+    overflow: visible;
+}
+
+.header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+    height: 76px;
+    direction: rtl;
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #c9a84c;
+    font-size: 1.5rem;
+    font-weight: 300;
+    font-family: 'Nunito', sans-serif;
+    text-decoration: none;
+    letter-spacing: 3px;
+    white-space: nowrap;
+}
+
+.header-logo-img {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    object-fit: contain;
+    object-position: center;
+    border: 2px solid #c9a84c;
+    background: #fff;
+    padding: 3px;
+}
+
+.header-nav {
+    display: flex;
+    gap: 1.75rem;
+    align-items: center;
+}
+
+.header-nav a {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.25rem 0;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    letter-spacing: 0.3px;
+}
+
+.header-nav a:hover,
+.header-nav a.active {
+    color: #fff;
+    border-bottom-color: #c9a84c;
+}
+
+.header-login-btn {
+    background-color: #c9a84c !important;
+    color: #0f1624 !important;
+    padding: 0.45rem 1.1rem !important;
+    border-radius: 6px !important;
+    border-bottom: none !important;
+    font-weight: 700 !important;
+    font-size: 0.88rem !important;
+    transition: background 0.2s, transform 0.1s !important;
+    letter-spacing: 0.5px !important;
+}
+
+.header-login-btn:hover {
+    background-color: #e0c068 !important;
+    transform: translateY(-1px);
+}
+
+.header-logout-btn {
+    background: transparent;
+    border: 1px solid #c9a84c;
+    color: #c9a84c;
+    padding: 0.45rem 1.1rem;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.88rem;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    letter-spacing: 0.5px;
+    font-family: inherit;
+}
+
+.header-logout-btn:hover {
+    background-color: #c9a84c;
+    color: #0f1624;
+
+    background: transparent;
+    border: 1px solid #c9a84c;
+    color: #c9a84c;
+    padding: 0.3rem 0.75rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.82rem;
+    font-weight: 700;
+    transition: background 0.2s, color 0.2s;
+    letter-spacing: 0.5px;
+}
+
+.lang-btn:hover {
+    background-color: #c9a84c;
+    color: #0f1624;
+}
