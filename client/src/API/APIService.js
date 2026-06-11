@@ -12,7 +12,7 @@ const apiClient = axios.create({
 
 apiClient.interceptors.response.use(
     res => res,
-    err => {
+    async err => {
         const url = err.config?.url || '';
         const status = err.response?.status;
         const errCode = err.response?.data?.error;
@@ -22,11 +22,20 @@ apiClient.interceptors.response.use(
         if (status === 401) {
             if (url.includes('auth/login')) return Promise.reject(err);
 
-            if (errCode === 'TOKEN_EXPIRED') {
-                sessionStorage.setItem('authMsg', t.sessionExpired);
+            if (errCode === 'TOKEN_EXPIRED' && !url.includes('auth/refresh-token')) {
+                try {
+                    await apiClient.post('/auth/refresh-token');
+                    return apiClient.request(err.config);
+                } catch (refreshError) {
+                    sessionStorage.setItem('authMsg', t.sessionExpired);
+                    if (!url.includes('auth/me')) {
+                        window.location.href = '/nnc/login';
+                    }
+                    return Promise.reject(refreshError);
+                }
             }
 
-            if (!url.includes('auth/me')) {
+            if (!url.includes('auth/me') && !url.includes('auth/refresh-token')) {
                 window.location.href = '/nnc/login';
             }
         }

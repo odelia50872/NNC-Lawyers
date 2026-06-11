@@ -2,7 +2,7 @@ import { useEffect, useState, useRef, useCallback } from 'react';
 import { api } from '../../API/APIService';
 import { useNotify } from '../notifications/NotificationContext';
 import { useLang } from '../../context/LanguageContext';
-import { FaTrashAlt, FaUserPlus } from 'react-icons/fa';
+import { FaTrashAlt, FaUserPlus, FaSearch } from 'react-icons/fa';
 import generatePassword from 'generate-password-browser';
 import useAdminAuth from '../../hooks/useAdminAuth.jsx';
 import '../../styles/AdminAddClient.css';
@@ -12,22 +12,35 @@ function AdminAddClient({ onClientChange = () => {} }) {
     const [offset, setOffset] = useState(0);
     const [hasMore, setHasMore] = useState(true);
     const [loadingMore, setLoadingMore] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [isSearching, setIsSearching] = useState(false);
     const listRef = useRef(null);
+    const searchTimeout = useRef(null);
     const LIMIT = 5;
     const [form, setForm] = useState({ full_name: '', email: '', emailLang: 'he' });
     const notify = useNotify();
     const { t } = useLang();
     const { requireAuth, PasswordModal } = useAdminAuth();
 
-    const fetchClients = useCallback(async (reset = false) => {
+    const fetchClients = useCallback(async (reset = false, query = '') => {
         const currentOffset = reset ? 0 : offset;
         setLoadingMore(true);
         try {
-            const res = await api.get('clients/paginated', { limit: LIMIT, offset: currentOffset });
-            const { clients: newClients, total } = res.data;
-            setClients(prev => reset ? newClients : [...prev, ...newClients]);
-            setOffset(currentOffset + newClients.length);
-            setHasMore(currentOffset + newClients.length < total);
+            let res;
+            if (query.trim()) {
+                res = await api.get('clients/search', { q: query });
+                setClients(res.data);
+                setHasMore(false);
+                setOffset(0);
+                setIsSearching(true);
+            } else {
+                res = await api.get('clients/paginated', { limit: LIMIT, offset: currentOffset });
+                const { clients: newClients, total } = res.data;
+                setClients(prev => reset ? newClients : [...prev, ...newClients]);
+                setOffset(currentOffset + newClients.length);
+                setHasMore(currentOffset + newClients.length < total);
+                setIsSearching(false);
+            }
         } finally {
             setLoadingMore(false);
         }
@@ -37,34 +50,69 @@ function AdminAddClient({ onClientChange = () => {} }) {
 
     useEffect(() => {
         const el = listRef.current;
-        if (!el) return;
+        if (!el || isSearching) return;
         const handleScroll = () => {
             if (el.scrollTop + el.clientHeight >= el.scrollHeight - 10 && hasMore && !loadingMore)
                 fetchClients();
         };
         el.addEventListener('scroll', handleScroll);
         return () => el.removeEventListener('scroll', handleScroll);
-    }, [hasMore, loadingMore, fetchClients]);
+    }, [hasMore, loadingMore, fetchClients, isSearching]);
+
+    const handleSearchInput = (value) => {
+        setSearchQuery(value);
+        clearTimeout(searchTimeout.current);
+        
+        if (!value.trim()) {
+            fetchClients(true);
+            return;
+        }
+        
+        searchTimeout.current = setTimeout(() => {
+            fetchClients(true, value);
+        }, 300);
+    };
+
+    const clearSearch = () => {
+        setSearchQuery('');
+        fetchClients(true);
+    };
 
     const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
     const handleSubmit = (e) => {
         e.preventDefault();
         requireAuth(async () => {
-            const password = generatePassword.generate({ length: 8, numbers: true, symbols: true, uppercase: true, strict: true });
-            await api.post('clients', { ...form, password });
-            await api.post('contact/welcome', { name: form.full_name, email: form.email, password, lang: form.emailLang });
-            await fetchClients(true);
-            onClientChange();
-            setForm({ full_name: '', email: '', emailLang: 'he' });
-            notify(t.adminAddClient.success, 'success');
+            try {
+                const password = generatePassword.generate({ length: 8, numbers: true, symbols: true, uppercase: true, strict: true });
+                await api.post('clients', { ...form, password });
+                await api.post('contact/welcome', { name: form.full_name, email: form.email, password, lang: form.emailLang });
+                if (searchQuery.trim()) {
+                    await fetchClients(true, searchQuery);
+                } else {
+                    await fetchClients(true);
+                }
+                onClientChange();
+                setForm({ full_name: '', email: '', emailLang: 'he' });
+                notify(t.adminAddClient.success, 'success');
+            } catch (error) {
+                if (error.response?.status === 409 && error.response?.data?.error === 'EMAIL_ALREADY_EXISTS') {
+                    notify(t.adminAddClient.emailExists, 'error');
+                } else {
+                    notify(t.adminAddClient.error, 'error');
+                }
+            }
         });
     };
 
     const handleDelete = (id) => {
         requireAuth(async () => {
             await api.delete('clients', id);
-            await fetchClients(true);
+            if (searchQuery.trim()) {
+                await fetchClients(true, searchQuery);
+            } else {
+                await fetchClients(true);
+            }
             onClientChange();
             notify(t.adminAddClient.deleteSuccess, 'success');
         });
@@ -89,7 +137,24 @@ function AdminAddClient({ onClientChange = () => {} }) {
             </div>
 
             <div className="admin-client-list-card">
-                <h3>{t.adminAddClient.existing}</h3>
+                <div className="admin-client-list-header">
+                    <h3>{t.adminAddClient.existing}</h3>
+                    <div className="admin-client-search-wrapper">
+                        <div className="admin-client-search-container">
+                            <FaSearch className="admin-client-search-icon" />
+                            <input
+                                type="text"
+                                className="admin-client-search-input"
+                                placeholder={t.adminAddClient.searchPlaceholder || 'חיפוש לקוח...'}
+                                value={searchQuery}
+                                onChange={e => handleSearchInput(e.target.value)}
+                            />
+                            {searchQuery && (
+                                <button className="admin-client-search-clear" onClick={clearSearch}>✕</button>
+                            )}
+                        </div>
+                    </div>
+                </div>
                 <ul className="admin-client-list" ref={listRef}>
                     {clients.map(c => (
                         <li key={c.id} className="admin-client-item">
@@ -103,6 +168,9 @@ function AdminAddClient({ onClientChange = () => {} }) {
                         </li>
                     ))}
                     {loadingMore && <li className="admin-client-loading">...</li>}
+                    {clients.length === 0 && searchQuery && !loadingMore && (
+                        <li className="admin-client-no-results">{t.adminAddClient.noResults || 'לא נמצאו תוצאות'}</li>
+                    )}
                 </ul>
             </div>
 

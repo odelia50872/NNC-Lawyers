@@ -29,6 +29,26 @@ router.post('/logout', (req, res) => {
     res.json({ message: 'Logged out' });
 });
 
+router.post('/refresh-token', verifyToken, async (req, res) => {
+    try {
+        const newToken = jwt.sign(
+            { id: req.user.id, email: req.user.email, role: req.user.role, full_name: req.user.full_name },
+            process.env.JWT_SECRET,
+            { expiresIn: '30m' }
+        );
+
+        res.cookie('token', newToken, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: process.env.NODE_ENV === 'production' ? 'strict' : 'lax',
+            maxAge: 30 * 60 * 1000
+        });
+        res.json({ success: true });
+    } catch (err) {
+        res.status(500).json({ error: 'Token refresh failed' });
+    }
+});
+
 router.get('/me', async (req, res) => {
     const token = req.cookies?.token;
     if (!token) return res.json({ user: null });

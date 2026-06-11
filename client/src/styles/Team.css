@@ -63,10 +63,13 @@
     margin-bottom: 0.4rem;
 }
 
-.team-card p {
+.team-card p,
+.team-role {
     color: #6b7280;
     font-size: 0.85rem;
     line-height: 1.5;
+    text-align: center !important;
+    text-justify: auto !important;
 }
 
 .team-card--clickable {
@@ -160,6 +163,8 @@
     font-size: 0.95rem;
     line-height: 1.9;
     margin-bottom: 1.1rem;
+    text-align: justify;
+    text-justify: inter-word;
 }
 
 .team-modal-body p:last-child {
@@ -209,4 +214,6 @@
     font-size: 0.9rem;
     font-weight: 600;
     margin-bottom: 0;
+    text-align: center !important;
+    text-justify: auto !important;
 }

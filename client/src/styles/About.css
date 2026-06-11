@@ -22,6 +22,8 @@
     font-size: 1.1rem;
     font-weight: 500;
     margin-bottom: 0.75rem;
+    text-align: center !important;
+    text-justify: auto !important;
 }
 
 .about-body {
@@ -29,6 +31,8 @@
     font-size: 1rem;
     line-height: 1.8;
     margin-top: 0.5rem;
+    text-align: justify;
+    text-justify: inter-word;
 }
 
 .about-sections {
@@ -56,4 +60,6 @@
     font-size: 1rem;
     color: #4b5563;
     line-height: 1.9;
+    text-align: justify;
+    text-justify: inter-word;
 }

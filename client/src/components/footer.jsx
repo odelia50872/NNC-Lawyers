@@ -56,7 +56,7 @@ function Footer() {
 
             </div>
             <p className="footer-bottom">
-                &copy; {new Date().getFullYear()} NNC-LAW. {t.footer.rights}.
+                &copy; {new Date().getFullYear()} NNC-LAW {t.footer.rights}.
             </p>
         </footer>
     );

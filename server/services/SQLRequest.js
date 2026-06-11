@@ -38,6 +38,19 @@ const queryGetPaginated = async (source, { limit = 5, offset = 0, where = null, 
 const querySearch = async (source, field, search) => {
     validateTable(source);
     validateField(field);
+    // חיפוש גם בעברית וגם באנגלית על שם מלא ומייל
+    if (source === 'clients' && field === 'full_name') {
+        const [rows] = await db.query(
+            `SELECT * FROM ${source} WHERE 
+             full_name LIKE ? OR 
+             email LIKE ? OR
+             full_name COLLATE utf8mb4_unicode_ci LIKE ? OR
+             email COLLATE utf8mb4_unicode_ci LIKE ?`, 
+            [`%${search}%`, `%${search}%`, `%${search}%`, `%${search}%`]
+        );
+        return rows;
+    }
+    
     const [rows] = await db.query(`SELECT * FROM ${source} WHERE ${field} LIKE ?`, [`%${search}%`]);
     return rows;
 };

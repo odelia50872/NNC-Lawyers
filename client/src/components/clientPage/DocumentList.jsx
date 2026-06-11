@@ -2,7 +2,7 @@ import { useAuth } from '../../context/AuthContext';
 import useDocuments from '../../hooks/useDocuments';
 import '../../styles/RentalAgreements.css';
 
-function DocumentList({ endpoint, emptyText, icon, groupByYear = true, title }) {
+function DocumentList({ endpoint, emptyText, icon, groupByYear = true, title, hideTitle = false }) {
     const { user } = useAuth();
     const { docs, byYear, years } = useDocuments(endpoint, user?.id);
 
@@ -14,19 +14,27 @@ function DocumentList({ endpoint, emptyText, icon, groupByYear = true, title }) 
         </li>
     );
 
+    const renderContent = () => {
+        if (docs.length === 0) {
+            return <p className="agreements-empty">{emptyText}</p>;
+        }
+        
+        if (groupByYear) {
+            return years.map(year => (
+                <div key={year} className="agreements-year-group">
+                    <div className="agreements-year-badge">{year}</div>
+                    <ul className="agreements-list">{byYear[year].map(renderItem)}</ul>
+                </div>
+            ));
+        }
+        
+        return <ul className="agreements-list">{docs.map(renderItem)}</ul>;
+    };
+
     return (
-        <div className="agreements-container">
-            {title && <h2 className="documents-title">{title}</h2>}
-            {docs.length === 0 && <p className="agreements-empty">{emptyText}</p>}
-            {groupByYear
-                ? years.map(year => (
-                      <div key={year} className="agreements-year-group">
-                          <div className="agreements-year-badge">{year}</div>
-                          <ul className="agreements-list">{byYear[year].map(renderItem)}</ul>
-                      </div>
-                  ))
-                : <ul className="agreements-list">{docs.map(renderItem)}</ul>
-            }
+        <div className={hideTitle ? '' : 'agreements-container'}>
+            {title && !hideTitle && <h2 className="documents-title">{title}</h2>}
+            {renderContent()}
         </div>
     );
 }

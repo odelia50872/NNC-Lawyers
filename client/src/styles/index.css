@@ -14,3 +14,67 @@ body {
 a {
   text-decoration: none;
 }
+
+/* יישור דו-צדדי גלובלי לטקסטים ארוכים */
+p {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+/* החרגות ליישור דו-צדדי */
+.no-justify,
+.text-center p,
+.text-left p,
+.text-right p,
+button p,
+.btn p,
+header p,
+.header p,
+nav p,
+.nav p,
+.menu p,
+.notification p,
+.alert p,
+.toast p,
+.team-role,
+.team-modal-role,
+.subtitle,
+.sub-title,
+*[class*="subtitle"],
+*[class*="sub-title"] {
+  text-align: inherit !important;
+  text-justify: auto !important;
+}
+
+/* כותרות משנה במרכז */
+.about-subtitle,
+.practice-subtitle,
+.contact-subtitle,
+.home-subtitle,
+.legal-subtitle,
+.dashboard-subtitle,
+.admin-subtitle,
+*[class*="subtitle"] p,
+*[class*="sub-title"] p {
+  text-align: center !important;
+  text-justify: auto !important;
+}
+
+/* יישור מותאם לשפות */
+[dir="ltr"] p {
+  text-align: justify;
+}
+
+[dir="rtl"] p {
+  text-align: justify;
+}
+
+[lang="fr"] p {
+  direction: ltr;
+  text-align: justify;
+}
+
+[lang="he"] p {
+  direction: rtl;
+  text-align: justify;
+}

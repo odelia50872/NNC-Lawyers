@@ -72,6 +72,14 @@ const getUserById = async (req, res) => {
 
 const createUser = async (req, res) => {
     try {
+        const { email } = req.body;
+        
+        // בדיקה אם המייל כבר קיים במערכת
+        const existingUser = await getUserByEmail(email);
+        if (existingUser) {
+            return res.status(409).json({ error: 'EMAIL_ALREADY_EXISTS' });
+        }
+        
         const result = await createUserService(req.body);
         res.status(201).json({ id: result.insertId });
     } catch (err) {

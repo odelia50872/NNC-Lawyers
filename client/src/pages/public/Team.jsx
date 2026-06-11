@@ -39,7 +39,7 @@ function Team() {
                             {member.gender === 'female' ? <FemaleAvatar /> : <MaleAvatar />}
                         </div>
                         <h3>{member.name}</h3>
-                        <p>{member.role}</p>
+                        <p className="team-role">{member.role}</p>
                         {member.bio && <span className="team-card-more">{lang === 'fr' ? 'En savoir plus' : 'קרא עוד'}</span>}
                     </div>
                 ))}

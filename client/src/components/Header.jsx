@@ -21,24 +21,28 @@ function Header() {
                     <span style={{ direction: 'ltr', unicodeBidi: 'bidi-override' }}>⋂⋂C-LAW</span>
                 </Link>
                 <nav className="header-nav">
-                    <NavLink to="/nnc/about" className={({ isActive }) => isActive ? 'active' : ''}>{t.nav.about}</NavLink>
-                    <NavLink to="/nnc/team" className={({ isActive }) => isActive ? 'active' : ''}>{t.nav.team}</NavLink>
-                    <NavLink to="/nnc/practice-areas" className={({ isActive }) => isActive ? 'active' : ''}>{t.nav.practiceAreas}</NavLink>
-                    <NavLink to="/nnc/contact" className={({ isActive }) => isActive ? 'active' : ''}>{t.nav.contact}</NavLink>
-                    <NavLink to="/nnc/legal-article" className={({ isActive }) => isActive ? 'active' : ''}>{t.nav.legalArticle}</NavLink>
-                    {user ? (
-                        <>
-                            <NavLink to={dashboardPath} className="header-login-btn">
-                                {user.full_name || t.nav.dashboard}
-                            </NavLink>
-                            <button className="header-logout-btn" onClick={() => logout(navigate)}>
-                                {t.nav.logout}
-                            </button>
-                        </>
-                    ) : (
-                        <NavLink to="/nnc/login" className="header-login-btn">{t.nav.login}</NavLink>
-                    )}
-                    <LanguageSwitcher />
+                    <div className="header-nav-links">
+                        <NavLink to="/nnc/about" className={({ isActive }) => isActive ? 'active' : ''}>{t.nav.about}</NavLink>
+                        <NavLink to="/nnc/team" className={({ isActive }) => isActive ? 'active' : ''}>{t.nav.team}</NavLink>
+                        <NavLink to="/nnc/practice-areas" className={({ isActive }) => isActive ? 'active' : ''}>{t.nav.practiceAreas}</NavLink>
+                        <NavLink to="/nnc/contact" className={({ isActive }) => isActive ? 'active' : ''}>{t.nav.contact}</NavLink>
+                        <NavLink to="/nnc/legal-article" className={({ isActive }) => isActive ? 'active' : ''}>{t.nav.legalArticle}</NavLink>
+                    </div>
+                    <div className="header-nav-buttons">
+                        {user ? (
+                            <>
+                                <NavLink to={dashboardPath} className="header-login-btn">
+                                    {user.full_name || t.nav.dashboard}
+                                </NavLink>
+                                <button className="header-logout-btn" onClick={() => logout(navigate)}>
+                                    {t.nav.logout}
+                                </button>
+                            </>
+                        ) : (
+                            <NavLink to="/nnc/login" className="header-login-btn">{t.nav.login}</NavLink>
+                        )}
+                        <LanguageSwitcher />
+                    </div>
                 </nav>
             </div>
         </header>

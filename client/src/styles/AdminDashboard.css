@@ -98,6 +98,25 @@
     background: #fff;
     min-width: 180px;
     outline: none;
+    direction: rtl;
+    text-align: right;
+}
+
+.admin-client-search-input::placeholder {
+    direction: rtl;
+    text-align: right;
+}
+
+[dir="ltr"] .admin-client-search-input,
+[lang="fr"] .admin-client-search-input {
+    direction: ltr;
+    text-align: left;
+}
+
+[dir="ltr"] .admin-client-search-input::placeholder,
+[lang="fr"] .admin-client-search-input::placeholder {
+    direction: ltr;
+    text-align: left;
 }
 
 .admin-client-search-input:focus {

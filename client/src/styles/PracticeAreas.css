@@ -21,6 +21,8 @@
     color: #c9a84c;
     font-size: 1.1rem;
     font-weight: 500;
+    text-align: center !important;
+    text-justify: auto !important;
 }
 
 .practice-grid {
@@ -74,4 +76,6 @@
     color: #6b7280;
     font-size: 0.85rem;
     line-height: 1.6;
+    text-align: justify;
+    text-justify: inter-word;
 }

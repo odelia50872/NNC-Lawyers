@@ -14,54 +14,71 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1100px;
+    max-width: 1300px;
     margin: 0 auto;
-    height: 76px;
+    height: 90px;
+    padding: 0 2rem;
 }
 
 .header-logo {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 1rem;
     color: #c9a84c;
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     font-weight: 300;
     font-family: 'Nunito', sans-serif;
     text-decoration: none;
     letter-spacing: 3px;
     white-space: nowrap;
+    margin-left: 0;
 }
 
 .header-logo-img {
-    width: 52px;
-    height: 52px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     object-fit: contain;
     object-position: center;
     border: 2px solid #c9a84c;
     background: #fff;
-    padding: 3px;
+    padding: 4px;
 }
 
 .header-nav {
     display: flex;
-    gap: 1.75rem;
+    gap: 3rem;
+    align-items: center;
+    margin-right: 0;
+}
+
+.header-nav-links {
+    display: flex;
+    gap: 2.5rem;
     align-items: center;
 }
 
-.header-nav a {
+.header-nav-buttons {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    margin-right: 1rem;
+}
+
+.header-nav-links a {
     color: #ccc;
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 1rem;
     font-weight: 500;
-    padding: 0.25rem 0;
+    padding: 0.4rem 0;
     border-bottom: 2px solid transparent;
     transition: color 0.2s, border-color 0.2s;
     letter-spacing: 0.3px;
+    white-space: nowrap;
 }
 
-.header-nav a:hover,
-.header-nav a.active {
+.header-nav-links a:hover,
+.header-nav-links a.active {
     color: #fff;
     border-bottom-color: #c9a84c;
 }
@@ -69,13 +86,14 @@
 .header-login-btn {
     background-color: #c9a84c !important;
     color: #0f1624 !important;
-    padding: 0.45rem 1.1rem !important;
-    border-radius: 6px !important;
+    padding: 0.6rem 1.5rem !important;
+    border-radius: 8px !important;
     border-bottom: none !important;
     font-weight: 700 !important;
-    font-size: 0.88rem !important;
+    font-size: 0.95rem !important;
     transition: background 0.2s, transform 0.1s !important;
     letter-spacing: 0.5px !important;
+    white-space: nowrap !important;
 }
 
 .header-login-btn:hover {
@@ -87,33 +105,104 @@
     background: transparent;
     border: 1px solid #c9a84c;
     color: #c9a84c;
-    padding: 0.45rem 1.1rem;
-    border-radius: 6px;
+    padding: 0.6rem 1.5rem;
+    border-radius: 8px;
     font-weight: 700;
-    font-size: 0.88rem;
+    font-size: 0.95rem;
     cursor: pointer;
     transition: background 0.2s, color 0.2s;
     letter-spacing: 0.5px;
     font-family: inherit;
+    white-space: nowrap;
 }
 
 .header-logout-btn:hover {
     background-color: #c9a84c;
     color: #0f1624;
+}
 
+.lang-btn {
     background: transparent;
     border: 1px solid #c9a84c;
     color: #c9a84c;
-    padding: 0.3rem 0.75rem;
-    border-radius: 4px;
+    padding: 0.4rem 1rem;
+    border-radius: 6px;
     cursor: pointer;
-    font-size: 0.82rem;
+    font-size: 0.9rem;
     font-weight: 700;
     transition: background 0.2s, color 0.2s;
     letter-spacing: 0.5px;
+    white-space: nowrap;
 }
 
 .lang-btn:hover {
     background-color: #c9a84c;
     color: #0f1624;
+}
+
+/* רספונסיבי */
+@media (max-width: 1024px) {
+    .header-inner {
+        max-width: 100%;
+        padding: 0 1rem;
+    }
+    
+    .header-nav {
+        gap: 2rem;
+    }
+    
+    .header-nav-links {
+        gap: 1.5rem;
+    }
+    
+    .header-nav-buttons {
+        gap: 1rem;
+        margin-right: 0.5rem;
+    }
+    
+    .header-nav-links a {
+        font-size: 0.9rem;
+    }
+    
+    .header-login-btn {
+        padding: 0.5rem 1.2rem !important;
+        font-size: 0.9rem !important;
+    }
+    
+    .header-logout-btn {
+        padding: 0.5rem 1.2rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-inner {
+        height: 70px;
+        flex-wrap: wrap;
+    }
+    
+    .header-logo {
+        font-size: 1.4rem;
+    }
+    
+    .header-logo-img {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .header-nav {
+        gap: 1rem;
+    }
+    
+    .header-nav-links {
+        gap: 1rem;
+    }
+    
+    .header-nav-buttons {
+        gap: 0.5rem;
+    }
+    
+    .header-nav-links a {
+        font-size: 0.85rem;
+    }
 }
