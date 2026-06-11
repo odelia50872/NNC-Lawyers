@@ -206,7 +206,7 @@ const translations = {
         about: {
             title: 'À propos du cabinet',
             subtitle: 'Professionnalisme, expérience et confiance',
-            body: 'Le cabinet NNC-Law a été fondé par Mr Nakache Pedaël Jean-Luc, spécialisé dans la prestation de services juridiques professionnels et personnalisés à ses clients en Israël et en France.',
+            body: 'Le cabinet NNC-Law a été fondé par Me Nakache Pedaël Jean-Luc, spécialisé dans la prestation de services juridiques professionnels et personnalisés à ses clients en Israël et en France.',
             section1Title: 'À propos du cabinet',
             section1: 'NNC-Law est un cabinet d\'avocats prestigieux et professionnel, offrant des conseils juridiques complets à ses clients dans de nombreux domaines du droit. Le cabinet est spécialisé en droit de la famille, immobilier, droit des sociétés, notariat et procuration continue. Grâce à de nombreuses années d\'expérience et d\'expertise de haut niveau, nous avons acquis une réputation de succès avéré aux yeux de nos clients.',
             section2Title: 'Notre approche',
@@ -218,11 +218,11 @@ const translations = {
             title: 'Notre équipe',
             members: [
                 { name: 'Secrétariat', role: 'Accueil et coordination des clients', gender: 'female', bio: null },
-                { name: 'Mr Pedaël Nakache', role: 'Avocat | Notaire | Fondateur du cabinet', gender: 'male', bio: null },
+                { name: 'Me Pedaël Nakache', role: 'Avocat | Notaire | Fondateur du cabinet', gender: 'male', bio: null },
                 {
                     name: 'Mr Michaël Nakache', role: 'Avocat', gender: 'male', bio: `Après avoir immigré en Israël avec ses parents en 1992, Maître Michaël NAKACHE obtient son baccalauréat israélien avant de poursuivre plusieurs années d'études religieuses en Yéchiva puis en Collel.\r\n\r\nDiplômé de la faculté de droit de Kyriat Ono, il est admis au Barreau israélien en 2012. Il rejoint alors le cabinet familial de Jérusalem, fondé par son père, Maître Pédael Jean-Luc NAKACHE, où il exerce depuis lors.\r\n\r\nSoucieux d'offrir à ses clients un accompagnement juridique complet et actualisé, il suit en 2019 la formation habilitant à la rédaction des procurations continues (« Ypouy Koach Mitmacheh »), puis obtient en 2026, la qualification nécessaire à l'exercice des fonctions de notaire.\r\n\r\nParfaitement bilingue en français et en hébreu, et bénéficiant de l'expérience de son père acquis durant ses années de stage et de fonction, Michaël intervient dans l'ensemble des domaines de compétence du cabinet et accompagne une clientèle israélienne et internationale dans le traitement de ses dossiers.` },
-                { name: 'Mme Yaël Kobi', role: 'Avocate', gender: 'female', bio: null },
-                { name: 'Yossef Kobi', role: 'Service de gestion locative', gender: 'male', bio: null },
+                { name: 'Me Yaël Cubby', role: 'Avocate', gender: 'female', bio: null },
+                { name: 'Yossef Cubby', role: 'Service de gestion locative', gender: 'male', bio: null },
             ],
         },
         practiceAreas: {
@@ -252,10 +252,10 @@ const translations = {
             directContact: 'Contact direct',
             contacts: [
                 { name: 'Secrétariat', phone: '02-6437311' },
-                { name: 'Mr Pedaël Nakache' },
+                { name: 'Me Pedaël Nakache' },
                 { name: 'Mr Michaël Nakache' },
-                { name: 'Mme Yaël Kobi' },
-                { name: 'Gestion immobilière Yossef Kobi', },
+                { name: 'Mme Yaël Cubby' },
+                { name: 'Mr Yossef Cubby', },
             ],
         },
         footer: {
@@ -265,12 +265,12 @@ const translations = {
             fri: 'Vendredi: 09:00 - 13:00',
             sat: 'Samedi: Fermé',
             rights: 'Tous droits réservés',
-            contact: 'Contact',
-            israel: 'Israël',
-            france: 'France',
-            fax: 'Fax',
+            contact: ' Contact ',
+            israel: ' Israël ',
+            france: ' France ',
+            fax: ' Fax ',
             navigate: 'Navigation',
-            firmName: 'Mr Nakache Pedaël-Jean-Luc',
+            firmName: 'Me NAKACHE Pedaël-Jean-Luc',
             address: '8/58 Kadish Luz, Jérusalem',
         },
         login: {
