@@ -1,13 +1,16 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { api } from '../../API/APIService';
-import { FaTrashAlt, FaEdit } from 'react-icons/fa';
+import { FaTrashAlt, FaEdit, FaUpload } from 'react-icons/fa';
 import { useNotify } from '../notifications/NotificationContext';
 import { useLang } from '../../context/LanguageContext';
 import useDocuments from '../../hooks/useDocuments';
+import useAdminAuth from '../../hooks/useAdminAuth.jsx';
 
 function AdminDocSection({ clients, endpoint, title, icon, accept }) {
     const [selectedClient, setSelectedClient] = useState('');
+    const [clientSearch, setClientSearch] = useState('');
+    const [showDropdown, setShowDropdown] = useState(false);
     const { docs, setDocs, byYear, years } = useDocuments(endpoint, selectedClient);
     const [docTitle, setDocTitle] = useState('');
     const [year, setYear] = useState(new Date().getFullYear());
@@ -20,38 +23,53 @@ function AdminDocSection({ clients, endpoint, title, icon, accept }) {
     const [pendingAction, setPendingAction] = useState(null);
     const notify = useNotify();
     const { t } = useLang();
+    const { requireAuth, PasswordModal } = useAdminAuth();
 
-    const confirmAction = (label, fn) => setPendingAction({ label, fn });
+    const filteredClients = clients.filter(c =>
+        c.full_name.toLowerCase().includes(clientSearch.toLowerCase())
+    );
 
-    const executeAction = async () => {
-        await pendingAction.fn();
-        setPendingAction(null);
+    const selectClient = (c) => {
+        setSelectedClient(c.id);
+        setClientSearch(c.full_name);
+        setShowDropdown(false);
     };
+
+    const clearClient = () => {
+        setSelectedClient('');
+        setClientSearch('');
+        setShowDropdown(false);
+    };
+    const executeAction = async () => { await pendingAction.fn(); setPendingAction(null); };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        confirmAction(t.confirm.addDoc, async () => {
-            const formData = new FormData();
-            formData.append('client_id', selectedClient);
-            formData.append('title', docTitle);
-            formData.append('year', year);
-            formData.append('file', file);
-            await axios.post(`${import.meta.env.VITE_API_URL}/${endpoint}`, formData, { withCredentials: true });
-            const res = await api.get(`${endpoint}/${selectedClient}`);
-            setDocs(res.data);
-            setDocTitle('');
-            setYear(new Date().getFullYear());
-            setFile(null);
-            setShowForm(false);
-            notify('המסמך נוסף בהצלחה', 'success');
+        requireAuth(async () => {
+            confirmAction(t.confirm.addDoc, async () => {
+                const formData = new FormData();
+                formData.append('client_id', selectedClient);
+                formData.append('title', docTitle);
+                formData.append('year', year);
+                formData.append('file', file);
+                await axios.post(`${import.meta.env.VITE_API_URL}/${endpoint}`, formData, { withCredentials: true });
+                const res = await api.get(`${endpoint}/${selectedClient}`);
+                setDocs(res.data);
+                setDocTitle('');
+                setYear(new Date().getFullYear());
+                setFile(null);
+                setShowForm(false);
+                notify(t.confirm.docAdded, 'success');
+            });
         });
     };
 
     const handleDelete = (id) => {
-        confirmAction(t.confirm.deleteDoc, async () => {
-            await api.delete(`${endpoint}/doc`, id);
-            setDocs(prev => prev.filter(d => d.id !== id));
-            notify('המסמך נמחק בהצלחה', 'success');
+        requireAuth(async () => {
+            confirmAction(t.confirm.deleteDoc, async () => {
+                await api.delete(`${endpoint}/doc`, id);
+                setDocs(prev => prev.filter(d => d.id !== id));
+                notify(t.confirm.docDeleted, 'success');
+            });
         });
     };
 
@@ -64,16 +82,18 @@ function AdminDocSection({ clients, endpoint, title, icon, accept }) {
 
     const handleUpdate = (e) => {
         e.preventDefault();
-        confirmAction(t.confirm.saveChanges, async () => {
-            const formData = new FormData();
-            formData.append('title', editTitle);
-            formData.append('year', editYear);
-            if (editFile) formData.append('file', editFile);
-            await axios.put(`${import.meta.env.VITE_API_URL}/${endpoint}/doc/${editDoc.id}`, formData, { withCredentials: true });
-            const res = await api.get(`${endpoint}/${selectedClient}`);
-            setDocs(res.data);
-            setEditDoc(null);
-            notify('המסמך עודכן בהצלחה', 'success');
+        requireAuth(async () => {
+            confirmAction(t.confirm.saveChanges, async () => {
+                const formData = new FormData();
+                formData.append('title', editTitle);
+                formData.append('year', editYear);
+                if (editFile) formData.append('file', editFile);
+                await axios.put(`${import.meta.env.VITE_API_URL}/${endpoint}/doc/${editDoc.id}`, formData, { withCredentials: true });
+                const res = await api.get(`${endpoint}/${selectedClient}`);
+                setDocs(res.data);
+                setEditDoc(null);
+                notify(t.confirm.docUpdated, 'success');
+            });
         });
     };
 
@@ -81,27 +101,46 @@ function AdminDocSection({ clients, endpoint, title, icon, accept }) {
         <div className="admin-reports">
             <div className="admin-reports-header">
                 <h2>{title}</h2>
-                <select value={selectedClient} onChange={e => setSelectedClient(e.target.value)} className="admin-reports-select">
-                    <option value="">בחר לקוח...</option>
-                    {clients.map(c => <option key={c.id} value={c.id}>{c.full_name}</option>)}
-                </select>
+                <div className="admin-client-search-wrapper">
+                    <input
+                        type="text"
+                        className="admin-client-search-input"
+                        placeholder={t.confirm.selectClient}
+                        value={clientSearch}
+                        onChange={e => { setClientSearch(e.target.value); setShowDropdown(true); setSelectedClient(''); }}
+                        onFocus={() => setShowDropdown(true)}
+                        onBlur={() => setTimeout(() => setShowDropdown(false), 150)}
+                    />
+                    {clientSearch && <button className="admin-client-search-clear" onClick={clearClient}>✕</button>}
+                    {showDropdown && filteredClients.length > 0 && (
+                        <ul className="admin-client-search-dropdown">
+                            {filteredClients.map(c => (
+                                <li key={c.id} onMouseDown={() => selectClient(c)}>{c.full_name}</li>
+                            ))}
+                        </ul>
+                    )}
+                </div>
                 {selectedClient && (
                     <button className="admin-reports-add-btn" onClick={() => setShowForm(v => !v)}>
-                        {showForm ? 'ביטול' : '+ הוסף'}
+                        {showForm ? t.confirm.cancel : t.confirm.add}
                     </button>
                 )}
             </div>
 
             {showForm && (
                 <form className="admin-reports-form" onSubmit={handleSubmit}>
-                    <input type="text" placeholder="כותרת" required value={docTitle} onChange={e => setDocTitle(e.target.value)} />
-                    <input type="number" placeholder="שנה" required value={year} onChange={e => setYear(e.target.value)} />
-                    <input type="file" accept={accept} required onChange={e => setFile(e.target.files[0])} />
-                    <button type="submit" className="admin-reports-save-btn">שמור</button>
+                    <input type="text" placeholder={t.confirm.titlePlaceholder} required value={docTitle} onChange={e => setDocTitle(e.target.value)} />
+                    <input type="number" placeholder={t.confirm.yearPlaceholder} required value={year} onChange={e => setYear(e.target.value)} />
+                    <label className="admin-file-label">
+                        <FaUpload style={{ marginLeft: '0.4rem' }} />
+                        {file ? t.confirm.fileChosen : t.confirm.chooseFile}
+                        <input type="file" accept={accept} required onChange={e => setFile(e.target.files[0])} />
+                    </label>
+                    <button type="submit" className="admin-reports-save-btn">{t.confirm.save}</button>
                 </form>
             )}
 
-            {selectedClient && years.length === 0 && <p className="agreements-empty">אין מסמכים ללקוח זה</p>}
+            {selectedClient && years.length === 0 && <p className="agreements-empty">{t.confirm.noDocs}</p>}
 
             {years.map(y => (
                 <div key={y} className="agreements-year-group">
@@ -111,8 +150,8 @@ function AdminDocSection({ clients, endpoint, title, icon, accept }) {
                             <li key={d.id} className="agreements-item">
                                 <a href={d.file_url} target="_blank" rel="noreferrer">{icon} {d.title}</a>
                                 <div className="admin-doc-actions">
-                                    <button className="admin-edit-btn" onClick={() => openEdit(d)} title="עדכן"><FaEdit /></button>
-                                    <button className="admin-reports-del-btn" onClick={() => handleDelete(d.id)} title="מחק"><FaTrashAlt /></button>
+                                    <button className="admin-edit-btn" onClick={() => openEdit(d)} title={t.confirm.editTooltip}><FaEdit /></button>
+                                    <button className="admin-reports-del-btn" onClick={() => handleDelete(d.id)} title={t.confirm.deleteTooltip}><FaTrashAlt /></button>
                                 </div>
                             </li>
                         ))}
@@ -139,14 +178,20 @@ function AdminDocSection({ clients, endpoint, title, icon, accept }) {
                         <button className="admin-modal-close" onClick={() => setEditDoc(null)}>✕</button>
                         <h3>{t.confirm.updateDoc}</h3>
                         <form className="admin-reports-form" onSubmit={handleUpdate}>
-                            <input type="text" placeholder="כותרת" required value={editTitle} onChange={e => setEditTitle(e.target.value)} />
-                            <input type="number" placeholder="שנה" required value={editYear} onChange={e => setEditYear(e.target.value)} />
-                            <input type="file" accept={accept} onChange={e => setEditFile(e.target.files[0])} />
-                            <button type="submit" className="admin-reports-save-btn">עדכן</button>
+                            <input type="text" placeholder={t.confirm.titlePlaceholder} required value={editTitle} onChange={e => setEditTitle(e.target.value)} />
+                            <input type="number" placeholder={t.confirm.yearPlaceholder} required value={editYear} onChange={e => setEditYear(e.target.value)} />
+                            <label className="admin-file-label">
+                                <FaUpload style={{ marginLeft: '0.4rem' }} />
+                                {editFile ? t.confirm.fileChosen : t.confirm.chooseFile}
+                                <input type="file" accept={accept} onChange={e => setEditFile(e.target.files[0])} />
+                            </label>
+                            <button type="submit" className="admin-reports-save-btn">{t.confirm.update}</button>
                         </form>
                     </div>
                 </div>
             )}
+
+            {PasswordModal}
         </div>
     );
 }

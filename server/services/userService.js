@@ -1,4 +1,4 @@
-const { queryGet, queryGetByField, queryPost, queryPut, queryDelete } = require('./SQLRequest');
+const { queryGet, queryGetPaginated, queryGetByField, querySearch, queryPost, queryPut, queryDelete } = require('./SQLRequest');
 const bcrypt = require('bcrypt');
 
 const getUserByEmail = async (email) => {
@@ -8,6 +8,15 @@ const getUserByEmail = async (email) => {
 
 const getAllUsers = async () => {
     return await queryGet('clients');
+};
+
+const searchUsers = async (query) => {
+    const rows = await querySearch('clients', 'full_name', query);
+    return rows.filter(r => r.role === 'client');
+};
+
+const getAllUsersPaginated = async (limit, offset) => {
+    return await queryGetPaginated('clients', { limit, offset, where: 'role', whereValue: 'client' });
 };
 
 const getUserById = async (id) => {
@@ -28,4 +37,4 @@ const deleteUser = async (id) => {
     return await queryDelete('clients', id);
 };
 
-module.exports = { getUserByEmail, getAllUsers, getUserById, createUser, updateUser, deleteUser };
+module.exports = { getUserByEmail, getAllUsers, getAllUsersPaginated, searchUsers, getUserById, createUser, updateUser, deleteUser };

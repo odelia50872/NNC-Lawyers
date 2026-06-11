@@ -4,6 +4,7 @@ import RentalAgreements from '../../components/clientPage/RentalAgreements';
 import Reports from '../../components/clientPage/Reports';
 import InsurancePolicy from '../../components/clientPage/InsurancePolicy';
 import IdentityDocuments from '../../components/clientPage/IdentityDocuments';
+import LegalArticles from '../../components/clientPage/LegalArticles';
 import '../../styles/ClientDashboard.css';
 
 function ClientDashboard() {
@@ -13,6 +14,7 @@ function ClientDashboard() {
         { key: 'agreements', label: t.dashboard.agreements },
         { key: 'insurance',  label: t.dashboard.insurance },
         { key: 'identity',   label: t.dashboard.identity },
+        { key: 'articles',   label: t.dashboard.articles },
     ];
     const { activeTab, setActiveTab } = useTabsNav(tabs);
 
@@ -35,6 +37,7 @@ function ClientDashboard() {
                 {activeTab === 'agreements' && <RentalAgreements />}
                 {activeTab === 'insurance'  && <InsurancePolicy />}
                 {activeTab === 'identity'   && <IdentityDocuments />}
+                {activeTab === 'articles'   && <LegalArticles />}
             </div>
         </div>
     );

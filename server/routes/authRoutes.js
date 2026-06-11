@@ -6,6 +6,20 @@ const { verifyToken } = require('../middleware/authMiddleware');
 
 router.post('/login', login);
 
+router.post('/verify-password', verifyToken, async (req, res) => {
+    const { password } = req.body;
+    const { getUserByEmail } = require('../services/userService');
+    const bcrypt = require('bcrypt');
+    try {
+        const user = await getUserByEmail(req.user.email);
+        const valid = await bcrypt.compare(password, user.password_hash);
+        if (!valid) return res.status(401).json({ error: 'INVALID_PASSWORD' });
+        res.json({ success: true });
+    } catch (err) {
+        res.status(500).json({ error: 'Verification failed' });
+    }
+});
+
 router.post('/logout', (req, res) => {
     res.clearCookie('token', {
         httpOnly: true,

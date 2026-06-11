@@ -1,4 +1,4 @@
-const emailContent = {
+const contactEmailContent = {
     he: (name, email, phone, message) => ({
         subject: `פנייה מהאתר — ${name}`,
         text: `שם: ${name}\nאימייל: ${email}\nטלפון: ${phone}\n\nהודעה:\n${message}`,
@@ -9,4 +9,35 @@ const emailContent = {
     }),
 };
 
-module.exports = emailContent;
+const welcomeAddedEmailContent = {
+    he: (name, username, password) => ({
+        subject: `ברוך הבא, ${name}!`,
+        html: `<div dir="rtl" style="font-family:Arial,sans-serif;font-size:15px;color:#222;">
+<p>שלום ${name},</p>
+<p>שמחים לעדכן שחשבונך נוצר בהצלחה במערכת על ידי מנהל האתר.</p>
+<p>אלו פרטי ההתחברות הקבועים שלך:</p>
+<ul>
+  <li><strong>כתובת המייל שבאמצעותה תתחבר לאזור האישי:</strong> ${username}</li>
+  <li><strong>סיסמא:</strong> ${password}</li>
+</ul>
+<p>לידיעתך, מטעמי אבטחה וניהול מערכת, סיסמא זו היא קבועה ולא ניתן לשנותה.</p>
+<p>בברכה,<br/>צוות האתר</p>
+</div>`,
+    }),
+    fr: (name, username, password) => ({
+        subject: `Bienvenue, ${name}!`,
+        html: `<div dir="ltr" style="font-family:Arial,sans-serif;font-size:15px;color:#222;">
+<p>Bonjour ${name},</p>
+<p>Nous avons le plaisir de vous informer que votre compte a été créé avec succès par l'administrateur.</p>
+<p>Voici vos identifiants de connexion permanents :</p>
+<ul>
+  <li><strong>Adresse e-mail avec laquelle vous vous connecterez à votre espace personnel :</strong> ${username}</li>
+  <li><strong>Mot de passe :</strong> ${password}</li>
+</ul>
+<p>Veuillez noter que pour des raisons de sécurité, ce mot de passe est fixe et ne peut pas être modifié.</p>
+<p>Cordialement,<br/>L'équipe du site</p>
+</div>`,
+    }),
+};
+
+module.exports = { contactEmailContent, welcomeAddedEmailContent };

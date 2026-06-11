@@ -25,6 +25,7 @@ function Header() {
                     <NavLink to="/nnc/team" className={({ isActive }) => isActive ? 'active' : ''}>{t.nav.team}</NavLink>
                     <NavLink to="/nnc/practice-areas" className={({ isActive }) => isActive ? 'active' : ''}>{t.nav.practiceAreas}</NavLink>
                     <NavLink to="/nnc/contact" className={({ isActive }) => isActive ? 'active' : ''}>{t.nav.contact}</NavLink>
+                    <NavLink to="/nnc/legal-article" className={({ isActive }) => isActive ? 'active' : ''}>{t.nav.legalArticle}</NavLink>
                     {user ? (
                         <>
                             <NavLink to={dashboardPath} className="header-login-btn">

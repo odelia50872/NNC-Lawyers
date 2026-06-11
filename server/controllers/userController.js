@@ -1,6 +1,6 @@
 
 
-const { getUserByEmail, getAllUsers: getAllUsersService, getUserById: getUserByIdService, createUser: createUserService, updateUser: updateUserService, deleteUser: deleteUserService } = require('../services/userService');
+const { getUserByEmail, getAllUsers: getAllUsersService, getAllUsersPaginated: getAllUsersPaginatedService, searchUsers: searchUsersService, getUserById: getUserByIdService, createUser: createUserService, updateUser: updateUserService, deleteUser: deleteUserService } = require('../services/userService');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -16,7 +16,7 @@ const login = async (req, res) => {
         const token = jwt.sign(
             { id: user.id, email: user.email, role: user.role, full_name: user.full_name },
             process.env.JWT_SECRET,
-            { expiresIn: '1m' }
+            { expiresIn: '30m' }
         );
 
         res.cookie('token', token, {
@@ -31,10 +31,30 @@ const login = async (req, res) => {
     }
 };
 
+const searchUsers = async (req, res) => {
+    try {
+        const rows = await searchUsersService(req.query.q || '');
+        res.json(rows);
+    } catch (err) {
+        res.status(500).json({ error: 'Failed to search users' });
+    }
+};
+
 const getAllUsers = async (req, res) => {
     try {
         const users = await getAllUsersService();
         res.json(users);
+    } catch (err) {
+        res.status(500).json({ error: 'Failed to retrieve users' });
+    }
+};
+
+const getAllUsersPaginated = async (req, res) => {
+    try {
+        const limit = parseInt(req.query.limit) || 10;
+        const offset = parseInt(req.query.offset) || 0;
+        const { rows, total } = await getAllUsersPaginatedService(limit, offset);
+        res.json({ clients: rows, total });
     } catch (err) {
         res.status(500).json({ error: 'Failed to retrieve users' });
     }
@@ -55,7 +75,8 @@ const createUser = async (req, res) => {
         const result = await createUserService(req.body);
         res.status(201).json({ id: result.insertId });
     } catch (err) {
-        res.status(500).json({ error: 'Failed to create user' });
+        console.error('createUser error:', err.message, err.stack);
+        res.status(500).json({ error: 'Failed to create user', details: err.message });
     }
 };
 
@@ -77,4 +98,4 @@ const deleteUser = async (req, res) => {
     }
 };
 
-module.exports = { login, getAllUsers, getUserById, createUser, updateUser, deleteUser };
+module.exports = { login, getAllUsers, getAllUsersPaginated, searchUsers, getUserById, createUser, updateUser, deleteUser };

@@ -19,6 +19,7 @@ DROP TABLE IF EXISTS financial_reports;
 DROP TABLE IF EXISTS rental_agreements;
 DROP TABLE IF EXISTS identity_documents;
 DROP TABLE IF EXISTS insurance_policies;
+DROP TABLE IF EXISTS legal_articles;
 DROP TABLE IF EXISTS clients;
 
 SET FOREIGN_KEY_CHECKS = 1;
@@ -132,3 +133,16 @@ INSERT INTO identity_documents (client_id, title, year, file_url) VALUES
 INSERT INTO insurance_policies (client_id, title, year, file_url) VALUES
 (2, 'פוליסת ביטוח 2025-2026', 2025, 'http://localhost:3000/uploads/insurance-2-2025-2026.pdf'),
 (2, 'פוליסת ביטוח 2026-2027', 2026, 'http://localhost:3000/uploads/insurance-2-2026-2027.pdf');
+
+-- ================================================
+-- טבלת מאמרים משפטיים
+-- ================================================
+
+CREATE TABLE legal_articles (
+    id         INT AUTO_INCREMENT PRIMARY KEY,
+    title_he   VARCHAR(255) NOT NULL,
+    content_he TEXT         NOT NULL,
+    title_fr   VARCHAR(255) NOT NULL,
+    content_fr TEXT         NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

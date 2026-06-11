@@ -1,9 +1,14 @@
 const db = require('../tools/db');
 
-const ALLOWED_TABLES = ['financial_reports', 'clients', 'rental_agreements', 'identity_documents', 'insurance_policies'];
+const ALLOWED_TABLES = ['financial_reports', 'clients', 'rental_agreements', 'identity_documents', 'insurance_policies', 'legal_articles'];
+const ALLOWED_FIELDS = ['email', 'role', 'client_id', 'id'];
 
 const validateTable = (source) => {
     if (!ALLOWED_TABLES.includes(source)) throw new Error(`Invalid table: ${source}`);
+};
+
+const validateField = (field) => {
+    if (!ALLOWED_FIELDS.includes(field)) throw new Error(`Invalid field: ${field}`);
 };
 
 const queryGet = async (source, id = null) => {
@@ -15,7 +20,25 @@ const queryGet = async (source, id = null) => {
 
 const queryGetByField = async (source, field, value) => {
     validateTable(source);
+    validateField(field);
     const [rows] = await db.query(`SELECT * FROM ${source} WHERE ${field} = ?`, [value]);
+    return rows;
+};
+
+const queryGetPaginated = async (source, { limit = 5, offset = 0, where = null, whereValue = null } = {}) => {
+    validateTable(source);
+    if (where) validateField(where);
+    const whereSql = where ? `WHERE ${where} = ?` : '';
+    const params = where ? [whereValue, limit, offset] : [limit, offset];
+    const [rows] = await db.query(`SELECT * FROM ${source} ${whereSql} LIMIT ? OFFSET ?`, params);
+    const [[{ total }]] = await db.query(`SELECT COUNT(*) as total FROM ${source} ${whereSql}`, where ? [whereValue] : []);
+    return { rows, total };
+};
+
+const querySearch = async (source, field, search) => {
+    validateTable(source);
+    validateField(field);
+    const [rows] = await db.query(`SELECT * FROM ${source} WHERE ${field} LIKE ?`, [`%${search}%`]);
     return rows;
 };
 
@@ -42,4 +65,4 @@ const queryDelete = async (source, id) => {
     return result;
 };
 
-module.exports = { queryGet, queryGetByField, queryPost, queryPut, queryDelete };
+module.exports = { queryGet, queryGetPaginated, queryGetByField, querySearch, queryPost, queryPut, queryDelete };

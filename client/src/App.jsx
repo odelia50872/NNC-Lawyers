@@ -9,11 +9,11 @@ import About from './pages/public/About';
 import PracticeAreas from './pages/public/PracticeAreas';
 import Team from './pages/public/Team';
 import Contact from './pages/public/Contact';
+import LegalArticle from './pages/public/LegalArticle';
 
 import ClientDashboard from './pages/client/ClientDashboard';
 
 import AdminDashboard from './pages/admin/AdminDashboard';
-import AdminClients from './pages/admin/AdminClients';
 
 import Login from './pages/auth/Login';
 
@@ -29,6 +29,7 @@ function App() {
         <Route path="/nnc/practice-areas" element={<PracticeAreas />} />
         <Route path="/nnc/team" element={<Team />} />
         <Route path="/nnc/contact" element={<Contact />} />
+        <Route path="/nnc/legal-article" element={<LegalArticle />} />
         <Route path="/nnc/login" element={<Login />} />
 
         <Route element={<ProtectedRoute allowedRoles={['client', 'admin']} />}>
@@ -37,7 +38,6 @@ function App() {
 
         <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
           <Route path="/nnc/admin" element={<AdminDashboard />} />
-          <Route path="/nnc/:name/clients" element={<AdminClients />} />
         </Route>
       </Route>
     </Routes>

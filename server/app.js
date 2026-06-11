@@ -6,7 +6,8 @@ require('dotenv').config();
 const authRoutes = require('./routes/authRoutes');
 const clientRoutes = require('./routes/clientRoutes');
 const financialReportRoutes = require('./routes/financialReportRoutes');
-const contactRoutes = require('./routes/contactRoutes');
+const contactRoutes = require('./routes/emailRoutes');
+const legalArticleRoutes = require('./routes/legalArticleRoutes');
 
 const rentalAgreementRoutes = require('./routes/rentalAgreementRoutes');
 const identityRoutes = require('./routes/identityRoutes');
@@ -26,6 +27,7 @@ app.use('/api/financial-reports', financialReportRoutes);
 app.use('/api/rental-agreements', rentalAgreementRoutes);
 app.use('/api/identity-documents', identityRoutes);
 app.use('/api/insurance-policies', insuranceRoutes);
+app.use('/api/legal-articles', legalArticleRoutes);
 
 app.use((err, req, res, next) => {
     console.error('Error:', err);
