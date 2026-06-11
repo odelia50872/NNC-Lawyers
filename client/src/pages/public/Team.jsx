@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useLang } from '../../context/LanguageContext';
 import '../../styles/Team.css';
 
@@ -19,7 +20,8 @@ const FemaleAvatar = () => (
 );
 
 function Team() {
-    const { t } = useLang();
+    const { t, lang } = useLang();
+    const [selected, setSelected] = useState(null);
 
     return (
         <div className="team-page">
@@ -28,15 +30,40 @@ function Team() {
             </div>
             <div className="team-grid">
                 {t.team.members.map((member, i) => (
-                    <div className="team-card" key={i}>
+                    <div
+                        className={`team-card${member.bio ? ' team-card--clickable' : ''}`}
+                        key={i}
+                        onClick={() => member.bio && setSelected(member)}
+                    >
                         <div className="team-avatar-wrapper">
                             {member.gender === 'female' ? <FemaleAvatar /> : <MaleAvatar />}
                         </div>
                         <h3>{member.name}</h3>
                         <p>{member.role}</p>
+                        {member.bio && <span className="team-card-more">{lang === 'fr' ? 'En savoir plus' : 'קרא עוד'}</span>}
                     </div>
                 ))}
             </div>
+
+            {selected && (
+                <div className="team-modal-overlay" onClick={() => setSelected(null)}>
+                    <div className="team-modal" onClick={e => e.stopPropagation()}>
+                        <div className="team-modal-header">
+                            <button className="team-modal-close" onClick={() => setSelected(null)}>✕</button>
+                            <div className="team-modal-avatar">
+                                {selected.gender === 'female' ? <FemaleAvatar /> : <MaleAvatar />}
+                            </div>
+                            <h2>{selected.name}</h2>
+                            <p className="team-modal-role">{selected.role}</p>
+                        </div>
+                        <div className="team-modal-body" style={{ direction: lang === 'fr' ? 'ltr' : 'rtl', textAlign: lang === 'fr' ? 'left' : 'right' }}>
+                            {selected.bio.split('\n\n').map((para, i) => (
+                                <p key={i}>{para}</p>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

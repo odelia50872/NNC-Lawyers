@@ -6,7 +6,7 @@ function PublicLayout() {
     return (
         <>
             <Header />
-            <main>
+            <main style={{ minHeight: 'calc(100vh - 76px - 120px)' }}>
                 <Outlet />
             </main>
             <Footer />

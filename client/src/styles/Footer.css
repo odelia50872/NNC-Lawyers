@@ -17,12 +17,26 @@
     border-bottom: 1px solid #1f2937;
 }
 
+.footer-section {
+    text-align: inherit;
+}
+
+[dir="rtl"] .footer-section h3 {
+    text-align: right;
+    margin: left 20px;
+    /* width: 100%; */
+}
+
+[dir="ltr"] .footer-section h3 {
+    text-align: left;
+}
+
 .footer-section h3 {
     color: #c9a84c;
     font-size: 1.4rem;
     font-weight: 300;
     font-family: 'Nunito', sans-serif;
-    letter-spacing: 3px;
+    letter-spacing: 4px;
     margin-bottom: 0.4rem;
 }
 

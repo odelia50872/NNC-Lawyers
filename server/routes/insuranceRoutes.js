@@ -6,7 +6,7 @@ const { makeController } = require('../controllers/documentController');
 const { verifyToken, verifyAdmin } = require('../middleware/authMiddleware');
 const { verifySelfOrAdmin } = require('../middleware/userMiddleware');
 
-const { getByClient, create, remove } = makeController('insurance_policies');
+const { getByClient, create, update, remove } = makeController('insurance_policies');
 
 const storage = multer.diskStorage({
     destination: 'uploads/',
@@ -14,8 +14,9 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-router.get('/:clientId', verifyToken, verifySelfOrAdmin, getByClient);
-router.post('/',         verifyToken, verifyAdmin, upload.single('file'), create);
-router.delete('/:id',    verifyToken, verifyAdmin, remove);
+router.put('/doc/:id',        verifyToken, verifyAdmin, upload.single('file'), update);
+router.delete('/doc/:id',     verifyToken, verifyAdmin, remove);
+router.get('/:clientId',      verifyToken, verifySelfOrAdmin, getByClient);
+router.post('/',              verifyToken, verifyAdmin, upload.single('file'), create);
 
 module.exports = router;

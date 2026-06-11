@@ -1,15 +1,8 @@
-const { queryGetByField, queryPost, queryDelete } = require('./SQLRequest');
+const { queryGetByField, queryPost, queryPut, queryDelete } = require('./SQLRequest');
 
-const getAgreementsByClientId = async (clientId) => {
-    return await queryGetByField('rental_agreements', 'client_id', clientId);
-};
+const getAgreementsByClientId = async (clientId) => queryGetByField('rental_agreements', 'client_id', clientId);
+const createAgreement = async (data) => queryPost('rental_agreements', data);
+const updateAgreement = async (id, data) => queryPut('rental_agreements', id, data);
+const deleteAgreement = async (id) => queryDelete('rental_agreements', id);
 
-const createAgreement = async (data) => {
-    return await queryPost('rental_agreements', data);
-};
-
-const deleteAgreement = async (id) => {
-    return await queryDelete('rental_agreements', id);
-};
-
-module.exports = { getAgreementsByClientId, createAgreement, deleteAgreement };
+module.exports = { getAgreementsByClientId, createAgreement, updateAgreement, deleteAgreement };

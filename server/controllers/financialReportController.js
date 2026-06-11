@@ -1,4 +1,4 @@
-const { getReportsByClientId: getReports, createReport, deleteReport } = require('../services/financialReportService');
+const { getReportsByClientId: getReports, createReport, updateReport, deleteReport } = require('../services/financialReportService');
 
 const getReportsByClientId = async (req, res) => {
     try {
@@ -20,6 +20,18 @@ const create = async (req, res) => {
     }
 };
 
+const update = async (req, res) => {
+    try {
+        const { title, year } = req.body;
+        const data = { title, year };
+        if (req.file) data.file_url = `${process.env.SERVER_URL || 'http://localhost:3000'}/uploads/${req.file.filename}`;
+        await updateReport(req.params.id, data);
+        res.json({ message: 'Updated' });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+};
+
 const remove = async (req, res) => {
     try {
         await deleteReport(req.params.id);
@@ -29,4 +41,4 @@ const remove = async (req, res) => {
     }
 };
 
-module.exports = { getReportsByClientId, create, remove };
+module.exports = { getReportsByClientId, create, update, remove };

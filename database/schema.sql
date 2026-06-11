@@ -99,7 +99,7 @@ CREATE TABLE insurance_policies (
 -- ================================================
 
 INSERT INTO clients (full_name, email, password_hash, phone, role) VALUES
-('מנהל מערכת',             'admin@nnc-law.co.il',   '$2b$10$Pw4CRVET6i29KX.m8sNQte0dn5PPszRJf5USbAk0FGvB2SFgRodc6', '050-1111111', 'admin'),
+('מנהל מערכת',             'admin@nnc-law.co.il',   '$2b$10$LNAeyyn6lf.T9PSqhhqAKeqNv2w8mpIRyYSiM6kcUlpCwhX3xaN12', '050-1111111', 'admin'),
 ("חג'ג' רבקה ואהרון שרה", 'chajaj@nnc-law.co.il',  '$2b$10$f.WT2IjVWyrEJt.ns7xd1..EikcdSAZ.Q1TNJvbMmx7fEUY0QeYUy', '050-2222222', 'client');
 
 -- ================================================
@@ -124,3 +124,11 @@ INSERT INTO financial_reports (client_id, title, year, file_url) VALUES
 
 INSERT INTO identity_documents (client_id, title, year, file_url) VALUES
 (2, 'תעודת זהות שוכר', 2024, 'http://localhost:3000/uploads/identity-3.pdf');
+
+-- ================================================
+-- נתוני פוליסות ביטוח
+-- ================================================
+
+INSERT INTO insurance_policies (client_id, title, year, file_url) VALUES
+(2, 'פוליסת ביטוח 2025-2026', 2025, 'http://localhost:3000/uploads/insurance-2-2025-2026.pdf'),
+(2, 'פוליסת ביטוח 2026-2027', 2026, 'http://localhost:3000/uploads/insurance-2-2026-2027.pdf');

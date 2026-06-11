@@ -1,19 +1,14 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { FaPhone } from 'react-icons/fa';
 import { useLang } from '../../context/LanguageContext';
 import { api } from '../../API/APIService';
+import { useNotify } from '../../components/notifications/NotificationContext';
 import '../../styles/Contact.css';
 
 function Contact() {
     const { t, lang } = useLang();
     const [form, setForm] = useState({ name: '', email: '', phone: '', message: '' });
-    const [status, setStatus] = useState(null);
-
-    useEffect(() => {
-        if (!status) return;
-        const timer = setTimeout(() => setStatus(null), 3000);
-        return () => clearTimeout(timer);
-    }, [status]);
+    const notify = useNotify();
 
     const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
@@ -21,10 +16,10 @@ function Contact() {
         e.preventDefault();
         try {
             await api.post('contact', { ...form, lang });
-            setStatus('success');
+            notify(t.contact.success, 'success');
             setForm({ name: '', email: '', phone: '', message: '' });
         } catch {
-            setStatus('error');
+            notify(t.contact.error, 'error');
         }
     };
 
@@ -52,9 +47,6 @@ function Contact() {
                 </div>
 
                 <div className="contact-card">
-                    {status === 'success' && <div className="contact-alert success">{t.contact.success}</div>}
-                    {status === 'error' && <div className="contact-alert error">{t.contact.error}</div>}
-
                     <form className="contact-form" onSubmit={handleSubmit}>
                         <div className="form-row">
                             <div className="form-group">

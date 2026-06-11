@@ -61,6 +61,15 @@
     color: #c9a84c;
 }
 
+.documents-title {
+    font-size: 1.8rem;
+    color: #0f1624;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    border-bottom: 3px solid #c9a84c;
+    padding-bottom: 0.75rem;
+}
+
 .agreements-empty {
     color: #888;
     text-align: center;

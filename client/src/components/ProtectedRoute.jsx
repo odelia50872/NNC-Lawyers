@@ -1,20 +1,26 @@
 import { useEffect } from 'react';
-import { useNavigate, Outlet } from 'react-router-dom';
+import { useNavigate, Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 function ProtectedRoute({ allowedRoles }) {
     const { user, loading } = useAuth();
     const navigate = useNavigate();
+    const location = useLocation();
+
     const isAllowed = user && (!allowedRoles || allowedRoles.includes(user.role));
 
     useEffect(() => {
-        if (!loading && !isAllowed) {
-            navigate('/login', { replace: true });
+       if (!loading && !isAllowed && location.pathname !== '/login') {
+            navigate('/login', {
+                replace: true,
+                state: { message: "אין לך הרשאה לגשת לעמוד זה" }
+            });
         }
-    }, [loading, user]);
+    }, [loading, isAllowed, navigate, location.pathname]);
 
-    if (loading) return null;
-    if (!isAllowed) return null;
+    if (loading || !isAllowed) {
+        return null;
+    }
 
     return <Outlet />;
 }

@@ -12,7 +12,7 @@ const apiClient = axios.create({
 apiClient.interceptors.response.use(
     res => res,
     err => {
-        if (err.response?.status === 401 && !err.config.url.includes('auth/me')) {
+        if (err.response?.status === 401 && !err.config.url.includes('auth/me') && !err.config.url.includes('auth/login')) {
             window.location.href = '/login';
         }
         return Promise.reject(err);

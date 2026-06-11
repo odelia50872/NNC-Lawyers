@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { api } from '../../API/APIService';
 import { useAuth } from '../../context/AuthContext';
 import { useLang } from '../../context/LanguageContext';
+import { useNotify } from '../../components/notifications/NotificationContext';
 import '../../styles/Login.css';
 
 function Login() {
@@ -12,6 +13,12 @@ function Login() {
     const { login, user, loading } = useAuth();
     const navigate = useNavigate();
     const { t } = useLang();
+    const location = useLocation();
+    const notify = useNotify();
+
+    useEffect(() => {
+        if (location.state?.message) notify(location.state.message, 'error');
+    }, []);
 
     useEffect(() => {
         if (!loading && user) {
@@ -19,43 +26,23 @@ function Login() {
             navigate(path, { replace: true });
         }
     }, [user, loading]);
-    const location = useLocation();
-    const [popup, setPopup] = useState(location.state?.message || null);
-    const [popupFading, setPopupFading] = useState(false);
-
-    const showPopup = (msg) => {
-        setPopup(msg);
-        setPopupFading(false);
-    };
-
-    useEffect(() => {
-        if (popup) {
-            const fade = setTimeout(() => setPopupFading(true), 2500);
-            const hide = setTimeout(() => { setPopup(null); setPopupFading(false); }, 3000);
-            return () => { clearTimeout(fade); clearTimeout(hide); };
-        }
-    }, [popup]);
 
     const validate = () => {
-        if (!email) { showPopup(t.login.emailRequired); return false; }
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showPopup(t.login.emailInvalid); return false; }
-        if (!password) { showPopup(t.login.passwordRequired); return false; }
-        if (password.length < 6) { showPopup(t.login.passwordShort); return false; }
+        if (!email) { notify(t.login.emailRequired, 'error'); return false; }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { notify(t.login.emailInvalid, 'error'); return false; }
+        if (!password) { notify(t.login.passwordRequired, 'error'); return false; }
+        if (password.length < 6) { notify(t.login.passwordShort, 'error'); return false; }
         return true;
     };
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        const valid = validate();
-        if (!valid) return;
+        if (!validate()) return;
         try {
             const response = await api.post('auth/login', { email, password });
-            const { user } = response.data;
-            login(user);
-            const path = user.role === 'admin' ? '/admin/dashboard' : '/client/dashboard';
-            navigate(path, { replace: true });
+            login(response.data.user);
         } catch (err) {
-            showPopup(err.response?.data?.error || t.login.failed);
+            notify(err.response?.data?.error || t.login.failed, 'error');
             setEmail('');
             setPassword('');
         }
@@ -63,7 +50,6 @@ function Login() {
 
     return (
         <div className="login-container">
-            {popup && <div className={`login-popup${popupFading ? ' fading' : ''}`}>{popup}</div>}
             <div className="login-box">
                 <h2>{t.login.title}</h2>
                 <form className="login-form" onSubmit={handleLogin}>

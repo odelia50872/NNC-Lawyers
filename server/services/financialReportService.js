@@ -1,15 +1,8 @@
-const { queryGetByField, queryPost, queryDelete } = require('./SQLRequest');
+const { queryGetByField, queryPost, queryPut, queryDelete } = require('./SQLRequest');
 
-const getReportsByClientId = async (clientId) => {
-    return await queryGetByField('financial_reports', 'client_id', clientId);
-};
+const getReportsByClientId = async (clientId) => queryGetByField('financial_reports', 'client_id', clientId);
+const createReport = async (data) => queryPost('financial_reports', data);
+const updateReport = async (id, data) => queryPut('financial_reports', id, data);
+const deleteReport = async (id) => queryDelete('financial_reports', id);
 
-const createReport = async (data) => {
-    return await queryPost('financial_reports', data);
-};
-
-const deleteReport = async (id) => {
-    return await queryDelete('financial_reports', id);
-};
-
-module.exports = { getReportsByClientId, createReport, deleteReport };
+module.exports = { getReportsByClientId, createReport, updateReport, deleteReport };
