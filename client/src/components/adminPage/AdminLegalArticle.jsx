@@ -31,44 +31,36 @@ function AdminLegalArticle() {
 
     const closeForm = () => { setShowForm(false); setEditArticle(null); setForm(EMPTY_FORM); };
 
+    const withAuth = (fn, successMsg, errorMsg) => {
+        requireAuth(async () => {
+            try { await fn(); notify(successMsg, 'success'); }
+            catch { notify(errorMsg, 'error'); }
+        });
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        requireAuth(async () => {
-            try {
-                await api.post('legal-articles', form);
-                await fetchArticles();
-                closeForm();
-                notify(t.legalArticles.added, 'success');
-            } catch {
-                notify(t.legalArticles.error, 'error');
-            }
-        });
+        withAuth(async () => {
+            await api.post('legal-articles', form);
+            await fetchArticles();
+            closeForm();
+        }, t.legalArticles.added, t.legalArticles.error);
     };
 
     const handleUpdate = (e) => {
         e.preventDefault();
-        requireAuth(async () => {
-            try {
-                await api.put('legal-articles', editArticle.id, form);
-                await fetchArticles();
-                closeForm();
-                notify(t.legalArticles.updated, 'success');
-            } catch {
-                notify(t.legalArticles.error, 'error');
-            }
-        });
+        withAuth(async () => {
+            await api.put('legal-articles', editArticle.id, form);
+            await fetchArticles();
+            closeForm();
+        }, t.legalArticles.updated, t.legalArticles.error);
     };
 
     const handleDelete = (id) => {
-        requireAuth(async () => {
-            try {
-                await api.delete('legal-articles', id);
-                await fetchArticles();
-                notify(t.legalArticles.deleted, 'success');
-            } catch {
-                notify(t.legalArticles.error, 'error');
-            }
-        });
+        withAuth(async () => {
+            await api.delete('legal-articles', id);
+            await fetchArticles();
+        }, t.legalArticles.deleted, t.legalArticles.error);
     };
 
     const openEdit = (article) => {

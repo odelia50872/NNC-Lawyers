@@ -3,10 +3,10 @@ import { SiWaze } from 'react-icons/si';
 import { useLang } from '../context/LanguageContext';
 import '../styles/Footer.css';
 
-const phoneIsrael = '02-6437311';
-const phoneFrance = '\u200E+33 177505913';
-const fax = '02-6439798';
-const email = 'nnc@nnc-law.com';
+const phoneIsrael = ' 02-6437311';
+const phoneFrance = ' \u200E+33 177505913';
+const fax = ' 02-6439798';
+const email = ' nnc@nnc-law.com';
 const wazeAddress = 'רחוב קדיש לוז 6, ירושלים';
 const gMapsAddress = 'רחוב קדיש לוז 8, ירושלים';
 
@@ -22,7 +22,7 @@ function Footer() {
             <div className="footer-content">
 
                 <div className="footer-section">
-                    <h3 style={{ direction: 'ltr', unicodeBidi: 'bidi-override' }}>⋂⋂C LAW</h3>
+                    <h3 style={{ direction: 'ltr', unicodeBidi: 'bidi-override' }}>⋂⋂C-LAW</h3>
                     <p>{t.footer.firmName}</p>
                     <p>{t.footer.address}</p>
                     <div className="footer-nav-links">
@@ -37,9 +37,9 @@ function Footer() {
 
                 <div className="footer-section">
                     <h4>{t.footer.contact}</h4>
-                    <p><FaPhone /> {t.footer.israel}: {phoneIsrael}</p>
-                    <p><FaPhone /> {t.footer.france}: {phoneFrance}</p>
-                    <p><FaFax /> {t.footer.fax}: {fax}</p>
+                    <p><FaPhone /> {t.footer.israel }: { phoneIsrael}</p>
+                    <p><FaPhone /> {t.footer.france }: { phoneFrance}</p>
+                    <p><FaFax /> {t.footer.fax }: { fax}</p>
                     <p>
                         <FaEnvelope />
                         <a href={GMAIL_URL} target="_blank" rel="noreferrer">{email}</a>
@@ -56,7 +56,7 @@ function Footer() {
 
             </div>
             <p className="footer-bottom">
-                &copy; {new Date().getFullYear()} NNC LAW. {t.footer.rights}.
+                &copy; {new Date().getFullYear()} NNC-LAW. {t.footer.rights}.
             </p>
         </footer>
     );

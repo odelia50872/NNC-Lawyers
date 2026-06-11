@@ -5,7 +5,7 @@ const verifySelfOrAdmin = (req, res, next) => {
     if (role === 'admin') return next(); 
 
     if (requestedId !== tokenId)
-        return res.status(403).json({ error: 'אין הרשאה לגשת לנתונים של משתמש אחר' });
+        return res.status(403).json({ error: 'No permission to access this resource' });
 
     next();
 };

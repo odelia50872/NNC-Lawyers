@@ -1,7 +1,9 @@
 import DocumentList from './DocumentList';
+import { useLang } from '../../context/LanguageContext';
 
 function IdentityDocuments() {
-    return <DocumentList endpoint="identity-documents" emptyText="אין תעודות זיהוי" icon="🪪" groupByYear={false} title="תעודות זיהוי" />;
+    const { t } = useLang();
+    return <DocumentList endpoint="identity-documents" emptyText={t.identityDocuments.empty} icon="🪪" groupByYear={false} title={t.identityDocuments.title} />;
 }
 
 export default IdentityDocuments;

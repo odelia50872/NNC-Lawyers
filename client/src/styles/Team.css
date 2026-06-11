@@ -132,6 +132,13 @@
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: #c9a84c #f3f4f6;
+    direction: rtl;
+    text-align: right;
+}
+
+.team-modal-body--fr {
+    direction: ltr;
+    text-align: left;
 }
 
 .team-modal-body::-webkit-scrollbar {

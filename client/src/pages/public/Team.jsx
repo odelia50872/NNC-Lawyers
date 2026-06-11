@@ -56,7 +56,7 @@ function Team() {
                             <h2>{selected.name}</h2>
                             <p className="team-modal-role">{selected.role}</p>
                         </div>
-                        <div className="team-modal-body" style={{ direction: lang === 'fr' ? 'ltr' : 'rtl', textAlign: lang === 'fr' ? 'left' : 'right' }}>
+                        <div className={`team-modal-body team-modal-body--${lang}`}>
                             {selected.bio.split('\n\n').map((para, i) => (
                                 <p key={i}>{para}</p>
                             ))}

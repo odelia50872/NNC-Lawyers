@@ -72,15 +72,15 @@ const translations = {
         },
         footer: {
             hours: 'שעות פעילות',
-            sun: 'יום א׳:15:00 -9:00',
-            monThu: 'ימים ב׳ - ה׳: 18:00- 09:00',
-            fri: 'יום ו׳: 12:00- 09:00',
-            sat: 'שבת: סגור',
+            sun: 'יום א׳ : 15:00- -9:00',
+            monThu: 'ימים ב׳ - ה׳ : 18:00- 09:00',
+            fri: 'יום ו׳ : 12:00- 09:00',
+            sat: 'שבת : סגור',
             rights: 'כל הזכויות שמורות',
             contact: 'צור קשר',
-            israel: 'ישראל',
-            france: 'צרפת',
-            fax: 'פקס',
+            israel: ' ישראל',
+            france: ' צרפת',
+            fax: ' פקס',
             navigate: 'ניווט',
             firmName: 'עו"ד נקש פדהאל-ז׳אן-לוק',
             address: 'קדיש לוז 8/58, ירושלים',
@@ -170,6 +170,22 @@ const translations = {
             emailLangHe: 'עברית',
             emailLangFr: 'צרפתית',
         },
+        identityDocuments: {
+            title: 'תעודות זיהוי',
+            empty: 'אין תעודות זיהוי',
+        },
+        insurancePolicies: {
+            title: 'פוליסות ביטוח',
+            empty: 'אין פוליסות ביטוח',
+        },
+        rentalAgreements: {
+            title: 'הסכמי שכירות',
+            empty: 'אין הסכמי שכירות',
+        },
+        financialReports: {
+            title: 'דוחות כספיים',
+            empty: 'אין דוחות כספיים',
+        },
     },
     fr: {
         nav: {
@@ -183,20 +199,20 @@ const translations = {
             legalArticle: 'Articles juridiques',
         },
         home: {
-            hero: 'Cabinet d\'avocats NNC Law',
+            hero: 'Cabinet d\'avocats NNC-Law',
             subtitle: 'Expérience, professionnalisme et fiabilité — à vos côtés à chaque étape',
             cta: 'Contactez-nous',
         },
         about: {
             title: 'À propos du cabinet',
             subtitle: 'Professionnalisme, expérience et confiance',
-            body: 'Le cabinet NNC Law a été fondé par Mr Nakache Pedaël Jean-Luc, spécialisé dans la prestation de services juridiques professionnels et personnalisés à ses clients en Israël et en France.',
+            body: 'Le cabinet NNC-Law a été fondé par Mr Nakache Pedaël Jean-Luc, spécialisé dans la prestation de services juridiques professionnels et personnalisés à ses clients en Israël et en France.',
             section1Title: 'À propos du cabinet',
-            section1: 'NNC Law est un cabinet d\'avocats prestigieux et professionnel, offrant des conseils juridiques complets à ses clients dans de nombreux domaines du droit. Le cabinet est spécialisé en droit de la famille, immobilier, droit des sociétés, notariat et procuration continue. Grâce à de nombreuses années d\'expérience et d\'expertise de haut niveau, nous avons acquis une réputation de succès avéré aux yeux de nos clients.',
+            section1: 'NNC-Law est un cabinet d\'avocats prestigieux et professionnel, offrant des conseils juridiques complets à ses clients dans de nombreux domaines du droit. Le cabinet est spécialisé en droit de la famille, immobilier, droit des sociétés, notariat et procuration continue. Grâce à de nombreuses années d\'expérience et d\'expertise de haut niveau, nous avons acquis une réputation de succès avéré aux yeux de nos clients.',
             section2Title: 'Notre approche',
             section2: 'Notre approche professionnelle est fondée sur une combinaison entre une expertise juridique de haut niveau et une compréhension des besoins spécifiques de chaque client. Nous croyons qu\'un service juridique d\'excellence commence par une écoute attentive, la transparence et l\'honnêteté. Notre cabinet accompagne ses clients à chaque étape et fournit des solutions pratiques et efficaces, conduisant aux meilleurs résultats.',
             section3Title: 'Activité internationale',
-            section3: 'Grâce à sa maîtrise du droit français et israélien, le cabinet NNC Law offre des solutions juridiques uniques aux clients israéliens et français. Nous traitons les transactions transfrontalières, les successions, les accords bilatéraux et la gestion d\'actifs, avec une compréhension approfondie du monde juridique mondial.',
+            section3: 'Grâce à sa maîtrise du droit français et israélien, le cabinet NNC-Law offre des solutions juridiques uniques aux clients israéliens et français. Nous traitons les transactions transfrontalières, les successions, les accords bilatéraux et la gestion d\'actifs, avec une compréhension approfondie du monde juridique mondial.',
         },
         team: {
             title: 'Notre équipe',
@@ -341,6 +357,22 @@ const translations = {
             emailLang: 'Langue du mail',
             emailLangHe: 'Hébreu',
             emailLangFr: 'Français',
+        },
+        identityDocuments: {
+            title: 'Pièces d\'identité',
+            empty: 'Aucune pièce d\'identité',
+        },
+        insurancePolicies: {
+            title: 'Polices d\'assurance',
+            empty: 'Aucune police d\'assurance',
+        },
+        rentalAgreements: {
+            title: 'Contrats de location',
+            empty: 'Aucun contrat de location',
+        },
+        financialReports: {
+            title: 'Rapports financiers',
+            empty: 'Aucun rapport financier',
         },
     },
 };

@@ -13,13 +13,24 @@ const apiClient = axios.create({
 apiClient.interceptors.response.use(
     res => res,
     err => {
-        if (err.response?.status === 401 && !err.config.url.includes('auth/me') && !err.config.url.includes('auth/login')) {
-            const lang = document.documentElement.lang || 'he';
-            const t = translations[lang];
-            const errCode = err.response?.data?.error;
-            if (errCode === 'TOKEN_EXPIRED') sessionStorage.setItem('authMsg', t.sessionExpired);
-            window.location.href = '/nnc/login';
+        const url = err.config?.url || '';
+        const status = err.response?.status;
+        const errCode = err.response?.data?.error;
+        const lang = document.documentElement.lang || 'he';
+        const t = translations[lang];
+
+        if (status === 401) {
+            if (url.includes('auth/login')) return Promise.reject(err);
+
+            if (errCode === 'TOKEN_EXPIRED') {
+                sessionStorage.setItem('authMsg', t.sessionExpired);
+            }
+
+            if (!url.includes('auth/me')) {
+                window.location.href = '/nnc/login';
+            }
         }
+
         return Promise.reject(err);
     }
 );

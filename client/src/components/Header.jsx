@@ -17,8 +17,8 @@ function Header() {
         <header className="header">
             <div className="header-inner">
                 <Link to="/nnc" className="header-logo">
-                    <img src={logo} alt="NNC Law" className="header-logo-img" />
-                    <span style={{ direction: 'ltr', unicodeBidi: 'bidi-override' }}>⋂⋂C LAW</span>
+                    <img src={logo} alt="NNC-Law" className="header-logo-img" />
+                    <span style={{ direction: 'ltr', unicodeBidi: 'bidi-override' }}>⋂⋂C-LAW</span>
                 </Link>
                 <nav className="header-nav">
                     <NavLink to="/nnc/about" className={({ isActive }) => isActive ? 'active' : ''}>{t.nav.about}</NavLink>

@@ -17,6 +17,8 @@ function Login() {
     const location = useLocation();
     const notify = useNotify();
 
+    const slug = useSlug(user?.full_name);
+
     useEffect(() => {
         if (location.state?.message) notify(location.state.message, 'error');
         const msg = sessionStorage.getItem('authMsg');
@@ -28,7 +30,6 @@ function Login() {
 
     useEffect(() => {
         if (!loading && user) {
-            const slug = useSlug(user.full_name);
             const path = user.role === 'admin' ? '/nnc/admin' : `/nnc/${slug}/dashboard`;
             navigate(path, { replace: true });
         }

@@ -6,11 +6,10 @@ import { useNotify } from '../notifications/NotificationContext';
 import { useLang } from '../../context/LanguageContext';
 import useDocuments from '../../hooks/useDocuments';
 import useAdminAuth from '../../hooks/useAdminAuth.jsx';
+import useClientSearch from '../../hooks/useClientSearch';
 
-function AdminDocSection({ clients, endpoint, title, icon, accept }) {
-    const [selectedClient, setSelectedClient] = useState('');
-    const [clientSearch, setClientSearch] = useState('');
-    const [showDropdown, setShowDropdown] = useState(false);
+function AdminDocSection({ endpoint, title, icon, accept }) {
+    const { clientSearch, selectedClient, results, showDropdown, setShowDropdown, handleSearch, selectClient, clearClient } = useClientSearch();
     const { docs, setDocs, byYear, years } = useDocuments(endpoint, selectedClient);
     const [docTitle, setDocTitle] = useState('');
     const [year, setYear] = useState(new Date().getFullYear());
@@ -20,56 +19,34 @@ function AdminDocSection({ clients, endpoint, title, icon, accept }) {
     const [editTitle, setEditTitle] = useState('');
     const [editYear, setEditYear] = useState('');
     const [editFile, setEditFile] = useState(null);
-    const [pendingAction, setPendingAction] = useState(null);
     const notify = useNotify();
     const { t } = useLang();
     const { requireAuth, PasswordModal } = useAdminAuth();
 
-    const filteredClients = clients.filter(c =>
-        c.full_name.toLowerCase().includes(clientSearch.toLowerCase())
-    );
-
-    const selectClient = (c) => {
-        setSelectedClient(c.id);
-        setClientSearch(c.full_name);
-        setShowDropdown(false);
-    };
-
-    const clearClient = () => {
-        setSelectedClient('');
-        setClientSearch('');
-        setShowDropdown(false);
-    };
-    const executeAction = async () => { await pendingAction.fn(); setPendingAction(null); };
-
     const handleSubmit = (e) => {
         e.preventDefault();
         requireAuth(async () => {
-            confirmAction(t.confirm.addDoc, async () => {
-                const formData = new FormData();
-                formData.append('client_id', selectedClient);
-                formData.append('title', docTitle);
-                formData.append('year', year);
-                formData.append('file', file);
-                await axios.post(`${import.meta.env.VITE_API_URL}/${endpoint}`, formData, { withCredentials: true });
-                const res = await api.get(`${endpoint}/${selectedClient}`);
-                setDocs(res.data);
-                setDocTitle('');
-                setYear(new Date().getFullYear());
-                setFile(null);
-                setShowForm(false);
-                notify(t.confirm.docAdded, 'success');
-            });
+            const formData = new FormData();
+            formData.append('client_id', selectedClient);
+            formData.append('title', docTitle);
+            formData.append('year', year);
+            formData.append('file', file);
+            await axios.post(`${import.meta.env.VITE_API_URL}/${endpoint}`, formData, { withCredentials: true });
+            const res = await api.get(`${endpoint}/${selectedClient}`);
+            setDocs(res.data);
+            setDocTitle('');
+            setYear(new Date().getFullYear());
+            setFile(null);
+            setShowForm(false);
+            notify(t.confirm.docAdded, 'success');
         });
     };
 
     const handleDelete = (id) => {
         requireAuth(async () => {
-            confirmAction(t.confirm.deleteDoc, async () => {
-                await api.delete(`${endpoint}/doc`, id);
-                setDocs(prev => prev.filter(d => d.id !== id));
-                notify(t.confirm.docDeleted, 'success');
-            });
+            await api.delete(`${endpoint}/doc`, id);
+            setDocs(prev => prev.filter(d => d.id !== id));
+            notify(t.confirm.docDeleted, 'success');
         });
     };
 
@@ -83,17 +60,15 @@ function AdminDocSection({ clients, endpoint, title, icon, accept }) {
     const handleUpdate = (e) => {
         e.preventDefault();
         requireAuth(async () => {
-            confirmAction(t.confirm.saveChanges, async () => {
-                const formData = new FormData();
-                formData.append('title', editTitle);
-                formData.append('year', editYear);
-                if (editFile) formData.append('file', editFile);
-                await axios.put(`${import.meta.env.VITE_API_URL}/${endpoint}/doc/${editDoc.id}`, formData, { withCredentials: true });
-                const res = await api.get(`${endpoint}/${selectedClient}`);
-                setDocs(res.data);
-                setEditDoc(null);
-                notify(t.confirm.docUpdated, 'success');
-            });
+            const formData = new FormData();
+            formData.append('title', editTitle);
+            formData.append('year', editYear);
+            if (editFile) formData.append('file', editFile);
+            await axios.put(`${import.meta.env.VITE_API_URL}/${endpoint}/doc/${editDoc.id}`, formData, { withCredentials: true });
+            const res = await api.get(`${endpoint}/${selectedClient}`);
+            setDocs(res.data);
+            setEditDoc(null);
+            notify(t.confirm.docUpdated, 'success');
         });
     };
 
@@ -107,14 +82,14 @@ function AdminDocSection({ clients, endpoint, title, icon, accept }) {
                         className="admin-client-search-input"
                         placeholder={t.confirm.selectClient}
                         value={clientSearch}
-                        onChange={e => { setClientSearch(e.target.value); setShowDropdown(true); setSelectedClient(''); }}
-                        onFocus={() => setShowDropdown(true)}
+                        onChange={e => handleSearch(e.target.value)}
+                        onFocus={() => results.length > 0 && setShowDropdown(true)}
                         onBlur={() => setTimeout(() => setShowDropdown(false), 150)}
                     />
                     {clientSearch && <button className="admin-client-search-clear" onClick={clearClient}>✕</button>}
-                    {showDropdown && filteredClients.length > 0 && (
+                    {showDropdown && results.length > 0 && (
                         <ul className="admin-client-search-dropdown">
-                            {filteredClients.map(c => (
+                            {results.map(c => (
                                 <li key={c.id} onMouseDown={() => selectClient(c)}>{c.full_name}</li>
                             ))}
                         </ul>
@@ -158,19 +133,6 @@ function AdminDocSection({ clients, endpoint, title, icon, accept }) {
                     </ul>
                 </div>
             ))}
-
-            {pendingAction && (
-                <div className="admin-modal-overlay confirm" onClick={() => setPendingAction(null)}>
-                    <div className="admin-modal" onClick={e => e.stopPropagation()}>
-                        <button className="admin-modal-close" onClick={() => setPendingAction(null)}>✕</button>
-                        <h3>{pendingAction.label}</h3>
-                        <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'flex-end', marginTop: '1.5rem' }}>
-                            <button className="admin-reports-add-btn" onClick={() => setPendingAction(null)}>{t.confirm.cancel}</button>
-                            <button className="admin-reports-save-btn" onClick={executeAction}>{t.confirm.approve}</button>
-                        </div>
-                    </div>
-                </div>
-            )}
 
             {editDoc && (
                 <div className="admin-modal-overlay" onClick={() => setEditDoc(null)}>

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { api } from '../../API/APIService';
-import { useLang } from '../../context/LanguageContext';
-import { useNotify } from '../notifications/NotificationContext';
+import { api } from '../API/APIService';
+import { useLang } from '../context/LanguageContext';
+import { useNotify } from './notifications/NotificationContext';
 
 function LegalArticles() {
     const [articles, setArticles] = useState([]);

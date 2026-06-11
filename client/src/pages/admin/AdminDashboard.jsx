@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import AdminDocSection from '../../components/adminPage/AdminDocSection';
 import AdminAddClient from '../../components/adminPage/AdminAddClient';
 import AdminLegalArticle from '../../components/adminPage/AdminLegalArticle';
@@ -8,6 +9,7 @@ import '../../styles/AdminDashboard.css';
 
 function AdminDashboard() {
     const { t } = useLang();
+
 
     const mainTabs = [
         { key: 'clients', label: t.adminAddClient.manageClients, icon: <FaUsers /> },

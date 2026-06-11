@@ -37,7 +37,7 @@ router.post('/welcome', verifyToken, verifyAdmin, async (req, res) => {
     const { subject, html } = (welcomeAddedEmailContent[lang] || welcomeAddedEmailContent.he)(name, email, password);
     try {
         await transporter.sendMail({
-            from: `"NNC Law" <${process.env.EMAIL_USER}>`,
+            from: `"NNC-Law" <${process.env.EMAIL_USER}>`,
             to: email,
             subject,
             html,
