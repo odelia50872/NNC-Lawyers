@@ -24,20 +24,20 @@ function App() {
     <AuthProvider>
     <Routes>
       <Route element={<PublicLayout />}>
-        <Route path="/" element={<About />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/practice-areas" element={<PracticeAreas />} />
-        <Route path="/team" element={<Team />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/nnc" element={<About />} />
+        <Route path="/nnc/about" element={<About />} />
+        <Route path="/nnc/practice-areas" element={<PracticeAreas />} />
+        <Route path="/nnc/team" element={<Team />} />
+        <Route path="/nnc/contact" element={<Contact />} />
+        <Route path="/nnc/login" element={<Login />} />
 
         <Route element={<ProtectedRoute allowedRoles={['client', 'admin']} />}>
-          <Route path="/client/dashboard" element={<ClientDashboard />} />
+          <Route path="/nnc/:name/dashboard" element={<ClientDashboard />} />
         </Route>
 
         <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
-          <Route path="/admin/dashboard" element={<AdminDashboard />} />
-          <Route path="/admin/clients" element={<AdminClients />} />
+          <Route path="/nnc/admin" element={<AdminDashboard />} />
+          <Route path="/nnc/:name/clients" element={<AdminClients />} />
         </Route>
       </Route>
     </Routes>

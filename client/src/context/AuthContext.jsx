@@ -9,7 +9,14 @@ export function AuthProvider({ children }) {
 
     useEffect(() => {
         api.get('auth/me')
-            .then(res => setUser(res.data.user))
+            .then(res => {
+                if (res.data.error === 'TOKEN_EXPIRED') {
+                    const lang = document.documentElement.lang || 'he';
+                    const translations = { he: 'פג תוקף החיבור, אנא התחבר מחדש', fr: 'Votre session a expiré, veuillez vous reconnecter' };
+                    sessionStorage.setItem('authMsg', translations[lang]);
+                }
+                setUser(res.data.user);
+            })
             .catch(() => setUser(null))
             .finally(() => setLoading(false));
     }, []);
@@ -19,7 +26,7 @@ export function AuthProvider({ children }) {
     const logout = (navigate) => {
         api.post('auth/logout').finally(() => {
             setUser(null);
-            navigate('/login', { replace: true });
+            navigate('/nnc/login', { replace: true });
         });
     };
 

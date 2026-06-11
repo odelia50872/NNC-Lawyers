@@ -1,12 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import { api } from '../../API/APIService';
 import { FaTrashAlt, FaEdit } from 'react-icons/fa';
 import { useNotify } from '../notifications/NotificationContext';
+import { useLang } from '../../context/LanguageContext';
+import useDocuments from '../../hooks/useDocuments';
 
 function AdminDocSection({ clients, endpoint, title, icon, accept }) {
-    const [docs, setDocs] = useState([]);
     const [selectedClient, setSelectedClient] = useState('');
+    const { docs, setDocs, byYear, years } = useDocuments(endpoint, selectedClient);
     const [docTitle, setDocTitle] = useState('');
     const [year, setYear] = useState(new Date().getFullYear());
     const [file, setFile] = useState(null);
@@ -17,18 +19,7 @@ function AdminDocSection({ clients, endpoint, title, icon, accept }) {
     const [editFile, setEditFile] = useState(null);
     const [pendingAction, setPendingAction] = useState(null);
     const notify = useNotify();
-
-    useEffect(() => {
-        if (!selectedClient) return setDocs([]);
-        api.get(`${endpoint}/${selectedClient}`).then(res => setDocs(res.data));
-    }, [selectedClient, endpoint]);
-
-    const byYear = docs.reduce((acc, r) => {
-        acc[r.year] = acc[r.year] || [];
-        acc[r.year].push(r);
-        return acc;
-    }, {});
-    const years = Object.keys(byYear).sort((a, b) => b - a);
+    const { t } = useLang();
 
     const confirmAction = (label, fn) => setPendingAction({ label, fn });
 
@@ -39,7 +30,7 @@ function AdminDocSection({ clients, endpoint, title, icon, accept }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        confirmAction('להוסיף את המסמך?', async () => {
+        confirmAction(t.confirm.addDoc, async () => {
             const formData = new FormData();
             formData.append('client_id', selectedClient);
             formData.append('title', docTitle);
@@ -57,7 +48,7 @@ function AdminDocSection({ clients, endpoint, title, icon, accept }) {
     };
 
     const handleDelete = (id) => {
-        confirmAction('למחוק את המסמך?', async () => {
+        confirmAction(t.confirm.deleteDoc, async () => {
             await api.delete(`${endpoint}/doc`, id);
             setDocs(prev => prev.filter(d => d.id !== id));
             notify('המסמך נמחק בהצלחה', 'success');
@@ -73,7 +64,7 @@ function AdminDocSection({ clients, endpoint, title, icon, accept }) {
 
     const handleUpdate = (e) => {
         e.preventDefault();
-        confirmAction('לשמור את השינויים?', async () => {
+        confirmAction(t.confirm.saveChanges, async () => {
             const formData = new FormData();
             formData.append('title', editTitle);
             formData.append('year', editYear);
@@ -135,8 +126,8 @@ function AdminDocSection({ clients, endpoint, title, icon, accept }) {
                         <button className="admin-modal-close" onClick={() => setPendingAction(null)}>✕</button>
                         <h3>{pendingAction.label}</h3>
                         <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'flex-end', marginTop: '1.5rem' }}>
-                            <button className="admin-reports-add-btn" onClick={() => setPendingAction(null)}>ביטול</button>
-                            <button className="admin-reports-save-btn" onClick={executeAction}>אשר</button>
+                            <button className="admin-reports-add-btn" onClick={() => setPendingAction(null)}>{t.confirm.cancel}</button>
+                            <button className="admin-reports-save-btn" onClick={executeAction}>{t.confirm.approve}</button>
                         </div>
                     </div>
                 </div>
@@ -146,7 +137,7 @@ function AdminDocSection({ clients, endpoint, title, icon, accept }) {
                 <div className="admin-modal-overlay" onClick={() => setEditDoc(null)}>
                     <div className="admin-modal" onClick={e => e.stopPropagation()}>
                         <button className="admin-modal-close" onClick={() => setEditDoc(null)}>✕</button>
-                        <h3>עדכון מסמך</h3>
+                        <h3>{t.confirm.updateDoc}</h3>
                         <form className="admin-reports-form" onSubmit={handleUpdate}>
                             <input type="text" placeholder="כותרת" required value={editTitle} onChange={e => setEditTitle(e.target.value)} />
                             <input type="number" placeholder="שנה" required value={editYear} onChange={e => setEditYear(e.target.value)} />

@@ -8,15 +8,15 @@ const login = async (req, res) => {
     try {
         const { email, password } = req.body;
         const user = await getUserByEmail(email);
-        if (!user) return res.status(401).json({ error: 'אימייל או סיסמה שגויים' });
+        if (!user) return res.status(401).json({ error: 'INVALID_CREDENTIALS' });
 
         const valid = await bcrypt.compare(password, user.password_hash);
-        if (!valid) return res.status(401).json({ error: 'אימייל או סיסמה שגויים' });
+        if (!valid) return res.status(401).json({ error: 'INVALID_CREDENTIALS' });
 
         const token = jwt.sign(
             { id: user.id, email: user.email, role: user.role, full_name: user.full_name },
             process.env.JWT_SECRET,
-            { expiresIn: '30m' }
+            { expiresIn: '1m' }
         );
 
         res.cookie('token', token, {

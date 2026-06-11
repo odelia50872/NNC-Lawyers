@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import { useLang } from '../../context/LanguageContext';
+import useTabsNav from '../../hooks/useTabsNav';
 import RentalAgreements from '../../components/clientPage/RentalAgreements';
 import Reports from '../../components/clientPage/Reports';
 import InsurancePolicy from '../../components/clientPage/InsurancePolicy';
@@ -8,14 +8,13 @@ import '../../styles/ClientDashboard.css';
 
 function ClientDashboard() {
     const { t } = useLang();
-    const [activeTab, setActiveTab] = useState('reports');
-
     const tabs = [
         { key: 'reports',    label: t.dashboard.reports },
         { key: 'agreements', label: t.dashboard.agreements },
         { key: 'insurance',  label: t.dashboard.insurance },
         { key: 'identity',   label: t.dashboard.identity },
     ];
+    const { activeTab, setActiveTab } = useTabsNav(tabs);
 
     return (
         <div className="dashboard-container">

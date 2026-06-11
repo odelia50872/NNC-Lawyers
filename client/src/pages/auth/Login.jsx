@@ -4,6 +4,7 @@ import { api } from '../../API/APIService';
 import { useAuth } from '../../context/AuthContext';
 import { useLang } from '../../context/LanguageContext';
 import { useNotify } from '../../components/notifications/NotificationContext';
+import useSlug from '../../hooks/useSlug';
 import '../../styles/Login.css';
 
 function Login() {
@@ -18,11 +19,17 @@ function Login() {
 
     useEffect(() => {
         if (location.state?.message) notify(location.state.message, 'error');
+        const msg = sessionStorage.getItem('authMsg');
+        if (msg) {
+            notify(msg, 'error');
+            sessionStorage.removeItem('authMsg');
+        }
     }, []);
 
     useEffect(() => {
         if (!loading && user) {
-            const path = user.role === 'admin' ? '/admin/dashboard' : '/client/dashboard';
+            const slug = useSlug(user.full_name);
+            const path = user.role === 'admin' ? '/nnc/admin' : `/nnc/${slug}/dashboard`;
             navigate(path, { replace: true });
         }
     }, [user, loading]);
@@ -42,7 +49,8 @@ function Login() {
             const response = await api.post('auth/login', { email, password });
             login(response.data.user);
         } catch (err) {
-            notify(err.response?.data?.error || t.login.failed, 'error');
+            const errCode = err.response?.data?.error;
+            notify(errCode === 'INVALID_CREDENTIALS' ? t.login.invalidCredentials : t.login.failed, 'error');
             setEmail('');
             setPassword('');
         }

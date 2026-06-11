@@ -1,25 +1,10 @@
-import { useEffect, useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
-import { api } from '../../API/APIService';
+import useDocuments from '../../hooks/useDocuments';
 import '../../styles/RentalAgreements.css';
 
 function DocumentList({ endpoint, emptyText, icon, groupByYear = true, title }) {
     const { user } = useAuth();
-    const [docs, setDocs] = useState([]);
-
-    useEffect(() => {
-        api.get(`${endpoint}/${user.id}`).then(res => setDocs(res.data));
-    }, [endpoint]);
-
-    const byYear = groupByYear
-        ? docs.reduce((acc, item) => {
-              acc[item.year] = acc[item.year] || [];
-              acc[item.year].push(item);
-              return acc;
-          }, {})
-        : {};
-
-    const years = Object.keys(byYear).sort((a, b) => b - a);
+    const { docs, byYear, years } = useDocuments(endpoint, user?.id);
 
     const renderItem = doc => (
         <li key={doc.id} className="agreements-item">

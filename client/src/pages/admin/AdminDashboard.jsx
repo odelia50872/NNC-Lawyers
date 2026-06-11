@@ -2,23 +2,23 @@ import { useEffect, useState } from 'react';
 import { api } from '../../API/APIService';
 import AdminDocSection from '../../components/adminPage/AdminDocSection';
 import { useLang } from '../../context/LanguageContext';
+import useTabsNav from '../../hooks/useTabsNav';
 import '../../styles/AdminDashboard.css';
 
 function AdminDashboard() {
     const [clients, setClients] = useState([]);
-    const [activeTab, setActiveTab] = useState('reports');
     const { t } = useLang();
+    const tabs = [
+        { key: 'reports',    label: t.dashboard.reports },
+        { key: 'agreements', label: t.dashboard.agreements },
+        { key: 'insurance',  label: t.dashboard.insurance },
+        { key: 'identity',   label: t.dashboard.identity },
+    ];
+    const { activeTab, setActiveTab } = useTabsNav(tabs);
 
     useEffect(() => {
         api.get('clients').then(res => setClients(res.data.filter(c => c.role === 'client')));
     }, []);
-
-    const tabs = [
-        { key: 'reports', label: t.dashboard.reports },
-        { key: 'agreements', label: t.dashboard.agreements },
-        { key: 'insurance', label: t.dashboard.insurance },
-        { key: 'identity', label: t.dashboard.identity },
-    ];
 
     return (
         <div className="admin-dashboard">

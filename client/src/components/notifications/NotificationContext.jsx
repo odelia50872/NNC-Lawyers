@@ -1,13 +1,14 @@
-import { createContext, useContext, useState, useCallback } from 'react';
+import { createContext, useContext, useState, useCallback, useRef } from 'react';
 import './Notification.css';
 
 const NotificationContext = createContext();
 
 export function NotificationProvider({ children }) {
     const [notifications, setNotifications] = useState([]);
+    const counter = useRef(0);
 
     const notify = useCallback((message, type = 'info') => {
-        const id = Date.now();
+        const id = ++counter.current;
         setNotifications(prev => [...prev, { id, message, type }]);
         setTimeout(() => {
             setNotifications(prev => prev.map(n => n.id === id ? { ...n, fading: true } : n));

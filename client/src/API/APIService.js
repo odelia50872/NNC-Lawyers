@@ -1,4 +1,5 @@
 import axios from 'axios';
+import translations from '../context/translations';
 const { VITE_API_URL } = import.meta.env;
 
 const apiClient = axios.create({
@@ -13,7 +14,11 @@ apiClient.interceptors.response.use(
     res => res,
     err => {
         if (err.response?.status === 401 && !err.config.url.includes('auth/me') && !err.config.url.includes('auth/login')) {
-            window.location.href = '/login';
+            const lang = document.documentElement.lang || 'he';
+            const t = translations[lang];
+            const errCode = err.response?.data?.error;
+            if (errCode === 'TOKEN_EXPIRED') sessionStorage.setItem('authMsg', t.sessionExpired);
+            window.location.href = '/nnc/login';
         }
         return Promise.reject(err);
     }
