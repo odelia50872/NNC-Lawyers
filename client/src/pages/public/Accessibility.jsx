@@ -4,8 +4,8 @@ import '../../styles/Accessibility.css';
 const content = {
     he: {
         title: 'הצהרת נגישות',
-        updated: 'עדכון אחרון: יוני 2025',
-        intro: 'משרד עורכי הדין NNC Law מחויב להנגיש את אתר האינטרנט שלו לאנשים עם מוגבלויות, בהתאם לתקנות שוויון זכויות לאנשים עם מוגבלות (התאמות נגישות לשירות), התשע"ג-2013, ובהתאם לתקן הישראלי ת"י 5568 המבוסס על WCAG 2.0 ברמה AA.',
+        updated: 'עדכון אחרון: יוני 2026',
+        intro: 'משרד עורכי הדין NNC-Law מחויב להנגיש את אתר האינטרנט שלו לאנשים עם מוגבלויות, בהתאם לתקנות שוויון זכויות לאנשים עם מוגבלות (התאמות נגישות לשירות), התשע"ג-2013, ובהתאם לתקן הישראלי ת"י 5568 המבוסס על WCAG 2.0 ברמה AA.',
         sections: [
             {
                 title: 'רמת הנגישות',
@@ -54,8 +54,8 @@ const content = {
     },
     fr: {
         title: 'Déclaration d\'accessibilité',
-        updated: 'Dernière mise à jour : Juin 2025',
-        intro: 'Le cabinet NNC Law s\'engage à rendre son site internet accessible aux personnes handicapées, conformément à la réglementation israélienne sur l\'égalité des droits des personnes handicapées et à la norme israélienne T"I 5568, basée sur WCAG 2.0 niveau AA.',
+        updated: 'Dernière mise à jour : Juin 2026',
+        intro: 'Le cabinet NNC-Law s\'engage à rendre son site internet accessible aux personnes handicapées, conformément à la réglementation israélienne sur l\'égalité des droits des personnes handicapées et à la norme israélienne T"I 5568, basée sur WCAG 2.0 niveau AA.',
         sections: [
             {
                 title: 'Niveau d\'accessibilité',

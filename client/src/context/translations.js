@@ -11,34 +11,35 @@ const translations = {
             legalArticle: 'מאמרים משפטיים',
         },
         home: {
-            hero: 'משרד עורכי דין NNC Law',
+            hero: 'משרד עורכי דין NNC-LAW',
             subtitle: 'ניסיון, מקצועיות ואמינות — לצידך בכל שלב',
             cta: 'צור קשר עכשיו',
         },
         about: {
             title: 'אודות המשרד',
             subtitle: 'מקצועיות, ניסיון ואמינות',
-            body: 'משרד עורכי הדין NNC Law הוקם על ידי עו"ד נקש פדהאל ז׳אן-לוק, מתמחה במתן שירות משפטי מקצועי ואישי ללקוחותיו בישראל ובצרפת.',
+            body: 'משרד עורכי הדין NNC-LAW הוקם על ידי עו"ד נקש פדהאל ז׳אן-לוק, מתמחה במתן שירות משפטי מקצועי ואישי ללקוחותיו בישראל ובצרפת.',
             section1Title: 'אודות המשרד',
-            section1: 'משרד NNC Law הוקם על ידי עו"ד נקש פדהאל ז׳אן-לוק, ומתמחה במתן שירות משפטי מקצועי ואישי ללקוחותיו בישראל ובצרפת. המשרד מעניק ייעוץ משפטי מקיף במגוון תחומים: משפחה, מקרקעין, דיני תאגידים, נוטריון וייפוי כוח מתמשך. בזכות שנים רבות של ניסיון מצבר ומקצועיות גבוהה, רכשנו מוניטין של הצלחה מוכחת בעיני לקוחותינו.',
+            section1: 'משרד NNC-LAW הוקם על ידי עו"ד נקש פדהאל ז׳אן-לוק, ומתמחה במתן שירות משפטי מקצועי ואישי ללקוחותיו בישראל ובצרפת. המשרד מעניק ייעוץ משפטי מקיף במגוון תחומים: משפחה, מקרקעין, דיני תאגידים, נוטריון וייפוי כוח מתמשך. בזכות שנים רבות של ניסיון מצבר ומקצועיות גבוהה, רכשנו מוניטין של הצלחה מוכחת בעיני לקוחותינו.',
             section2Title: 'גישת המשרד',
             section2: 'גישתנו המקצועית מבוססת על שילוב בין מומחיות משפטית גבוהה לבין הבנת צרכיו הייחודיים של כל לקוח. אנו מאמינים ששירות משפטי מצוין מתחיל בהקשבה מלאה, בשקיפות ובישרות. משרדנו מלווה לקוחותיו בכל שלב ומספק פתרונות מעשיים ויעילים.',
             section3Title: 'פעילות בינלאומית',
-            section3: 'בזכות התמחותו בדין הצרפתי והישראלי, משרד NNC Law מעניק פתרונות משפטיים ייחודיים ללקוחות ישראלים וצרפתים. אנו מטפלים בעסקאות חוצר גבול, בירושות, הסכמים דו לאומיים ועיזבון נכסים, תוך שימושים בהבנת העולם המשפטי הגלובלי.',
+            section3: 'בזכות התמחותו בדין הצרפתי והישראלי, משרד NNC-LAW מעניק פתרונות משפטיים ייחודיים ללקוחות ישראלים וצרפתים. אנו מטפלים בעסקאות חוצר גבול, בירושות, הסכמים דו לאומיים ועיזבון נכסים, תוך שימושים בהבנת העולם המשפטי הגלובלי.',
         },
         team: {
             title: 'הצוות שלנו',
             members: [
-                { name: 'מזכירות', role: 'קבלת פנים ותיאום לקוחות', gender: 'female', bio: null },
-                { name: 'עו"ד פדאהל נקש', role: 'עורך דין | נוטר | מייסד המשרד', gender: 'male', bio: `לאחר שסיים את לימודי הבגרות בשנת 1972, עו"ד ז'אן-לוק נקש החל בלימודי משפטים באוניברסיטת פנתאון בפריז בין השנים 1973–1974, ולאחר מכן המשיך את הכשרתו במשפט נוטריוני באוניברסיטת פנתאון-אסאס (Panthéon-Assas) בין השנים 1975–1976. לאחר שירותו בצי הצרפתי בין השנים 1975–1977, הצטרף למשרדו של עו"ד לוסיין אביב (Lucien ABIB), נוטריון בפריז, שם עבד כמתמחה נוטריוני בין השנים 1977–1984.
+                {
+                    name: 'עו"ד פדהאל נקש', role: 'עורך דין | נוטריון | מייסד המשרד', gender: 'male', bio: `לאחר שסיים את לימודי הבגרות בשנת 1972, עו"ד ז'אן-לוק נקש החל בלימודי משפטים באוניברסיטת פנתאון בפריז בין השנים 1973–1974, ולאחר מכן המשיך את הכשרתו במשפט נוטריוני באוניברסיטת פנתאון-אסאס (Panthéon-Assas) בין השנים 1975–1976. לאחר שירותו בצי הצרפתי בין השנים 1975–1977, הצטרף למשרדו של עו"ד לוסיין אביב (Lucien ABIB), נוטריון בפריז, שם עבד כמתמחה נוטריוני בין השנים 1977–1984.
 במקביל, למד במשך 3 שנים בבית הספר הגבוה ללימודים נוטריוניים בפריז (École Supérieure d'Études Notariales) וקיבל את הדיפלומה של המרכז הגבוה ללימודים נוטריוניים בשנת 1977. בזכות ניסיונו, פתח בשנת 1984 משרד לייעוץ משפטי, וניהל עד שנת 1991 מבנה שהעסיק כעשרה עובדים, בהם מספר מתמחים לעריכת דין.
 בעקבות איחוד מקצועות הייעוץ המשפטי ועריכת הדין בצרפת, הוסמך כעורך דין בינואר 1992. באוגוסט של אותה שנה עלה לישראל עם משפחתו ולמד בקורסי ההסמכה המיועדים למשפטנים מנוסים שהוכשרו בחו"ל בפקולטה למשפטים ברמת אביב.
 הוא התקבל ללשכת עורכי הדין בישראל בנובמבר 1994, לאחר התמחות במשרד עורכי דין בירושלים, והחל לעסוק כעורך דין בדצמבר 1994. ביוני 1997 קיבל רישיון נוטריון בישראל, ובכך חיזק מומחיות כפולה של עורך דין ונוטריון, אותה רכש בשתי מערכות משפט שונות (צרפתית וישראלית).
 במשך למעלה משלושים שנה בישראל, ועם ניסיון מקצועי שהחל לפני קרוב לחמישים שנה, עו"ד ז'אן-לוק נקש מנהל את המשרד כשהוא מוקף בצוות עורכי דין מוסמכים, במטרה להעניק ללקוחותיו ליווי קפדני, מותאם אישית ויעיל, הן במשפט פרטי ישראלי והן במשפט בינלאומי פרטי צרפתי-ישראלי.` },
                 {
-                    name: 'עו"ד מיכאל נקש', role: 'עורך דין', gender: 'male', bio: `לאחר שעלה לישראל עם הוריו בשנת 1992, קיבל עו"ד מיכאל נקש את תעודת הבגרות הישראלית, ולאחר מכן המשיך ללמוד מספר שנים לימודי קודש בישיבה ובכולל.\r\n\r\nבוגר הפקולטה למשפטים בקריית אונו, התקבל ללשכת עורכי הדין הישראלית בשנת 2012. לאחר מכן הצטרף למשרד המשפחתי בירושלים, שנוסד על ידי אביו, עו"ד פדאהל ז'אן-לוק נקש, שם הוא פועל מאז.\r\n\r\nבמטרה להעניק ללקוחותיו ליווי משפטי מקיף ומעודכן, עבר בשנת 2019 הכשרה המסמיכה לעריכת ייפויי כוח מתמשכים, ובשנת 2026 קיבל את ההסמכה הנדרשת לתפקיד נוטריון.\r\n\r\nדובר עברית וצרפתית ברמת שפת אם, ובזכות הניסיון שצבר לצד אביו במהלך שנות ההתמחות והעבודה — מיכאל פועל בכלל תחומי המשרד ומלווה לקוחות ישראלים ובינלאומיים בטיפול בתיקיהם.`
+                    name: 'עו"ד מיכאל נקש', role: 'עורך דין', gender: 'male', bio: `לאחר שעלה לישראל עם הוריו בשנת 1992, קיבל עו"ד מיכאל נקש את תעודת הבגרות הישראלית, ולאחר מכן המשיך ללמוד מספר שנים לימודי קודש בישיבה ובכולל.\r\n\r\nבוגר הפקולטה למשפטים בקריית אונו, התקבל ללשכת עורכי הדין הישראלית בשנת 2012. לאחר מכן הצטרף למשרד המשפחתי בירושלים, שנוסד על ידי אביו, עו"ד פדהאל ז'אן-לוק נקש, שם הוא פועל מאז.\r\n\r\nבמטרה להעניק ללקוחותיו ליווי משפטי מקיף ומעודכן, עבר בשנת 2019 הכשרה המסמיכה לעריכת ייפויי כוח מתמשכים, ובשנת 2026 קיבל את ההסמכה הנדרשת לתפקיד נוטריון.\r\n\r\nדובר עברית וצרפתית ברמת שפת אם, ובזכות הניסיון שצבר לצד אביו במהלך שנות ההתמחות והעבודה — מיכאל פועל בכלל תחומי המשרד ומלווה לקוחות ישראלים ובינלאומיים בטיפול בתיקיהם.`
                 },
                 { name: 'עו"ד יעל קובי', role: 'עורכת דין', gender: 'female', bio: null },
+                { name: 'מזכירות', role: 'קבלת פנים ותיאום לקוחות', gender: 'female', bio: null },
                 { name: 'יוסף קובי', role: 'שירות ניהול דירות', gender: 'male', bio: null },
             ],
         },
@@ -50,14 +51,14 @@ const translations = {
                 { title: 'דיני מקרקעין', desc: 'עסקאות נדל"ן, רישום זכויות, חוזי שכירות ורכישה, בדיקות הסכמי פינוי בינוי ותמ"א 38 עבור לקוחות פרטיים וחברתיים.' },
                 { title: 'דיני תאגידים', desc: 'הקמת חברות, עמותות, חוזים מסחריים וייעוץ עסקי שוטף.' },
                 { title: 'ייפוי כוח מתמשך', desc: 'תכנון עתידי לניהול עניינים אישיים ורפואיים.' },
-                { title: 'נוטריון', desc: 'אימות מסמכים, תרגומים (עברית - צרפתית), אישור העתק, טיפול באפוסטיל (גם דיגיטלי), ייפוי כוח ועוד שירותי נוטריון מקצועיים.' },
+                { title: 'נוטריון', desc: 'אימות מסמכים, תרגומים (עברית-צרפתית), אישור העתק, טיפול באפוסטיל (גם דיגיטלי), ייפוי כוח ועוד שירותי נוטריון מקצועיים.' },
                 { title: 'חוות דעת בדין הזר', desc: 'מתן חוות דעת לבתי המשפט בארץ בדין הזר הצרפתי, וכן חוות דעת בדין הזר הישראלי לבתי המשפט בצרפת.' },
                 { title: 'ניהול דירות', desc: 'ניהול השכרת דירות, בדיקת עמידת השוכרים, ערבים, בדיקת בטיחות, טיפול בתיקונים ושיפוצים.' }
             ],
         },
         contact: {
             title: 'צור קשר',
-            subtitle: 'נשמח לעמוד לרשותך — השאר פרטים ונחזור אליך בהקדם',
+            subtitle: 'נשמח לעמוד לרשותך - השאר פרטים ונחזור אליך בהקדם',
             name: 'שם מלא',
             email: 'אימייל',
             phone: 'טלפון',
@@ -69,7 +70,7 @@ const translations = {
             directContact: 'צרו קשר ישיר',
             contacts: [
                 { name: 'מזכירות', phone: '02-6437311' },
-                { name: 'עו"ד פדאהל נקש' },
+                { name: 'עו"ד פדהאל נקש' },
                 { name: 'עו"ד מיכאל נקש' },
                 { name: 'עו"ד יעל קובי' },
                 { name: 'שירות ניהול דירות יוסף קובי', },
@@ -247,7 +248,6 @@ const translations = {
         team: {
             title: 'Notre équipe',
             members: [
-                { name: 'Secrétariat', role: 'Accueil et coordination des clients', gender: 'female', bio: null },
                 {
                     name: 'Me Pedaël Nakache', role: 'Avocat | Notaire | Fondateur du cabinet', gender: 'male', bio: `Titulaire du baccalauréat depuis 1972, Maître Pédael Jean-Luc NAKACHE entreprend des études de droit à l'Université Panthéon à Paris de 1973 à 1974, avant de poursuivre sa formation en droit notarial à l'Université Panthéon-Assas de 1975 à 1976. Après son service dans la Marine nationale française entre 1975 et 1977, il intègre l'étude de Maître Lucien ABIB, Notaire à Paris, où il exerce de 1977 à 1984 en qualité de clerc de Notaire.
 Parallèlement, il suit les enseignements de l'École Supérieure d'Études Notariales de Paris pendant 3 ans et obtient le Diplôme du Centre Supérieur d'Études Notariales en 1977. Fort de cette expérience, il s'installe en 1984 comme conseil juridique et dirige jusqu'en 1991 une structure composée d'une dizaine de collaborateurs, dont plusieurs stagiaires avocats.
@@ -259,6 +259,7 @@ Depuis plus de trente ans en Israël et fort d'une expérience professionnelle d
                     name: 'Mr Michaël Nakache', role: 'Avocat', gender: 'male', bio: `Après avoir immigré en Israël avec ses parents en 1992, Maître Michaël NAKACHE obtient son baccalauréat israélien avant de poursuivre plusieurs années d'études religieuses en Yéchiva puis en Collel.\r\n\r\nDiplômé de la faculté de droit de Kyriat Ono, il est admis au Barreau israélien en 2012. Il rejoint alors le cabinet familial de Jérusalem, fondé par son père, Maître Pédael Jean-Luc NAKACHE, où il exerce depuis lors.\r\n\r\nSoucieux d'offrir à ses clients un accompagnement juridique complet et actualisé, il suit en 2019 la formation habilitant à la rédaction des procurations continues (« Ypouy Koach Mitmacheh »), puis obtient en 2026, la qualification nécessaire à l'exercice des fonctions de notaire.\r\n\r\nParfaitement bilingue en français et en hébreu, et bénéficiant de l'expérience de son père acquis durant ses années de stage et de fonction, Michaël intervient dans l'ensemble des domaines de compétence du cabinet et accompagne une clientèle israélienne et internationale dans le traitement de ses dossiers.`
                 },
                 { name: 'Me Yaël Cubby', role: 'Avocate', gender: 'female', bio: null },
+                { name: 'Secrétariat', role: 'Accueil et coordination des clients', gender: 'female', bio: null },
                 { name: 'Yossef Cubby', role: 'Service de gestion locative', gender: 'male', bio: null },
             ],
         },
@@ -270,7 +271,7 @@ Depuis plus de trente ans en Israël et fort d'une expérience professionnelle d
                 { title: 'Droit immobilier', desc: 'Transactions immobilières, enregistrement des droits, baux et contrats d\'achat, vérification des accords de rénovation urbaine (Pinui Binui) et TAMA 38 pour clients particuliers et professionnels.' },
                 { title: 'Droit des sociétés', desc: 'Création de sociétés, associations, contrats commerciaux et conseil juridique continu.' },
                 { title: 'Procuration continue', desc: 'Planification anticipée pour la gestion de vos affaires personnelles et médicales.' },
-                { title: 'Notaire', desc: 'Authentification de documents, traductions (hébreu - français), copie certifiée, apostille (y compris digitale), procuration et autres services notariaux professionnels.' },
+                { title: 'Notaire', desc: 'Authentification de documents, traductions (hébreu-français), copie certifiée, apostille (y compris digitale), procuration et autres services notariaux professionnels.' },
                 { title: 'Consultation auprès des tribunaux', desc: 'Fourniture d\'avis juridiques aux tribunaux israéliens en droit français, ainsi qu\'en droit israélien aux tribunaux français.' },
                 { title: 'Gestion locative et administration de biens immobiliers', desc: 'Gestion de la location de biens immobiliers, vérification des locataires et garants, contrôle de sécurité, gestion des réparations et rénovations.' },
             ],

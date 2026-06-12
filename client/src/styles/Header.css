@@ -8,6 +8,7 @@
     box-shadow: 0 2px 12px rgba(0,0,0,0.5);
     border-bottom: 2px solid #c9a84c;
     overflow: visible;
+    padding: 0 4rem;
 }
 
 .header-inner {
@@ -31,6 +32,7 @@
     text-decoration: none;
     letter-spacing: 3px;
     white-space: nowrap;
+    margin-right: 50px !important;
 }
 
 .header-logo-img {
