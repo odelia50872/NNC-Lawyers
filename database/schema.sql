@@ -29,13 +29,14 @@ SET FOREIGN_KEY_CHECKS = 1;
 -- ================================================
 
 CREATE TABLE clients (
-    id            INT AUTO_INCREMENT PRIMARY KEY,
-    full_name     VARCHAR(100)  NOT NULL,
-    email         VARCHAR(100)  NOT NULL UNIQUE,
-    password_hash VARCHAR(255)  NOT NULL,
-    phone         VARCHAR(20),
-    role          ENUM('client', 'admin') DEFAULT 'client',
-    created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    id                   INT AUTO_INCREMENT PRIMARY KEY,
+    full_name            VARCHAR(100)  NOT NULL,
+    email                VARCHAR(100)  NOT NULL UNIQUE,
+    password_hash        VARCHAR(255)  NOT NULL,
+    phone                VARCHAR(20),
+    role                 ENUM('client', 'admin') DEFAULT 'client',
+    must_change_password TINYINT(1)    DEFAULT 0,
+    created_at           TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- ================================================

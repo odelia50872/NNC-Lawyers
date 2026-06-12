@@ -134,9 +134,9 @@
     white-space: nowrap;
 }
 
-.lang-btn:hover {
-    background-color: #c9a84c;
-    color: #0f1624;
+.header-logo-text {
+    direction: ltr;
+    unicode-bidi: bidi-override;
 }
 
 /* המבורגר */

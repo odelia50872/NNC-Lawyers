@@ -31,8 +31,12 @@ function Login() {
 
     useEffect(() => {
         if (!loading && user) {
-            const path = user.role === 'admin' ? '/nnc/admin' : `/nnc/${slug}/dashboard`;
-            navigate(path, { replace: true });
+            if (user.must_change_password) {
+                navigate('/nnc/change-password', { replace: true });
+            } else {
+                const path = user.role === 'admin' ? '/nnc/admin' : `/nnc/${slug}/dashboard`;
+                navigate(path, { replace: true });
+            }
         }
     }, [user, loading]);
 

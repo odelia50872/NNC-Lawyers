@@ -141,3 +141,8 @@
 .footer-accessibility-link:hover {
     color: #c9a84c;
 }
+
+.footer-logo-text {
+    direction: ltr;
+    unicode-bidi: bidi-override;
+}

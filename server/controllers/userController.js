@@ -1,8 +1,15 @@
-
-
 const { getUserByEmail, getAllUsers: getAllUsersService, getAllUsersPaginated: getAllUsersPaginatedService, searchUsers: searchUsersService, getUserById: getUserByIdService, createUser: createUserService, updateUser: updateUserService, deleteUser: deleteUserService } = require('../services/userService');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const nodemailer = require('nodemailer');
+const { welcomeAddedEmailContent } = require('../config/emailContent');
+
+const transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS },
+});
 
 const login = async (req, res) => {
     try {
@@ -25,7 +32,15 @@ const login = async (req, res) => {
             sameSite: process.env.NODE_ENV === 'production' ? 'strict' : 'lax',
             maxAge: 30 * 60 * 1000
         });
-        res.json({ user: { id: user.id, full_name: user.full_name, email: user.email, role: user.role } });
+        res.json({
+            user: {
+                id: user.id,
+                full_name: user.full_name,
+                email: user.email,
+                role: user.role,
+                must_change_password: !!user.must_change_password,
+            }
+        });
     } catch (err) {
         res.status(500).json({ error: 'Login failed', details: err.message });
     }
@@ -72,16 +87,29 @@ const getUserById = async (req, res) => {
 
 const createUser = async (req, res) => {
     try {
-        const { email } = req.body;
-        
-        // בדיקה אם המייל כבר קיים במערכת
+        const { email, full_name, emailLang } = req.body;
+
         const existingUser = await getUserByEmail(email);
         if (existingUser) {
             return res.status(409).json({ error: 'EMAIL_ALREADY_EXISTS' });
         }
-        
-        const result = await createUserService(req.body);
-        res.status(201).json({ id: result.insertId });
+
+        // סיסמה זמנית
+        const password = Math.random().toString(36).slice(-6) + Math.random().toString(36).slice(-2).toUpperCase() + Math.floor(Math.random() * 90 + 10);
+
+        await createUserService({ ...req.body, password });
+
+        // שליחת מייל עם הסיסמה הזמנית
+        const lang = emailLang || 'he';
+        const { subject, html } = (welcomeAddedEmailContent[lang] || welcomeAddedEmailContent.he)(full_name, email, password);
+        await transporter.sendMail({
+            from: `"NNC-Law" <${process.env.EMAIL_USER}>`,
+            to: email,
+            subject,
+            html,
+        });
+
+        res.status(201).json({ success: true });
     } catch (err) {
         console.error('createUser error:', err.message, err.stack);
         res.status(500).json({ error: 'Failed to create user', details: err.message });

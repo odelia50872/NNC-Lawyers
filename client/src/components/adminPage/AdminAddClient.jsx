@@ -3,7 +3,6 @@ import { api } from '../../API/APIService';
 import { useNotify } from '../notifications/NotificationContext';
 import { useLang } from '../../context/LanguageContext';
 import { FaTrashAlt, FaUserPlus, FaSearch } from 'react-icons/fa';
-import generatePassword from 'generate-password-browser';
 import useAdminAuth from '../../hooks/useAdminAuth.jsx';
 import '../../styles/AdminAddClient.css';
 
@@ -99,9 +98,7 @@ function AdminAddClient({ onClientChange = () => {} }) {
         e.preventDefault();
         requireAuth(async () => {
             try {
-                const password = generatePassword.generate({ length: 8, numbers: true, symbols: true, uppercase: true, strict: true });
-                await api.post('clients', { ...form, password });
-                await api.post('contact/welcome', { name: form.full_name, email: form.email, password, lang: form.emailLang });
+                await api.post('clients', { ...form });
                 if (searchQuery.trim()) {
                     await fetchClients(true, searchQuery);
                 } else {

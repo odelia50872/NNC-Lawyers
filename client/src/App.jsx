@@ -17,6 +17,7 @@ import ClientDashboard from './pages/client/ClientDashboard';
 import AdminDashboard from './pages/admin/AdminDashboard';
 
 import Login from './pages/auth/Login';
+import ChangePassword from './pages/auth/ChangePassword';
 
 function App() {
   return (
@@ -33,6 +34,10 @@ function App() {
         <Route path="/nnc/legal-article" element={<LegalArticle />} />
         <Route path="/nnc/accessibility" element={<Accessibility />} />
         <Route path="/nnc/login" element={<Login />} />
+
+        <Route element={<ProtectedRoute allowedRoles={['client', 'admin']} />}>
+          <Route path="/nnc/change-password" element={<ChangePassword />} />
+        </Route>
 
         <Route element={<ProtectedRoute allowedRoles={['client', 'admin']} />}>
           <Route path="/nnc/:name/dashboard" element={<ClientDashboard />} />

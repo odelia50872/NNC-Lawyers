@@ -22,7 +22,7 @@ function Header() {
             <div className="header-inner">
                 <Link to="/nnc" className="header-logo" aria-label="NNC Law - דף הבית">
                     <img src={logo} alt="NNC Law logo" className="header-logo-img" />
-                    <span style={{ direction: 'ltr', unicodeBidi: 'bidi-override' }}>⋂⋂C-LAW</span>
+                    <span className="header-logo-text">⋂⋂C-LAW</span>
                 </Link>
                 <button
                     className={`header-hamburger${menuOpen ? ' open' : ''}`}

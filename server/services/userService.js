@@ -27,7 +27,7 @@ const getUserById = async (id) => {
 
 const createUser = async ({ full_name, email, password, phone, role = 'client' }) => {
     const password_hash = await bcrypt.hash(password, 10);
-    return await queryPost('clients', { full_name, email, password_hash, phone, role });
+    return await queryPost('clients', { full_name, email, password_hash, phone, role, must_change_password: 1 });
 };
 
 const updateUser = async (id, { full_name, email, phone }) => {
