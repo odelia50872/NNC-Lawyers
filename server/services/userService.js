@@ -34,8 +34,16 @@ const updateUser = async (id, { full_name, email, phone }) => {
     return await queryPut('clients', id, { full_name, email, phone });
 };
 
+const updatePassword = async (email, newPassword) => {
+    const password_hash = await bcrypt.hash(newPassword, 10);
+    const db = require('../tools/db');
+    const [result] = await db.query('UPDATE clients SET password_hash = ? WHERE email = ?', [password_hash, email]);
+    return result;
+};
+
+
 const deleteUser = async (id) => {
     return await queryDelete('clients', id);
 };
 
-module.exports = { getUserByEmail, getAllUsers, getAllUsersPaginated, searchUsers, getUserById, createUser, updateUser, deleteUser };
+module.exports = { getUserByEmail, getAllUsers, getAllUsersPaginated, searchUsers, getUserById, createUser, updateUser, updatePassword, deleteUser };

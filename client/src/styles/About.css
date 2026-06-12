@@ -49,6 +49,19 @@
     border-inline-start: 4px solid #c9a84c;
 }
 
+@media (max-width: 560px) {
+    .about-page {
+        padding: 0 1rem;
+        margin: 1.5rem auto;
+    }
+    .about-header { margin-bottom: 1.5rem; }
+    .about-header h1 { font-size: 1.6rem; }
+    .about-sections { gap: 1rem; }
+    .about-section {
+        padding: 1.25rem 1rem;
+    }
+}
+
 .about-section h2 {
     font-size: 1.2rem;
     color: #111827;

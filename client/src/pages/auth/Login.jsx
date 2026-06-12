@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { GoogleLogin } from '@react-oauth/google';
 import { api } from '../../API/APIService';
 import { useAuth } from '../../context/AuthContext';
 import { useLang } from '../../context/LanguageContext';
@@ -11,9 +12,12 @@ function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+    const [forgotMode, setForgotMode] = useState(false);
+    const [forgotEmail, setForgotEmail] = useState('');
+    const [forgotLoading, setForgotLoading] = useState(false);
     const { login, user, loading } = useAuth();
     const navigate = useNavigate();
-    const { t } = useLang();
+    const { t, lang } = useLang();
     const location = useLocation();
     const notify = useNotify();
 
@@ -22,10 +26,7 @@ function Login() {
     useEffect(() => {
         if (location.state?.message) notify(location.state.message, 'error');
         const msg = sessionStorage.getItem('authMsg');
-        if (msg) {
-            notify(msg, 'error');
-            sessionStorage.removeItem('authMsg');
-        }
+        if (msg) { notify(msg, 'error'); sessionStorage.removeItem('authMsg'); }
     }, []);
 
     useEffect(() => {
@@ -56,6 +57,60 @@ function Login() {
             setPassword('');
         }
     };
+
+    const handleGoogleSuccess = async (credentialResponse) => {
+        try {
+            const response = await api.post('auth/google', { credential: credentialResponse.credential });
+            login(response.data.user);
+        } catch (err) {
+            const errCode = err.response?.data?.error;
+            notify(errCode === 'USER_NOT_FOUND' ? t.login.googleNotFound : t.login.googleFailed, 'error');
+        }
+    };
+
+    const handleForgotPassword = async (e) => {
+        e.preventDefault();
+        if (!forgotEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(forgotEmail)) {
+            notify(t.login.emailInvalid, 'error');
+            return;
+        }
+        setForgotLoading(true);
+        try {
+            await api.post('auth/forgot-password', { email: forgotEmail, lang });
+            notify(t.login.forgotPasswordSuccess, 'success');
+            setForgotMode(false);
+            setForgotEmail('');
+        } catch (err) {
+            const errCode = err.response?.data?.error;
+            notify(errCode === 'USER_NOT_FOUND' ? t.login.forgotPasswordNotFound : t.login.forgotPasswordFailed, 'error');
+        } finally {
+            setForgotLoading(false);
+        }
+    };
+
+    if (forgotMode) return (
+        <div className="login-container">
+            <div className="login-box">
+                <h2>{t.login.forgotPasswordTitle}</h2>
+                <form className="login-form" onSubmit={handleForgotPassword}>
+                    <p className="forgot-desc">{t.login.forgotPasswordDesc}</p>
+                    <label htmlFor="forgot-email">{t.login.email}:</label>
+                    <input
+                        type="email"
+                        id="forgot-email"
+                        value={forgotEmail}
+                        onChange={(e) => setForgotEmail(e.target.value)}
+                    />
+                    <button type="submit" disabled={forgotLoading}>
+                        {forgotLoading ? '...' : t.login.forgotPasswordSend}
+                    </button>
+                    <button type="button" className="forgot-back-btn" onClick={() => setForgotMode(false)}>
+                        {t.login.forgotPasswordBack}
+                    </button>
+                </form>
+            </div>
+        </div>
+    );
 
     return (
         <div className="login-container">
@@ -94,7 +149,25 @@ function Login() {
                         </button>
                     </div>
 
+                    <button type="button" className="forgot-link" onClick={() => setForgotMode(true)}>
+                        {t.login.forgotPassword}
+                    </button>
+
                     <button type="submit">{t.login.submit}</button>
+
+                    <div className="login-divider"><span>או</span></div>
+
+                    <div className="google-login-wrapper">
+                        <GoogleLogin
+                            onSuccess={handleGoogleSuccess}
+                            onError={() => notify(t.login.googleFailed, 'error')}
+                            text="signin_with"
+                            shape="rectangular"
+                            theme="outline"
+                            size="large"
+                            width="400"
+                        />
+                    </div>
                 </form>
             </div>
         </div>

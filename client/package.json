@@ -17,6 +17,7 @@
     "vite": "^8.0.16"
   },
   "dependencies": {
+    "@react-oauth/google": "^0.13.5",
     "axios": "^1.17.0",
     "generate-password": "^1.7.1",
     "generate-password-browser": "^1.1.0",

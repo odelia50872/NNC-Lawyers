@@ -6,6 +6,32 @@
     direction: rtl;
 }
 
+@media (max-width: 560px) {
+    .admin-dashboard {
+        padding: 0 1rem;
+        margin: 1.5rem auto;
+    }
+    .admin-dashboard h1 { font-size: 1.4rem; }
+    .admin-main-tabs { gap: 0.5rem; }
+    .admin-main-tab {
+        padding: 0.6rem 0.8rem;
+        font-size: 0.82rem;
+        flex: 1;
+        justify-content: center;
+    }
+    .admin-section { padding: 0.75rem; }
+    .admin-reports-table { font-size: 0.75rem; }
+    .admin-reports-table th,
+    .admin-reports-table td { padding: 0.35rem 0.4rem; }
+    .admin-reports-form { flex-direction: column; }
+    .admin-reports-form input,
+    .admin-reports-form select { width: 100%; }
+    .legal-admin-form-grid { grid-template-columns: 1fr; }
+    .admin-modal { padding: 1.25rem; max-width: calc(100vw - 2rem); }
+    .admin-client-search-container { min-width: unset; width: 100%; }
+    .admin-client-list-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+}
+
 .admin-dashboard h1 {
     font-size: 2rem;
     color: #1a1a2e;
@@ -203,6 +229,7 @@
     border-radius: 6px;
     font-size: 0.88rem;
     width: 130px;
+    max-width: 100%;
 }
 
 .admin-file-label {

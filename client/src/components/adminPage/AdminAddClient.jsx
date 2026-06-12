@@ -9,13 +9,15 @@ import '../../styles/AdminAddClient.css';
 
 function AdminAddClient({ onClientChange = () => {} }) {
     const [clients, setClients] = useState([]);
-    const [offset, setOffset] = useState(0);
-    const [hasMore, setHasMore] = useState(true);
     const [loadingMore, setLoadingMore] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
     const [isSearching, setIsSearching] = useState(false);
     const listRef = useRef(null);
     const searchTimeout = useRef(null);
+    const offsetRef = useRef(0);
+    const hasMoreRef = useRef(true);
+    const loadingRef = useRef(false);
+    const isSearchingRef = useRef(false);
     const LIMIT = 5;
     const [form, setForm] = useState({ full_name: '', email: '', emailLang: 'he' });
     const notify = useNotify();
@@ -23,41 +25,54 @@ function AdminAddClient({ onClientChange = () => {} }) {
     const { requireAuth, PasswordModal } = useAdminAuth();
 
     const fetchClients = useCallback(async (reset = false, query = '') => {
-        const currentOffset = reset ? 0 : offset;
+        if (loadingRef.current) return;
+        if (!reset && !hasMoreRef.current) return;
+        loadingRef.current = true;
         setLoadingMore(true);
         try {
-            let res;
             if (query.trim()) {
-                res = await api.get('clients/search', { q: query });
+                const res = await api.get('clients/search', { q: query });
                 setClients(res.data);
-                setHasMore(false);
-                setOffset(0);
+                hasMoreRef.current = false;
+                offsetRef.current = 0;
+                isSearchingRef.current = true;
                 setIsSearching(true);
             } else {
-                res = await api.get('clients/paginated', { limit: LIMIT, offset: currentOffset });
+                const currentOffset = reset ? 0 : offsetRef.current;
+                const res = await api.get('clients/paginated', { limit: LIMIT, offset: currentOffset });
                 const { clients: newClients, total } = res.data;
                 setClients(prev => reset ? newClients : [...prev, ...newClients]);
-                setOffset(currentOffset + newClients.length);
-                setHasMore(currentOffset + newClients.length < total);
+                offsetRef.current = currentOffset + newClients.length;
+                hasMoreRef.current = offsetRef.current < total;
+                isSearchingRef.current = false;
                 setIsSearching(false);
             }
         } finally {
+            loadingRef.current = false;
             setLoadingMore(false);
         }
-    }, [offset]);
+    }, []);
 
     useEffect(() => { fetchClients(true); }, []);
 
     useEffect(() => {
         const el = listRef.current;
-        if (!el || isSearching) return;
+        if (!el) return;
         const handleScroll = () => {
-            if (el.scrollTop + el.clientHeight >= el.scrollHeight - 10 && hasMore && !loadingMore)
+            if (el.scrollTop + el.clientHeight >= el.scrollHeight - 10 && !isSearchingRef.current)
                 fetchClients();
         };
         el.addEventListener('scroll', handleScroll);
         return () => el.removeEventListener('scroll', handleScroll);
-    }, [hasMore, loadingMore, fetchClients, isSearching]);
+    }, [fetchClients]);
+
+    // אם אחרי טעינה ראשונה יש עוד לקוחות אבל אין צורך לגלול — טען אוטומטית
+    useEffect(() => {
+        const el = listRef.current;
+        if (!el) return;
+        if (el.scrollHeight <= el.clientHeight && hasMoreRef.current && !loadingRef.current && !isSearchingRef.current)
+            fetchClients();
+    });
 
     const handleSearchInput = (value) => {
         setSearchQuery(value);

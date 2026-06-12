@@ -7,6 +7,22 @@
     min-height: calc(100vh - 64px - 200px);
 }
 
+@media (max-width: 560px) {
+    .dashboard-container {
+        padding: 0 1rem;
+        margin: 1.5rem auto;
+    }
+    .dashboard-title { font-size: 1.3rem; }
+    .dashboard-tabs { gap: 0.5rem; }
+    .dashboard-tab {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.82rem;
+        flex: 1;
+        text-align: center;
+    }
+    .dashboard-content { padding: 1rem; }
+}
+
 .dashboard-title {
     font-size: 1.8rem;
     color: #0f1624;

@@ -46,6 +46,26 @@
     align-items: center;
 }
 
+@media (max-width: 900px) {
+    .practice-card {
+        width: calc(50% - 1rem);
+    }
+}
+
+@media (max-width: 560px) {
+    .practice-page {
+        padding: 0 1rem;
+        margin: 1.5rem auto;
+    }
+    .practice-header { margin-bottom: 1.5rem; }
+    .practice-header h1 { font-size: 1.6rem; }
+    .practice-grid { gap: 1rem; }
+    .practice-card {
+        width: 100%;
+        padding: 1.5rem 1rem;
+    }
+}
+
 .practice-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 12px 28px rgba(0,0,0,0.1);

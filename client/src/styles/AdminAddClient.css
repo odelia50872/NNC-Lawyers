@@ -261,3 +261,15 @@
     font-size: 0.82rem;
     margin-top: 0.35rem;
 }
+
+@media (max-width: 560px) {
+    .admin-client-form { flex-direction: column; }
+    .admin-client-form input,
+    .admin-client-lang-select { min-width: unset; width: 100%; }
+    .admin-client-submit-btn { width: 100%; }
+    .admin-client-search-container { min-width: unset; width: 100%; }
+    .admin-client-list-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+    .admin-client-item { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+    .admin-modal-actions { flex-direction: column; }
+    .admin-modal-actions button { width: 100%; }
+}
