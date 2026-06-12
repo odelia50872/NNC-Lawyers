@@ -117,3 +117,14 @@
     color: #4b5563;
     letter-spacing: 0.5px;
 }
+
+.footer-accessibility-link {
+    color: #6b7280;
+    text-decoration: underline;
+    transition: color 0.2s;
+    margin-inline-start: 0.5rem;
+}
+
+.footer-accessibility-link:hover {
+    color: #c9a84c;
+}

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { FaPhone, FaFax, FaEnvelope, FaClock, FaMapMarkerAlt } from 'react-icons/fa';
 import { SiWaze } from 'react-icons/si';
 import { useLang } from '../context/LanguageContext';
@@ -18,7 +19,7 @@ const GMAIL_URL = `https://mail.google.com/mail/?view=cm&to=${email}`;
 function Footer() {
     const { t } = useLang();
     return (
-        <footer className="footer">
+        <footer className="footer" role="contentinfo" aria-label={t.footer.contact}>
             <div className="footer-content">
 
                 <div className="footer-section">
@@ -26,11 +27,11 @@ function Footer() {
                     <p>{t.footer.firmName}</p>
                     <p>{t.footer.address}</p>
                     <div className="footer-nav-links">
-                        <a href={WAZE_URL} target="_blank" rel="noreferrer" className="waze-link">
-                            <SiWaze /> Waze
+                        <a href={WAZE_URL} target="_blank" rel="noreferrer" className="waze-link" aria-label="ניווט ב-Waze">
+                            <SiWaze aria-hidden="true" /> Waze
                         </a>
-                        <a href={GMAPS_URL} target="_blank" rel="noreferrer" className="gmaps-link">
-                            <FaMapMarkerAlt /> Google Maps
+                        <a href={GMAPS_URL} target="_blank" rel="noreferrer" className="gmaps-link" aria-label="ניווט ב-Google Maps">
+                            <FaMapMarkerAlt aria-hidden="true" /> Google Maps
                         </a>
                     </div>
                 </div>
@@ -57,6 +58,7 @@ function Footer() {
             </div>
             <p className="footer-bottom">
                 &copy; {new Date().getFullYear()} NNC-LAW {t.footer.rights}.
+                {' '}<Link to="/nnc/accessibility" className="footer-accessibility-link">{t.footer.accessibility}</Link>
             </p>
         </footer>
     );

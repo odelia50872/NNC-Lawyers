@@ -162,8 +162,8 @@ function AdminAddClient({ onClientChange = () => {} }) {
                                 <span className="admin-client-name">{c.full_name}</span>
                                 <span className="admin-client-email">{c.email}</span>
                             </div>
-                            <button className="admin-reports-del-btn" onClick={() => handleDelete(c.id)} title={t.confirm.deleteTooltip}>
-                                <FaTrashAlt />
+                            <button className="admin-reports-del-btn" onClick={() => handleDelete(c.id)} title={t.confirm.deleteTooltip} aria-label={`${t.confirm.deleteTooltip} ${c.full_name}`}>
+                                <FaTrashAlt aria-hidden="true" />
                             </button>
                         </li>
                     ))}

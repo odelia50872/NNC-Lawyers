@@ -125,8 +125,8 @@ function AdminDocSection({ endpoint, title, icon, accept }) {
                             <li key={d.id} className="agreements-item">
                                 <a href={d.file_url} target="_blank" rel="noreferrer">{icon} {d.title}</a>
                                 <div className="admin-doc-actions">
-                                    <button className="admin-edit-btn" onClick={() => openEdit(d)} title={t.confirm.editTooltip}><FaEdit /></button>
-                                    <button className="admin-reports-del-btn" onClick={() => handleDelete(d.id)} title={t.confirm.deleteTooltip}><FaTrashAlt /></button>
+                                    <button className="admin-edit-btn" onClick={() => openEdit(d)} title={t.confirm.editTooltip} aria-label={`${t.confirm.editTooltip} ${d.title}`}><FaEdit aria-hidden="true" /></button>
+                                    <button className="admin-reports-del-btn" onClick={() => handleDelete(d.id)} title={t.confirm.deleteTooltip} aria-label={`${t.confirm.deleteTooltip} ${d.title}`}><FaTrashAlt aria-hidden="true" /></button>
                                 </div>
                             </li>
                         ))}

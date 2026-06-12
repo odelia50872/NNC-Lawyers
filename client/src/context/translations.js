@@ -30,9 +30,14 @@ const translations = {
             title: 'הצוות שלנו',
             members: [
                 { name: 'מזכירות', role: 'קבלת פנים ותיאום לקוחות', gender: 'female', bio: null },
-                { name: 'עו"ד פדאהל נקש', role: 'עורך דין | נוטר | מייסד המשרד', gender: 'male', bio: null },
+                { name: 'עו"ד פדאהל נקש', role: 'עורך דין | נוטר | מייסד המשרד', gender: 'male', bio: `לאחר שסיים את לימודי הבגרות בשנת 1972, עו"ד ז'אן-לוק נקש החל בלימודי משפטים באוניברסיטת פנתאון בפריז בין השנים 1973–1974, ולאחר מכן המשיך את הכשרתו במשפט נוטריוני באוניברסיטת פנתאון-אסאס (Panthéon-Assas) בין השנים 1975–1976. לאחר שירותו בצי הצרפתי בין השנים 1975–1977, הצטרף למשרדו של עו"ד לוסיין אביב (Lucien ABIB), נוטריון בפריז, שם עבד כמתמחה נוטריוני בין השנים 1977–1984.
+במקביל, למד במשך 3 שנים בבית הספר הגבוה ללימודים נוטריוניים בפריז (École Supérieure d'Études Notariales) וקיבל את הדיפלומה של המרכז הגבוה ללימודים נוטריוניים בשנת 1977. בזכות ניסיונו, פתח בשנת 1984 משרד לייעוץ משפטי, וניהל עד שנת 1991 מבנה שהעסיק כעשרה עובדים, בהם מספר מתמחים לעריכת דין.
+בעקבות איחוד מקצועות הייעוץ המשפטי ועריכת הדין בצרפת, הוסמך כעורך דין בינואר 1992. באוגוסט של אותה שנה עלה לישראל עם משפחתו ולמד בקורסי ההסמכה המיועדים למשפטנים מנוסים שהוכשרו בחו"ל בפקולטה למשפטים ברמת אביב.
+הוא התקבל ללשכת עורכי הדין בישראל בנובמבר 1994, לאחר התמחות במשרד עורכי דין בירושלים, והחל לעסוק כעורך דין בדצמבר 1994. ביוני 1997 קיבל רישיון נוטריון בישראל, ובכך חיזק מומחיות כפולה של עורך דין ונוטריון, אותה רכש בשתי מערכות משפט שונות (צרפתית וישראלית).
+במשך למעלה משלושים שנה בישראל, ועם ניסיון מקצועי שהחל לפני קרוב לחמישים שנה, עו"ד ז'אן-לוק נקש מנהל את המשרד כשהוא מוקף בצוות עורכי דין מוסמכים, במטרה להעניק ללקוחותיו ליווי קפדני, מותאם אישית ויעיל, הן במשפט פרטי ישראלי והן במשפט בינלאומי פרטי צרפתי-ישראלי.` },
                 {
-                    name: 'עו"ד מיכאל נקש', role: 'עורך דין', gender: 'male', bio: `לאחר שעלה לישראל עם הוריו בשנת 1992, קיבל עו"ד מיכאל נקש את תעודת הבגרות הישראלית, ולאחר מכן המשיך ללמוד מספר שנים לימודי קודש בישיבה ובכולל.\r\n\r\nבוגר הפקולטה למשפטים בקריית אונו, התקבל ללשכת עורכי הדין הישראלית בשנת 2012. לאחר מכן הצטרף למשרד המשפחתי בירושלים, שנוסד על ידי אביו, עו"ד פדאהל ז'אן-לוק נקש, שם הוא פועל מאז.\r\n\r\nבמטרה להעניק ללקוחותיו ליווי משפטי מקיף ומעודכן, עבר בשנת 2019 הכשרה המסמיכה לעריכת ייפויי כוח מתמשכים, ובשנת 2026 קיבל את ההסמכה הנדרשת לתפקיד נוטריון.\r\n\r\nדובר עברית וצרפתית ברמת שפת אם, ובזכות הניסיון שצבר לצד אביו במהלך שנות ההתמחות והעבודה — מיכאל פועל בכלל תחומי המשרד ומלווה לקוחות ישראלים ובינלאומיים בטיפול בתיקיהם.` },
+                    name: 'עו"ד מיכאל נקש', role: 'עורך דין', gender: 'male', bio: `לאחר שעלה לישראל עם הוריו בשנת 1992, קיבל עו"ד מיכאל נקש את תעודת הבגרות הישראלית, ולאחר מכן המשיך ללמוד מספר שנים לימודי קודש בישיבה ובכולל.\r\n\r\nבוגר הפקולטה למשפטים בקריית אונו, התקבל ללשכת עורכי הדין הישראלית בשנת 2012. לאחר מכן הצטרף למשרד המשפחתי בירושלים, שנוסד על ידי אביו, עו"ד פדאהל ז'אן-לוק נקש, שם הוא פועל מאז.\r\n\r\nבמטרה להעניק ללקוחותיו ליווי משפטי מקיף ומעודכן, עבר בשנת 2019 הכשרה המסמיכה לעריכת ייפויי כוח מתמשכים, ובשנת 2026 קיבל את ההסמכה הנדרשת לתפקיד נוטריון.\r\n\r\nדובר עברית וצרפתית ברמת שפת אם, ובזכות הניסיון שצבר לצד אביו במהלך שנות ההתמחות והעבודה — מיכאל פועל בכלל תחומי המשרד ומלווה לקוחות ישראלים ובינלאומיים בטיפול בתיקיהם.`
+                },
                 { name: 'עו"ד יעל קובי', role: 'עורכת דין', gender: 'female', bio: null },
                 { name: 'יוסף קובי', role: 'שירות ניהול דירות', gender: 'male', bio: null },
             ],
@@ -84,6 +89,7 @@ const translations = {
             navigate: 'ניווט',
             firmName: 'עו"ד נקש פדהאל-ז׳אן-לוק',
             address: 'קדיש לוז 8/58, ירושלים',
+            accessibility: 'הצהרת נגישות',
         },
         login: {
             title: 'כניסת לקוחות',
@@ -221,9 +227,16 @@ const translations = {
             title: 'Notre équipe',
             members: [
                 { name: 'Secrétariat', role: 'Accueil et coordination des clients', gender: 'female', bio: null },
-                { name: 'Me Pedaël Nakache', role: 'Avocat | Notaire | Fondateur du cabinet', gender: 'male', bio: null },
                 {
-                    name: 'Mr Michaël Nakache', role: 'Avocat', gender: 'male', bio: `Après avoir immigré en Israël avec ses parents en 1992, Maître Michaël NAKACHE obtient son baccalauréat israélien avant de poursuivre plusieurs années d'études religieuses en Yéchiva puis en Collel.\r\n\r\nDiplômé de la faculté de droit de Kyriat Ono, il est admis au Barreau israélien en 2012. Il rejoint alors le cabinet familial de Jérusalem, fondé par son père, Maître Pédael Jean-Luc NAKACHE, où il exerce depuis lors.\r\n\r\nSoucieux d'offrir à ses clients un accompagnement juridique complet et actualisé, il suit en 2019 la formation habilitant à la rédaction des procurations continues (« Ypouy Koach Mitmacheh »), puis obtient en 2026, la qualification nécessaire à l'exercice des fonctions de notaire.\r\n\r\nParfaitement bilingue en français et en hébreu, et bénéficiant de l'expérience de son père acquis durant ses années de stage et de fonction, Michaël intervient dans l'ensemble des domaines de compétence du cabinet et accompagne une clientèle israélienne et internationale dans le traitement de ses dossiers.` },
+                    name: 'Me Pedaël Nakache', role: 'Avocat | Notaire | Fondateur du cabinet', gender: 'male', bio: `Titulaire du baccalauréat depuis 1972, Maître Pédael Jean-Luc NAKACHE entreprend des études de droit à l'Université Panthéon à Paris de 1973 à 1974, avant de poursuivre sa formation en droit notarial à l'Université Panthéon-Assas de 1975 à 1976. Après son service dans la Marine nationale française entre 1975 et 1977, il intègre l'étude de Maître Lucien ABIB, Notaire à Paris, où il exerce de 1977 à 1984 en qualité de clerc de Notaire.
+Parallèlement, il suit les enseignements de l'École Supérieure d'Études Notariales de Paris pendant 3 ans et obtient le Diplôme du Centre Supérieur d'Études Notariales en 1977. Fort de cette expérience, il s'installe en 1984 comme conseil juridique et dirige jusqu'en 1991 une structure composée d'une dizaine de collaborateurs, dont plusieurs stagiaires avocats.
+À la suite de la fusion des professions de conseil juridique et d'avocat, il accède à la profession d'avocat en janvier 1992. En août de la même année, il s'installe en Israël avec sa famille et suit les cours d'équivalence destinés aux praticiens expérimentés formés à l'étranger à la Faculté de droit de Ramat Aviv.
+Admis au Barreau israélien en novembre 1994, après un stage dans le cadre d'un Cabinet d'avocats à Jérusalem, il s'installe en tant qu'avocat en décembre 1994. En juin 1997, il obtient le diplôme de Notaire en Israël, renforçant ainsi une double compétence d'avocat et de Notaire acquise dans deux systèmes juridiques distincts (français et israélien).
+Depuis plus de trente ans en Israël et fort d'une expérience professionnelle débutée il y a près de cinquante ans, Maître PJL NAKACHE dirige l'étude entouré d'une équipe d'avocats collaborateurs qualifiés, avec pour objectif d'offrir à sa clientèle un accompagnement rigoureux, personnalisé et efficace tant en droit privé israélien qu'en droit international privé franco-israélien.
+` },
+                {
+                    name: 'Mr Michaël Nakache', role: 'Avocat', gender: 'male', bio: `Après avoir immigré en Israël avec ses parents en 1992, Maître Michaël NAKACHE obtient son baccalauréat israélien avant de poursuivre plusieurs années d'études religieuses en Yéchiva puis en Collel.\r\n\r\nDiplômé de la faculté de droit de Kyriat Ono, il est admis au Barreau israélien en 2012. Il rejoint alors le cabinet familial de Jérusalem, fondé par son père, Maître Pédael Jean-Luc NAKACHE, où il exerce depuis lors.\r\n\r\nSoucieux d'offrir à ses clients un accompagnement juridique complet et actualisé, il suit en 2019 la formation habilitant à la rédaction des procurations continues (« Ypouy Koach Mitmacheh »), puis obtient en 2026, la qualification nécessaire à l'exercice des fonctions de notaire.\r\n\r\nParfaitement bilingue en français et en hébreu, et bénéficiant de l'expérience de son père acquis durant ses années de stage et de fonction, Michaël intervient dans l'ensemble des domaines de compétence du cabinet et accompagne une clientèle israélienne et internationale dans le traitement de ses dossiers.`
+                },
                 { name: 'Me Yaël Cubby', role: 'Avocate', gender: 'female', bio: null },
                 { name: 'Yossef Cubby', role: 'Service de gestion locative', gender: 'male', bio: null },
             ],
@@ -275,6 +288,7 @@ const translations = {
             navigate: 'Navigation',
             firmName: 'Me NAKACHE Pedaël-Jean-Luc',
             address: '8/58 Kadish Luz, Jérusalem',
+            accessibility: 'Déclaration d\'accessibilité',
         },
         login: {
             title: 'Espace client',

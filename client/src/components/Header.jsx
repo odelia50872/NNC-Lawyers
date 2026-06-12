@@ -14,13 +14,13 @@ function Header() {
     const dashboardPath = user?.role === 'admin' ? '/nnc/admin' : `/nnc/${slug}/dashboard`;
 
     return (
-        <header className="header">
+        <header className="header" role="banner">
             <div className="header-inner">
-                <Link to="/nnc" className="header-logo">
-                    <img src={logo} alt="NNC-Law" className="header-logo-img" />
+                <Link to="/nnc" className="header-logo" aria-label="NNC Law - דף הבית">
+                    <img src={logo} alt="NNC Law logo" className="header-logo-img" />
                     <span style={{ direction: 'ltr', unicodeBidi: 'bidi-override' }}>⋂⋂C-LAW</span>
                 </Link>
-                <nav className="header-nav">
+                <nav className="header-nav" aria-label={t.nav.about}>
                     <div className="header-nav-links">
                         <NavLink to="/nnc/about" className={({ isActive }) => isActive ? 'active' : ''}>{t.nav.about}</NavLink>
                         <NavLink to="/nnc/team" className={({ isActive }) => isActive ? 'active' : ''}>{t.nav.team}</NavLink>
