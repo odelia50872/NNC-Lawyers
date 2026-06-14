@@ -22,9 +22,27 @@ function PracticeAreas() {
                             <h3>{item.title}</h3>
                             <p>{item.desc}</p>
                         </div>
+                         <div
+                        className={`team-card${member.bio ? ' team-card--clickable' : ''}`}
+                        key={i}
+                        onClick={() => member.bio && setSelected(member)}
+                        role={member.bio ? 'button' : undefined}
+                        tabIndex={member.bio ? 0 : undefined}
+                        onKeyDown={e => member.bio && e.key === 'Enter' && setSelected(member)}
+                        aria-label={member.bio ? `${member.name} - ${readMore}` : undefined}
+                    >
+                        <div className="team-avatar-wrapper">
+                            {member.gender === 'female' ? <FemaleAvatar /> : <MaleAvatar />}
+                        </div>
+                        <h3>{member.name}</h3>
+                        <p className="team-role">{member.role}</p>
+                        {member.bio && <span className="team-card-more">{readMore}</span>}
+                    </div>
                     );
                 })}
             </div>
+
+            
         </div>
     );
 }
