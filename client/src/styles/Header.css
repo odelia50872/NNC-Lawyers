@@ -1,24 +1,24 @@
 /* Header.css */
 .header {
     background-color: #0f1624;
-    padding: 0 2rem;
+    padding: 0 4rem;
     position: sticky;
     top: 0;
     z-index: 100;
     box-shadow: 0 2px 12px rgba(0,0,0,0.5);
     border-bottom: 2px solid #c9a84c;
     overflow: visible;
-    padding: 0 4rem;
 }
 
 .header-inner {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1300px;
+    max-width: 1400px;
     margin: 0 auto;
-    height: 90px;
-    padding: 0 2rem;
+    height: 125px;
+    padding: 0 4rem;
+    gap: 3rem;
 }
 
 .header-logo {
@@ -26,72 +26,87 @@
     align-items: center;
     gap: 1rem;
     color: #c9a84c;
-    font-size: 1.7rem;
+    font-size: 1.9rem;
     font-weight: 300;
     font-family: 'Nunito', sans-serif;
     text-decoration: none;
     letter-spacing: 3px;
     white-space: nowrap;
-    margin-right: 50px !important;
+    flex-shrink: 0;
+    transition: opacity 0.2s;
+}
+
+.header-logo:hover {
+    opacity: 0.85;
 }
 
 .header-logo-img {
-    width: 60px;
-    height: 60px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
     object-fit: contain;
     object-position: center;
     border: 2px solid #c9a84c;
     background: #fff;
     padding: 4px;
+    transition: transform 0.2s;
+}
+
+.header-logo:hover .header-logo-img {
+    transform: scale(1.05);
 }
 
 .header-nav {
     display: flex;
-    gap: 3rem;
+    gap: 2rem;
     align-items: center;
-    margin-right: 0;
+    flex: 1;
+    justify-content: space-between;
 }
 
 .header-nav-links {
     display: flex;
-    gap: 2.5rem;
+    gap: 2rem;
     align-items: center;
+    flex: 1;
+    justify-content: center;
 }
 
 .header-nav-buttons {
     display: flex;
-    gap: 1.5rem;
+    gap: 1rem;
     align-items: center;
-    margin-right: 1rem;
+    flex-shrink: 0;
 }
 
 .header-nav-links a {
     color: #ccc;
     text-decoration: none;
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 500;
     padding: 0.4rem 0;
     border-bottom: 2px solid transparent;
-    transition: color 0.2s, border-color 0.2s;
+    transition: color 0.25s, border-color 0.25s, transform 0.2s;
     letter-spacing: 0.3px;
     white-space: nowrap;
+    display: inline-block;
 }
 
 .header-nav-links a:hover,
 .header-nav-links a.active {
     color: #fff;
     border-bottom-color: #c9a84c;
+    transform: translateY(-1px);
 }
 
 .header-login-btn {
     background-color: #c9a84c !important;
     color: #0f1624 !important;
-    padding: 0.6rem 1.5rem !important;
+    padding: 0.65rem 1.6rem !important;
     border-radius: 8px !important;
     border-bottom: none !important;
     font-weight: 700 !important;
-    font-size: 0.95rem !important;
+    font-size: 1.05rem !important;
     transition: background 0.2s, transform 0.1s !important;
     letter-spacing: 0.5px !important;
     white-space: nowrap !important;
@@ -106,10 +121,10 @@
     background: transparent;
     border: 1px solid #c9a84c;
     color: #c9a84c;
-    padding: 0.6rem 1.5rem;
+    padding: 0.65rem 1.6rem;
     border-radius: 8px;
     font-weight: 700;
-    font-size: 0.95rem;
+    font-size: 1.05rem;
     cursor: pointer;
     transition: background 0.2s, color 0.2s;
     letter-spacing: 0.5px;

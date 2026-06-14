@@ -99,3 +99,18 @@
     text-align: justify;
     text-justify: inter-word;
 }
+
+.practice-read-more {
+    margin-top: auto;
+    padding-top: 0.75rem;
+    background: none;
+    border: none;
+    color: #c9a84c;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.practice-read-more:hover {
+    text-decoration: underline;
+}

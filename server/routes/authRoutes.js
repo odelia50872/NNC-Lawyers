@@ -93,17 +93,8 @@ router.post('/change-password', verifyToken, async (req, res) => {
         await db.query('UPDATE clients SET must_change_password = 0 WHERE email = ?', [req.user.email]);
         // רענן token
         const user = await getUserByEmail(req.user.email);
-        const token = jwt.sign(
-            { id: user.id, email: user.email, role: user.role, full_name: user.full_name },
-            process.env.JWT_SECRET,
-            { expiresIn: '30m' }
-        );
-        res.cookie('token', token, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: process.env.NODE_ENV === 'production' ? 'strict' : 'lax',
-            maxAge: 30 * 60 * 1000,
-        });
+        const token = signToken(user);
+        setTokenCookie(res, token);
         res.json({ success: true, user: { id: user.id, full_name: user.full_name, email: user.email, role: user.role, must_change_password: false } });
     } catch (err) {
         res.status(500).json({ error: 'CHANGE_FAILED' });

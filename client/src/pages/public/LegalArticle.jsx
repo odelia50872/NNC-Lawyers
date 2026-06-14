@@ -18,7 +18,10 @@ function LegalArticle() {
 
     return (
         <div className="legal-article-page">
-            <h1 className="legal-article-title">{t.legalArticles.title}</h1>
+            <div className="legal-article-header">
+                <h1 className="legal-article-title">{t.legalArticles.title}</h1>
+            </div>
+
             {articles.length === 0 ? (
                 <p className="legal-article-empty">{t.legalArticles.empty}</p>
             ) : (
@@ -29,10 +32,18 @@ function LegalArticle() {
                         const isOpen  = expanded === a.id;
                         return (
                             <li key={a.id} className={`legal-article-item${isOpen ? ' open' : ''}`}>
-                                <div className="legal-article-item-header" onClick={() => setExpanded(isOpen ? null : a.id)}>
+                                <button
+                                    className="legal-article-item-header"
+                                    onClick={() => setExpanded(isOpen ? null : a.id)}
+                                    aria-expanded={isOpen}
+                                >
                                     <span className="legal-article-item-title">{title}</span>
-                                    <span className="legal-article-chevron">{isOpen ? '▲' : '▼'}</span>
-                                </div>
+                                    <span className="legal-article-expand-btn" aria-hidden="true">
+                                        <span className="legal-article-expand-icon">
+                                            {isOpen ? '−' : '+'}
+                                        </span>
+                                    </span>
+                                </button>
                                 {isOpen && (
                                     <div className="legal-article-content">
                                         <p>{content}</p>
