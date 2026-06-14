@@ -115,8 +115,7 @@ const translations = {
         },
         footer: {
             hours: 'שעות פעילות',
-            sun: 'יום א׳ : 16:00- -9:00',
-            monThu: 'ימים ב׳ - ה׳ : 18:00- 09:00',
+            sunThu: 'יום א׳ - ה׳ : 16:00- 09:00',
             fri: 'יום ו׳ : 12:00- 09:00',
             sat: 'שבת : סגור',
             rights: 'כל הזכויות שמורות',
@@ -426,8 +425,7 @@ Cette gestion personnalisée permet aux propriétaires, notamment ceux résidant
         },
         footer: {
             hours: 'Heures d\'ouverture',
-            sun: 'Dimanche: 09:00 - 16:00',
-            monThu: 'Lun - Jeu: 09:00 - 15:00',
+            sunThu: 'Dimanche-Jeudi : 09:00 - 16:00',
             fri: 'Vendredi: 09:00 - 13:00',
             sat: 'Samedi: Fermé',
             rights: 'Tous droits réservés',
