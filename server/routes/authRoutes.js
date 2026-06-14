@@ -120,6 +120,7 @@ router.post('/refresh-token', verifyToken, async (req, res) => {
     }
 });
 
+//לשנות את ME 
 router.get('/me', async (req, res) => {
     const token = req.cookies?.token;
     if (!token) return res.json({ user: null });

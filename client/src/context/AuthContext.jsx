@@ -12,6 +12,7 @@ export function AuthProvider({ children }) {
     const { updateActivity, scheduleTokenRefresh } = useTokenManager();
 
     useEffect(() => {
+        //לשנות את ME
         api.get('auth/me')
             .then(res => {
                 setUser(res.data.user);

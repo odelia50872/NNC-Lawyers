@@ -28,13 +28,14 @@ apiClient.interceptors.response.use(
                     return apiClient.request(err.config);
                 } catch (refreshError) {
                     sessionStorage.setItem('authMsg', t.sessionExpired);
+                    //לשנות את ME
                     if (!url.includes('auth/me')) {
                         window.location.href = '/nnc/login';
                     }
                     return Promise.reject(refreshError);
                 }
             }
-
+//לשנות את ME
             if (!url.includes('auth/me') && !url.includes('auth/refresh-token')) {
                 window.location.href = '/nnc/login';
             }
