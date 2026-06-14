@@ -275,8 +275,7 @@ const translations = {
                 },
             ],
         },
-    }
-},
+    },
     fr: {
         nav: {
             about: 'À propos',
