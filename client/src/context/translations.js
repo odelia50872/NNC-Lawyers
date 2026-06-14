@@ -38,8 +38,16 @@ const translations = {
                 {
                     name: 'עו"ד מיכאל נקש', role: 'עורך דין', gender: 'male', bio: `לאחר שעלה לישראל עם הוריו בשנת 1992, קיבל עו"ד מיכאל נקש את תעודת הבגרות הישראלית, ולאחר מכן המשיך ללמוד מספר שנים לימודי קודש בישיבה ובכולל.\r\n\r\nבוגר הפקולטה למשפטים בקריית אונו, התקבל ללשכת עורכי הדין הישראלית בשנת 2012. לאחר מכן הצטרף למשרד המשפחתי בירושלים, שנוסד על ידי אביו, עו"ד פדהאל ז'אן-לוק נקש, שם הוא פועל מאז.\r\n\r\nבמטרה להעניק ללקוחותיו ליווי משפטי מקיף ומעודכן, עבר בשנת 2019 הכשרה המסמיכה לעריכת ייפויי כוח מתמשכים, ובשנת 2026 קיבל את ההסמכה הנדרשת לתפקיד נוטריון.\r\n\r\nדובר עברית וצרפתית ברמת שפת אם, ובזכות הניסיון שצבר לצד אביו במהלך שנות ההתמחות והעבודה — מיכאל פועל בכלל תחומי המשרד ומלווה לקוחות ישראלים ובינלאומיים בטיפול בתיקיהם.`
                 },
-                { name: 'עו"ד יעל קובי', role: 'עורכת דין', gender: 'female', bio: null },
-                { name: 'מזכירות', role: 'קבלת פנים ותיאום לקוחות', gender: 'female', bio: null },
+                {
+                    name: 'עו"ד יעל קובי', role: 'עורכת דין', gender: 'female', bio: `עורכת הדין יעל קובי חברה בלשכת עורכי הדין בישראל מאז שנת 2009. היא בוגרת הפקולטה למשפטים של הקריה האקדמית אונו, ועוסקת במקצוע במשרד שהוקם בירושלים על ידי אביה, עורך הדין פדאל ז'אן-לוק נקש.
+עם ניסיון של מעל חמש-עשרה שנה, היא מלווה לקוחות ישראלים ובינלאומיים בכל תחומי הפעילות של המשרד, תוך דגש על גישה המבוססת על הקשבה, זמינות ומציאת פתרונות מותאמים אישית לכל מצב.
+על מנת להעניק ללקוחותיה ליווי משפטי מקיף ועדכני בהתאם להתפתחויות הדין הישראלי, היא הוסמכה בשנת 2019 לעריכת ייפוי כוח מתמשך, ובשנת 2026 הוסמכה כנוטריונית.
+דוברת צרפתית ועברית ברמת שפת אם, עו"ד קובי מעניקה שירות ללקוחות דוברי צרפתית ולקוחות ישראלים, ומייעצת להם ומסייעת להם בצעדיהם האישיים והמקצועיים כאחד.` },
+                {
+                    name: 'מזכירות', role: 'קבלת פנים ותיאום לקוחות', gender: 'female', bio: `המשרד מייחס חשיבות מיוחדת לאיכות הקשר עם לקוחותיו. לשם כך, עומד לרשות הלקוחות שירות מזכירות מנוסה הדובר צרפתית ועברית, המבטיח קבלת קהל מקצועית, אישית וזמינה.
+הצוות שלנו עומד לרשות הלקוחות בימים א'-ה' בין השעות 09:00 עד 16:00 (ימי ראשון) ו-09:00 עד 18:00 (ימים שני עד חמישי), ובימי שישי בין השעות 09:00 עד 12:00. הצוות מלווה את הלקוחות בביצוע פעולותיהם, במעקב אחר התיקים שלהם ובתיאום פגישותיהם.
+כדי להבטיח זמינות אופטימלית, המשרד הקים גם שירות מענה טלפוני חיצוני, המאפשר טיפול בשיחות מחוץ לשעות הפעילות, ובכך מבטיח המשכיות שירות ורמת היענות גבוהה.
+התארגנות זו מאפשרת ללקוחותינו, בין אם הם מתגוררים בישראל ובין אם בחו"ל, ליהנות מאיש קשר זמין וקשוב לצרכיהם לאורך כל שלבי הטיפול בתיק שלהם.` },
                 { name: 'יוסף קובי', role: 'שירות ניהול דירות', gender: 'male', bio: null },
             ],
         },
@@ -78,7 +86,7 @@ const translations = {
         },
         footer: {
             hours: 'שעות פעילות',
-            sun: 'יום א׳ : 15:00- -9:00',
+            sun: 'יום א׳ : 16:00- -9:00',
             monThu: 'ימים ב׳ - ה׳ : 18:00- 09:00',
             fri: 'יום ו׳ : 12:00- 09:00',
             sat: 'שבת : סגור',
@@ -217,7 +225,58 @@ const translations = {
             title: 'דוחות כספיים',
             empty: 'אין דוחות כספיים',
         },
-    },
+        accessibility: {
+            title: 'הצהרת נגישות',
+            updated: 'עדכון אחרון: יוני 2026',
+            intro: 'משרד עורכי הדין NNC-Law מחויב להנגיש את אתר האינטרנט שלו לאנשים עם מוגבלויות, בהתאם לתקנות שוויון זכויות לאנשים עם מוגבלות (התאמות נגישות לשירות), התשע"ג-2013, ובהתאם לתקן הישראלי ת"י 5568 המבוסס על WCAG 2.0 ברמה AA.',
+            sections: [
+                {
+                    title: 'רמת הנגישות',
+                    text: 'האתר עומד ברמת נגישות AA של תקן WCAG 2.0, הכולל:',
+                    items: [
+                        'תמיכה בקוראי מסך באמצעות תגיות ARIA ומבנה סמנטי תקין',
+                        'ניווט מלא באמצעות מקלדת בלבד',
+                        'טקסט חלופי (alt) על כל האלמנטים הוויזואליים המשמעותיים',
+                        'מבנה כותרות היררכי ונגיש',
+                        'ניגודיות צבעים עומדת בדרישות התקן',
+                        'תמיכה בשינוי גודל טקסט עד 200% ללא אובדן תוכן',
+                        'הצהרת שפה (lang) על כל הדפים',
+                        'אתר מגיב (Responsive) לכל גדלי המסך',
+                    ],
+                },
+                {
+                    title: 'אמצעי הנגישות שיושמו',
+                    text: 'במסגרת עבודת הנגישות בוצעו ההתאמות הבאות:',
+                    items: [
+                        'הוספת role ו-aria-label לכל רכיבי הניווט',
+                        'כפתורים עם טקסט נגיש לקוראי מסך',
+                        'תפריט ניווט ראשי עם תיאור מלא',
+                        'דיאלוגים (modals) עם role="dialog" ו-aria-modal',
+                        'אייקונים דקורטיביים מוגדרים כ-aria-hidden',
+                        'תמיכה בניווט מקלדת בקארדים אינטראקטיביים',
+                        'שפת הממשק מתעדכנת דינמית ב-HTML lang',
+                    ],
+                },
+                {
+                    title: 'מגבלות ידועות',
+                    text: 'אנו עובדים על שיפור מתמיד. להלן מגבלות ידועות:',
+                    items: [
+                        'חלק מהמסמכים PDF עשויים שלא להיות נגישים במלואם',
+                    ],
+                },
+                {
+                    title: 'יצירת קשר בנושא נגישות',
+                    text: 'נתקלתם בבעיית נגישות? אנחנו כאן לעזור:',
+                    items: [
+                        'אימייל: nnc@nnc-law.com',
+                        'טלפון: 02-6437311',
+                        'כתובת: קדיש לוז 8/58, ירושלים',
+                    ],
+                },
+            ],
+        },
+    }
+},
     fr: {
         nav: {
             about: 'À propos',
@@ -258,8 +317,17 @@ Depuis plus de trente ans en Israël et fort d'une expérience professionnelle d
                 {
                     name: 'Mr Michaël Nakache', role: 'Avocat', gender: 'male', bio: `Après avoir immigré en Israël avec ses parents en 1992, Maître Michaël NAKACHE obtient son baccalauréat israélien avant de poursuivre plusieurs années d'études religieuses en Yéchiva puis en Collel.\r\n\r\nDiplômé de la faculté de droit de Kyriat Ono, il est admis au Barreau israélien en 2012. Il rejoint alors le cabinet familial de Jérusalem, fondé par son père, Maître Pédael Jean-Luc NAKACHE, où il exerce depuis lors.\r\n\r\nSoucieux d'offrir à ses clients un accompagnement juridique complet et actualisé, il suit en 2019 la formation habilitant à la rédaction des procurations continues (« Ypouy Koach Mitmacheh »), puis obtient en 2026, la qualification nécessaire à l'exercice des fonctions de notaire.\r\n\r\nParfaitement bilingue en français et en hébreu, et bénéficiant de l'expérience de son père acquis durant ses années de stage et de fonction, Michaël intervient dans l'ensemble des domaines de compétence du cabinet et accompagne une clientèle israélienne et internationale dans le traitement de ses dossiers.`
                 },
-                { name: 'Me Yaël Cubby', role: 'Avocate', gender: 'female', bio: null },
-                { name: 'Secrétariat', role: 'Accueil et coordination des clients', gender: 'female', bio: null },
+                {
+                    name: 'Me Yaël Cubby', role: 'Avocate', gender: 'female', bio: `Maître Yael CUBBY est avocate au Barreau israélien depuis 2009. Diplômée de la Faculté de droit de Kiryat Ono, elle exerce au sein du cabinet fondé à Jérusalem par son père, Maître Pédael Jean-Luc Nakache.
+                    Forte de plus de quinze années d'expérience, elle accompagne une clientèle israélienne et internationale dans l'ensemble des domaines d'activité du cabinet, en privilégiant une approche fondée sur l'écoute, la disponibilité et la recherche de solutions adaptées à chaque situation.
+Afin d'offrir à ses clients un accompagnement juridique complet et conforme aux évolutions du droit israélien, elle a obtenu en 2019 l'habilitation à rédiger des mandats de protection future (« Yipouï Koa'h Mitmatcheh »), puis en 2026 la qualification de notaire.
+Parfaitement bilingue en français et en hébreu, Maître CUBBY intervient auprès d'une clientèle francophone et israélienne, qu'elle conseille et assiste tant dans ses démarches personnelles que professionnelles.
+` },
+                {
+                    name: 'Secrétariat', role: 'Accueil et coordination des clients', gender: 'female', bio: `Le cabinet attache une importance particulière à la qualité de la relation avec ses clients. À cette fin, il dispose d'un service de secrétariat bilingue français hébreu expérimenté, permettant d'assurer un accueil professionnel, personnalisé et réactif.
+Notre équipe est à la disposition de la clientèle le dimanche de 9h00 à 16h00, du lundi au jeudi de 9h00 à 18h00 et le vendredi de 9h00 à 12h00. Elle accompagne les clients dans leurs démarches, le suivi de leurs dossiers et l'organisation de leurs rendez-vous.
+Afin de garantir une disponibilité optimale, le cabinet a également mis en place un service de permanence téléphonique externe, permettant la prise en charge des appels en dehors des horaires d'ouverture et assurant ainsi une continuité de service et une réactivité accrue.
+Cette organisation permet à nos clients, qu'ils résident en Israël ou à l'étranger, de bénéficier d'un interlocuteur disponible et attentif à leurs besoins, tout au long du traitement de leur dossier.` },
                 { name: 'Yossef Cubby', role: 'Service de gestion locative', gender: 'male', bio: null },
             ],
         },
@@ -298,7 +366,7 @@ Depuis plus de trente ans en Israël et fort d'une expérience professionnelle d
         },
         footer: {
             hours: 'Heures d\'ouverture',
-            sun: 'Dimanche: 09:00 - 15:00',
+            sun: 'Dimanche: 09:00 - 16:00',
             monThu: 'Lun - Jeu: 09:00 - 15:00',
             fri: 'Vendredi: 09:00 - 13:00',
             sat: 'Samedi: Fermé',
@@ -438,6 +506,57 @@ Depuis plus de trente ans en Israël et fort d'une expérience professionnelle d
             empty: 'Aucun rapport financier',
         },
     },
+    accesibility: {
+        title: 'Déclaration d\'accessibilité',
+        updated: 'Dernière mise à jour : Juin 2026',
+        intro: 'Le cabinet NNC-Law s\'engage à rendre son site internet accessible aux personnes handicapées, conformément à la réglementation israélienne sur l\'égalité des droits des personnes handicapées et à la norme israélienne T"I 5568, basée sur WCAG 2.0 niveau AA.',
+        sections: [
+            {
+                title: 'Niveau d\'accessibilité',
+                text: 'Le site respecte le niveau AA de la norme WCAG 2.0, incluant :',
+                items: [
+                    'Support des lecteurs d\'écran via les attributs ARIA et une structure sémantique correcte',
+                    'Navigation complète au clavier',
+                    'Texte alternatif (alt) sur tous les éléments visuels significatifs',
+                    'Structure hiérarchique des titres accessible',
+                    'Contraste des couleurs conforme aux exigences',
+                    'Support du redimensionnement du texte jusqu\'à 200% sans perte de contenu',
+                    'Déclaration de langue (lang) sur toutes les pages',
+                    'Site responsive pour toutes les tailles d\'écran',
+                ],
+            },
+            {
+                title: 'Mesures d\'accessibilité mises en œuvre',
+                text: 'Les adaptations suivantes ont été réalisées :',
+                items: [
+                    'Ajout de role et aria-label sur tous les composants de navigation',
+                    'Boutons avec texte accessible pour les lecteurs d\'écran',
+                    'Menu de navigation principal avec description complète',
+                    'Dialogues (modals) avec role="dialog" et aria-modal',
+                    'Icônes décoratives définies comme aria-hidden',
+                    'Navigation au clavier sur les cartes interactives',
+                    'Langue de l\'interface mise à jour dynamiquement via HTML lang',
+                ],
+            },
+            {
+                title: 'Limitations connues',
+                text: 'Nous travaillons à une amélioration continue. Limitations connues :',
+                items: [
+                    'Certains documents PDF peuvent ne pas être entièrement accessibles',
+                ],
+            },
+            {
+                title: 'Contact accessibilité',
+                text: 'Vous avez rencontré un problème d\'accessibilité ? Nous sommes là pour vous aider :',
+                items: [
+                    'Email : nnc@nnc-law.com',
+                    'Téléphone : 02-6437311',
+                    'Adresse : 8/58 Kadish Luz, Jérusalem',
+                ],
+            },
+        ],
+    },
 };
+
 
 export default translations;

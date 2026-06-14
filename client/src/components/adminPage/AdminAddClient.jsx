@@ -65,7 +65,6 @@ function AdminAddClient({ onClientChange = () => {} }) {
         return () => el.removeEventListener('scroll', handleScroll);
     }, [fetchClients]);
 
-    // אם אחרי טעינה ראשונה יש עוד לקוחות אבל אין צורך לגלול — טען אוטומטית
     useEffect(() => {
         const el = listRef.current;
         if (!el) return;
