@@ -6,7 +6,7 @@ import { FaTrashAlt, FaUserPlus, FaSearch } from 'react-icons/fa';
 import useAdminAuth from '../../hooks/useAdminAuth.jsx';
 import '../../styles/AdminAddClient.css';
 
-function AdminAddClient({ onClientChange = () => {} }) {
+function AdminAddClient({ onClientChange = () => { } }) {
     const [clients, setClients] = useState([]);
     const [loadingMore, setLoadingMore] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
@@ -31,7 +31,8 @@ function AdminAddClient({ onClientChange = () => {} }) {
         try {
             if (query.trim()) {
                 const res = await api.get('clients/search', { q: query });
-                setClients(res.data);
+                const sortedData = [...res.data].sort((a, b) => a.full_name.localeCompare(b.full_name));
+                setClients(sortedData);
                 hasMoreRef.current = false;
                 offsetRef.current = 0;
                 isSearchingRef.current = true;
@@ -40,8 +41,11 @@ function AdminAddClient({ onClientChange = () => {} }) {
                 const currentOffset = reset ? 0 : offsetRef.current;
                 const res = await api.get('clients/paginated', { limit: LIMIT, offset: currentOffset });
                 const { clients: newClients, total } = res.data;
-                setClients(prev => reset ? newClients : [...prev, ...newClients]);
-                offsetRef.current = currentOffset + newClients.length;
+                const sortedData = [...newClients].sort((a, b) => a.full_name.localeCompare(b.full_name));
+                setClients(prev => {
+                    const updatedList = reset ? sortedData : [...prev, ...sortedData];
+                    return reset ? updatedList : updatedList.sort((a, b) => a.full_name.localeCompare(b.full_name));
+                }); offsetRef.current = currentOffset + newClients.length;
                 hasMoreRef.current = offsetRef.current < total;
                 isSearchingRef.current = false;
                 setIsSearching(false);
@@ -75,12 +79,12 @@ function AdminAddClient({ onClientChange = () => {} }) {
     const handleSearchInput = (value) => {
         setSearchQuery(value);
         clearTimeout(searchTimeout.current);
-        
+
         if (!value.trim()) {
             fetchClients(true);
             return;
         }
-        
+
         searchTimeout.current = setTimeout(() => {
             fetchClients(true, value);
         }, 300);
