@@ -115,7 +115,8 @@ const translations = {
         },
         footer: {
             hours: 'שעות פעילות',
-            sunThu: 'יום א׳ - ה׳ : 16:00- 09:00',
+            sun: 'יום א׳ : 16:00- 09:00',
+            monThu: 'ימים ב׳ - ה׳ : 18:00- 09:00',
             fri: 'יום ו׳ : 12:00- 09:00',
             sat: 'שבת : סגור',
             rights: 'כל הזכויות שמורות',
@@ -405,7 +406,7 @@ Cette gestion personnalisée permet aux propriétaires, notamment ceux résidant
         },
         contact: {
             title: 'Contactez-nous',
-            subtitle: 'Nous sommes à votre disposition — laissez vos coordonnées et nous vous répondrons rapidement',
+            subtitle: 'Nous sommes à votre disposition - laissez vos coordonnées et nous vous répondrons rapidement',
             name: 'Nom complet',
             email: 'Email',
             phone: 'Téléphone',
@@ -425,7 +426,8 @@ Cette gestion personnalisée permet aux propriétaires, notamment ceux résidant
         },
         footer: {
             hours: 'Heures d\'ouverture',
-            sunThu: 'Dimanche-Jeudi : 09:00 - 16:00',
+            sun: 'Dimanche: 09:00 - 16:00',
+            monThu: 'Lun - Jeu: 09:00 - 18:00',
             fri: 'Vendredi: 09:00 - 13:00',
             sat: 'Samedi: Fermé',
             rights: 'Tous droits réservés',

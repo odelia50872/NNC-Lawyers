@@ -49,7 +49,8 @@ function Footer() {
 
                 <div className="footer-section">
                     <h4><FaClock /> {t.footer.hours}</h4>
-                    <p>{t.footer.sunThu}</p>
+                    <p>{t.footer.sun}</p>
+                    <p>{t.footer.monThu}</p>
                     <p>{t.footer.fri}</p>
                     <p>{t.footer.sat}</p>
                 </div>
