@@ -1,50 +1,6 @@
 const { getUserByEmail, getAllUsers: getAllUsersService, getAllUsersPaginated: getAllUsersPaginatedService, searchUsers: searchUsersService, getUserById: getUserByIdService, createUser: createUserService, updateUser: updateUserService, deleteUser: deleteUserService } = require('../services/userService');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const nodemailer = require('nodemailer');
 const { welcomeAddedEmailContent } = require('../config/emailContent');
-
-const transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: true,
-    auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS },
-});
-
-const login = async (req, res) => {
-    try {
-        const { email, password } = req.body;
-        const user = await getUserByEmail(email);
-        if (!user) return res.status(401).json({ error: 'INVALID_CREDENTIALS' });
-
-        const valid = await bcrypt.compare(password, user.password_hash);
-        if (!valid) return res.status(401).json({ error: 'INVALID_CREDENTIALS' });
-
-        const token = jwt.sign(
-            { id: user.id, email: user.email, role: user.role, full_name: user.full_name },
-            process.env.JWT_SECRET,
-            { expiresIn: '30m' }
-        );
-
-        res.cookie('token', token, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: process.env.NODE_ENV === 'production' ? 'strict' : 'lax',
-            maxAge: 30 * 60 * 1000
-        });
-        res.json({
-            user: {
-                id: user.id,
-                full_name: user.full_name,
-                email: user.email,
-                role: user.role,
-                must_change_password: !!user.must_change_password,
-            }
-        });
-    } catch (err) {
-        res.status(500).json({ error: 'Login failed', details: err.message });
-    }
-};
+const transporter = require('../tools/mailer');
 
 const searchUsers = async (req, res) => {
     try {
@@ -132,4 +88,4 @@ const deleteUser = async (req, res) => {
     }
 };
 
-module.exports = { login, getAllUsers, getAllUsersPaginated, searchUsers, getUserById, createUser, updateUser, deleteUser };
+module.exports = { getAllUsers, getAllUsersPaginated, searchUsers, getUserById, createUser, updateUser, deleteUser };
