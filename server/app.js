@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser');
 require('dotenv').config();
 
 const authRoutes = require('./routes/authRoutes');
-const clientRoutes = require('./routes/clientRoutes');
+const userRoutes = require('./routes/userRoutes');
 const contactRoutes = require('./routes/emailRoutes');
 const legalArticleRoutes = require('./routes/legalArticleRoutes');
 const { makeDocRouter } = require('./routes/makeDocRouter');
@@ -18,7 +18,7 @@ app.use('/uploads', express.static('uploads'));
 
 app.use('/api/auth', authRoutes);
 app.use('/api/contact', contactRoutes);
-app.use('/api/clients', clientRoutes);
+app.use('/api/clients', userRoutes);
 app.use('/api/financial-reports',  makeDocRouter('financial_reports',   'report'));
 app.use('/api/rental-agreements',  makeDocRouter('rental_agreements',   'agreement'));
 app.use('/api/identity-documents', makeDocRouter('identity_documents',  'identity'));

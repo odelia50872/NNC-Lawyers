@@ -1,10 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const { getAllUsers, getAllUsersPaginated, searchUsers, getUserById, createUser, updateUser, deleteUser } = require('../controllers/userController');
+const { getAllUsersPaginated, searchUsers, getUserById, createUser, updateUser, deleteUser } = require('../controllers/userController');
 const { verifyToken, verifyAdmin } = require('../middleware/authMiddleware');
 const { verifySelfOrAdmin } = require('../middleware/userMiddleware');
 
-router.get('/',            verifyToken, verifyAdmin,       getAllUsers);
 router.get('/paginated',   verifyToken, verifyAdmin,       getAllUsersPaginated);
 router.get('/search',      verifyToken, verifyAdmin,       searchUsers);
 router.get('/:id',         verifyToken, verifySelfOrAdmin, getUserById);

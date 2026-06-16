@@ -1,5 +1,5 @@
-const { getUserByEmail, getAllUsers: getAllUsersService, getAllUsersPaginated: getAllUsersPaginatedService, searchUsers: searchUsersService, getUserById: getUserByIdService, createUser: createUserService, updateUser: updateUserService, deleteUser: deleteUserService } = require('../services/userService');
-const { welcomeAddedEmailContent } = require('../config/emailContent');
+const { getUserByEmail, getAllUsersPaginated: getAllUsersPaginatedService, searchUsers: searchUsersService, getUserById: getUserByIdService, createUser: createUserService, updateUser: updateUserService, deleteUser: deleteUserService } = require('../services/userService');
+const { welcomeAddedEmailContent } = require('../templates/emailTemplates');
 const transporter = require('../tools/mailer');
 
 const searchUsers = async (req, res) => {
@@ -8,15 +8,6 @@ const searchUsers = async (req, res) => {
         res.json(rows);
     } catch (err) {
         res.status(500).json({ error: 'Failed to search users' });
-    }
-};
-
-const getAllUsers = async (req, res) => {
-    try {
-        const users = await getAllUsersService();
-        res.json(users);
-    } catch (err) {
-        res.status(500).json({ error: 'Failed to retrieve users' });
     }
 };
 
@@ -88,4 +79,4 @@ const deleteUser = async (req, res) => {
     }
 };
 
-module.exports = { getAllUsers, getAllUsersPaginated, searchUsers, getUserById, createUser, updateUser, deleteUser };
+module.exports = { getAllUsersPaginated, searchUsers, getUserById, createUser, updateUser, deleteUser };
