@@ -38,7 +38,6 @@ const queryGetPaginated = async (source, { limit = 5, offset = 0, where = null, 
 const querySearch = async (source, field, search) => {
     validateTable(source);
     validateField(field);
-    // חיפוש גם בעברית וגם באנגלית על שם מלא ומייל
     if (source === 'clients' && field === 'full_name') {
         const [rows] = await db.query(
             `SELECT * FROM ${source} WHERE 

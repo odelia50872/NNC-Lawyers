@@ -94,12 +94,10 @@ const createUser = async (req, res) => {
             return res.status(409).json({ error: 'EMAIL_ALREADY_EXISTS' });
         }
 
-        // סיסמה זמנית
         const password = Math.random().toString(36).slice(-6) + Math.random().toString(36).slice(-2).toUpperCase() + Math.floor(Math.random() * 90 + 10);
 
         await createUserService({ ...req.body, password });
 
-        // שליחת מייל עם הסיסמה הזמנית
         const lang = emailLang || 'he';
         const { subject, html } = (welcomeAddedEmailContent[lang] || welcomeAddedEmailContent.he)(full_name, email, password);
         await transporter.sendMail({

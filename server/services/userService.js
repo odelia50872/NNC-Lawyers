@@ -11,7 +11,6 @@ const getAllUsers = async () => {
 };
 
 const searchUsers = async (query) => {
-    // חיפוש גם בשם וגם במייל, כולל תמיכה בעברית
     const rows = await querySearch('clients', 'full_name', query);
     return rows.filter(r => r.role === 'client');
 };
