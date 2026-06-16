@@ -565,8 +565,7 @@ Cette gestion personnalisée permet aux propriétaires, notamment ceux résidant
             title: 'Rapports financiers',
             empty: 'Aucun rapport financier',
         },
-    },
-    accesibility: {
+        accessibility: {
         title: 'Déclaration d\'accessibilité',
         updated: 'Dernière mise à jour : Juin 2026',
         intro: 'Le cabinet NNC-Law s\'engage à rendre son site internet accessible aux personnes handicapées, conformément à la réglementation israélienne sur l\'égalité des droits des personnes handicapées et à la norme israélienne T"I 5568, basée sur WCAG 2.0 niveau AA.',
@@ -615,6 +614,7 @@ Cette gestion personnalisée permet aux propriétaires, notamment ceux résidant
                 ],
             },
         ],
+        },
     },
 };
 
