@@ -1,5 +1,5 @@
 const transporter = require('../tools/mailer');
-const { contactEmailContent, welcomeAddedEmailContent } = require('../config/emailContent');
+const { contactEmailContent, welcomeAddedEmailContent } = require('../templates/emailTemplates');
 
 const sendContactEmail = async (req, res) => {
     const { name, email, phone, message, lang } = req.body;
