@@ -4,9 +4,8 @@ import { api } from '../API/APIService';
 export function useTokenManager() {
     const lastActivityRef = useRef(Date.now());
     const refreshTimeoutRef = useRef(null);
-    const ACTIVITY_TIMEOUT = 30 * 60 * 1000; // 30 דקות
-    const REFRESH_BEFORE_EXPIRE = 5 * 60 * 1000; // 5 דקות לפני פקיעה
-
+    const ACTIVITY_TIMEOUT = 30 * 60 * 1000; 
+    const REFRESH_BEFORE_EXPIRE = 5 * 60 * 1000; 
     const updateActivity = useCallback(() => {
         lastActivityRef.current = Date.now();
     }, []);
@@ -27,7 +26,7 @@ export function useTokenManager() {
                     console.log('Token refresh failed:', error);
                 }
             }
-        }, 25 * 60 * 1000); // רענן כל 25 דקות
+        }, 25 * 60 * 1000); 
     }, []);
 
     return { updateActivity, scheduleTokenRefresh };
