@@ -49,9 +49,17 @@ function AdminDocSection({ endpoint, title, icon, accept, allowDelete = false })
     const handleDeleteDoc = (e, id) => {
         e.stopPropagation();
         requireAuth(async () => {
-            await api.delete(`${endpoint}/doc/${id}`);
+            await api.delete(`${endpoint}/doc`, id);
             setDocs(prev => prev.filter(d => d.id !== id));
             notify(t.confirm.docDeleted, 'success');
+        });
+    };
+
+    const handleDeleteClient = (e, id) => {
+        e.stopPropagation();
+        requireAuth(async () => {
+            await api.delete('users', id);
+            notify(t.adminAddClient.deleteSuccess, 'success');
         });
     };
 
@@ -134,7 +142,7 @@ function AdminDocSection({ endpoint, title, icon, accept, allowDelete = false })
                             <span className="admin-client-email">{c.email}</span>
                         </div>
                         {allowDelete && (
-                            <button className="admin-client-delete-btn" onClick={(e) => handleDeleteDoc(e, c.id)}>
+                            <button className="admin-client-delete-btn" onClick={(e) => handleDeleteClient(e, c.id)}>
                                 <FaTrashAlt />
                             </button>
                         )}
