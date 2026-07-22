@@ -1,4 +1,4 @@
-const { queryGetPaginated, queryGetByField, querySearch, queryPost, queryPut, queryDelete } = require('./SQLRequest');
+const { queryGetPaginated, queryGetByField, querySearch, queryPost,queryPutByField, queryDelete } = require('./SQLRequest');
 const bcrypt = require('bcrypt');
 
 const getUserByEmail = async (email) => {
@@ -26,14 +26,12 @@ const createUser = async ({ full_name, email, password, phone, role = 'client' }
 };
 
 const updateUser = async (id, { full_name, email, phone }) => {
-    return await queryPut('clients', id, { full_name, email, phone });
+    return await queryPutByField('clients', 'id', id, { full_name, email, phone });
 };
 
 const updatePassword = async (email, newPassword) => {
     const password_hash = await bcrypt.hash(newPassword, 10);
-    const db = require('../tools/db');
-    const [result] = await db.query('UPDATE clients SET password_hash = ? WHERE email = ?', [password_hash, email]);
-    return result;
+    return await queryPutByField('clients', 'email', email, { password_hash, must_change_password: 0 });
 };
 
 

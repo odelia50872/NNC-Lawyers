@@ -11,7 +11,7 @@ import useClientSearch from '../../hooks/useClientSearch';
 function AdminDocSection({ endpoint, title, icon, accept, allowDelete = false }) {
     const { clientSearch, selectedClient, results, handleSearch, selectClient, clearClient, loadAll } = useClientSearch();
     const { docs, setDocs, byYear, years } = useDocuments(endpoint, selectedClient);
-    
+
     const [docTitle, setDocTitle] = useState('');
     const [year, setYear] = useState(new Date().getFullYear());
     const [file, setFile] = useState(null);
@@ -20,7 +20,7 @@ function AdminDocSection({ endpoint, title, icon, accept, allowDelete = false })
     const [editTitle, setEditTitle] = useState('');
     const [editYear, setEditYear] = useState('');
     const [editFile, setEditFile] = useState(null);
-    
+
     const notify = useNotify();
     const { t } = useLang();
     const { requireAuth, PasswordModal } = useAdminAuth();
@@ -49,7 +49,7 @@ function AdminDocSection({ endpoint, title, icon, accept, allowDelete = false })
     const handleDeleteDoc = (e, id) => {
         e.stopPropagation();
         requireAuth(async () => {
-            await api.delete(`${endpoint}/doc/${id}`);
+            await api.delete(`${endpoint}/doc`, id);
             setDocs(prev => prev.filter(d => d.id !== id));
             notify(t.confirm.docDeleted, 'success');
         });
@@ -62,7 +62,11 @@ function AdminDocSection({ endpoint, title, icon, accept, allowDelete = false })
             formData.append('title', editTitle);
             formData.append('year', editYear);
             if (editFile) formData.append('file', editFile);
-            await axios.put(`${import.meta.env.VITE_API_URL}/${endpoint}/doc/${editDoc.id}`, formData, { withCredentials: true });
+            await axios.put(
+                `${import.meta.env.VITE_API_URL}/${endpoint}/doc/${editDoc.id}`,
+                formData,
+                { withCredentials: true }
+            );
             const res = await api.get(`${endpoint}/${selectedClient}`);
             setDocs(res.data);
             setEditDoc(null);
@@ -124,8 +128,8 @@ function AdminDocSection({ endpoint, title, icon, accept, allowDelete = false })
 
             <div className="admin-clients-list-container">
                 {results.map(c => (
-                    <div 
-                        key={c.id} 
+                    <div
+                        key={c.id}
                         className={`admin-client-item ${selectedClient === c.id ? 'active' : ''}`}
                         onClick={() => selectClient(c)}
                     >

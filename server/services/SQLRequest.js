@@ -63,13 +63,15 @@ const queryPost = async (source, data) => {
     return result;
 };
 
-const queryPut = async (source, id, data) => {
+
+const queryPutByField = async (source, field, value, data) => {
     validateTable(source);
+    validateField(field);
     const setClause = Object.keys(data).map(key => `${key} = ?`).join(', ');
-    const values = [...Object.values(data), id];
-    const [result] = await db.query(`UPDATE ${source} SET ${setClause} WHERE id = ?`, values);
+    const values = [...Object.values(data), value];
+    const [result] = await db.query(`UPDATE ${source} SET ${setClause} WHERE ${field} = ?`, values);
     return result;
-};
+}
 
 const queryDelete = async (source, id) => {
     validateTable(source);
@@ -77,4 +79,4 @@ const queryDelete = async (source, id) => {
     return result;
 };
 
-module.exports = { queryGet, queryGetPaginated, queryGetByField, querySearch, queryPost, queryPut, queryDelete };
+module.exports = { queryGet, queryGetPaginated, queryGetByField, querySearch, queryPost,queryPutByField, queryDelete };
