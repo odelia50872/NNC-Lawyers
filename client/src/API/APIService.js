@@ -48,5 +48,5 @@ export const api = {
     post: (resource, data) => apiClient.post(`/${resource}`, data),
     put: (resource, id, data) => apiClient.put(`/${resource}/${id}`, data), 
     patch: (resource, id, data) => apiClient.patch(`/${resource}/${id}`, data),   
-    delete: (resource, id) => apiClient.delete(`/${resource}/${id}`),
+    delete: (resource) => apiClient.delete(`/${resource}`),
 };

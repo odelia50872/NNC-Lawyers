@@ -4,6 +4,7 @@ import { LanguageProvider } from './context/LanguageContext';
 import { NotificationProvider } from './components/notifications/NotificationContext';
 import PublicLayout from './components/PublicLayout';
 import ProtectedRoute from './components/ProtectedRoute';
+import ScrollToTop from './components/ScrollToTop';
 
 import About from './pages/public/About';
 import PracticeAreas from './pages/public/PracticeAreas';
@@ -24,6 +25,7 @@ function App() {
     <LanguageProvider>
     <NotificationProvider>
     <AuthProvider>
+    <ScrollToTop />
     <Routes>
       <Route element={<PublicLayout />}>
         <Route path="/nnc" element={<About />} />

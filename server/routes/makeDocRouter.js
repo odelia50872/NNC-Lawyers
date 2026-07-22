@@ -7,7 +7,7 @@ const { verifySelfOrAdmin } = require('../middleware/userMiddleware');
 
 const makeDocRouter = (table, filePrefix) => {
     const router = express.Router();
-    const { getByClient, create, update, remove } = makeController(table);
+    const { getByClient, getAll, create, update, remove } = makeController(table);
 
     const storage = multer.diskStorage({
         destination: 'uploads/',
@@ -15,6 +15,7 @@ const makeDocRouter = (table, filePrefix) => {
     });
     const upload = multer({ storage });
 
+    router.get('/',          verifyToken, verifyAdmin, getAll);
     router.get('/:clientId',  verifyToken, verifySelfOrAdmin, getByClient);
     router.post('/',          verifyToken, verifyAdmin, upload.single('file'), create);
     router.put('/doc/:id',    verifyToken, verifyAdmin, upload.single('file'), update);

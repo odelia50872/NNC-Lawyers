@@ -36,6 +36,11 @@ const updatePassword = async (email, newPassword) => {
 
 
 const deleteUser = async (id) => {
+    const db = require('../tools/db');
+    const tables = ['financial_reports', 'rental_agreements', 'identity_documents', 'insurance_policies'];
+    for (const table of tables) {
+        await db.query(`DELETE FROM ${table} WHERE client_id = ?`, [id]);
+    }
     return await queryDelete('clients', id);
 };
 

@@ -1,6 +1,14 @@
 const documentService = require('../services/documentService');
 
 const makeController = (table) => ({
+    getAll: async (req, res) => {
+        try {
+            const rows = await documentService.getAll(table)();
+            res.json(rows);
+        } catch (err) {
+            res.status(500).json({ error: err.message });
+        }
+    },
     getByClient: async (req, res) => {
         try {
             const rows = await documentService.getByClient(table)(req.params.clientId);
