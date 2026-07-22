@@ -1,4 +1,4 @@
-const { queryGetPaginated, queryGetByField, querySearch, queryPost,queryPutByField, queryDelete } = require('./SQLRequest');
+const { queryGet, queryGetPaginated, queryGetByField, querySearch, queryPost, queryPutByField, queryDelete } = require('./SQLRequest');
 const bcrypt = require('bcrypt');
 
 const getUserByEmail = async (email) => {
@@ -36,10 +36,9 @@ const updatePassword = async (email, newPassword) => {
 
 
 const deleteUser = async (id) => {
-    const db = require('../tools/db');
     const tables = ['financial_reports', 'rental_agreements', 'identity_documents', 'insurance_policies'];
     for (const table of tables) {
-        await db.query(`DELETE FROM ${table} WHERE client_id = ?`, [id]);
+        await queryDelete(table, null, { field: 'client_id', value: id });
     }
     return await queryDelete('clients', id);
 };

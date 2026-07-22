@@ -1,9 +1,8 @@
-const { queryGet } = require('../services/SQLRequest');
-const { createArticle: createArticleService, updateArticle: updateArticleService, deleteArticle: deleteArticleService } = require('../services/legalArticleService');
+const { getAllArticles: getAllArticlesService, createArticle: createArticleService, updateArticle: updateArticleService, deleteArticle: deleteArticleService } = require('../services/legalArticleService');
 
 const getAllArticles = async (req, res) => {
     try {
-        const articles = await queryGet('legal_articles');
+        const articles = await getAllArticlesService();
         res.json(articles);
     } catch (err) {
         res.status(500).json({ error: err.message });

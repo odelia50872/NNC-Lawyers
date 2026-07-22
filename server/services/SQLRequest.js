@@ -73,8 +73,13 @@ const queryPutByField = async (source, field, value, data) => {
     return result;
 }
 
-const queryDelete = async (source, id) => {
+const queryDelete = async (source, id, byField = null) => {
     validateTable(source);
+    if (byField) {
+        validateField(byField.field);
+        const [result] = await db.query(`DELETE FROM ${source} WHERE ${byField.field} = ?`, [byField.value]);
+        return result;
+    }
     const [result] = await db.query(`DELETE FROM ${source} WHERE id = ?`, [id]);
     return result;
 };
