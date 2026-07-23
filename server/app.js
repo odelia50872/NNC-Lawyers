@@ -40,7 +40,6 @@ const authLimiter = rateLimit({
 app.use(['/api/auth/login', '/auth/login'], authLimiter);
 app.use(['/api/auth/forgot-password', '/auth/forgot-password'], authLimiter);
 
-// תמיכה בנתיבים גם עם /api וגם בלעדיו למניעת שגיאות 404
 app.use(['/api/auth', '/auth'], authRoutes);
 app.use(['/api/contact', '/contact'], contactRoutes);
 app.use(['/api/clients', '/clients'], userRoutes);
@@ -56,6 +55,8 @@ app.use((err, req, res, next) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, '0.0.0.0', () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Server running on port ${PORT}`);
+});
 
 module.exports = app;
