@@ -15,7 +15,6 @@ const app = express();
 
 app.set('trust proxy', 1);
 
-// הגדרת CORS שמתאמת אוטומטית לכל דומיין של Vercel ולוקאל
 app.use(cors({ 
     origin: function (origin, callback) {
         if (!origin || origin.includes('vercel.app') || origin.includes('localhost')) {
@@ -37,17 +36,19 @@ const authLimiter = rateLimit({
     max: 20,
     message: { error: 'TOO_MANY_REQUESTS' }
 });
-app.use('/api/auth/login', authLimiter);
-app.use('/api/auth/forgot-password', authLimiter);
 
-app.use('/api/auth', authRoutes);
-app.use('/api/contact', contactRoutes);
-app.use('/api/clients', userRoutes);
-app.use('/api/financial-reports',  makeDocRouter('financial_reports',   'report'));
-app.use('/api/rental-agreements',  makeDocRouter('rental_agreements',   'agreement'));
-app.use('/api/identity-documents', makeDocRouter('identity_documents',  'identity'));
-app.use('/api/insurance-policies', makeDocRouter('insurance_policies',  'insurance'));
-app.use('/api/legal-articles', legalArticleRoutes);
+app.use(['/api/auth/login', '/auth/login'], authLimiter);
+app.use(['/api/auth/forgot-password', '/auth/forgot-password'], authLimiter);
+
+// תמיכה בנתיבים גם עם /api וגם בלעדיו למניעת שגיאות 404
+app.use(['/api/auth', '/auth'], authRoutes);
+app.use(['/api/contact', '/contact'], contactRoutes);
+app.use(['/api/clients', '/clients'], userRoutes);
+app.use(['/api/financial-reports', '/financial-reports'],   makeDocRouter('financial_reports',   'report'));
+app.use(['/api/rental-agreements', '/rental-agreements'],   makeDocRouter('rental_agreements',   'agreement'));
+app.use(['/api/identity-documents', '/identity-documents'], makeDocRouter('identity_documents',  'identity'));
+app.use(['/api/insurance-policies', '/insurance-policies'], makeDocRouter('insurance_policies',  'insurance'));
+app.use(['/api/legal-articles', '/legal-articles'], legalArticleRoutes);
 
 app.use((err, req, res, next) => {
     console.error('*** ACTUAL ERROR: ***', err);
