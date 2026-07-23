@@ -23,35 +23,35 @@ import ChangePassword from './pages/auth/ChangePassword';
 function App() {
   return (
     <LanguageProvider>
-    <NotificationProvider>
-    <AuthProvider>
-    <ScrollToTop />
-    <Routes>
-      <Route element={<PublicLayout />}>
-        <Route path="/nnc" element={<About />} />
-        <Route path="/nnc/about" element={<About />} />
-        <Route path="/nnc/practice-areas" element={<PracticeAreas />} />
-        <Route path="/nnc/team" element={<Team />} />
-        <Route path="/nnc/contact" element={<Contact />} />
-        <Route path="/nnc/legal-article" element={<LegalArticle />} />
-        <Route path="/nnc/accessibility" element={<Accessibility />} />
-        <Route path="/nnc/login" element={<Login />} />
+      <NotificationProvider>
+        <AuthProvider>
+          <ScrollToTop />
+          <Routes>
+            <Route element={<PublicLayout />}>
+              <Route path="/" element={<About />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/practice-areas" element={<PracticeAreas />} />
+              <Route path="/team" element={<Team />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/legal-article" element={<LegalArticle />} />
+              <Route path="/accessibility" element={<Accessibility />} />
+              <Route path="/login" element={<Login />} />
 
-        <Route element={<ProtectedRoute allowedRoles={['client', 'admin']} />}>
-          <Route path="/nnc/change-password" element={<ChangePassword />} />
-        </Route>
+              <Route element={<ProtectedRoute allowedRoles={['client', 'admin']} />}>
+                <Route path="/change-password" element={<ChangePassword />} />
+              </Route>
 
-        <Route element={<ProtectedRoute allowedRoles={['client', 'admin']} />}>
-          <Route path="/nnc/:name/dashboard" element={<ClientDashboard />} />
-        </Route>
+              <Route element={<ProtectedRoute allowedRoles={['client', 'admin']} />}>
+                <Route path="/:name/dashboard" element={<ClientDashboard />} />
+              </Route>
 
-        <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
-          <Route path="/nnc/admin" element={<AdminDashboard />} />
-        </Route>
-      </Route>
-    </Routes>
-    </AuthProvider>
-    </NotificationProvider>
+              <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
+                <Route path="/admin" element={<AdminDashboard />} />
+              </Route>
+            </Route>
+          </Routes>
+        </AuthProvider>
+      </NotificationProvider>
     </LanguageProvider>
   );
 }
