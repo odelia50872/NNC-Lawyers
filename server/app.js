@@ -14,7 +14,19 @@ const { makeDocRouter } = require('./routes/makeDocRouter');
 const app = express();
 
 app.set('trust proxy', 1);
-app.use(cors({ origin: process.env.CLIENT_URL || 'http://localhost:5173', credentials: true }));
+
+// הגדרת CORS שמתאמת אוטומטית לכל דומיין של Vercel ולוקאל
+app.use(cors({ 
+    origin: function (origin, callback) {
+        if (!origin || origin.includes('vercel.app') || origin.includes('localhost')) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    }, 
+    credentials: true 
+}));
+
 app.use(helmet());
 app.use(cookieParser());
 app.use(express.json());
