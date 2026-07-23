@@ -14,7 +14,6 @@ import LegalArticle from './pages/public/LegalArticle';
 import Accessibility from './pages/public/Accessibility';
 
 import ClientDashboard from './pages/client/ClientDashboard';
-
 import AdminDashboard from './pages/admin/AdminDashboard';
 
 import Login from './pages/auth/Login';
