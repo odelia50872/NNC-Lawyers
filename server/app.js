@@ -50,8 +50,12 @@ app.use(['/api/insurance-policies', '/insurance-policies'], makeDocRouter('insur
 app.use(['/api/legal-articles', '/legal-articles'], legalArticleRoutes);
 
 app.use((err, req, res, next) => {
-    console.error('*** ACTUAL ERROR: ***', err);
-    res.status(500).json({ error: 'Internal server error', details: err.message });
+    console.error('*** ACTUAL ERROR STACK: ***', err.stack || err);
+    res.status(500).json({ 
+        error: 'Internal server error', 
+        message: err.message,
+        stack: err.stack 
+    });
 });
 
 const PORT = process.env.PORT || 3000;
