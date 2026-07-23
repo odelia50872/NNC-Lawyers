@@ -38,7 +38,7 @@ app.use('/api/insurance-policies', makeDocRouter('insurance_policies',  'insuran
 app.use('/api/legal-articles', legalArticleRoutes);
 
 app.use((err, req, res, next) => {
-    console.error('Error:', err);
+    console.error('*** ACTUAL ERROR: ***', err);
     res.status(500).json({ error: 'Internal server error', details: err.message });
 });
 
