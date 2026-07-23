@@ -58,7 +58,7 @@ function Footer() {
             </div>
             <p className="footer-bottom">
                 &copy; {new Date().getFullYear()} NNC-LAW {t.footer.rights}.
-                {' '}<Link to="/nnc/accessibility" className="footer-accessibility-link">{t.footer.accessibility}</Link>
+                {' '}<Link to="/accessibility" className="footer-accessibility-link">{t.footer.accessibility}</Link>
             </p>
         </footer>
     );

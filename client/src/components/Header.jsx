@@ -12,7 +12,7 @@ function Header() {
     const { user, logout } = useAuth();
     const navigate = useNavigate();
     const slug = useSlug(user?.full_name);
-    const dashboardPath = user?.role === 'admin' ? '/nnc/admin' : `/nnc/${slug}/dashboard`;
+    const dashboardPath = user?.role === 'admin' ? '/admin' : `/${slug}/dashboard`;
     const [menuOpen, setMenuOpen] = useState(false);
 
     const closeMenu = () => setMenuOpen(false);
@@ -20,7 +20,7 @@ function Header() {
     return (
         <header className="header" role="banner">
             <div className="header-inner">
-                <Link to="/nnc" className="header-logo" aria-label="NNC Law - דף הבית">
+                <Link to="/" className="header-logo" aria-label="NNC Law - דף הבית">
                     <img src={logo} alt="NNC Law logo" className="header-logo-img" />
                     <span className="header-logo-text">⋂⋂C-LAW</span>
                 </Link>
@@ -34,11 +34,11 @@ function Header() {
                 </button>
                 <nav className={`header-nav${menuOpen ? ' mobile-open' : ''}`} aria-label={t.nav.about}>
                     <div className="header-nav-links">
-                        <NavLink to="/nnc/about" className={({ isActive }) => isActive ? 'active' : ''} onClick={closeMenu}>{t.nav.about}</NavLink>
-                        <NavLink to="/nnc/team" className={({ isActive }) => isActive ? 'active' : ''} onClick={closeMenu}>{t.nav.team}</NavLink>
-                        <NavLink to="/nnc/practice-areas" className={({ isActive }) => isActive ? 'active' : ''} onClick={closeMenu}>{t.nav.practiceAreas}</NavLink>
-                        <NavLink to="/nnc/contact" className={({ isActive }) => isActive ? 'active' : ''} onClick={closeMenu}>{t.nav.contact}</NavLink>
-                        <NavLink to="/nnc/legal-article" className={({ isActive }) => isActive ? 'active' : ''} onClick={closeMenu}>{t.nav.legalArticle}</NavLink>
+                        <NavLink to="/about" className={({ isActive }) => isActive ? 'active' : ''} onClick={closeMenu}>{t.nav.about}</NavLink>
+                        <NavLink to="/team" className={({ isActive }) => isActive ? 'active' : ''} onClick={closeMenu}>{t.nav.team}</NavLink>
+                        <NavLink to="/practice-areas" className={({ isActive }) => isActive ? 'active' : ''} onClick={closeMenu}>{t.nav.practiceAreas}</NavLink>
+                        <NavLink to="/contact" className={({ isActive }) => isActive ? 'active' : ''} onClick={closeMenu}>{t.nav.contact}</NavLink>
+                        <NavLink to="/legal-article" className={({ isActive }) => isActive ? 'active' : ''} onClick={closeMenu}>{t.nav.legalArticle}</NavLink>
                     </div>
                     <div className="header-nav-buttons">
                         {user ? (
@@ -51,7 +51,7 @@ function Header() {
                                 </button>
                             </>
                         ) : (
-                            <NavLink to="/nnc/login" className="header-login-btn" onClick={closeMenu}>{t.nav.login}</NavLink>
+                            <NavLink to="/login" className="header-login-btn" onClick={closeMenu}>{t.nav.login}</NavLink>
                         )}
                         <LanguageSwitcher />
                     </div>
