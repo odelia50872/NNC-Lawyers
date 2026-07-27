@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const fs = require('fs');
+const path = require('path');
 const db = require('./tools/db');
 require('dotenv').config();
 
@@ -17,79 +18,79 @@ const app = express();
 
 app.set('trust proxy', 1);
 
-app.use(cors({ 
+const allowedOrigins = [
+    'http://localhost:5173',
+    'http://localhost:3000',
+    process.env.CLIENT_URL,
+].filter(Boolean);
+
+app.use(cors({
     origin: function (origin, callback) {
-        if (!origin || origin.includes('vercel.app') || origin.includes('localhost')) {
+        if (!origin || allowedOrigins.some(o => origin.startsWith(o)) || origin.includes('railway.app')) {
             callback(null, true);
         } else {
             callback(new Error('Not allowed by CORS'));
         }
-    }, 
-    credentials: true 
+    },
+    credentials: true
 }));
 
-app.use(helmet());
+app.use(helmet({ contentSecurityPolicy: false }));
 app.use(cookieParser());
 app.use(express.json());
-app.use('/uploads', express.static('uploads'));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 const authLimiter = rateLimit({
     windowMs: 15 * 60 * 1000,
     max: 20,
     message: { error: 'TOO_MANY_REQUESTS' }
 });
+app.use('/api/auth/login', authLimiter);
+app.use('/api/auth/forgot-password', authLimiter);
 
-app.use(['/api/auth/login', '/auth/login'], authLimiter);
-app.use(['/api/auth/forgot-password', '/auth/forgot-password'], authLimiter);
+app.use('/api/auth', authRoutes);
+app.use('/api/contact', contactRoutes);
+app.use('/api/clients', userRoutes);
+app.use('/api/financial-reports',  makeDocRouter('financial_reports',  'report'));
+app.use('/api/rental-agreements',  makeDocRouter('rental_agreements',  'agreement'));
+app.use('/api/identity-documents', makeDocRouter('identity_documents', 'identity'));
+app.use('/api/insurance-policies', makeDocRouter('insurance_policies', 'insurance'));
+app.use('/api/legal-articles', legalArticleRoutes);
 
-app.use(['/api/auth', '/auth'], authRoutes);
-app.use(['/api/contact', '/contact'], contactRoutes);
-app.use(['/api/clients', '/clients'], userRoutes);
-app.use(['/api/financial-reports', '/financial-reports'],   makeDocRouter('financial_reports',   'report'));
-app.use(['/api/rental-agreements', '/rental-agreements'],   makeDocRouter('rental_agreements',   'agreement'));
-app.use(['/api/identity-documents', '/identity-documents'], makeDocRouter('identity_documents',   'identity'));
-app.use(['/api/insurance-policies', '/insurance-policies'], makeDocRouter('insurance_policies',   'insurance'));
-app.use(['/api/legal-articles', '/legal-articles'], legalArticleRoutes);
+// Serve React build
+const clientBuild = path.join(__dirname, '..', 'client', 'dist');
+if (fs.existsSync(clientBuild)) {
+    app.use(express.static(clientBuild));
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(clientBuild, 'index.html'));
+    });
+}
 
 app.use((err, req, res, next) => {
-    console.error('*** ACTUAL ERROR STACK: ***', err.stack || err);
-    res.status(500).json({ 
-        error: 'Internal server error', 
-        message: err.message,
-        stack: err.stack 
-    });
+    console.error('Error:', err.stack || err);
+    res.status(500).json({ error: 'Internal server error', message: err.message });
 });
 
 async function initDatabase() {
-    if (process.env.MYSQL_URL || process.env.MYSQL_PUBLIC_URL) {
-        console.log("Skipping local SQL import on cloud environment.");
+    if (process.env.MYSQL_URL || process.env.MYSQL_PUBLIC_URL || process.env.MYSQLDATABASE) {
+        console.log('Cloud environment detected — skipping SQL import.');
         return;
     }
-
     try {
-        const paths = ['./nnc_law_export.sql', './server/nnc_law_export.sql', '../nnc_law_export.sql'];
+        const paths = ['./nnc_law_export.sql', './server/nnc_law_export.sql'];
         let sqlContent = null;
-        
         for (let p of paths) {
-            if (fs.existsSync(p)) {
-                sqlContent = fs.readFileSync(p, 'utf8');
-                break;
-            }
+            if (fs.existsSync(p)) { sqlContent = fs.readFileSync(p, 'utf8'); break; }
         }
-
         if (sqlContent) {
             const queries = sqlContent.split(';');
             for (let query of queries) {
-                if (query.trim()) {
-                    await db.query(query);
-                }
+                if (query.trim()) await db.query(query);
             }
-            console.log("Database tables imported successfully on startup!");
-        } else {
-            console.log("SQL export file not found in paths.");
+            console.log('Database imported successfully.');
         }
     } catch (err) {
-        console.error("Database import error details:", err.message || err);
+        console.error('Database import error:', err.message);
     }
 }
 
