@@ -3,6 +3,8 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
+const fs = require('fs');
+const db = require('./server/tools/db'); // ודאי שהנתיב ל-db תואם למבנה התיקיות אצלך
 require('dotenv').config();
 
 const authRoutes = require('./routes/authRoutes');
@@ -45,8 +47,8 @@ app.use(['/api/contact', '/contact'], contactRoutes);
 app.use(['/api/clients', '/clients'], userRoutes);
 app.use(['/api/financial-reports', '/financial-reports'],   makeDocRouter('financial_reports',   'report'));
 app.use(['/api/rental-agreements', '/rental-agreements'],   makeDocRouter('rental_agreements',   'agreement'));
-app.use(['/api/identity-documents', '/identity-documents'], makeDocRouter('identity_documents',  'identity'));
-app.use(['/api/insurance-policies', '/insurance-policies'], makeDocRouter('insurance_policies',  'insurance'));
+app.use(['/api/identity-documents', '/identity-documents'], makeDocRouter('identity_documents',   'identity'));
+app.use(['/api/insurance-policies', '/insurance-policies'], makeDocRouter('insurance_policies',   'insurance'));
 app.use(['/api/legal-articles', '/legal-articles'], legalArticleRoutes);
 
 app.use((err, req, res, next) => {
@@ -58,9 +60,28 @@ app.use((err, req, res, next) => {
     });
 });
 
+// פונקציה לייבוא אוטומטי של הטבלאות בהפעלת השרת בענן
+async function initDatabase() {
+    try {
+        if (fs.existsSync('./nnc_law_export.sql')) {
+            const sql = fs.readFileSync('./nnc_law_export.sql', 'utf8');
+            const queries = sql.split(';');
+            for (let query of queries) {
+                if (query.trim()) {
+                    await db.query(query);
+                }
+            }
+            console.log("Database tables imported successfully on startup!");
+        }
+    } catch (err) {
+        console.log("Database import note (tables might already exist):", err.message);
+    }
+}
+
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, '0.0.0.0', () => {
+app.listen(PORT, '0.0.0.0', async () => {
     console.log(`Server running on port ${PORT}`);
+    await initDatabase();
 });
 
 module.exports = app;
