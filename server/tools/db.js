@@ -13,4 +13,5 @@ const pool = mysql.createPool({
     ssl: process.env.MYSQL_PUBLIC_URL ? { rejectUnauthorized: false } : false
 });
 
+
 module.exports = pool.promise();
