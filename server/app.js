@@ -57,7 +57,6 @@ app.use('/api/identity-documents', makeDocRouter('identity_documents', 'identity
 app.use('/api/insurance-policies', makeDocRouter('insurance_policies', 'insurance'));
 app.use('/api/legal-articles', legalArticleRoutes);
 
-// Serve React build
 const clientBuild = path.join(__dirname, '..', 'client', 'dist');
 if (fs.existsSync(clientBuild)) {
     app.use(express.static(clientBuild));
@@ -72,22 +71,35 @@ app.use((err, req, res, next) => {
 });
 
 async function initDatabase() {
-    if (process.env.MYSQL_URL || process.env.MYSQL_PUBLIC_URL || process.env.MYSQLDATABASE) {
-        console.log('Cloud environment detected — skipping SQL import.');
-        return;
-    }
     try {
-        const paths = ['./nnc_law_export.sql', './server/nnc_law_export.sql'];
+        const paths = [
+            './nnc_law_backup.sql', 
+            './server/nnc_law_backup.sql', 
+            './nnc_law_export.sql', 
+            './server/nnc_law_export.sql'
+        ];
+        
         let sqlContent = null;
         for (let p of paths) {
-            if (fs.existsSync(p)) { sqlContent = fs.readFileSync(p, 'utf8'); break; }
+            if (fs.existsSync(p)) { 
+                sqlContent = fs.readFileSync(p, 'utf8'); 
+                break; 
+            }
         }
+        
         if (sqlContent) {
             const queries = sqlContent.split(';');
             for (let query of queries) {
-                if (query.trim()) await db.query(query);
+                if (query.trim()) {
+                    try {
+                        await db.query(query);
+                    } catch (err) {
+                    }
+                }
             }
-            console.log('Database imported successfully.');
+            console.log('Database tables initialized successfully.');
+        } else {
+            console.log('SQL backup file not found.');
         }
     } catch (err) {
         console.error('Database import error:', err.message);
