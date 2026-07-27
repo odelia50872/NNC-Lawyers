@@ -60,7 +60,6 @@ app.use((err, req, res, next) => {
     });
 });
 
-// פונקציה לייבוא אוטומטי של הטבלאות בהפעלת השרת בענן
 async function initDatabase() {
     try {
         const paths = ['./nnc_law_export.sql', './server/nnc_law_export.sql', '../nnc_law_export.sql'];
