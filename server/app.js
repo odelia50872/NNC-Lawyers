@@ -61,6 +61,11 @@ app.use((err, req, res, next) => {
 });
 
 async function initDatabase() {
+    if (process.env.MYSQL_URL || process.env.MYSQL_PUBLIC_URL) {
+        console.log("Skipping local SQL import on cloud environment.");
+        return;
+    }
+
     try {
         const paths = ['./nnc_law_export.sql', './server/nnc_law_export.sql', '../nnc_law_export.sql'];
         let sqlContent = null;
