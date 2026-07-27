@@ -1,15 +1,15 @@
 const mysql = require('mysql2');
 require('dotenv').config();
 
-// שימוש במחרוזת החיבור המלאה שמגיעה ממשתני הסביבה של ריילוי
-const connectionString = process.env.MYSQL_PUBLIC_URL || process.env.MYSQL_URL;
-
 const pool = mysql.createPool({
-    uri: connectionString,
+    host: process.env.MYSQLHOST || 'localhost',
+    user: process.env.MYSQLUSER || 'railway',
+    password: process.env.MYSQLPASSWORD,
+    database: process.env.MYSQLDATABASE || 'railway',
+    port: process.env.MYSQLPORT || 3306,
     waitForConnections: true,
     connectionLimit: 10,
-    queueLimit: 0,
-    ssl: { rejectUnauthorized: false }
+    queueLimit: 0
 });
 
 module.exports = pool.promise();
