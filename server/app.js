@@ -60,20 +60,32 @@ app.use((err, req, res, next) => {
     });
 });
 
+// פונקציה לייבוא אוטומטי של הטבלאות בהפעלת השרת בענן
 async function initDatabase() {
     try {
-        if (fs.existsSync('./nnc_law_export.sql')) {
-            const sql = fs.readFileSync('./nnc_law_export.sql', 'utf8');
-            const queries = sql.split(';');
+        const paths = ['./nnc_law_export.sql', '../nnc_law_export.sql'];
+        let sqlContent = null;
+        
+        for (let p of paths) {
+            if (fs.existsSync(p)) {
+                sqlContent = fs.readFileSync(p, 'utf8');
+                break;
+            }
+        }
+
+        if (sqlContent) {
+            const queries = sqlContent.split(';');
             for (let query of queries) {
                 if (query.trim()) {
                     await db.query(query);
                 }
             }
             console.log("Database tables imported successfully on startup!");
+        } else {
+            console.log("SQL export file not found.");
         }
     } catch (err) {
-        console.log("Database import note (tables might already exist):", err.message);
+        console.log("Database import note:", err.message);
     }
 }
 
