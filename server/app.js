@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const fs = require('fs');
-const db = require('./server/tools/db'); // ודאי שהנתיב ל-db תואם למבנה התיקיות אצלך
+const db = require('./server/tools/db'); 
 require('dotenv').config();
 
 const authRoutes = require('./routes/authRoutes');
@@ -60,7 +60,6 @@ app.use((err, req, res, next) => {
     });
 });
 
-// פונקציה לייבוא אוטומטי של הטבלאות בהפעלת השרת בענן
 async function initDatabase() {
     try {
         if (fs.existsSync('./nnc_law_export.sql')) {
