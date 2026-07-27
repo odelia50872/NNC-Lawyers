@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const fs = require('fs');
-const db = require('./server/tools/db'); 
+const db = require('./tools/db');
 require('dotenv').config();
 
 const authRoutes = require('./routes/authRoutes');
