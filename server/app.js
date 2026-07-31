@@ -26,7 +26,12 @@ const allowedOrigins = [
 
 app.use(cors({
     origin: function (origin, callback) {
-        if (!origin || allowedOrigins.some(o => origin.startsWith(o)) || origin.includes('railway.app')) {
+        if (
+            !origin || 
+            allowedOrigins.some(o => origin.startsWith(o)) || 
+            (origin && origin.includes('railway.app')) ||
+            (origin && origin.includes('vercel.app'))
+        ) {
             callback(null, true);
         } else {
             callback(new Error('Not allowed by CORS'));
@@ -39,6 +44,15 @@ app.use(helmet({ contentSecurityPolicy: false }));
 app.use(cookieParser());
 app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+// נתיב בדיקה מהיר לוודא שהשרת חי ומגיב
+app.get('/health', (req, res) => {
+    res.status(200).json({ status: 'ok', message: 'Server is running smoothly' });
+});
+
+app.get('/', (req, res) => {
+    res.send('NNC Lawyers Backend is running');
+});
 
 const authLimiter = rateLimit({
     windowMs: 15 * 60 * 1000,
