@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { api } from '../../API/APIService';
-import { FaTrashAlt, FaEdit, FaUpload } from 'react-icons/fa';
+import { FaTrashAlt, FaEdit, FaUpload, FaSearch } from 'react-icons/fa';
+import '../../styles/AdminAddClient.css';
 import { useNotify } from '../notifications/NotificationContext';
 import { useLang } from '../../context/LanguageContext';
 import useDocuments from '../../hooks/useDocuments';
@@ -10,8 +11,8 @@ import useClientSearch from '../../hooks/useClientSearch';
 
 function AdminDocSection({ endpoint, title, icon, accept, allowDelete = false }) {
     const { clientSearch, selectedClient, results, handleSearch, selectClient, clearClient, loadAll } = useClientSearch();
-    const { docs, setDocs, byYear, years } = useDocuments(endpoint, selectedClient);
-    
+    const { docs, setDocs, byYear, years, loading } = useDocuments(endpoint, selectedClient);
+
     const [docTitle, setDocTitle] = useState('');
     const [year, setYear] = useState(new Date().getFullYear());
     const [file, setFile] = useState(null);
@@ -20,7 +21,7 @@ function AdminDocSection({ endpoint, title, icon, accept, allowDelete = false })
     const [editTitle, setEditTitle] = useState('');
     const [editYear, setEditYear] = useState('');
     const [editFile, setEditFile] = useState(null);
-    
+
     const notify = useNotify();
     const { t } = useLang();
     const { requireAuth, PasswordModal } = useAdminAuth();
@@ -70,7 +71,11 @@ function AdminDocSection({ endpoint, title, icon, accept, allowDelete = false })
             formData.append('title', editTitle);
             formData.append('year', editYear);
             if (editFile) formData.append('file', editFile);
-            await axios.put(`${import.meta.env.VITE_API_URL}/${endpoint}/doc/${editDoc.id}`, formData, { withCredentials: true });
+            await axios.put(
+                `${import.meta.env.VITE_API_URL}/${endpoint}/doc/${editDoc.id}`,
+                formData,
+                { withCredentials: true }
+            );
             const res = await api.get(`${endpoint}/${selectedClient}`);
             setDocs(res.data);
             setEditDoc(null);
@@ -86,16 +91,23 @@ function AdminDocSection({ endpoint, title, icon, accept, allowDelete = false })
                     {showForm ? t.confirm.cancel : t.confirm.add}
                 </button>
                 <div className="admin-client-search-wrapper">
-                    <input
-                        type="text"
-                        className="admin-client-search-input"
-                        placeholder={t.confirm.selectClient}
-                        value={clientSearch}
-                        onChange={e => handleSearch(e.target.value)}
-                    />
-                    {clientSearch && <button className="admin-client-search-clear" onClick={clearClient}>✕</button>}
+                    <div className="admin-client-search-container">
+                        <FaSearch className="admin-client-search-icon" />
+                        <input
+                            type="text"
+                            className="admin-client-search-input"
+                            placeholder={t.confirm.selectClient}
+                            value={clientSearch}
+                            onChange={e => handleSearch(e.target.value)}
+                        />
+                        {clientSearch && <button className="admin-client-search-clear" onClick={clearClient}>✕</button>}
+                    </div>
                 </div>
             </div>
+
+            {!selectedClient && !loading && years.length === 0 && (
+                <p className="agreements-empty">{t.confirm.noDocsGlobal}</p>
+            )}
 
             {selectedClient && (
                 <div className="admin-client-actions-section" style={{ marginBottom: '1.5rem' }}>
@@ -109,6 +121,10 @@ function AdminDocSection({ endpoint, title, icon, accept, allowDelete = false })
                             </label>
                             <button type="submit" className="admin-reports-save-btn">{t.confirm.save}</button>
                         </form>
+                    )}
+
+                    {!loading && years.length === 0 && !showForm && (
+                        <p className="agreements-empty">{t.confirm.noDocs}</p>
                     )}
 
                     {years.map(y => (
@@ -132,8 +148,8 @@ function AdminDocSection({ endpoint, title, icon, accept, allowDelete = false })
 
             <div className="admin-clients-list-container">
                 {results.map(c => (
-                    <div 
-                        key={c.id} 
+                    <div
+                        key={c.id}
                         className={`admin-client-item ${selectedClient === c.id ? 'active' : ''}`}
                         onClick={() => selectClient(c)}
                     >

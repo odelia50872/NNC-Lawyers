@@ -29,13 +29,13 @@ apiClient.interceptors.response.use(
                 } catch (refreshError) {
                     sessionStorage.setItem('authMsg', t.sessionExpired);
                     if (!url.includes('auth/me')) {
-                        window.location.href = '/nnc/login';
+                        window.location.href = '/login';
                     }
                     return Promise.reject(refreshError);
                 }
             }
             if (!url.includes('auth/me') && !url.includes('auth/refresh-token')) {
-                window.location.href = '/nnc/login';
+                window.location.href = '/login';
             }
         }
 
@@ -48,5 +48,5 @@ export const api = {
     post: (resource, data) => apiClient.post(`/${resource}`, data),
     put: (resource, id, data) => apiClient.put(`/${resource}/${id}`, data), 
     patch: (resource, id, data) => apiClient.patch(`/${resource}/${id}`, data),   
-    delete: (resource, id) => apiClient.delete(`/${resource}/${id}`),
+    delete: (resource) => apiClient.delete(`/${resource}`),
 };

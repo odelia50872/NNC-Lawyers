@@ -19,11 +19,11 @@ function ProtectedRoute({ allowedRoles }) {
     }, [user]);
 
     useEffect(() => {
-        if (!loading && !isAllowed && location.pathname !== '/nnc/login') {
+        if (!loading && !isAllowed && location.pathname !== '/login') {
             if (!wasLoggedIn.current) {
                 notify(t.unauthorized, 'error');
             }
-            navigate('/nnc/login', { replace: true });
+            navigate('/login', { replace: true });
         }
     }, [loading, isAllowed, navigate, location.pathname]);
 

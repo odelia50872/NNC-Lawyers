@@ -32,9 +32,9 @@ function Login() {
     useEffect(() => {
         if (!loading && user) {
             if (user.must_change_password) {
-                navigate('/nnc/change-password', { replace: true });
+                navigate('/change-password', { replace: true });
             } else {
-                const path = user.role === 'admin' ? '/nnc/admin' : `/nnc/${slug}/dashboard`;
+                const path = user.role === 'admin' ? '/admin' : `/${slug}/dashboard`;
                 navigate(path, { replace: true });
             }
         }

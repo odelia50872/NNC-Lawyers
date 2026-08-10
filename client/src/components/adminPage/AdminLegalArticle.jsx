@@ -3,12 +3,15 @@ import { api } from '../../API/APIService';
 import { useLang } from '../../context/LanguageContext';
 import { useNotify } from '../notifications/NotificationContext';
 import useAdminAuth from '../../hooks/useAdminAuth.jsx';
-import { FaTrashAlt, FaEdit, FaPlus, FaTimes } from 'react-icons/fa';
+import { FaTrashAlt, FaEdit, FaPlus, FaTimes, FaSearch } from 'react-icons/fa';
+import '../../styles/AdminAddClient.css';
 
 const EMPTY_FORM = { title_he: '', content_he: '', title_fr: '', content_fr: '' };
 
 function AdminLegalArticle() {
     const [articles, setArticles] = useState([]);
+    const [filteredArticles, setFilteredArticles] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
     const [form, setForm] = useState(EMPTY_FORM);
     const [editArticle, setEditArticle] = useState(null);
     const [showForm, setShowForm] = useState(false);
@@ -26,6 +29,14 @@ function AdminLegalArticle() {
     };
 
     useEffect(() => { fetchArticles(); }, []);
+
+    useEffect(() => {
+        if (!searchQuery.trim()) { setFilteredArticles(articles); return; }
+        const q = searchQuery.toLowerCase();
+        setFilteredArticles(articles.filter(a =>
+            a.title_he?.toLowerCase().includes(q) || a.title_fr?.toLowerCase().includes(q)
+        ));
+    }, [searchQuery, articles]);
 
     const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
@@ -58,7 +69,7 @@ function AdminLegalArticle() {
 
     const handleDelete = (id) => {
         withAuth(async () => {
-            await api.delete('legal-articles', id);
+            await api.delete(`legal-articles/${id}`);
             await fetchArticles();
         }, t.legalArticles.deleted, t.legalArticles.error);
     };
@@ -78,6 +89,21 @@ function AdminLegalArticle() {
         <div className="legal-admin-wrap">
             <div className="legal-admin-header">
                 <h2 className="legal-admin-title">{t.legalArticles.title}</h2>
+                <div className="admin-client-search-wrapper">
+                    <div className="admin-client-search-container">
+                        <FaSearch className="admin-client-search-icon" />
+                        <input
+                            type="text"
+                            className="admin-client-search-input"
+                            placeholder={t.legalArticles.searchPlaceholder || 'חיפוש מאמר...'}
+                            value={searchQuery}
+                            onChange={e => setSearchQuery(e.target.value)}
+                        />
+                        {searchQuery && (
+                            <button className="admin-client-search-clear" onClick={() => setSearchQuery('')}>✕</button>
+                        )}
+                    </div>
+                </div>
                 <button className="legal-admin-add-btn" onClick={() => showForm && !editArticle ? closeForm() : (setEditArticle(null), setForm(EMPTY_FORM), setShowForm(true))}>
                     {showForm && !editArticle ? <><FaTimes /> {t.confirm.cancel}</> : <><FaPlus /> {t.confirm.add}</>}
                 </button>
@@ -117,11 +143,11 @@ function AdminLegalArticle() {
                 </form>
             )}
 
-            {articles.length === 0 ? (
+            {filteredArticles.length === 0 ? (
                 <p className="agreements-empty">{t.legalArticles.empty}</p>
             ) : (
                 <ul className="legal-admin-list">
-                    {articles.map(a => (
+                    {filteredArticles.map(a => (
                         <li key={a.id} className="legal-admin-item">
                             <span className="legal-admin-item-title">{lang === 'fr' ? a.title_fr : a.title_he}</span>
                             <div className="admin-doc-actions">

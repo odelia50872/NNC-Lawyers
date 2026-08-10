@@ -63,18 +63,25 @@ const queryPost = async (source, data) => {
     return result;
 };
 
-const queryPut = async (source, id, data) => {
-    validateTable(source);
-    const setClause = Object.keys(data).map(key => `${key} = ?`).join(', ');
-    const values = [...Object.values(data), id];
-    const [result] = await db.query(`UPDATE ${source} SET ${setClause} WHERE id = ?`, values);
-    return result;
-};
 
-const queryDelete = async (source, id) => {
+const queryPutByField = async (source, field, value, data) => {
     validateTable(source);
+    validateField(field);
+    const setClause = Object.keys(data).map(key => `${key} = ?`).join(', ');
+    const values = [...Object.values(data), value];
+    const [result] = await db.query(`UPDATE ${source} SET ${setClause} WHERE ${field} = ?`, values);
+    return result;
+}
+
+const queryDelete = async (source, id, byField = null) => {
+    validateTable(source);
+    if (byField) {
+        validateField(byField.field);
+        const [result] = await db.query(`DELETE FROM ${source} WHERE ${byField.field} = ?`, [byField.value]);
+        return result;
+    }
     const [result] = await db.query(`DELETE FROM ${source} WHERE id = ?`, [id]);
     return result;
 };
 
-module.exports = { queryGet, queryGetPaginated, queryGetByField, querySearch, queryPost, queryPut, queryDelete };
+module.exports = { queryGet, queryGetPaginated, queryGetByField, querySearch, queryPost,queryPutByField, queryDelete };

@@ -122,7 +122,7 @@ function AdminAddClient({ onClientChange = () => { } }) {
 
     const handleDelete = (id) => {
         requireAuth(async () => {
-            await api.delete('clients', id);
+            await api.delete(`clients/${id}`);
             if (searchQuery.trim()) {
                 await fetchClients(true, searchQuery);
             } else {
@@ -183,8 +183,10 @@ function AdminAddClient({ onClientChange = () => { } }) {
                         </li>
                     ))}
                     {loadingMore && <li className="admin-client-loading">...</li>}
-                    {clients.length === 0 && searchQuery && !loadingMore && (
-                        <li className="admin-client-no-results">{t.adminAddClient.noResults || 'לא נמצאו תוצאות'}</li>
+                    {clients.length === 0 && !loadingMore && (
+                        <li className="admin-client-no-results">
+                            {searchQuery ? t.adminAddClient.noResults : t.adminAddClient.noClients}
+                        </li>
                     )}
                 </ul>
             </div>

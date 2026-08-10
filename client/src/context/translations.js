@@ -195,6 +195,7 @@ const translations = {
             save: 'שמור',
             update: 'עדכן',
             noDocs: 'אין מסמכים ללקוח זה',
+            noDocsGlobal: 'אין מסמכים להצגה',
             editTooltip: 'עדכן',
             deleteTooltip: 'מחק',
             chooseFile: 'בחר קובץ',
@@ -232,6 +233,7 @@ const translations = {
             existing: 'לקוחות קיימים',
             searchPlaceholder: 'חיפוש לקוח...',
             noResults: 'לא נמצאו תוצאות',
+            noClients: 'אין לקוחות קיימים',
             success: 'הלקוח נוסף בהצלחה',
             error: 'שגיאה בהוספת הלקוח',
             emailExists: 'קיים משתמש עם כתובת מייל זו',
@@ -359,7 +361,7 @@ Admis au Barreau israélien en novembre 1994, après un stage dans le cadre d'un
 Depuis plus de trente ans en Israël et fort d'une expérience professionnelle débutée il y a près de cinquante ans, Maître PJL NAKACHE dirige l'étude entouré d'une équipe d'avocats collaborateurs qualifiés, avec pour objectif d'offrir à sa clientèle un accompagnement rigoureux, personnalisé et efficace tant en droit privé israélien qu'en droit international privé franco-israélien.
 ` },
                 {
-                    name: 'Mr Michaël Nakache', role: 'Avocat', gender: 'male', bio: `Après avoir immigré en Israël avec ses parents en 1992, Maître Michaël NAKACHE obtient son baccalauréat israélien avant de poursuivre plusieurs années d'études religieuses en Yéchiva puis en Collel.\r\n\r\nDiplômé de la faculté de droit de Kyriat Ono, il est admis au Barreau israélien en 2012. Il rejoint alors le cabinet familial de Jérusalem, fondé par son père, Maître Pédael Jean-Luc NAKACHE, où il exerce depuis lors.\r\n\r\nSoucieux d'offrir à ses clients un accompagnement juridique complet et actualisé, il suit en 2019 la formation habilitant à la rédaction des mandats de protection future (« Ypouy Koach Mitmacheh »), puis obtient en 2026, la qualification nécessaire à l'exercice des fonctions de notaire.\r\n\r\nParfaitement bilingue en français et en hébreu, et bénéficiant de l'expérience de son père acquis durant ses années de stage et de fonction, Michaël intervient dans l'ensemble des domaines de compétence du cabinet et accompagne une clientèle israélienne et internationale dans le traitement de ses dossiers.`
+                    name: 'Me Michaël Nakache', role: 'Avocat', gender: 'male', bio: `Après avoir immigré en Israël avec ses parents en 1992, Maître Michaël NAKACHE obtient son baccalauréat israélien avant de poursuivre plusieurs années d'études religieuses en Yéchiva puis en Collel.\r\n\r\nDiplômé de la faculté de droit de Kyriat Ono, il est admis au Barreau israélien en 2012. Il rejoint alors le cabinet familial de Jérusalem, fondé par son père, Maître Pédael Jean-Luc NAKACHE, où il exerce depuis lors.\r\n\r\nSoucieux d'offrir à ses clients un accompagnement juridique complet et actualisé, il suit en 2019 la formation habilitant à la rédaction des mandats de protection future (« Ypouy Koach Mitmacheh »), puis obtient en 2026, la qualification nécessaire à l'exercice des fonctions de notaire.\r\n\r\nParfaitement bilingue en français et en hébreu, et bénéficiant de l'expérience de son père acquis durant ses années de stage et de fonction, Michaël intervient dans l'ensemble des domaines de compétence du cabinet et accompagne une clientèle israélienne et internationale dans le traitement de ses dossiers.`
                 },
                 {
                     name: 'Me Yaël Cubby', role: 'Avocate', gender: 'female', bio: `Maître Yael CUBBY est avocate au Barreau israélien depuis 2009. Diplômée de la Faculté de droit de Kiryat Ono, elle exerce au sein du cabinet fondé à Jérusalem par son père, Maître Pédael Jean-Luc Nakache.
@@ -520,6 +522,7 @@ Cette gestion personnalisée permet aux propriétaires, notamment ceux résidant
             save: 'Enregistrer',
             update: 'Mettre à jour',
             noDocs: 'Aucun document pour ce client',
+            noDocsGlobal: 'Aucun document à afficher',
             editTooltip: 'Modifier',
             deleteTooltip: 'Supprimer',
             chooseFile: 'Choisir un fichier',
@@ -557,6 +560,7 @@ Cette gestion personnalisée permet aux propriétaires, notamment ceux résidant
             existing: 'Clients existants',
             searchPlaceholder: 'Rechercher un client...',
             noResults: 'Aucun résultat trouvé',
+            noClients: 'Aucun client existant',
             success: 'Client ajouté avec succès',
             error: 'Erreur lors de l\'ajout du client',
             emailExists: 'Il existe déjà un utilisateur avec cette adresse email',
