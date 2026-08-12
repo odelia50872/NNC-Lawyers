@@ -8,8 +8,8 @@ const signToken = (user) => jwt.sign(
 
 const setTokenCookie = (res, token) => res.cookie('token', token, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: process.env.NODE_ENV === 'production' ? 'strict' : 'lax',
+    secure: true,
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
     maxAge: 30 * 60 * 1000,
 });
 

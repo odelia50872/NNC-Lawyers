@@ -103,8 +103,8 @@ const changePassword = async (req, res) => {
 const logout = (req, res) => {
     res.clearCookie('token', {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: process.env.NODE_ENV === 'production' ? 'strict' : 'lax',
+        secure: true,
+        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
     });
     res.json({ message: 'Logged out' });
 };

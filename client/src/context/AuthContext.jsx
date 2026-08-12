@@ -37,7 +37,7 @@ export function AuthProvider({ children }) {
     const logout = (navigate) => {
         api.post('auth/logout').finally(() => {
             setUser(null);
-            navigate('/login', { replace: true });
+            navigate('/nnc/login', { replace: true });
         });
     };
 

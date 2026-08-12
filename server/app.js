@@ -21,17 +21,13 @@ app.set('trust proxy', 1);
 const allowedOrigins = [
     'http://localhost:5173',
     'http://localhost:3000',
+    'https://nnc-lawyers.vercel.app',
     process.env.CLIENT_URL,
 ].filter(Boolean);
 
 app.use(cors({
     origin: function (origin, callback) {
-        if (
-            !origin || 
-            allowedOrigins.some(o => origin.startsWith(o)) || 
-            (origin && origin.includes('railway.app')) ||
-            (origin && origin.includes('vercel.app'))
-        ) {
+        if (!origin || allowedOrigins.includes(origin)) {
             callback(null, true);
         } else {
             callback(new Error('Not allowed by CORS'));
@@ -45,7 +41,6 @@ app.use(cookieParser());
 app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// נתיב בדיקה מהיר לוודא שהשרת חי ומגיב
 app.get('/health', (req, res) => {
     res.status(200).json({ status: 'ok', message: 'Server is running smoothly' });
 });
