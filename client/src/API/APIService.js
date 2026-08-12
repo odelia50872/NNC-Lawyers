@@ -29,13 +29,13 @@ apiClient.interceptors.response.use(
                 } catch (refreshError) {
                     sessionStorage.setItem('authMsg', t.sessionExpired);
                     if (!url.includes('auth/me')) {
-                        window.location.href = '/nnc/login';
+                        window.location.href = '/login';
                     }
                     return Promise.reject(refreshError);
                 }
             }
             if (!url.includes('auth/me') && !url.includes('auth/refresh-token')) {
-                window.location.href = '/nnc/login';
+                window.location.href = '/login';
             }
         }
 
