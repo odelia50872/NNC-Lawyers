@@ -22,6 +22,7 @@ const allowedOrigins = [
     'http://localhost:5173',
     'http://localhost:3000',
     'https://nnc-lawyers.vercel.app',
+    'https://nnc-lawyers-production.up.railway.app',
     process.env.CLIENT_URL,
 ].filter(Boolean);
 
