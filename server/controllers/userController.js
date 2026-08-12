@@ -47,12 +47,12 @@ const createUser = async (req, res) => {
 
         const lang = emailLang || 'he';
         const { subject, html } = (welcomeAddedEmailContent[lang] || welcomeAddedEmailContent.he)(full_name, email, password);
-        await transporter.sendMail({
+        transporter.sendMail({
             from: `"NNC-Law" <${process.env.EMAIL_USER}>`,
             to: email,
             subject,
             html,
-        });
+        }).catch(err => console.error('Welcome email failed:', err.message));
 
         res.status(201).json({ success: true });
     } catch (err) {
