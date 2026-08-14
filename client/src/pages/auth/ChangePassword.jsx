@@ -32,7 +32,9 @@ function ChangePassword() {
             const res = await api.post('auth/change-password', { newPassword });
             login(res.data.user);
             notify(t.changePassword.success, 'success');
-            navigate('/nnc/login', { replace: true });
+            const u = res.data.user;
+            if (u.role === 'admin') navigate('/admin', { replace: true });
+            else navigate(`/${u.full_name.toLowerCase().replace(/\s+/g, '-')}/dashboard`, { replace: true });
         } catch {
             notify(t.changePassword.error, 'error');
         } finally {

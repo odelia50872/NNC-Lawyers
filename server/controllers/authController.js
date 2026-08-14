@@ -4,7 +4,7 @@ const { OAuth2Client } = require('google-auth-library');
 const { getUserByEmail, updatePassword } = require('../services/userService');
 const { resetPasswordEmailContent } = require('../templates/emailTemplates');
 const { signToken, setTokenCookie } = require('../tools/tokenUtils');
-const transporter = require('../tools/mailer');
+const resend = require('../tools/mailer');
 const db = require('../tools/db');
 
 const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
@@ -60,8 +60,8 @@ const forgotPassword = async (req, res) => {
         const newPassword = Math.random().toString(36).slice(-8) + Math.random().toString(36).slice(-4).toUpperCase();
         await updatePassword(email, newPassword);
         const { subject, html } = (resetPasswordEmailContent[lang] || resetPasswordEmailContent.he)(user.full_name, newPassword);
-        await transporter.sendMail({
-            from: `"NNC-Law" <${process.env.EMAIL_USER}>`,
+        await resend.emails.send({
+            from: 'NNC-Law <onboarding@resend.dev>',
             to: email,
             subject,
             html,
