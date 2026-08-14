@@ -1,17 +1,28 @@
 const express = require('express');
 const multer = require('multer');
-const path = require('path');
+const cloudinary = require('cloudinary').v2;
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const { makeController } = require('../controllers/documentController');
 const { verifyToken, verifyAdmin } = require('../middleware/authMiddleware');
 const { verifySelfOrAdmin } = require('../middleware/userMiddleware');
+
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key:    process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 const makeDocRouter = (table, filePrefix) => {
     const router = express.Router();
     const { getByClient, getAll, create, update, remove } = makeController(table);
 
-    const storage = multer.diskStorage({
-        destination: 'uploads/',
-        filename: (req, file, cb) => cb(null, filePrefix + '-' + Date.now() + path.extname(file.originalname))
+    const storage = new CloudinaryStorage({
+        cloudinary,
+        params: {
+            folder: 'nnc-law',
+            public_id: (req, file) => filePrefix + '-' + Date.now(),
+            resource_type: 'raw',
+        },
     });
     const upload = multer({ storage });
 
