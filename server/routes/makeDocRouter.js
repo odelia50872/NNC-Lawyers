@@ -22,6 +22,7 @@ const makeDocRouter = (table, filePrefix) => {
             folder: 'nnc-law',
             public_id: (req, file) => filePrefix + '-' + Date.now(),
             resource_type: 'raw',
+            access_mode: 'public',
             format: async (req, file) => file.originalname.split('.').pop(),
         },
     });
