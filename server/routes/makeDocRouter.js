@@ -22,6 +22,7 @@ const makeDocRouter = (table, filePrefix) => {
             folder: 'nnc-law',
             public_id: (req, file) => filePrefix + '-' + Date.now(),
             resource_type: 'raw',
+            format: async (req, file) => file.originalname.split('.').pop(),
         },
     });
     const upload = multer({ storage });
