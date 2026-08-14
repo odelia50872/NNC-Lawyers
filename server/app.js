@@ -82,37 +82,22 @@ app.use((err, req, res, next) => {
 
 async function initDatabase() {
     try {
-        const paths = [
-            './nnc_law_backup.sql', 
-            './server/nnc_law_backup.sql', 
-            './nnc_law_export.sql', 
-            './server/nnc_law_export.sql'
-        ];
-        
-        let sqlContent = null;
-        for (let p of paths) {
-            if (fs.existsSync(p)) { 
-                sqlContent = fs.readFileSync(p, 'utf8'); 
-                break; 
-            }
-        }
-        
-        if (sqlContent) {
-            const queries = sqlContent.split(';');
-            for (let query of queries) {
-                if (query.trim()) {
-                    try {
-                        await db.query(query);
-                    } catch (err) {
-                    }
-                }
-            }
-            console.log('Database tables initialized successfully.');
-        } else {
-            console.log('SQL backup file not found.');
-        }
+        await db.query(`CREATE TABLE IF NOT EXISTS clients (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            full_name VARCHAR(255) NOT NULL,
+            email VARCHAR(255) UNIQUE NOT NULL,
+            password_hash VARCHAR(255) NOT NULL,
+            role ENUM('client','admin') DEFAULT 'client',
+            must_change_password TINYINT(1) DEFAULT 0
+        )`);
+        await db.query(`CREATE TABLE IF NOT EXISTS financial_reports (id INT AUTO_INCREMENT PRIMARY KEY, client_id INT, title VARCHAR(255), year INT, file_url TEXT, FOREIGN KEY (client_id) REFERENCES clients(id) ON DELETE CASCADE)`);
+        await db.query(`CREATE TABLE IF NOT EXISTS rental_agreements (id INT AUTO_INCREMENT PRIMARY KEY, client_id INT, title VARCHAR(255), year INT, file_url TEXT, FOREIGN KEY (client_id) REFERENCES clients(id) ON DELETE CASCADE)`);
+        await db.query(`CREATE TABLE IF NOT EXISTS identity_documents (id INT AUTO_INCREMENT PRIMARY KEY, client_id INT, title VARCHAR(255), year INT, file_url TEXT, FOREIGN KEY (client_id) REFERENCES clients(id) ON DELETE CASCADE)`);
+        await db.query(`CREATE TABLE IF NOT EXISTS insurance_policies (id INT AUTO_INCREMENT PRIMARY KEY, client_id INT, title VARCHAR(255), year INT, file_url TEXT, FOREIGN KEY (client_id) REFERENCES clients(id) ON DELETE CASCADE)`);
+        await db.query(`CREATE TABLE IF NOT EXISTS legal_articles (id INT AUTO_INCREMENT PRIMARY KEY, title_he TEXT, title_fr TEXT, content_he LONGTEXT, content_fr LONGTEXT)`);
+        console.log('Database tables initialized successfully.');
     } catch (err) {
-        console.error('Database import error:', err.message);
+        console.error('Database init error:', err.message);
     }
 }
 
