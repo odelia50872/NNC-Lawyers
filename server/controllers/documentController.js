@@ -20,7 +20,8 @@ const makeController = (table) => ({
     create: async (req, res) => {
         try {
             const { client_id, title, year } = req.body;
-            const file_url = req.file.secure_url || req.file.path;
+            const raw_url = req.file.secure_url || req.file.path;
+            const file_url = raw_url.replace('/image/upload/', '/raw/upload/');
             const result = await documentService.create(table)({ client_id, title, year, file_url });
             res.status(201).json({ id: result.insertId });
         } catch (err) {
@@ -31,7 +32,10 @@ const makeController = (table) => ({
         try {
             const { title, year } = req.body;
             const data = { title, year };
-            if (req.file) data.file_url = req.file.secure_url || req.file.path;
+            if (req.file) {
+                const raw_url = req.file.secure_url || req.file.path;
+                data.file_url = raw_url.replace('/image/upload/', '/raw/upload/');
+            }
             await documentService.update(table)(req.params.id, data);
             res.json({ message: 'Updated' });
         } catch (err) {
