@@ -1,6 +1,6 @@
 const { getUserByEmail, getAllUsersPaginated: getAllUsersPaginatedService, searchUsers: searchUsersService, getUserById: getUserByIdService, createUser: createUserService, updateUser: updateUserService, deleteUser: deleteUserService } = require('../services/userService');
 const { welcomeAddedEmailContent } = require('../templates/emailTemplates');
-const transporter = require('../tools/mailer');
+const resend = require('../tools/mailer');
 
 const searchUsers = async (req, res) => {
     try {
@@ -47,8 +47,8 @@ const createUser = async (req, res) => {
 
         const lang = emailLang || 'he';
         const { subject, html } = (welcomeAddedEmailContent[lang] || welcomeAddedEmailContent.he)(full_name, email, password);
-        transporter.sendMail({
-            from: `"NNC-Law" <${process.env.EMAIL_USER}>`,
+        resend.emails.send({
+            from: 'NNC-Law <onboarding@resend.dev>',
             to: email,
             subject,
             html,
