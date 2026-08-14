@@ -3,10 +3,10 @@ const dns = require('dns');
 dns.setDefaultResultOrder('ipv4first');
 
 const transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 587,
-    secure: false,
-    auth: { user: process.env.EMAIL_USER, pass: process.env.EMAIL_PASS },
+    host: 'smtp.resend.com',
+    port: 465,
+    secure: true,
+    auth: { user: 'resend', pass: process.env.RESEND_API_KEY },
 });
 
 module.exports = transporter;
