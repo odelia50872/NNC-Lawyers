@@ -1,3 +1,16 @@
+const autoReplyFooter = {
+    he: `<hr style="border:none;border-top:1px solid #ddd;margin:24px 0;"/>
+<p style="font-size:12px;color:#888;">
+הודעה זו נשלחה באופן אוטומטי — אנא אל תשיב למייל זה.<br/>
+לכל שאלה או פנייה ניתן לפנות אלינו ישירות: <a href="mailto:nnc@nnc-law.com" style="color:#555;">nnc@nnc-law.com</a>
+</p>`,
+    fr: `<hr style="border:none;border-top:1px solid #ddd;margin:24px 0;"/>
+<p style="font-size:12px;color:#888;">
+Ce message a été envoyé automatiquement — merci de ne pas répondre à cet email.<br/>
+Pour toute question, vous pouvez nous contacter directement : <a href="mailto:nnc@nnc-law.com" style="color:#555;">nnc@nnc-law.com</a>
+</p>`,
+};
+
 const contactEmailContent = {
     he: (name, email, phone, message) => ({
         subject: `פנייה מהאתר — ${name}`,
@@ -22,7 +35,7 @@ const welcomeAddedEmailContent = {
 </ul>
 <p style="color:#c00;"><strong>בכניסה הראשונה תתבקש לשנות את הסיסמה.</strong></p>
 <p>בברכה,<br/>צוות NNC-Law</p>
-</div>`,
+${autoReplyFooter.he}</div>`,
     }),
     fr: (name, username, password) => ({
         subject: `Bienvenue, ${name}!`,
@@ -36,7 +49,7 @@ const welcomeAddedEmailContent = {
 </ul>
 <p style="color:#c00;"><strong>Lors de votre première connexion, vous devrez changer votre mot de passe.</strong></p>
 <p>Cordialement,<br/>L'équipe NNC-Law</p>
-</div>`,
+${autoReplyFooter.fr}</div>`,
     }),
 };
 
@@ -49,7 +62,7 @@ const resetPasswordEmailContent = {
 <p style="font-size:20px;font-weight:bold;letter-spacing:2px;color:#111;">${newPassword}</p>
 <p>אנא התחבר עם סיסמה זו ושמור אותה במקום בטוח.</p>
 <p>בברכה,<br/>צוות NNC-Law</p>
-</div>`,
+${autoReplyFooter.he}</div>`,
     }),
     fr: (name, newPassword) => ({
         subject: 'Réinitialisation du mot de passe — NNC-Law',
@@ -59,7 +72,7 @@ const resetPasswordEmailContent = {
 <p style="font-size:20px;font-weight:bold;letter-spacing:2px;color:#111;">${newPassword}</p>
 <p>Veuillez vous connecter avec ce mot de passe et le conserver en lieu sûr.</p>
 <p>Cordialement,<br/>L'équipe NNC-Law</p>
-</div>`,
+${autoReplyFooter.fr}</div>`,
     }),
 };
 
