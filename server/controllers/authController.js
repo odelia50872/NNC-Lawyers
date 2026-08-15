@@ -59,6 +59,7 @@ const forgotPassword = async (req, res) => {
         if (!user) return res.status(404).json({ error: 'USER_NOT_FOUND' });
         const newPassword = Math.random().toString(36).slice(-8) + Math.random().toString(36).slice(-4).toUpperCase();
         await updatePassword(email, newPassword);
+        await db.query('UPDATE clients SET must_change_password = 1 WHERE email = ?', [email]);
         const { subject, html } = (resetPasswordEmailContent[lang] || resetPasswordEmailContent.he)(user.full_name, newPassword);
         await resend.emails.send({
             from: 'NNC-Law <onboarding@resend.dev>',
