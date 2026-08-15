@@ -1,23 +1,23 @@
 const autoReplyFooter = {
     he: `<hr style="border:none;border-top:1px solid #ddd;margin:24px 0;"/>
 <p style="font-size:12px;color:#888;">
-הודעה זו נשלחה באופן אוטומטי — אנא אל תשיב למייל זה.<br/>
+הודעה זו נשלחה באופן אוטומטי - אנא אל תשיב למייל זה.<br/>
 לכל שאלה או פנייה ניתן לפנות אלינו ישירות: <a href="mailto:nnc@nnc-law.com" style="color:#555;">nnc@nnc-law.com</a>
 </p>`,
     fr: `<hr style="border:none;border-top:1px solid #ddd;margin:24px 0;"/>
 <p style="font-size:12px;color:#888;">
-Ce message a été envoyé automatiquement — merci de ne pas répondre à cet email.<br/>
+Ce message a été envoyé automatiquement - merci de ne pas répondre à cet email.<br/>
 Pour toute question, vous pouvez nous contacter directement : <a href="mailto:nnc@nnc-law.com" style="color:#555;">nnc@nnc-law.com</a>
 </p>`,
 };
 
 const contactEmailContent = {
     he: (name, email, phone, message) => ({
-        subject: `פנייה מהאתר — ${name}`,
+        subject: `פנייה מהאתר - ${name}`,
         text: `שם: ${name}\nאימייל: ${email}\nטלפון: ${phone}\n\nהודעה:\n${message}`,
     }),
     fr: (name, email, phone, message) => ({
-        subject: `Message du site — ${name}`,
+        subject: `Message du site - ${name}`,
         text: `Nom: ${name}\nEmail: ${email}\nTéléphone: ${phone}\n\nMessage:\n${message}`,
     }),
 };
@@ -58,9 +58,10 @@ const resetPasswordEmailContent = {
         subject: 'איפוס סיסמה — NNC-Law',
         html: `<div dir="rtl" style="font-family:Arial,sans-serif;font-size:15px;color:#222;">
 <p>שלום ${name},</p>
-<p>קיבלנו בקשה לאיפוס הסיסמה שלך. הסיסמה החדשה שלך היא:</p>
-<p style="font-size:20px;font-weight:bold;letter-spacing:2px;color:#111;">${newPassword}</p>
-<p>אנא התחבר עם סיסמה זו ושמור אותה במקום בטוח.</p>
+<p>קיבלנו בקשה לאיפוס הסיסמה שלך. להלן <strong>סיסמה זמנית</strong> לכניסה לחשבונך:</p>
+<p style="font-size:20px;font-weight:bold;letter-spacing:2px;color:#111;background:#f5f5f5;padding:10px;display:inline-block;border-radius:4px;">${newPassword}</p>
+<p style="color:#c00;"><strong>בכניסה הראשונה עם סיסמה זו תתבקש לבחור סיסמה חדשה.</strong></p>
+<p>אם לא ביקשת איפוס סיסמה, אנא פנה אלינו מיידית.</p>
 <p>בברכה,<br/>צוות NNC-Law</p>
 ${autoReplyFooter.he}</div>`,
     }),
@@ -68,9 +69,10 @@ ${autoReplyFooter.he}</div>`,
         subject: 'Réinitialisation du mot de passe — NNC-Law',
         html: `<div dir="ltr" style="font-family:Arial,sans-serif;font-size:15px;color:#222;">
 <p>Bonjour ${name},</p>
-<p>Nous avons reçu une demande de réinitialisation de votre mot de passe. Votre nouveau mot de passe est :</p>
-<p style="font-size:20px;font-weight:bold;letter-spacing:2px;color:#111;">${newPassword}</p>
-<p>Veuillez vous connecter avec ce mot de passe et le conserver en lieu sûr.</p>
+<p>Nous avons reçu une demande de réinitialisation de votre mot de passe. Voici votre <strong>mot de passe temporaire</strong> :</p>
+<p style="font-size:20px;font-weight:bold;letter-spacing:2px;color:#111;background:#f5f5f5;padding:10px;display:inline-block;border-radius:4px;">${newPassword}</p>
+<p style="color:#c00;"><strong>Lors de votre première connexion avec ce mot de passe, vous serez invité(e) à en choisir un nouveau.</strong></p>
+<p>Si vous n'avez pas demandé cette réinitialisation, veuillez nous contacter immédiatement.</p>
 <p>Cordialement,<br/>L'équipe NNC-Law</p>
 ${autoReplyFooter.fr}</div>`,
     }),
