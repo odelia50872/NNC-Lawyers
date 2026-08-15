@@ -22,18 +22,25 @@ const contactEmailContent = {
     }),
 };
 
+const passwordBox = (password, dir = 'rtl') => `
+<table style="margin:16px 0;" cellpadding="0" cellspacing="0">
+  <tr>
+    <td style="background:#f0f4ff;border:2px dashed #4a6cf7;border-radius:6px;padding:12px 24px;font-size:22px;font-weight:bold;letter-spacing:3px;color:#111;font-family:monospace;">${password}</td>
+    <td style="padding-${dir === 'rtl' ? 'right' : 'left'}:12px;font-size:12px;color:#888;vertical-align:middle;">${dir === 'rtl' ? '← העתק את הסיסמה' : 'Copiez le mot de passe →'}</td>
+  </tr>
+</table>`;
+
 const welcomeAddedEmailContent = {
     he: (name, username, password) => ({
         subject: `ברוך הבא, ${name}!`,
         html: `<div dir="rtl" style="font-family:Arial,sans-serif;font-size:15px;color:#222;">
 <p>שלום ${name},</p>
-<p>שמחים לעדכן שחשבונך נוצר בהצלחה במערכת על ידי מנהל האתר.</p>
-<p>אלו פרטי ההתחברות הזמניים שלך:</p>
-<ul>
-  <li><strong>אימייל:</strong> ${username}</li>
-  <li><strong>סיסמה זמנית:</strong> <span style="font-size:18px;font-weight:bold;letter-spacing:2px;color:#111;">${password}</span></li>
-</ul>
-<p style="color:#c00;"><strong>בכניסה הראשונה תתבקש לשנות את הסיסמה.</strong></p>
+<p>שמחים לעדכן שחשבונך נוצר בהצלחה במערכת NNC-Law.</p>
+<p>להלן פרטי ההתחברות הזמניים שלך:</p>
+<p><strong>אימייל:</strong> ${username}</p>
+<p><strong>סיסמה זמנית:</strong></p>
+${passwordBox(password, 'rtl')}
+<p style="color:#c00;"><strong>בכניסה הראשונה תתבקש לבחור סיסמה חדשה.</strong></p>
 <p>בברכה,<br/>צוות NNC-Law</p>
 ${autoReplyFooter.he}</div>`,
     }),
@@ -41,13 +48,12 @@ ${autoReplyFooter.he}</div>`,
         subject: `Bienvenue, ${name}!`,
         html: `<div dir="ltr" style="font-family:Arial,sans-serif;font-size:15px;color:#222;">
 <p>Bonjour ${name},</p>
-<p>Nous avons le plaisir de vous informer que votre compte a été créé avec succès par l'administrateur.</p>
+<p>Nous avons le plaisir de vous informer que votre compte a été créé avec succès sur NNC-Law.</p>
 <p>Voici vos identifiants de connexion temporaires :</p>
-<ul>
-  <li><strong>Email :</strong> ${username}</li>
-  <li><strong>Mot de passe temporaire :</strong> <span style="font-size:18px;font-weight:bold;letter-spacing:2px;color:#111;">${password}</span></li>
-</ul>
-<p style="color:#c00;"><strong>Lors de votre première connexion, vous devrez changer votre mot de passe.</strong></p>
+<p><strong>Email :</strong> ${username}</p>
+<p><strong>Mot de passe temporaire :</strong></p>
+${passwordBox(password, 'ltr')}
+<p style="color:#c00;"><strong>Lors de votre première connexion, vous serez invité(e) à choisir un nouveau mot de passe.</strong></p>
 <p>Cordialement,<br/>L'équipe NNC-Law</p>
 ${autoReplyFooter.fr}</div>`,
     }),
@@ -59,7 +65,7 @@ const resetPasswordEmailContent = {
         html: `<div dir="rtl" style="font-family:Arial,sans-serif;font-size:15px;color:#222;">
 <p>שלום ${name},</p>
 <p>קיבלנו בקשה לאיפוס הסיסמה שלך. להלן <strong>סיסמה זמנית</strong> לכניסה לחשבונך:</p>
-<p style="font-size:20px;font-weight:bold;letter-spacing:2px;color:#111;background:#f5f5f5;padding:10px;display:inline-block;border-radius:4px;">${newPassword}</p>
+${passwordBox(newPassword, 'rtl')}
 <p style="color:#c00;"><strong>בכניסה הראשונה עם סיסמה זו תתבקש לבחור סיסמה חדשה.</strong></p>
 <p>אם לא ביקשת איפוס סיסמה, אנא פנה אלינו מיידית.</p>
 <p>בברכה,<br/>צוות NNC-Law</p>
@@ -70,7 +76,7 @@ ${autoReplyFooter.he}</div>`,
         html: `<div dir="ltr" style="font-family:Arial,sans-serif;font-size:15px;color:#222;">
 <p>Bonjour ${name},</p>
 <p>Nous avons reçu une demande de réinitialisation de votre mot de passe. Voici votre <strong>mot de passe temporaire</strong> :</p>
-<p style="font-size:20px;font-weight:bold;letter-spacing:2px;color:#111;background:#f5f5f5;padding:10px;display:inline-block;border-radius:4px;">${newPassword}</p>
+${passwordBox(newPassword, 'ltr')}
 <p style="color:#c00;"><strong>Lors de votre première connexion avec ce mot de passe, vous serez invité(e) à en choisir un nouveau.</strong></p>
 <p>Si vous n'avez pas demandé cette réinitialisation, veuillez nous contacter immédiatement.</p>
 <p>Cordialement,<br/>L'équipe NNC-Law</p>
