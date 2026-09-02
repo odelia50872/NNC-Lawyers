@@ -48,7 +48,7 @@ const createUser = async (req, res) => {
         const lang = emailLang || 'he';
         const { subject, html } = (welcomeAddedEmailContent[lang] || welcomeAddedEmailContent.he)(full_name, email, password);
         resend.emails.send({
-            from: 'NNC-Law <onboarding@resend.dev>',
+            from: 'NNC-Law <noreply@nnc-law.com>',
             to: email,
             subject,
             html,

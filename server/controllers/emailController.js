@@ -6,7 +6,7 @@ const sendContactEmail = async (req, res) => {
     const { subject, text } = (contactEmailContent[lang] || contactEmailContent.he)(name, email, phone, message);
     try {
         await resend.emails.send({
-            from: 'NNC-Law <onboarding@resend.dev>',
+            from: 'NNC-Law <noreply@nnc-law.com>',
             to: process.env.EMAIL_USER,
             subject,
             text,
@@ -24,7 +24,7 @@ const sendWelcomeEmail = async (req, res) => {
     const { subject, html } = (welcomeAddedEmailContent[lang] || welcomeAddedEmailContent.he)(name, email, password);
     try {
         await resend.emails.send({
-            from: 'NNC-Law <onboarding@resend.dev>',
+            from: 'NNC-Law <noreply@nnc-law.com>',
             to: email,
             subject,
             html,

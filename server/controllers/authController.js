@@ -62,7 +62,7 @@ const forgotPassword = async (req, res) => {
         await db.query('UPDATE clients SET must_change_password = 1 WHERE email = ?', [email]);
         const { subject, html } = (resetPasswordEmailContent[lang] || resetPasswordEmailContent.he)(user.full_name, newPassword);
         await resend.emails.send({
-            from: 'NNC-Law <onboarding@resend.dev>',
+            from: 'NNC-Law <noreply@nnc-law.com>',
             to: email,
             subject,
             html,
