@@ -1,5 +1,10 @@
 {
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "nnc-lawyers.vercel.app" }],
+      "destination": "https://www.nnc-law.com/$1",
+      "permanent": true
+    }
   ]
 }
