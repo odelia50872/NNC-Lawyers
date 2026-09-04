@@ -3,13 +3,13 @@ const { contactEmailContent, welcomeAddedEmailContent } = require('../templates/
 
 const sendContactEmail = async (req, res) => {
     const { name, email, phone, message, lang } = req.body;
-    const { subject, text } = (contactEmailContent[lang] || contactEmailContent.he)(name, email, phone, message);
+    const { subject, html } = (contactEmailContent[lang] || contactEmailContent.he)(name, email, phone, message);
     try {
         await resend.emails.send({
             from: 'NNC-Law <noreply@nnc-law.com>',
-            to: process.env.EMAIL_USER,
+            to: 'nnc@nnc-law.com',
             subject,
-            text,
+            html,
             reply_to: email,
         });
         res.json({ success: true });

@@ -14,11 +14,23 @@ Pour toute question, vous pouvez nous contacter directement : <a href="mailto:nn
 const contactEmailContent = {
     he: (name, email, phone, message) => ({
         subject: `פנייה מהאתר - ${name}`,
-        text: `שם: ${name}\nאימייל: ${email}\nטלפון: ${phone}\n\nהודעה:\n${message}`,
+        html: `<div dir="rtl" style="font-family:Arial,sans-serif;font-size:15px;color:#222;">
+<p><strong>שם:</strong> ${name}</p>
+<p><strong>אימייל:</strong> ${email}</p>
+<p><strong>טלפון:</strong> ${phone}</p>
+<p><strong>הודעה:</strong></p>
+<p>${message}</p>
+${autoReplyFooter.he}</div>`,
     }),
     fr: (name, email, phone, message) => ({
         subject: `Message du site - ${name}`,
-        text: `Nom: ${name}\nEmail: ${email}\nTéléphone: ${phone}\n\nMessage:\n${message}`,
+        html: `<div dir="ltr" style="font-family:Arial,sans-serif;font-size:15px;color:#222;">
+<p><strong>Nom :</strong> ${name}</p>
+<p><strong>Email :</strong> ${email}</p>
+<p><strong>Téléphone :</strong> ${phone}</p>
+<p><strong>Message :</strong></p>
+<p>${message}</p>
+${autoReplyFooter.fr}</div>`,
     }),
 };
 
