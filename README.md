@@ -2,7 +2,7 @@
 
 A full-stack web application for **NNC Law**, a bilingual (Hebrew/French) law firm based in Jerusalem. The platform provides a secure client portal for document management, a powerful admin dashboard, and a public-facing website.
 
-> ** Live Production Project:** This platform is fully deployed and actively used in production by the law firm and its clients. You can visit the live application here: [https://www.nnc-law.com](https://www.nnc-law.com)
+> **Live Production Project:** This platform is fully deployed and actively used in production by the law firm and its clients. You can visit the live application here: [https://www.nnc-law.com](https://www.nnc-law.com)
 
 ---
 
