@@ -208,6 +208,9 @@ const translations = {
             insurance: 'פוליסת ביטוח',
             identity: 'תעודות זיהוי',
             articles: 'מאמרים משפטיים',
+            poa: 'יפוי כח',
+            photos: 'תמונות',
+            misc: 'שונות',
         },
         legalArticles: {
             title: 'מאמרים משפטיים',
@@ -535,6 +538,9 @@ Cette gestion personnalisée permet aux propriétaires, notamment ceux résidant
             insurance: 'Police d\'assurance',
             identity: 'Pièces d\'identité',
             articles: 'Articles juridiques',
+            poa: 'Procuration',
+            photos: 'Photos',
+            misc: 'Divers',
         },
         legalArticles: {
             title: 'Articles juridiques',

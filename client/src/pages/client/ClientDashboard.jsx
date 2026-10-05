@@ -4,6 +4,9 @@ import RentalAgreements from '../../components/clientPage/RentalAgreements';
 import FinancialReports from '../../components/clientPage/FinancialReports';
 import InsurancePolicy from '../../components/clientPage/InsurancePolicy';
 import IdentityDocuments from '../../components/clientPage/IdentityDocuments';
+import PowerOfAttorney from '../../components/clientPage/PowerOfAttorney';
+import Photos from '../../components/clientPage/Photos';
+import Miscellaneous from '../../components/clientPage/Miscellaneous';
 import '../../styles/ClientDashboard.css';
 
 function ClientDashboard() {
@@ -13,6 +16,9 @@ function ClientDashboard() {
         { key: 'agreements', label: t.dashboard.agreements },
         { key: 'insurance',  label: t.dashboard.insurance },
         { key: 'identity',   label: t.dashboard.identity },
+        { key: 'poa',        label: t.dashboard.poa || 'יפוי כח' },
+        { key: 'photos',     label: t.dashboard.photos || 'תמונות' },
+        { key: 'misc',       label: t.dashboard.misc || 'שונות' },
     ];
     const { activeTab, setActiveTab } = useTabsNav(tabs);
 
@@ -35,6 +41,9 @@ function ClientDashboard() {
                 {activeTab === 'agreements' && <RentalAgreements />}
                 {activeTab === 'insurance'  && <InsurancePolicy />}
                 {activeTab === 'identity'   && <IdentityDocuments />}
+                {activeTab === 'poa'        && <PowerOfAttorney />}
+                {activeTab === 'photos'     && <Photos />}
+                {activeTab === 'misc'       && <Miscellaneous />}
             </div>
         </div>
     );

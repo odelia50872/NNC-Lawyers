@@ -22,6 +22,9 @@ function AdminDashboard() {
         { key: 'agreements', label: t.dashboard.agreements },
         { key: 'insurance',  label: t.dashboard.insurance },
         { key: 'identity',   label: t.dashboard.identity },
+        { key: 'poa',        label: t.dashboard.poa || 'יפוי כח' },
+        { key: 'photos',     label: t.dashboard.photos || 'תמונות' },
+        { key: 'misc',       label: t.dashboard.misc || 'שונות' },
     ];
 
     const { activeTab: mainTab, setActiveTab: setMainTab } = useTabsNav(mainTabs);
@@ -70,6 +73,9 @@ function AdminDashboard() {
                         {docTab === 'agreements' && <AdminDocSection endpoint="rental-agreements"   title={t.dashboard.agreements} icon="📄" accept=".pdf" />}
                         {docTab === 'insurance'  && <AdminDocSection endpoint="insurance-policies"  title={t.dashboard.insurance}  icon="🛡️" accept=".pdf" />}
                         {docTab === 'identity'   && <AdminDocSection endpoint="identity-documents"  title={t.dashboard.identity}   icon="🪪" accept=".pdf" />}
+                        {docTab === 'poa'        && <AdminDocSection endpoint="power-of-attorney"   title={t.dashboard.poa || 'יפוי כח'}   icon="📋" accept=".pdf,.png,.jpg,.jpeg" />}
+                        {docTab === 'photos'     && <AdminDocSection endpoint="photos"              title={t.dashboard.photos || 'תמונות'}  icon="🖼️" accept=".pdf,.png,.jpg,.jpeg" />}
+                        {docTab === 'misc'       && <AdminDocSection endpoint="miscellaneous"       title={t.dashboard.misc || 'שונות'}     icon="📁" accept=".pdf,.xlsx,.xls,.png,.jpg,.jpeg" />}
                     </div>
                 </div>
             )}

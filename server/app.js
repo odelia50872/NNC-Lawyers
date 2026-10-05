@@ -67,6 +67,9 @@ app.use('/api/financial-reports',  makeDocRouter('financial_reports',  'report')
 app.use('/api/rental-agreements',  makeDocRouter('rental_agreements',  'agreement'));
 app.use('/api/identity-documents', makeDocRouter('identity_documents', 'identity'));
 app.use('/api/insurance-policies', makeDocRouter('insurance_policies', 'insurance'));
+app.use('/api/power-of-attorney',  makeDocRouter('power_of_attorney',  'poa'));
+app.use('/api/photos',             makeDocRouter('photos',             'photo'));
+app.use('/api/miscellaneous',      makeDocRouter('miscellaneous',      'misc'));
 app.use('/api/legal-articles', legalArticleRoutes);
 
 const clientBuild = path.join(__dirname, '..', 'client', 'dist');
@@ -96,6 +99,9 @@ async function initDatabase() {
         await db.query(`CREATE TABLE IF NOT EXISTS rental_agreements (id INT AUTO_INCREMENT PRIMARY KEY, client_id INT, title VARCHAR(255), year INT, file_url TEXT, FOREIGN KEY (client_id) REFERENCES clients(id) ON DELETE CASCADE)`);
         await db.query(`CREATE TABLE IF NOT EXISTS identity_documents (id INT AUTO_INCREMENT PRIMARY KEY, client_id INT, title VARCHAR(255), year INT, file_url TEXT, FOREIGN KEY (client_id) REFERENCES clients(id) ON DELETE CASCADE)`);
         await db.query(`CREATE TABLE IF NOT EXISTS insurance_policies (id INT AUTO_INCREMENT PRIMARY KEY, client_id INT, title VARCHAR(255), year INT, file_url TEXT, FOREIGN KEY (client_id) REFERENCES clients(id) ON DELETE CASCADE)`);
+        await db.query(`CREATE TABLE IF NOT EXISTS power_of_attorney (id INT AUTO_INCREMENT PRIMARY KEY, client_id INT, title VARCHAR(255), year INT, file_url TEXT, FOREIGN KEY (client_id) REFERENCES clients(id) ON DELETE CASCADE)`);
+        await db.query(`CREATE TABLE IF NOT EXISTS photos (id INT AUTO_INCREMENT PRIMARY KEY, client_id INT, title VARCHAR(255), year INT, file_url TEXT, FOREIGN KEY (client_id) REFERENCES clients(id) ON DELETE CASCADE)`);
+        await db.query(`CREATE TABLE IF NOT EXISTS miscellaneous (id INT AUTO_INCREMENT PRIMARY KEY, client_id INT, title VARCHAR(255), year INT, file_url TEXT, FOREIGN KEY (client_id) REFERENCES clients(id) ON DELETE CASCADE)`);
         await db.query(`CREATE TABLE IF NOT EXISTS legal_articles (id INT AUTO_INCREMENT PRIMARY KEY, title_he TEXT, title_fr TEXT, content_he LONGTEXT, content_fr LONGTEXT)`);
         console.log('Database tables initialized successfully.');
     } catch (err) {
