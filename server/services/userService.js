@@ -26,8 +26,9 @@ const createUser = async ({ full_name, email, password, phone, role = 'client' }
 };
 
 const updateUser = async (id, data) => {
-    const allowed = ['full_name', 'email', 'phone', 'password_hash', 'must_change_password'];
+    const allowed = ['full_name', 'email', 'phone', 'must_change_password'];
     const filtered = Object.fromEntries(Object.entries(data).filter(([k]) => allowed.includes(k)));
+    if (data.password) filtered.password_hash = await bcrypt.hash(data.password, 10);
     return await queryPutByField('clients', 'id', id, filtered);
 };
 
@@ -38,7 +39,7 @@ const updatePassword = async (email, newPassword) => {
 
 
 const deleteUser = async (id) => {
-    const tables = ['financial_reports', 'rental_agreements', 'identity_documents', 'insurance_policies'];
+    const tables = ['financial_reports', 'rental_agreements', 'identity_documents', 'insurance_policies', 'power_of_attorney', 'photos', 'miscellaneous'];
     for (const table of tables) {
         await queryDelete(table, null, { field: 'client_id', value: id });
     }

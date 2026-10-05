@@ -74,10 +74,7 @@ const updateUser = async (req, res) => {
             if (taken) return res.status(409).json({ error: 'EMAIL_ALREADY_EXISTS' });
 
             const password = Math.random().toString(36).slice(-6) + Math.random().toString(36).slice(-2).toUpperCase() + Math.floor(Math.random() * 90 + 10);
-            const bcrypt = require('bcrypt');
-            const password_hash = await bcrypt.hash(password, 10);
-
-            await updateUserService(req.params.id, { full_name: full_name || existing.full_name, email, password_hash, must_change_password: 1 });
+            await updateUserService(req.params.id, { full_name: full_name || existing.full_name, email, password, must_change_password: 1 });
 
             const lang = existing.emailLang || 'he';
             const { subject, html } = (welcomeAddedEmailContent[lang] || welcomeAddedEmailContent.he)(full_name || existing.full_name, email, password);
