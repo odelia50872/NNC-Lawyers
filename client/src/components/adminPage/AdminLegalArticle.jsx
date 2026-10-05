@@ -78,7 +78,8 @@ function AdminLegalArticle() {
     };
 
     return (
-        <div className="legal-admin-wrap">
+        <>
+            <div className="legal-admin-wrap">
             <div className="legal-admin-header">
                 <h2 className="legal-admin-title">{t.legalArticles.title}</h2>
                 <div className="admin-client-search-wrapper">
@@ -152,6 +153,7 @@ function AdminLegalArticle() {
             )}
         </div>
         {PasswordModal}
+        </>
     );
 }
 

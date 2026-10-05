@@ -80,7 +80,8 @@ function AdminDocSection({ endpoint, title, icon, accept, allowDelete = false })
     };
 
     return (
-        <div className="admin-reports">
+        <>
+            <div className="admin-reports">
             <div className="admin-reports-header">
                 <h2>{title}</h2>
                 <button className="admin-reports-add-btn" onClick={() => setShowForm(v => !v)}>
@@ -176,6 +177,7 @@ function AdminDocSection({ endpoint, title, icon, accept, allowDelete = false })
             )}
         </div>
         {PasswordModal}
+        </>
     );
 }
 
