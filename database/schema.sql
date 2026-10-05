@@ -108,48 +108,39 @@ CREATE TABLE insurance_policies (
     FOREIGN KEY (client_id) REFERENCES clients(id) ON DELETE CASCADE
 );
 
+CREATE TABLE IF NOT EXISTS power_of_attorney(
+    id INT AUTO_INCREMENT PRIMARY KEY, 
+    client_id INT, title VARCHAR(255),
+    year INT,
+    file_url TEXT,
+    FOREIGN KEY (client_id) REFERENCES clients(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS photos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    client_id INT, title VARCHAR(255),
+    year INT,
+    file_url TEXT,
+    FOREIGN KEY (client_id) REFERENCES clients(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS miscellaneous (  
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    client_id INT, title VARCHAR(255), 
+    year INT, 
+    file_url TEXT,
+    FOREIGN KEY (client_id) REFERENCES clients(id) ON DELETE CASCADE
+);
+
 -- ================================================
 -- נתוני לקוחות
 -- סיסמה של כולם: 123456
 -- ================================================
 
 INSERT INTO clients (full_name, email, password_hash, phone, role) VALUES
-('מנהל מערכת',             'admin@nnc-law.co.il',   '$2b$10$LNAeyyn6lf.T9PSqhhqAKeqNv2w8mpIRyYSiM6kcUlpCwhX3xaN12', '050-1111111', 'admin'),
-("חג'ג' רבקה ואהרון שרה", 'chajaj@nnc-law.co.il',  '$2b$10$f.WT2IjVWyrEJt.ns7xd1..EikcdSAZ.Q1TNJvbMmx7fEUY0QeYUy', '050-2222222', 'client');
-
--- ================================================
--- נתוני הסכמי שכירות
--- ================================================
-
-INSERT INTO rental_agreements (client_id, title, year, file_url) VALUES
-(2, 'הסכם שכירות חתום',   2024, 'http://localhost:3000/uploads/agreement-1.pdf'),
-(2, 'הסכם שכירות חתום 1', 2024, 'http://localhost:3000/uploads/agreement-2.pdf');
-
--- ================================================
--- נתוני דוחות כספיים
--- ================================================
-
-INSERT INTO financial_reports (client_id, title, year, file_url) VALUES
-(2, "דו''ח חצי שנה ראשונה 2024", 2024, 'http://localhost:3000/uploads/report-3-2024-h1.xlsx'),
-(2, "דו''ח חצי שנה שנייה 2024",  2024, 'http://localhost:3000/uploads/report-3-2024-h2.xlsx');
-
--- ================================================
--- נתוני תעודות זהות
--- ================================================
-
-INSERT INTO identity_documents (client_id, title, year, file_url) VALUES
-(2, 'תעודת זהות שוכר', 2024, 'http://localhost:3000/uploads/identity-3.pdf');
-
--- ================================================
--- נתוני פוליסות ביטוח
--- ================================================
-
-INSERT INTO insurance_policies (client_id, title, year, file_url) VALUES
-(2, 'פוליסת ביטוח 2025-2026', 2025, 'http://localhost:3000/uploads/insurance-2-2025-2026.pdf'),
-(2, 'פוליסת ביטוח 2026-2027', 2026, 'http://localhost:3000/uploads/insurance-2-2026-2027.pdf');
+('מנהל מערכת',             'admin@nnc-law.co.il',   '$2b$10$LNAeyyn6lf.T9PSqhhqAKeqNv2w8mpIRyYSiM6kcUlpCwhX3xaN12', '050-1111111', 'admin')
 
 
-INSERT INTO legal_articles (title_he, content_he, title_fr, content_fr) VALUES
-('ייפוי כוח מתמשך: להבטיח את עתידך', 'ייפוי כוח מתמשך הוא כלי משפטי המאפשר לכל אדם בגיר לקבוע מראש כיצד ייראו חייו, ענייניו הכספיים ורווחתו האישית בעתיד, במידה ולא יוכל לקבל החלטות בעצמו. מדובר במסמך המעניק שקט נפשי לכם ולבני משפחתכם, ומונע התערבות של גורמים חיצוניים בניהול ענייניכם.', 'Le mandat de protection future : assurer votre avenir', 'Le mandat de protection future est un outil juridique permettant à toute personne majeure de déterminer à l\'avance comment sa vie, ses affaires financières et son bien-être personnel seront gérés, si elle ne pouvait plus prendre les décisions elle-même. C\'est un document qui offre une tranquillité d\'esprit à vous et à votre famille, en évitant l\'intervention de tiers dans la gestion de vos affaires.'),
-('חשיבות הבדיקה המשפטית לפני חתימה על חוזה שכירות', 'רבים חותמים על חוזי שכירות מבלי לבחון לעומק את הסעיפים הקטנים. ליווי משפטי מקצועי מאפשר לכם לוודא שהזכויות שלכם מוגנות, שהתחייבויות בעל הנכס ברורות ושההסכם תואם את המציאות בשטח. אל תתפשרו על הביטחון המשפטי שלכם בביתכם.', 'L\'importance de l\'audit juridique avant de signer un contrat de location', 'Beaucoup signent des contrats de location sans examiner en profondeur les petites lignes. Un accompagnement juridique professionnel vous permet de vous assurer que vos droits sont protégés, que les obligations du propriétaire sont claires et que le contrat correspond à la réalité du terrain. Ne faites pas de compromis sur votre sécurité juridique dans votre logement.'),
-('הזכות לפרטיות מול חובת השקיפות בייצוג משפטי', 'יצירת מערכת שקופה המאפשרת ללקוח גישה מלאה למסמכים האישיים שלו בכל עת, בצורה בטוחה ומאובטחת.', 'Le droit à la vie privée face à l\'obligation de transparence dans la représentation juridique', 'À l\'ère du numérique, l\'obligation de l\'avocat de protéger la vie privée du client est primordiale.');
+
+
+
