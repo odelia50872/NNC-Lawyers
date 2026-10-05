@@ -37,6 +37,10 @@ const updatePassword = async (email, newPassword) => {
     return await queryPutByField('clients', 'email', email, { password_hash, must_change_password: 0 });
 };
 
+const setMustChangePassword = async (email, value) => {
+    return await queryPutByField('clients', 'email', email, { must_change_password: value });
+};
+
 
 const deleteUser = async (id) => {
     const tables = ['financial_reports', 'rental_agreements', 'identity_documents', 'insurance_policies', 'power_of_attorney', 'photos', 'miscellaneous'];
@@ -46,4 +50,4 @@ const deleteUser = async (id) => {
     return await queryDelete('clients', id);
 };
 
-module.exports = { getUserByEmail, getAllUsersPaginated, searchUsers, getUserById, createUser, updateUser, updatePassword, deleteUser };
+module.exports = { getUserByEmail, getAllUsersPaginated, searchUsers, getUserById, createUser, updateUser, updatePassword, setMustChangePassword, deleteUser };

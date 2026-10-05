@@ -1,11 +1,10 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const { OAuth2Client } = require('google-auth-library');
-const { getUserByEmail, updatePassword } = require('../services/userService');
+const { getUserByEmail, updatePassword, setMustChangePassword } = require('../services/userService');
 const { resetPasswordEmailContent } = require('../templates/emailTemplates');
 const { signToken, setTokenCookie } = require('../tools/tokenUtils');
 const resend = require('../tools/mailer');
-const db = require('../tools/db');
 
 const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
@@ -59,7 +58,7 @@ const forgotPassword = async (req, res) => {
         if (!user) return res.status(404).json({ error: 'USER_NOT_FOUND' });
         const newPassword = Math.random().toString(36).slice(-8) + Math.random().toString(36).slice(-4).toUpperCase();
         await updatePassword(email, newPassword);
-        await db.query('UPDATE clients SET must_change_password = 1 WHERE email = ?', [email]);
+        await setMustChangePassword(email, 1);
         const { subject, html } = (resetPasswordEmailContent[lang] || resetPasswordEmailContent.he)(user.full_name, newPassword);
         await resend.emails.send({
             from: 'NNC-Law <noreply@nnc-law.com>',
@@ -91,7 +90,7 @@ const changePassword = async (req, res) => {
         return res.status(400).json({ error: 'PASSWORD_TOO_SHORT' });
     try {
         await updatePassword(req.user.email, newPassword);
-        await db.query('UPDATE clients SET must_change_password = 0 WHERE email = ?', [req.user.email]);
+        await setMustChangePassword(req.user.email, 0);
         const user = await getUserByEmail(req.user.email);
         const token = signToken(user);
         setTokenCookie(res, token);
