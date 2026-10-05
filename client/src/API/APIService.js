@@ -46,7 +46,9 @@ apiClient.interceptors.response.use(
 export const api = {
     get: (resource, params = {}) => apiClient.get(`/${resource}`, { params }),
     post: (resource, data) => apiClient.post(`/${resource}`, data),
-    put: (resource, id, data) => apiClient.put(`/${resource}/${id}`, data), 
-    patch: (resource, id, data) => apiClient.patch(`/${resource}/${id}`, data),   
+    postForm: (resource, formData) => apiClient.post(`/${resource}`, formData, { headers: { 'Content-Type': 'multipart/form-data' } }),
+    put: (resource, id, data) => apiClient.put(`/${resource}/${id}`, data),
+    putForm: (resource, id, formData) => apiClient.put(`/${resource}/${id}`, formData, { headers: { 'Content-Type': 'multipart/form-data' } }),
+    patch: (resource, id, data) => apiClient.patch(`/${resource}/${id}`, data),
     delete: (resource, id = null) => apiClient.delete(id ? `/${resource}/${id}` : `/${resource}`),
 };

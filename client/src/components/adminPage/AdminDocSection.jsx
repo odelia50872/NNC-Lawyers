@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import { api } from '../../API/APIService';
 import { FaTrashAlt, FaEdit, FaUpload, FaSearch } from 'react-icons/fa';
 import '../../styles/AdminAddClient.css';
@@ -35,7 +34,7 @@ function AdminDocSection({ endpoint, title, icon, accept, allowDelete = false })
         formData.append('title', docTitle);
         formData.append('year', year);
         formData.append('file', file);
-        await axios.post(`${import.meta.env.VITE_API_URL}/${endpoint}`, formData, { withCredentials: true });
+        await api.postForm(endpoint, formData);
         const res = await api.get(`${endpoint}/${selectedClient}`);
         setDocs(res.data);
         setDocTitle('');
@@ -68,11 +67,7 @@ function AdminDocSection({ endpoint, title, icon, accept, allowDelete = false })
         formData.append('title', editTitle);
         formData.append('year', editYear);
         if (editFile) formData.append('file', editFile);
-        await axios.put(
-            `${import.meta.env.VITE_API_URL}/${endpoint}/doc/${editDoc.id}`,
-            formData,
-            { withCredentials: true }
-        );
+        await api.putForm(`${endpoint}/doc`, editDoc.id, formData);
         const res = await api.get(`${endpoint}/${selectedClient}`);
         setDocs(res.data);
         setEditDoc(null);
