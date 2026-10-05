@@ -127,17 +127,32 @@ function AdminDocSection({ endpoint, title, icon, accept, allowDelete = false })
                     {years.map(y => (
                         <div key={y} className="agreements-year-group">
                             <div className="agreements-year-badge">{y}</div>
-                            <ul className="agreements-list">
-                                {byYear[y].map(d => (
-                                    <li key={d.id} className="agreements-item">
-                                        <a href={d.file_url} target="_blank" rel="noreferrer">{icon} {d.title}</a>
-                                        <div className="admin-doc-actions">
-                                            <button className="admin-edit-btn" onClick={() => { setEditDoc(d); setEditTitle(d.title); setEditYear(d.year); }}><FaEdit /></button>
-                                            <button className="admin-reports-del-btn" onClick={(e) => handleDeleteDoc(e, d.id)}><FaTrashAlt /></button>
+                            {endpoint === 'photos' ? (
+                                <div className="photos-grid" style={{ padding: '1rem' }}>
+                                    {byYear[y].map(d => (
+                                        <div key={d.id} className="photo-card">
+                                            <img src={d.file_url} alt={d.title} className="photo-thumb" />
+                                            <span className="photo-title">{d.title}</span>
+                                            <div className="admin-doc-actions" style={{ padding: '0.4rem' }}>
+                                                <button className="admin-edit-btn" onClick={() => { setEditDoc(d); setEditTitle(d.title); setEditYear(d.year); }}><FaEdit /></button>
+                                                <button className="admin-reports-del-btn" onClick={(e) => handleDeleteDoc(e, d.id)}><FaTrashAlt /></button>
+                                            </div>
                                         </div>
-                                    </li>
-                                ))}
-                            </ul>
+                                    ))}
+                                </div>
+                            ) : (
+                                <ul className="agreements-list">
+                                    {byYear[y].map(d => (
+                                        <li key={d.id} className="agreements-item">
+                                            <a href={d.file_url} target="_blank" rel="noreferrer">{icon} {d.title}</a>
+                                            <div className="admin-doc-actions">
+                                                <button className="admin-edit-btn" onClick={() => { setEditDoc(d); setEditTitle(d.title); setEditYear(d.year); }}><FaEdit /></button>
+                                                <button className="admin-reports-del-btn" onClick={(e) => handleDeleteDoc(e, d.id)}><FaTrashAlt /></button>
+                                            </div>
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
                         </div>
                     ))}
                 </div>
