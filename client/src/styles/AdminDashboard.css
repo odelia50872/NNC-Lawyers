@@ -45,6 +45,46 @@
     flex-wrap: wrap;
 }
 
+.dashboard-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 0.25rem;
+    scrollbar-width: none;
+}
+
+.dashboard-tabs::-webkit-scrollbar {
+    display: none;
+}
+
+.dashboard-tab {
+    padding: 0.65rem 1rem;
+    border: 2px solid #0f1624;
+    border-radius: 8px;
+    background: #fff;
+    color: #0f1624;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.25s, color 0.25s, border-color 0.25s;
+    font-family: inherit;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.dashboard-tab:hover {
+    background: #0f1624;
+    color: #c9a84c;
+}
+
+.dashboard-tab.active {
+    background: #0f1624;
+    color: #c9a84c;
+    border-color: #0f1624;
+}
+
 .admin-main-tab {
     display: flex;
     align-items: center;
