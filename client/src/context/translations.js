@@ -258,6 +258,7 @@ const translations = {
             emailLangFr: 'צרפתית',
             editTitle: 'עריכת לקוח',
             editSuccess: 'הלקוח עודכן בהצלחה',
+            editEmailSuccess: 'המייל עודכן — סיסמה חדשה נשלחה ללקוח',
         },
         identityDocuments: {
             title: 'תעודות זיהוי',
@@ -590,6 +591,7 @@ Cette gestion personnalisée permet aux propriétaires, notamment ceux résidant
             emailLangFr: 'Français',
             editTitle: 'Modifier le client',
             editSuccess: 'Client mis à jour avec succès',
+            editEmailSuccess: 'Email mis à jour — un nouveau mot de passe a été envoyé au client',
         },
         identityDocuments: {
             title: 'Pièces d\'identité',

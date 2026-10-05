@@ -25,8 +25,10 @@ const createUser = async ({ full_name, email, password, phone, role = 'client' }
     return await queryPost('clients', { full_name, email, password_hash, phone, role, must_change_password: 1 });
 };
 
-const updateUser = async (id, { full_name, email, phone }) => {
-    return await queryPutByField('clients', 'id', id, { full_name, email, phone });
+const updateUser = async (id, data) => {
+    const allowed = ['full_name', 'email', 'phone', 'password_hash', 'must_change_password'];
+    const filtered = Object.fromEntries(Object.entries(data).filter(([k]) => allowed.includes(k)));
+    return await queryPutByField('clients', 'id', id, filtered);
 };
 
 const updatePassword = async (email, newPassword) => {

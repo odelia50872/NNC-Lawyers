@@ -63,9 +63,33 @@ const createUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
     try {
-        await updateUserService(req.params.id, req.body);
-        res.json({ message: 'User updated successfully' });
+        const { full_name, email } = req.body;
+        const existing = await getUserByIdService(req.params.id);
+        if (!existing) return res.status(404).json({ error: 'User not found' });
+
+        const emailChanged = email && email !== existing.email;
+
+        if (emailChanged) {
+            const taken = await getUserByEmail(email);
+            if (taken) return res.status(409).json({ error: 'EMAIL_ALREADY_EXISTS' });
+
+            const password = Math.random().toString(36).slice(-6) + Math.random().toString(36).slice(-2).toUpperCase() + Math.floor(Math.random() * 90 + 10);
+            const bcrypt = require('bcrypt');
+            const password_hash = await bcrypt.hash(password, 10);
+
+            await updateUserService(req.params.id, { full_name: full_name || existing.full_name, email, password_hash, must_change_password: 1 });
+
+            const lang = existing.emailLang || 'he';
+            const { subject, html } = (welcomeAddedEmailContent[lang] || welcomeAddedEmailContent.he)(full_name || existing.full_name, email, password);
+            resend.emails.send({ from: 'NNC-Law <noreply@nnc-law.com>', to: email, subject, html })
+                .catch(err => console.error('Update email failed:', err.message));
+        } else {
+            await updateUserService(req.params.id, { full_name: full_name || existing.full_name, email: existing.email });
+        }
+
+        res.json({ message: 'User updated successfully', emailChanged });
     } catch (err) {
+        console.error('updateUser error:', err.message);
         res.status(500).json({ error: 'Failed to update user' });
     }
 };
