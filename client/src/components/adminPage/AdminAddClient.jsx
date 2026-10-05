@@ -115,7 +115,7 @@ function AdminAddClient({ onClientChange = () => { } }) {
     const handleEditSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await api.put(`clients/${editClient.id}`, editForm);
+            const res = await api.put('clients', editClient.id, editForm);
             await fetchClients(true, searchQuery.trim() ? searchQuery : '');
             setEditClient(null);
             notify(res.data.emailChanged ? t.adminAddClient.editEmailSuccess : t.adminAddClient.editSuccess, 'success');
