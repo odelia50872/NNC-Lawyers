@@ -3,7 +3,6 @@ import { api } from '../../API/APIService';
 import { useNotify } from '../notifications/NotificationContext';
 import { useLang } from '../../context/LanguageContext';
 import { FaTrashAlt, FaUserPlus, FaSearch } from 'react-icons/fa';
-import useAdminAuth from '../../hooks/useAdminAuth.jsx';
 import '../../styles/AdminAddClient.css';
 
 function AdminAddClient({ onClientChange = () => { } }) {
@@ -21,7 +20,6 @@ function AdminAddClient({ onClientChange = () => { } }) {
     const [form, setForm] = useState({ full_name: '', email: '', emailLang: 'he' });
     const notify = useNotify();
     const { t } = useLang();
-    const { requireAuth, PasswordModal } = useAdminAuth();
 
     const fetchClients = useCallback(async (reset = false, query = '') => {
         if (loadingRef.current) return;
@@ -45,7 +43,8 @@ function AdminAddClient({ onClientChange = () => { } }) {
                 setClients(prev => {
                     const updatedList = reset ? sortedData : [...prev, ...sortedData];
                     return reset ? updatedList : updatedList.sort((a, b) => a.full_name.localeCompare(b.full_name));
-                }); offsetRef.current = currentOffset + newClients.length;
+                });
+                offsetRef.current = currentOffset + newClients.length;
                 hasMoreRef.current = offsetRef.current < total;
                 isSearchingRef.current = false;
                 setIsSearching(false);
@@ -79,58 +78,40 @@ function AdminAddClient({ onClientChange = () => { } }) {
     const handleSearchInput = (value) => {
         setSearchQuery(value);
         clearTimeout(searchTimeout.current);
-
-        if (!value.trim()) {
-            fetchClients(true);
-            return;
-        }
-
-        searchTimeout.current = setTimeout(() => {
-            fetchClients(true, value);
-        }, 300);
+        if (!value.trim()) { fetchClients(true); return; }
+        searchTimeout.current = setTimeout(() => { fetchClients(true, value); }, 300);
     };
 
-    const clearSearch = () => {
-        setSearchQuery('');
-        fetchClients(true);
-    };
+    const clearSearch = () => { setSearchQuery(''); fetchClients(true); };
 
     const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        requireAuth(async () => {
-            try {
-                await api.post('clients', { ...form });
-                if (searchQuery.trim()) {
-                    await fetchClients(true, searchQuery);
-                } else {
-                    await fetchClients(true);
-                }
-                onClientChange();
-                setForm({ full_name: '', email: '', emailLang: 'he' });
-                notify(t.adminAddClient.success, 'success');
-            } catch (error) {
-                if (error.response?.status === 409 && error.response?.data?.error === 'EMAIL_ALREADY_EXISTS') {
-                    notify(t.adminAddClient.emailExists, 'error');
-                } else {
-                    notify(t.adminAddClient.error, 'error');
-                }
+        try {
+            await api.post('clients', { ...form });
+            await fetchClients(true, searchQuery.trim() ? searchQuery : '');
+            onClientChange();
+            setForm({ full_name: '', email: '', emailLang: 'he' });
+            notify(t.adminAddClient.success, 'success');
+        } catch (error) {
+            if (error.response?.status === 409 && error.response?.data?.error === 'EMAIL_ALREADY_EXISTS') {
+                notify(t.adminAddClient.emailExists, 'error');
+            } else {
+                notify(t.adminAddClient.error, 'error');
             }
-        });
+        }
     };
 
-    const handleDelete = (id) => {
-        requireAuth(async () => {
+    const handleDelete = async (id) => {
+        try {
             await api.delete(`clients/${id}`);
-            if (searchQuery.trim()) {
-                await fetchClients(true, searchQuery);
-            } else {
-                await fetchClients(true);
-            }
+            await fetchClients(true, searchQuery.trim() ? searchQuery : '');
             onClientChange();
             notify(t.adminAddClient.deleteSuccess, 'success');
-        });
+        } catch {
+            notify(t.adminAddClient.error, 'error');
+        }
     };
 
     return (
@@ -190,8 +171,6 @@ function AdminAddClient({ onClientChange = () => { } }) {
                     )}
                 </ul>
             </div>
-
-            {PasswordModal}
         </div>
     );
 }

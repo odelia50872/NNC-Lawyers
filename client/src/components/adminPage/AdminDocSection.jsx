@@ -6,7 +6,6 @@ import '../../styles/AdminAddClient.css';
 import { useNotify } from '../notifications/NotificationContext';
 import { useLang } from '../../context/LanguageContext';
 import useDocuments from '../../hooks/useDocuments';
-import useAdminAuth from '../../hooks/useAdminAuth.jsx';
 import useClientSearch from '../../hooks/useClientSearch';
 
 function AdminDocSection({ endpoint, title, icon, accept, allowDelete = false }) {
@@ -24,63 +23,54 @@ function AdminDocSection({ endpoint, title, icon, accept, allowDelete = false })
 
     const notify = useNotify();
     const { t } = useLang();
-    const { requireAuth, PasswordModal } = useAdminAuth();
 
     useEffect(() => { loadAll(); }, [loadAll]);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        requireAuth(async () => {
-            const formData = new FormData();
-            formData.append('client_id', selectedClient);
-            formData.append('title', docTitle);
-            formData.append('year', year);
-            formData.append('file', file);
-            await axios.post(`${import.meta.env.VITE_API_URL}/${endpoint}`, formData, { withCredentials: true });
-            const res = await api.get(`${endpoint}/${selectedClient}`);
-            setDocs(res.data);
-            setDocTitle('');
-            setYear(new Date().getFullYear());
-            setFile(null);
-            setShowForm(false);
-            notify(t.confirm.docAdded, 'success');
-        });
+        const formData = new FormData();
+        formData.append('client_id', selectedClient);
+        formData.append('title', docTitle);
+        formData.append('year', year);
+        formData.append('file', file);
+        await axios.post(`${import.meta.env.VITE_API_URL}/${endpoint}`, formData, { withCredentials: true });
+        const res = await api.get(`${endpoint}/${selectedClient}`);
+        setDocs(res.data);
+        setDocTitle('');
+        setYear(new Date().getFullYear());
+        setFile(null);
+        setShowForm(false);
+        notify(t.confirm.docAdded, 'success');
     };
 
-    const handleDeleteDoc = (e, id) => {
+    const handleDeleteDoc = async (e, id) => {
         e.stopPropagation();
-        requireAuth(async () => {
-            await api.delete(`${endpoint}/doc`, id);
-            setDocs(prev => prev.filter(d => d.id !== id));
-            notify(t.confirm.docDeleted, 'success');
-        });
+        await api.delete(`${endpoint}/doc`, id);
+        setDocs(prev => prev.filter(d => d.id !== id));
+        notify(t.confirm.docDeleted, 'success');
     };
 
-    const handleDeleteClient = (e, id) => {
+    const handleDeleteClient = async (e, id) => {
         e.stopPropagation();
-        requireAuth(async () => {
-            await api.delete('users', id);
-            notify(t.adminAddClient.deleteSuccess, 'success');
-        });
+        await api.delete('users', id);
+        notify(t.adminAddClient.deleteSuccess, 'success');
     };
 
-    const handleUpdateDoc = (e) => {
+    const handleUpdateDoc = async (e) => {
         e.preventDefault();
-        requireAuth(async () => {
-            const formData = new FormData();
-            formData.append('title', editTitle);
-            formData.append('year', editYear);
-            if (editFile) formData.append('file', editFile);
-            await axios.put(
-                `${import.meta.env.VITE_API_URL}/${endpoint}/doc/${editDoc.id}`,
-                formData,
-                { withCredentials: true }
-            );
-            const res = await api.get(`${endpoint}/${selectedClient}`);
-            setDocs(res.data);
-            setEditDoc(null);
-            notify(t.confirm.docUpdated, 'success');
-        });
+        const formData = new FormData();
+        formData.append('title', editTitle);
+        formData.append('year', editYear);
+        if (editFile) formData.append('file', editFile);
+        await axios.put(
+            `${import.meta.env.VITE_API_URL}/${endpoint}/doc/${editDoc.id}`,
+            formData,
+            { withCredentials: true }
+        );
+        const res = await api.get(`${endpoint}/${selectedClient}`);
+        setDocs(res.data);
+        setEditDoc(null);
+        notify(t.confirm.docUpdated, 'success');
     };
 
     return (
@@ -178,7 +168,6 @@ function AdminDocSection({ endpoint, title, icon, accept, allowDelete = false })
                     </div>
                 </div>
             )}
-            {PasswordModal}
         </div>
     );
 }

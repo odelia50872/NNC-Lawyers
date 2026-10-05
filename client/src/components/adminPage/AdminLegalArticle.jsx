@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { api } from '../../API/APIService';
 import { useLang } from '../../context/LanguageContext';
 import { useNotify } from '../notifications/NotificationContext';
-import useAdminAuth from '../../hooks/useAdminAuth.jsx';
 import { FaTrashAlt, FaEdit, FaPlus, FaTimes, FaSearch } from 'react-icons/fa';
 import '../../styles/AdminAddClient.css';
 
@@ -17,7 +16,6 @@ function AdminLegalArticle() {
     const [showForm, setShowForm] = useState(false);
     const { t, lang } = useLang();
     const notify = useNotify();
-    const { requireAuth, PasswordModal } = useAdminAuth();
 
     const fetchArticles = async () => {
         try {
@@ -39,49 +37,39 @@ function AdminLegalArticle() {
     }, [searchQuery, articles]);
 
     const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
-
     const closeForm = () => { setShowForm(false); setEditArticle(null); setForm(EMPTY_FORM); };
 
-    const withAuth = (fn, successMsg, errorMsg) => {
-        requireAuth(async () => {
-            try { await fn(); notify(successMsg, 'success'); }
-            catch { notify(errorMsg, 'error'); }
-        });
-    };
-
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        withAuth(async () => {
+        try {
             await api.post('legal-articles', form);
             await fetchArticles();
             closeForm();
-        }, t.legalArticles.added, t.legalArticles.error);
+            notify(t.legalArticles.added, 'success');
+        } catch { notify(t.legalArticles.error, 'error'); }
     };
 
-    const handleUpdate = (e) => {
+    const handleUpdate = async (e) => {
         e.preventDefault();
-        withAuth(async () => {
+        try {
             await api.put('legal-articles', editArticle.id, form);
             await fetchArticles();
             closeForm();
-        }, t.legalArticles.updated, t.legalArticles.error);
+            notify(t.legalArticles.updated, 'success');
+        } catch { notify(t.legalArticles.error, 'error'); }
     };
 
-    const handleDelete = (id) => {
-        withAuth(async () => {
+    const handleDelete = async (id) => {
+        try {
             await api.delete(`legal-articles/${id}`);
             await fetchArticles();
-        }, t.legalArticles.deleted, t.legalArticles.error);
+            notify(t.legalArticles.deleted, 'success');
+        } catch { notify(t.legalArticles.error, 'error'); }
     };
 
     const openEdit = (article) => {
         setEditArticle(article);
-        setForm({
-            title_he: article.title_he,
-            content_he: article.content_he,
-            title_fr: article.title_fr,
-            content_fr: article.content_fr,
-        });
+        setForm({ title_he: article.title_he, content_he: article.content_he, title_fr: article.title_fr, content_fr: article.content_fr });
         setShowForm(true);
     };
 
@@ -158,8 +146,6 @@ function AdminLegalArticle() {
                     ))}
                 </ul>
             )}
-
-            {PasswordModal}
         </div>
     );
 }
