@@ -119,6 +119,7 @@ function AdminAddClient({ onClientChange = () => { } }) {
     };
 
     return (
+        <>
         <div className="admin-client-section">
             <div className="admin-client-form-card">
                 <div className="admin-client-form-header">
@@ -177,6 +178,7 @@ function AdminAddClient({ onClientChange = () => { } }) {
             </div>
         </div>
         {PasswordModal}
+        </>
     );
 }
 
