@@ -3,6 +3,7 @@ import { api } from '../../API/APIService';
 import { useNotify } from '../notifications/NotificationContext';
 import { useLang } from '../../context/LanguageContext';
 import { FaTrashAlt, FaUserPlus, FaSearch } from 'react-icons/fa';
+import useAdminAuth from '../../hooks/useAdminAuth.jsx';
 import '../../styles/AdminAddClient.css';
 
 function AdminAddClient({ onClientChange = () => { } }) {
@@ -20,6 +21,7 @@ function AdminAddClient({ onClientChange = () => { } }) {
     const [form, setForm] = useState({ full_name: '', email: '', emailLang: 'he' });
     const notify = useNotify();
     const { t } = useLang();
+    const { requireAuth, PasswordModal } = useAdminAuth();
 
     const fetchClients = useCallback(async (reset = false, query = '') => {
         if (loadingRef.current) return;
@@ -104,14 +106,16 @@ function AdminAddClient({ onClientChange = () => { } }) {
     };
 
     const handleDelete = async (id) => {
-        try {
-            await api.delete(`clients/${id}`);
-            await fetchClients(true, searchQuery.trim() ? searchQuery : '');
-            onClientChange();
-            notify(t.adminAddClient.deleteSuccess, 'success');
-        } catch {
-            notify(t.adminAddClient.error, 'error');
-        }
+        requireAuth(async () => {
+            try {
+                await api.delete(`clients/${id}`);
+                await fetchClients(true, searchQuery.trim() ? searchQuery : '');
+                onClientChange();
+                notify(t.adminAddClient.deleteSuccess, 'success');
+            } catch {
+                notify(t.adminAddClient.error, 'error');
+            }
+        });
     };
 
     return (
@@ -172,6 +176,7 @@ function AdminAddClient({ onClientChange = () => { } }) {
                 </ul>
             </div>
         </div>
+        {PasswordModal}
     );
 }
 

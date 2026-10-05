@@ -6,6 +6,7 @@ import '../../styles/AdminAddClient.css';
 import { useNotify } from '../notifications/NotificationContext';
 import { useLang } from '../../context/LanguageContext';
 import useDocuments from '../../hooks/useDocuments';
+import useAdminAuth from '../../hooks/useAdminAuth.jsx';
 import useClientSearch from '../../hooks/useClientSearch';
 
 function AdminDocSection({ endpoint, title, icon, accept, allowDelete = false }) {
@@ -23,6 +24,7 @@ function AdminDocSection({ endpoint, title, icon, accept, allowDelete = false })
 
     const notify = useNotify();
     const { t } = useLang();
+    const { requireAuth, PasswordModal } = useAdminAuth();
 
     useEffect(() => { loadAll(); }, [loadAll]);
 
@@ -45,15 +47,19 @@ function AdminDocSection({ endpoint, title, icon, accept, allowDelete = false })
 
     const handleDeleteDoc = async (e, id) => {
         e.stopPropagation();
-        await api.delete(`${endpoint}/doc`, id);
-        setDocs(prev => prev.filter(d => d.id !== id));
-        notify(t.confirm.docDeleted, 'success');
+        requireAuth(async () => {
+            await api.delete(`${endpoint}/doc`, id);
+            setDocs(prev => prev.filter(d => d.id !== id));
+            notify(t.confirm.docDeleted, 'success');
+        });
     };
 
     const handleDeleteClient = async (e, id) => {
         e.stopPropagation();
-        await api.delete('users', id);
-        notify(t.adminAddClient.deleteSuccess, 'success');
+        requireAuth(async () => {
+            await api.delete('users', id);
+            notify(t.adminAddClient.deleteSuccess, 'success');
+        });
     };
 
     const handleUpdateDoc = async (e) => {
@@ -169,6 +175,7 @@ function AdminDocSection({ endpoint, title, icon, accept, allowDelete = false })
                 </div>
             )}
         </div>
+        {PasswordModal}
     );
 }
 

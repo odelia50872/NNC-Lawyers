@@ -3,6 +3,7 @@ import { api } from '../../API/APIService';
 import { useLang } from '../../context/LanguageContext';
 import { useNotify } from '../notifications/NotificationContext';
 import { FaTrashAlt, FaEdit, FaPlus, FaTimes, FaSearch } from 'react-icons/fa';
+import useAdminAuth from '../../hooks/useAdminAuth.jsx';
 import '../../styles/AdminAddClient.css';
 
 const EMPTY_FORM = { title_he: '', content_he: '', title_fr: '', content_fr: '' };
@@ -16,6 +17,7 @@ function AdminLegalArticle() {
     const [showForm, setShowForm] = useState(false);
     const { t, lang } = useLang();
     const notify = useNotify();
+    const { requireAuth, PasswordModal } = useAdminAuth();
 
     const fetchArticles = async () => {
         try {
@@ -60,11 +62,13 @@ function AdminLegalArticle() {
     };
 
     const handleDelete = async (id) => {
-        try {
-            await api.delete(`legal-articles/${id}`);
-            await fetchArticles();
-            notify(t.legalArticles.deleted, 'success');
-        } catch { notify(t.legalArticles.error, 'error'); }
+        requireAuth(async () => {
+            try {
+                await api.delete(`legal-articles/${id}`);
+                await fetchArticles();
+                notify(t.legalArticles.deleted, 'success');
+            } catch { notify(t.legalArticles.error, 'error'); }
+        });
     };
 
     const openEdit = (article) => {
@@ -147,6 +151,7 @@ function AdminLegalArticle() {
                 </ul>
             )}
         </div>
+        {PasswordModal}
     );
 }
 
