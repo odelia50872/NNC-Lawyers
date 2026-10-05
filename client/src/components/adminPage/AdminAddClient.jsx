@@ -2,7 +2,7 @@ import { useEffect, useState, useRef, useCallback } from 'react';
 import { api } from '../../API/APIService';
 import { useNotify } from '../notifications/NotificationContext';
 import { useLang } from '../../context/LanguageContext';
-import { FaTrashAlt, FaUserPlus, FaSearch } from 'react-icons/fa';
+import { FaTrashAlt, FaUserPlus, FaSearch, FaEdit } from 'react-icons/fa';
 import useAdminAuth from '../../hooks/useAdminAuth.jsx';
 import '../../styles/AdminAddClient.css';
 
@@ -19,6 +19,8 @@ function AdminAddClient({ onClientChange = () => { } }) {
     const isSearchingRef = useRef(false);
     const LIMIT = 5;
     const [form, setForm] = useState({ full_name: '', email: '', emailLang: 'he' });
+    const [editClient, setEditClient] = useState(null); // { id, full_name, email }
+    const [editForm, setEditForm] = useState({ full_name: '', email: '' });
     const notify = useNotify();
     const { t } = useLang();
     const { requireAuth, PasswordModal } = useAdminAuth();
@@ -105,6 +107,27 @@ function AdminAddClient({ onClientChange = () => { } }) {
         }
     };
 
+    const handleEdit = (c) => {
+        setEditClient(c);
+        setEditForm({ full_name: c.full_name, email: c.email });
+    };
+
+    const handleEditSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            await api.put(`clients/${editClient.id}`, editForm);
+            await fetchClients(true, searchQuery.trim() ? searchQuery : '');
+            setEditClient(null);
+            notify(t.adminAddClient.editSuccess, 'success');
+        } catch (error) {
+            if (error.response?.status === 409) {
+                notify(t.adminAddClient.emailExists, 'error');
+            } else {
+                notify(t.adminAddClient.error, 'error');
+            }
+        }
+    };
+
     const handleDelete = async (id) => {
         requireAuth(async () => {
             try {
@@ -163,9 +186,14 @@ function AdminAddClient({ onClientChange = () => { } }) {
                                 <span className="admin-client-name">{c.full_name}</span>
                                 <span className="admin-client-email">{c.email}</span>
                             </div>
-                            <button className="admin-reports-del-btn" onClick={() => handleDelete(c.id)} title={t.confirm.deleteTooltip} aria-label={`${t.confirm.deleteTooltip} ${c.full_name}`}>
-                                <FaTrashAlt aria-hidden="true" />
-                            </button>
+                            <div style={{ display: 'flex', gap: '0.5rem' }}>
+                                <button className="admin-edit-btn" onClick={() => handleEdit(c)} title={t.confirm.editTooltip} aria-label={`${t.confirm.editTooltip} ${c.full_name}`}>
+                                    <FaEdit aria-hidden="true" />
+                                </button>
+                                <button className="admin-reports-del-btn" onClick={() => handleDelete(c.id)} title={t.confirm.deleteTooltip} aria-label={`${t.confirm.deleteTooltip} ${c.full_name}`}>
+                                    <FaTrashAlt aria-hidden="true" />
+                                </button>
+                            </div>
                         </li>
                     ))}
                     {loadingMore && <li className="admin-client-loading">...</li>}
@@ -177,6 +205,30 @@ function AdminAddClient({ onClientChange = () => { } }) {
                 </ul>
             </div>
         </div>
+        {editClient && (
+            <div className="admin-modal-overlay" onClick={() => setEditClient(null)}>
+                <div className="admin-modal" onClick={e => e.stopPropagation()}>
+                    <h3>{t.adminAddClient.editTitle}</h3>
+                    <form className="admin-reports-form" onSubmit={handleEditSubmit}>
+                        <input
+                            type="text"
+                            value={editForm.full_name}
+                            placeholder={t.adminAddClient.fullName}
+                            required
+                            onChange={e => setEditForm({ ...editForm, full_name: e.target.value })}
+                        />
+                        <input
+                            type="email"
+                            value={editForm.email}
+                            placeholder={t.adminAddClient.email}
+                            required
+                            onChange={e => setEditForm({ ...editForm, email: e.target.value })}
+                        />
+                        <button type="submit" className="admin-reports-save-btn">{t.confirm.update}</button>
+                    </form>
+                </div>
+            </div>
+        )}
         {PasswordModal}
         </>
     );

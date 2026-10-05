@@ -256,6 +256,8 @@ const translations = {
             emailLang: 'שפת המייל',
             emailLangHe: 'עברית',
             emailLangFr: 'צרפתית',
+            editTitle: 'עריכת לקוח',
+            editSuccess: 'הלקוח עודכן בהצלחה',
         },
         identityDocuments: {
             title: 'תעודות זיהוי',
@@ -586,6 +588,8 @@ Cette gestion personnalisée permet aux propriétaires, notamment ceux résidant
             emailLang: 'Langue du mail',
             emailLangHe: 'Hébreu',
             emailLangFr: 'Français',
+            editTitle: 'Modifier le client',
+            editSuccess: 'Client mis à jour avec succès',
         },
         identityDocuments: {
             title: 'Pièces d\'identité',
