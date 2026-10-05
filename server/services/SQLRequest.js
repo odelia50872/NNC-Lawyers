@@ -1,6 +1,6 @@
 const db = require('../tools/db');
 
-const ALLOWED_TABLES = ['financial_reports', 'clients', 'rental_agreements', 'identity_documents', 'insurance_policies', 'legal_articles'];
+const ALLOWED_TABLES = ['financial_reports', 'clients', 'rental_agreements', 'identity_documents', 'insurance_policies', 'legal_articles', 'power_of_attorney', 'photos', 'miscellaneous'];
 const ALLOWED_FIELDS = ['email', 'role', 'client_id', 'id', 'full_name'];
 
 const validateTable = (source) => {
