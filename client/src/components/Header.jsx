@@ -4,6 +4,7 @@ import { useLang } from '../context/LanguageContext';
 import { useAuth } from '../context/AuthContext';
 import LanguageSwitcher from './LanguageSwitcher';
 import useSlug from '../hooks/useSlug';
+import { FiLogOut } from 'react-icons/fi';
 import logo from '../assets/small-logo.jpg';
 import '../styles/Header.css';
 
@@ -49,8 +50,8 @@ function Header() {
                                 <NavLink to={dashboardPath} className="header-login-btn header-user-btn" onClick={closeMenu} title={user.full_name}>
                                     {user.full_name || t.nav.dashboard}
                                 </NavLink>
-                                <button className="header-logout-btn" onClick={() => { logout(navigate); closeMenu(); }}>
-                                    {t.nav.logout}
+                                <button className="header-logout-btn" onClick={() => { logout(navigate); closeMenu(); }} title={t.nav.logout} aria-label={t.nav.logout}>
+                                    <FiLogOut size={18} />
                                 </button>
                             </>
                         ) : (

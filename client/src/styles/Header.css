@@ -161,16 +161,16 @@
     background: transparent;
     border: 1px solid #c9a84c;
     color: #c9a84c;
-    padding: 0.65rem 1.2rem;
+    padding: 0.5rem;
     border-radius: 8px;
-    font-weight: 700;
     font-size: 0.95rem;
     cursor: pointer;
     transition: background 0.2s, color 0.2s;
-    letter-spacing: 0.3px;
     font-family: inherit;
-    white-space: nowrap;
     flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .header-logout-btn:hover {
@@ -295,8 +295,7 @@
         margin-inline-start: 0;
         align-items: stretch;
     }
-    .header-login-btn,
-    .header-logout-btn {
+    .header-login-btn {
         text-align: center !important;
         width: 100% !important;
         max-width: 100% !important;
