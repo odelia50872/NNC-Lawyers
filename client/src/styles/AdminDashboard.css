@@ -51,9 +51,7 @@
     margin-bottom: 2rem;
     flex-wrap: nowrap;
     overflow-x: auto;
-    overflow-y: visible;
-    padding-bottom: 0.25rem;
-    padding-top: 0.25rem;
+    padding: 0.3rem 0.1rem 0.25rem;
     scrollbar-width: none;
 }
 
@@ -124,6 +122,7 @@
     border: 1px solid #e5e7eb;
     padding: 1.5rem;
     box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    overflow: visible;
 }
 
 .admin-section-content {

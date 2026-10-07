@@ -36,9 +36,7 @@
     margin-bottom: 2rem;
     flex-wrap: nowrap;
     overflow-x: auto;
-    overflow-y: visible;
-    padding-bottom: 0.25rem;
-    padding-top: 0.25rem;
+    padding: 0.3rem 0.1rem 0.25rem;
     scrollbar-width: none;
 }
 
@@ -55,7 +53,7 @@
     font-size: 0.88rem;
     font-weight: 600;
     cursor: pointer;
-    transition: background 0.25s, color 0.25s, border-color 0.25s, transform 0.2s, box-shadow 0.2s;
+    transition: background 0.25s, color 0.25s, border-color 0.25s;
     font-family: inherit;
     white-space: nowrap;
     flex-shrink: 0;
@@ -65,16 +63,12 @@
 .dashboard-tab:hover {
     background: #0f1624;
     color: #c9a84c;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
 .dashboard-tab.active {
     background: #0f1624;
     color: #c9a84c;
     border-color: #0f1624;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
 .dashboard-content {
