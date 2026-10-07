@@ -8,7 +8,7 @@ import { FaUsers, FaFolderOpen } from 'react-icons/fa';
 import '../../styles/AdminDashboard.css';
 
 function AdminDashboard() {
-    const { t } = useLang();
+    const { t, lang } = useLang();
 
 
     const mainTabs = [
@@ -57,7 +57,7 @@ function AdminDashboard() {
 
             {mainTab === 'docs' && (
                 <div className="admin-section">
-                    <div className="dashboard-tabs">
+                    <div className="dashboard-tabs" style={lang === 'fr' ? { direction: 'ltr' } : {}}>
                         {docTabs.map(tab => (
                             <button
                                 key={tab.key}

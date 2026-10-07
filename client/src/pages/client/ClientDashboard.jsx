@@ -10,7 +10,7 @@ import Miscellaneous from '../../components/clientPage/Miscellaneous';
 import '../../styles/ClientDashboard.css';
 
 function ClientDashboard() {
-    const { t } = useLang();
+    const { t, lang } = useLang();
     const tabs = [
         { key: 'reports',    label: t.dashboard.reports },
         { key: 'agreements', label: t.dashboard.agreements },
@@ -25,7 +25,7 @@ function ClientDashboard() {
     return (
         <div className="dashboard-container">
             <h1 className="dashboard-title">{t.dashboard.title}</h1>
-            <div className="dashboard-tabs" role="tablist" aria-label={t.dashboard.title}>
+            <div className="dashboard-tabs" role="tablist" aria-label={t.dashboard.title} style={lang === 'fr' ? { direction: 'ltr' } : {}}>
                 {tabs.map(tab => (
                     <button
                         key={tab.key}
