@@ -279,11 +279,11 @@ const translations = {
         accessibility: {
             title: 'הצהרת נגישות',
             updated: 'עדכון אחרון: יוני 2026',
-            intro: 'משרד עורכי הדין NNC-Law מחויב להנגיש את אתר האינטרנט שלו לאנשים עם מוגבלויות, בהתאם לתקנות שוויון זכויות לאנשים עם מוגבלות (התאמות נגישות לשירות), התשע"ג-2013, ובהתאם לתקן הישראלי ת"י 5568 המבוסס על WCAG 2.0 ברמה AA.',
+            intro: 'משרד עורכי הדין NNC-Law מחויב להנגיש את אתר האינטרנט שלו לאנשים עם מוגבלויות, בהתאם לתקנות שוויון זכויות לאנשים עם מוגבלות (התאמות נגישות לשירות), התשע"ג-2013, ובהתאם לתקן הישראלי ת"י 5568 המבוסס על WCAG 2.1 ברמה AA.',
             sections: [
                 {
                     title: 'רמת הנגישות',
-                    text: 'האתר עומד ברמת נגישות AA של תקן WCAG 2.0, הכולל:',
+                    text: 'האתר עומד ברמת נגישות AA של תקן WCAG 2.1, הכולל:',
                     items: [
                         'תמיכה בקוראי מסך באמצעות תגיות ARIA ומבנה סמנטי תקין',
                         'ניווט מלא באמצעות מקלדת בלבד',
@@ -309,10 +309,24 @@ const translations = {
                     ],
                 },
                 {
+                    title: 'נגישות מסמכי PDF',
+                    text: 'המשרד מפרסם מסמכים משפטיים (חוזים, טפסים, מאמרים) בפורמט PDF. אנו פועלים להנגשת מסמכים אלו באופן שוטף. במידה ונתקלתם במסמך שאינו נגיש, ניתן לפנות אלינו בדרכי ההתקשרות המפורטות להלן ונספק את המסמך בפורמט נגיש בתוך זמן סביר.',
+                    items: [],
+                },
+                {
+                    title: 'רכז נגישות',
+                    text: 'רכז הנגישות של המשרד אחראי על יישום דרישות הנגישות ומענה לפניות בנושא:',
+                    items: [
+                        'שם: עו"ד מיכאל נקש',
+                        'אימייל: nnc@nnc-law.com',
+                        'טלפון: 02-6437311',
+                    ],
+                },
+                {
                     title: 'מגבלות ידועות',
                     text: 'אנו עובדים על שיפור מתמיד. להלן מגבלות ידועות:',
                     items: [
-                        'חלק מהמסמכים PDF עשויים שלא להיות נגישים במלואם',
+                        'חלק מהמסמכים PDF עשויים שלא להיות נגישים במלואם — ניתן לבקש גרסה נגישה בפנייה ישירה למשרד',
                     ],
                 },
                 {
@@ -612,11 +626,11 @@ Cette gestion personnalisée permet aux propriétaires, notamment ceux résidant
         accessibility: {
         title: 'Déclaration d\'accessibilité',
         updated: 'Dernière mise à jour : Juin 2026',
-        intro: 'Le cabinet NNC-Law s\'engage à rendre son site internet accessible aux personnes handicapées, conformément à la réglementation israélienne sur l\'égalité des droits des personnes handicapées et à la norme israélienne T"I 5568, basée sur WCAG 2.0 niveau AA.',
+        intro: 'Le cabinet NNC-Law s\'engage à rendre son site internet accessible aux personnes handicapées, conformément à la réglementation israélienne sur l\'égalité des droits des personnes handicapées et à la norme israélienne T"I 5568, basée sur WCAG 2.1 niveau AA.',
         sections: [
             {
                 title: 'Niveau d\'accessibilité',
-                text: 'Le site respecte le niveau AA de la norme WCAG 2.0, incluant :',
+                text: 'Le site respecte le niveau AA de la norme WCAG 2.1, incluant :',
                 items: [
                     'Support des lecteurs d\'écran via les attributs ARIA et une structure sémantique correcte',
                     'Navigation complète au clavier',
@@ -642,10 +656,24 @@ Cette gestion personnalisée permet aux propriétaires, notamment ceux résidant
                 ],
             },
             {
+                title: 'Accessibilité des documents PDF',
+                text: 'Le cabinet publie des documents juridiques (contrats, formulaires, articles) au format PDF. Nous travaillons à rendre ces documents accessibles de manière progressive. Si vous rencontrez un document inaccessible, vous pouvez nous contacter via les coordonnées ci-dessous et nous vous fournirons une version accessible dans un délai raisonnable.',
+                items: [],
+            },
+            {
+                title: 'Responsable accessibilité',
+                text: 'Le responsable accessibilité du cabinet est chargé de la mise en œuvre des exigences d\'accessibilité et de répondre aux demandes :',
+                items: [
+                    'Nom : Me Michaël Nakache',
+                    'Email : nnc@nnc-law.com',
+                    'Téléphone : 02-6437311',
+                ],
+            },
+            {
                 title: 'Limitations connues',
                 text: 'Nous travaillons à une amélioration continue. Limitations connues :',
                 items: [
-                    'Certains documents PDF peuvent ne pas être entièrement accessibles',
+                    'Certains documents PDF peuvent ne pas être entièrement accessibles — une version accessible peut être demandée directement au cabinet',
                 ],
             },
             {

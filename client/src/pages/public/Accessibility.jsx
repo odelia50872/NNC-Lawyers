@@ -17,11 +17,13 @@ function Accessibility() {
                     <section key={i} className="accessibility-section">
                         <h2>{section.title}</h2>
                         <p>{section.text}</p>
-                        <ul>
-                            {section.items.map((item, j) => (
-                                <li key={j}>{item}</li>
-                            ))}
-                        </ul>
+                        {section.items.length > 0 && (
+                            <ul>
+                                {section.items.map((item, j) => (
+                                    <li key={j}>{item}</li>
+                                ))}
+                            </ul>
+                        )}
                     </section>
                 ))}
             </div>
