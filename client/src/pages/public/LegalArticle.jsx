@@ -17,7 +17,7 @@ function LegalArticle() {
     }, []);
 
     return (
-        <main className="legal-article-page" role="main" aria-label={t.legalArticles.title}>
+        <main id="main-content" className="legal-article-page" role="main" aria-label={t.legalArticles.title}>
             <div className="legal-article-header">
                 <h1 className="legal-article-title">{t.legalArticles.title}</h1>
             </div>
@@ -55,3 +55,7 @@ function LegalArticle() {
                 </ul>
             )}
         </main>
+    );
+}
+
+export default LegalArticle;

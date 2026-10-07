@@ -38,17 +38,17 @@ function Footer() {
 
                 <div className="footer-section">
                     <h4>{t.footer.contact}</h4>
-                    <p><FaPhone /> {t.footer.israel }: { phoneIsrael}</p>
-                    <p><FaPhone /> {t.footer.france }: { phoneFrance}</p>
-                    <p><FaFax /> {t.footer.fax }: { fax}</p>
+                    <p><FaPhone aria-hidden="true" /> {t.footer.israel }: { phoneIsrael}</p>
+                    <p><FaPhone aria-hidden="true" /> {t.footer.france }: { phoneFrance}</p>
+                    <p><FaFax aria-hidden="true" /> {t.footer.fax }: { fax}</p>
                     <p>
-                        <FaEnvelope />
+                        <FaEnvelope aria-hidden="true" />
                         <a href={GMAIL_URL} target="_blank" rel="noreferrer">{email}</a>
                     </p>
                 </div>
 
                 <div className="footer-section">
-                    <h4><FaClock /> {t.footer.hours}</h4>
+                    <h3><FaClock aria-hidden="true" /> {t.footer.hours}</h3>
                     <p>{t.footer.sun}</p>
                     <p>{t.footer.monThu}</p>
                     <p>{t.footer.fri}</p>

@@ -9,6 +9,7 @@ const translations = {
             logout: 'התנתק',
             dashboard: 'האזור שלי',
             legalArticle: 'מאמרים משפטיים',
+            skipToMain: 'דלג לתוכן הראשי',
         },
         home: {
             hero: 'משרד עורכי דין NNC-LAW',
@@ -353,6 +354,7 @@ const translations = {
             logout: 'Se déconnecter',
             dashboard: 'Mon espace',
             legalArticle: 'Articles juridiques',
+            skipToMain: 'Aller au contenu principal',
         },
         home: {
             hero: 'Cabinet d\'avocats NNC-Law',

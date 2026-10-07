@@ -19,6 +19,9 @@ function Header() {
 
     return (
         <header className="header" role="banner">
+            <a href="#main-content" className="skip-to-main">
+                {t.nav.skipToMain || 'דלג לתוכן הראשי'}
+            </a>
             <div className="header-inner">
                 <Link to="/" className="header-logo" aria-label="NNC Law - דף הבית">
                     <img src={logo} alt="NNC Law logo" className="header-logo-img" />

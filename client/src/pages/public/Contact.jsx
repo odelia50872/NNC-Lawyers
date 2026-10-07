@@ -24,7 +24,7 @@ function Contact() {
     };
 
     return (
-        <main className="contact-page" role="main" aria-label={t.contact.title}>
+        <main id="main-content" className="contact-page" role="main" aria-label={t.contact.title}>
             <div className="contact-header">
                 <h1>{t.contact.title}</h1>
                 <p className="contact-subtitle">{t.contact.subtitle}</p>

@@ -6,7 +6,7 @@ function About() {
     const a = t.about;
 
     return (
-        <main className="about-page" role="main" aria-label={a.title}>
+        <main id="main-content" className="about-page" role="main" aria-label={a.title}>
             <div className="about-header">
                 <h1>{a.title}</h1>
                 <p className="about-subtitle">{a.subtitle}</p>

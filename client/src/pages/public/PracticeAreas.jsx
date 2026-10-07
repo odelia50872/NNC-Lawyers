@@ -12,7 +12,7 @@ function PracticeAreas() {
     const closeLabel = lang === 'fr' ? 'Fermer' : 'סגור';
 
     return (
-        <main className="practice-page" role="main" aria-label={t.practiceAreas.title}>
+        <main id="main-content" className="practice-page" role="main" aria-label={t.practiceAreas.title}>
             <div className="practice-header">
                 <h1>{t.practiceAreas.title}</h1>
                 <p className="practice-subtitle">{t.practiceAreas.subtitle}</p>
@@ -66,3 +66,7 @@ function PracticeAreas() {
                 </div>
             )}
         </main>
+    );
+}
+
+export default PracticeAreas;

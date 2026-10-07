@@ -26,7 +26,7 @@ function Team() {
     const closeLabel = lang === 'fr' ? 'Fermer' : 'סגור';
 
     return (
-        <main className="team-page" role="main" aria-label={t.team.title}>
+        <main id="main-content" className="team-page" role="main" aria-label={t.team.title}>
             <div className="team-header">
                 <h1>{t.team.title}</h1>
             </div>
@@ -77,3 +77,7 @@ function Team() {
                 </div>
             )}
         </main>
+    );
+}
+
+export default Team;

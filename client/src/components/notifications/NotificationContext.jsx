@@ -27,7 +27,7 @@ export function NotificationProvider({ children }) {
 function NotificationContainer({ notifications }) {
     if (!notifications.length) return null;
     return (
-        <div className="notification-container">
+        <div className="notification-container" role="status" aria-live="polite" aria-atomic="false">
             {notifications.map(n => (
                 <div key={n.id} className={`notification notification--${n.type}${n.fading ? ' fading' : ''}`}>
                     {n.message}
