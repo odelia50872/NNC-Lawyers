@@ -12,7 +12,7 @@ function PracticeAreas() {
     const closeLabel = lang === 'fr' ? 'Fermer' : 'סגור';
 
     return (
-        <div className="practice-page">
+        <main className="practice-page" role="main" aria-label={t.practiceAreas.title}>
             <div className="practice-header">
                 <h1>{t.practiceAreas.title}</h1>
                 <p className="practice-subtitle">{t.practiceAreas.subtitle}</p>
@@ -21,7 +21,11 @@ function PracticeAreas() {
                 {t.practiceAreas.items.map((item, i) => {
                     const Icon = ICONS[i] || FaBriefcase;
                     return (
-                        <div className="practice-card" key={i}>
+                        <div
+                            className="practice-card"
+                            key={i}
+                            role="article"
+                        >
                             <div className="practice-icon"><Icon /></div>
                             <h3>{item.title}</h3>
                             <p>{item.desc}</p>
@@ -61,8 +65,4 @@ function PracticeAreas() {
                     </div>
                 </div>
             )}
-        </div>
-    );
-}
-
-export default PracticeAreas;
+        </main>

@@ -32,7 +32,7 @@ function Header() {
                 >
                     <span /><span /><span />
                 </button>
-                <nav className={`header-nav${menuOpen ? ' mobile-open' : ''}`} aria-label={t.nav.about}>
+                <nav className={`header-nav${menuOpen ? ' mobile-open' : ''}`} aria-label="ניווט ראשי">
                     <div className="header-nav-links">
                         <NavLink to="/about" className={({ isActive }) => isActive ? 'active' : ''} onClick={closeMenu}>{t.nav.about}</NavLink>
                         <NavLink to="/team" className={({ isActive }) => isActive ? 'active' : ''} onClick={closeMenu}>{t.nav.team}</NavLink>

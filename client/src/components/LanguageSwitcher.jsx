@@ -21,7 +21,13 @@ function LanguageSwitcher() {
             }}
             tabIndex={-1}
         >
-            <button className="lang-current" onClick={() => setOpen(o => !o)}>
+            <button
+                className="lang-current"
+                onClick={() => setOpen(o => !o)}
+                aria-label={`שפה נוכחית: ${LANGS[lang].label}. לחץ לשינוי שפה`}
+                aria-expanded={open}
+                aria-haspopup="listbox"
+            >
                 {LANGS[lang].label} ▾
             </button>
             {open && (

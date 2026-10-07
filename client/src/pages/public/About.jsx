@@ -6,7 +6,7 @@ function About() {
     const a = t.about;
 
     return (
-        <div className="about-page">
+        <main className="about-page" role="main" aria-label={a.title}>
             <div className="about-header">
                 <h1>{a.title}</h1>
                 <p className="about-subtitle">{a.subtitle}</p>
@@ -28,7 +28,7 @@ function About() {
                     <p>{a.section3}</p>
                 </div>
             </div>
-        </div>
+        </main>
     );
 }
 

@@ -23,7 +23,8 @@ export function LanguageProvider({ children }) {
 
     useEffect(() => {
         document.documentElement.lang = lang;
-    }, []);
+        document.documentElement.dir = lang === 'he' ? 'rtl' : 'ltr';
+    }, [lang]);
 
     return (
         <LanguageContext.Provider value={{ lang, setLang, t, dir }}>

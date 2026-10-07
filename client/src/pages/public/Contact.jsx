@@ -24,7 +24,7 @@ function Contact() {
     };
 
     return (
-        <div className="contact-page">
+        <main className="contact-page" role="main" aria-label={t.contact.title}>
             <div className="contact-header">
                 <h1>{t.contact.title}</h1>
                 <p className="contact-subtitle">{t.contact.subtitle}</p>
@@ -32,7 +32,7 @@ function Contact() {
 
             <div className="contact-layout">
                 <div className="contact-info-card">
-                    <h3>{t.contact.directContact}</h3>
+                    <h2>{t.contact.directContact}</h2>
                     <ul className="contact-info-list">
                         {t.contact.contacts.map((c, i) => (
                             <li key={i}>
@@ -50,40 +50,47 @@ function Contact() {
                     <form className="contact-form" onSubmit={handleSubmit}>
                         <div className="form-row">
                             <div className="form-group">
-                                <label>{t.contact.name}</label>
+                                <label htmlFor="contact-name">{t.contact.name}</label>
                                 <input
+                                    id="contact-name"
                                     type="text"
                                     name="name"
                                     value={form.name}
                                     onChange={handleChange}
                                     required
+                                    autoComplete="name"
                                 />
                             </div>
                             <div className="form-group">
-                                <label>{t.contact.phone}</label>
+                                <label htmlFor="contact-phone">{t.contact.phone}</label>
                                 <input
+                                    id="contact-phone"
                                     type="tel"
                                     name="phone"
                                     value={form.phone}
                                     onChange={handleChange}
+                                    autoComplete="tel"
                                 />
                             </div>
                         </div>
 
                         <div className="form-group">
-                            <label>{t.contact.email}</label>
+                            <label htmlFor="contact-email">{t.contact.email}</label>
                             <input
+                                id="contact-email"
                                 type="email"
                                 name="email"
                                 value={form.email}
                                 onChange={handleChange}
                                 required
+                                autoComplete="email"
                             />
                         </div>
 
                         <div className="form-group">
-                            <label>{t.contact.message}</label>
+                            <label htmlFor="contact-message">{t.contact.message}</label>
                             <textarea
+                                id="contact-message"
                                 name="message"
                                 value={form.message}
                                 onChange={handleChange}
@@ -98,7 +105,7 @@ function Contact() {
                     </form>
                 </div>
             </div>
-        </div>
+        </main>
     );
 }
 
