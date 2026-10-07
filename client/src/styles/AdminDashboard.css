@@ -51,7 +51,9 @@
     margin-bottom: 2rem;
     flex-wrap: nowrap;
     overflow-x: auto;
+    overflow-y: visible;
     padding-bottom: 0.25rem;
+    padding-top: 0.25rem;
     scrollbar-width: none;
 }
 
