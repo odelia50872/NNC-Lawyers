@@ -142,11 +142,14 @@
     transition: background 0.2s, transform 0.1s !important;
     letter-spacing: 0.3px !important;
     white-space: nowrap !important;
+    display: inline-block !important;
+    text-align: center !important;
+}
+
+.header-user-btn {
     width: 130px !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
-    display: inline-block !important;
-    text-align: center !important;
 }
 
 .header-login-btn:hover {
