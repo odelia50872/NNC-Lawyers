@@ -235,12 +235,21 @@
 /* רספונסיבי */
 @media (max-width: 1280px) {
     .header-inner { padding: 0.75rem 1.5rem; gap: 0.75rem; }
-    .header-nav-links { gap: 0.75rem; }
+    .header-nav-links { gap: 0.6rem; }
     .header-nav-links a { font-size: 0.88rem; }
-    .header-login-btn { padding: 0.5rem 0.85rem !important; font-size: 0.82rem !important; max-width: 120px !important; }
+    .header-login-btn { padding: 0.5rem 0.85rem !important; font-size: 0.82rem !important; }
+    .header-user-btn { width: 110px !important; }
     .header-logout-btn { padding: 0.5rem 0.85rem; font-size: 0.82rem; }
     .header-logo { font-size: 1.5rem; letter-spacing: 2px; }
     .header-logo-img { width: 55px; height: 55px; }
+}
+
+@media (max-width: 1200px) {
+    .header-nav-links { gap: 0.4rem; }
+    .header-nav-links a { font-size: 0.82rem; }
+    .header-user-btn { width: 100px !important; }
+    .header-logout-btn { padding: 0.5rem 0.7rem; font-size: 0.8rem; }
+    .header-login-btn { padding: 0.5rem 0.7rem !important; font-size: 0.8rem !important; }
 }
 
 /* מתחת ל-1100px — מעבר למבורגר */
