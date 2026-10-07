@@ -46,7 +46,7 @@ function Header() {
                     <div className="header-nav-buttons">
                         {user ? (
                             <>
-                                <NavLink to={dashboardPath} className="header-login-btn header-user-btn" onClick={closeMenu}>
+                                <NavLink to={dashboardPath} className="header-login-btn header-user-btn" onClick={closeMenu} title={user.full_name}>
                                     {user.full_name || t.nav.dashboard}
                                 </NavLink>
                                 <button className="header-logout-btn" onClick={() => { logout(navigate); closeMenu(); }}>
