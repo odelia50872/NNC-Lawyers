@@ -26,7 +26,7 @@ function PracticeAreas() {
                             key={i}
                             role="article"
                         >
-                            <div className="practice-icon"><Icon /></div>
+                            <div className="practice-icon" aria-hidden="true"><Icon /></div>
                             <h3>{item.title}</h3>
                             <p>{item.desc}</p>
                             {item.bio && (

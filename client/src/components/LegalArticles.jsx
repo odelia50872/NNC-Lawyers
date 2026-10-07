@@ -29,13 +29,19 @@ function LegalArticles() {
                     const isOpen  = expanded === a.id;
                     return (
                         <li key={a.id} className={`legal-article-item${isOpen ? ' open' : ''}`}>
-                            <div className="legal-article-item-header" onClick={() => setExpanded(isOpen ? null : a.id)}>
+                            <div className="legal-article-item-header">
                                 <h3 className="legal-article-item-title">{title}</h3>
-                                <button className="legal-article-expand-btn" type="button">
+                                <button
+                                    className="legal-article-expand-btn"
+                                    type="button"
+                                    aria-expanded={isOpen}
+                                    aria-label={`${title} - ${isOpen ? t.legalArticles.readLess : t.legalArticles.readMore}`}
+                                    onClick={() => setExpanded(isOpen ? null : a.id)}
+                                >
                                     {isOpen ? (
-                                        <span className="legal-article-expand-icon">−</span>
+                                        <span className="legal-article-expand-icon" aria-hidden="true">−</span>
                                     ) : (
-                                        <span className="legal-article-expand-icon">+</span>
+                                        <span className="legal-article-expand-icon" aria-hidden="true">+</span>
                                     )}
                                 </button>
                             </div>

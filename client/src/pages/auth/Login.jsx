@@ -137,7 +137,7 @@ function Login() {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
-                        <button type="button" className="toggle-password" onClick={() => setShowPassword(p => !p)}>
+                        <button type="button" className="toggle-password" onClick={() => setShowPassword(p => !p)} aria-label={showPassword ? (lang === 'fr' ? 'Masquer le mot de passe' : 'הסתר סיסמה') : (lang === 'fr' ? 'Afficher le mot de passe' : 'הצג סיסמה')} aria-pressed={showPassword}>
                             {showPassword ? (
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                     <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
@@ -159,7 +159,7 @@ function Login() {
 
                     <button type="submit">{t.login.submit}</button>
 
-                    <div className="login-divider"><span>או</span></div>
+                    <div className="login-divider" role="separator" aria-hidden="true"><span>{lang === 'fr' ? 'ou' : 'או'}</span></div>
 
                     <div className="google-login-wrapper">
                         <GoogleLogin

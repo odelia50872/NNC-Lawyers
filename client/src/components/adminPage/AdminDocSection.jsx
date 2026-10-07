@@ -129,8 +129,8 @@ function AdminDocSection({ endpoint, title, icon, accept, allowDelete = false })
                                             <img src={d.file_url} alt={d.title} className="photo-thumb" />
                                             <span className="photo-title">{d.title}</span>
                                             <div className="admin-doc-actions" style={{ padding: '0.4rem' }}>
-                                                <button className="admin-edit-btn" onClick={() => { setEditDoc(d); setEditTitle(d.title); setEditYear(d.year); }}><FaEdit /></button>
-                                                <button className="admin-reports-del-btn" onClick={(e) => handleDeleteDoc(e, d.id)}><FaTrashAlt /></button>
+                                                <button className="admin-edit-btn" aria-label={t.confirm.editTooltip} onClick={() => { setEditDoc(d); setEditTitle(d.title); setEditYear(d.year); }}><FaEdit aria-hidden="true" /></button>
+                                                <button className="admin-reports-del-btn" aria-label={t.confirm.deleteTooltip} onClick={(e) => handleDeleteDoc(e, d.id)}><FaTrashAlt aria-hidden="true" /></button>
                                             </div>
                                         </div>
                                     ))}
@@ -141,8 +141,8 @@ function AdminDocSection({ endpoint, title, icon, accept, allowDelete = false })
                                         <li key={d.id} className="agreements-item">
                                             <a href={d.file_url} target="_blank" rel="noreferrer">{icon} {d.title}</a>
                                             <div className="admin-doc-actions">
-                                                <button className="admin-edit-btn" onClick={() => { setEditDoc(d); setEditTitle(d.title); setEditYear(d.year); }}><FaEdit /></button>
-                                                <button className="admin-reports-del-btn" onClick={(e) => handleDeleteDoc(e, d.id)}><FaTrashAlt /></button>
+                                                <button className="admin-edit-btn" aria-label={t.confirm.editTooltip} onClick={() => { setEditDoc(d); setEditTitle(d.title); setEditYear(d.year); }}><FaEdit aria-hidden="true" /></button>
+                                                <button className="admin-reports-del-btn" aria-label={t.confirm.deleteTooltip} onClick={(e) => handleDeleteDoc(e, d.id)}><FaTrashAlt aria-hidden="true" /></button>
                                             </div>
                                         </li>
                                     ))}
@@ -165,8 +165,8 @@ function AdminDocSection({ endpoint, title, icon, accept, allowDelete = false })
                             <span className="admin-client-email">{c.email}</span>
                         </div>
                         {allowDelete && (
-                            <button className="admin-client-delete-btn" onClick={(e) => handleDeleteClient(e, c.id)}>
-                                <FaTrashAlt />
+                            <button className="admin-client-delete-btn" aria-label={`${t.adminAddClient.deleteConfirm} ${c.full_name}`} onClick={(e) => handleDeleteClient(e, c.id)}>
+                                <FaTrashAlt aria-hidden="true" />
                             </button>
                         )}
                     </div>
@@ -174,7 +174,7 @@ function AdminDocSection({ endpoint, title, icon, accept, allowDelete = false })
             </div>
 
             {editDoc && (
-                <div className="admin-modal-overlay" onClick={() => setEditDoc(null)}>
+                <div className="admin-modal-overlay" role="dialog" aria-modal="true" aria-label={t.confirm.updateDoc} onClick={() => setEditDoc(null)}>
                     <div className="admin-modal" onClick={e => e.stopPropagation()}>
                         <h3>{t.confirm.updateDoc}</h3>
                         <form className="admin-reports-form" onSubmit={handleUpdateDoc}>

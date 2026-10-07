@@ -31,9 +31,11 @@ function LanguageSwitcher() {
                 {LANGS[lang].label} ▾
             </button>
             {open && (
-                <div className="lang-dropdown">
+                <div className="lang-dropdown" role="listbox" aria-label="בחר שפה">
                     <button
                         className="lang-dropdown-item"
+                        role="option"
+                        aria-selected={false}
                         onMouseDown={(e) => {
                             e.preventDefault();
                             setLang(LANGS[lang].next);

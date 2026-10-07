@@ -25,25 +25,43 @@ function ClientDashboard() {
     return (
         <div className="dashboard-container">
             <h1 className="dashboard-title">{t.dashboard.title}</h1>
-            <div className="dashboard-tabs">
+            <div className="dashboard-tabs" role="tablist" aria-label={t.dashboard.title}>
                 {tabs.map(tab => (
                     <button
                         key={tab.key}
                         className={`dashboard-tab${activeTab === tab.key ? ' active' : ''}`}
                         onClick={() => setActiveTab(tab.key)}
+                        role="tab"
+                        aria-selected={activeTab === tab.key}
+                        aria-controls={`tabpanel-${tab.key}`}
+                        id={`tab-${tab.key}`}
                     >
                         {tab.label}
                     </button>
                 ))}
             </div>
             <div className="dashboard-content">
-                {activeTab === 'reports'    && <FinancialReports />}
-                {activeTab === 'agreements' && <RentalAgreements />}
-                {activeTab === 'insurance'  && <InsurancePolicy />}
-                {activeTab === 'identity'   && <IdentityDocuments />}
-                {activeTab === 'poa'        && <PowerOfAttorney />}
-                {activeTab === 'photos'     && <Photos />}
-                {activeTab === 'misc'       && <Miscellaneous />}
+                {tabs.map(tab => (
+                    <div
+                        key={tab.key}
+                        id={`tabpanel-${tab.key}`}
+                        role="tabpanel"
+                        aria-labelledby={`tab-${tab.key}`}
+                        hidden={activeTab !== tab.key}
+                    >
+                        {activeTab === tab.key && (
+                            <>
+                                {tab.key === 'reports'    && <FinancialReports />}
+                                {tab.key === 'agreements' && <RentalAgreements />}
+                                {tab.key === 'insurance'  && <InsurancePolicy />}
+                                {tab.key === 'identity'   && <IdentityDocuments />}
+                                {tab.key === 'poa'        && <PowerOfAttorney />}
+                                {tab.key === 'photos'     && <Photos />}
+                                {tab.key === 'misc'       && <Miscellaneous />}
+                            </>
+                        )}
+                    </div>
+                ))}
             </div>
         </div>
     );
