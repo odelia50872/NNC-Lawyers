@@ -49,13 +49,16 @@ NNC-Law is a full-stack application consisting of:
   - Rental Agreements
   - Insurance Policies
   - Identity Documents
-- File download support (PDF, Excel)
+  - Power of Attorney
+  - Photos
+  - Miscellaneous
+- File download support (PDF, Excel, images)
 - Automatic session refresh with activity tracking
 - **Forced password change** on first login (temporary password flow)
 
 ### Admin Dashboard
 - Add / delete clients with automatic welcome email (temporary password)
-- Upload, update, and delete documents per client per category
+- Upload, update, and delete documents per client per category (7 categories)
 - Manage legal articles (Hebrew + French content)
 - Admin action confirmation with password re-verification
 - Paginated and searchable client list
@@ -91,6 +94,8 @@ NNC-Law is a full-stack application consisting of:
 
 ### Database
 - **MySQL** — relational database with foreign key constraints
+- **Production:** hosted on Railway (with persistent volume for uploads)
+- **Local:** MySQL running on localhost
 
 ---
 
@@ -100,28 +105,39 @@ NNC-Law is a full-stack application consisting of:
 NNC-Lawyers/
 ├── client/                        # React frontend (Vite)
 │   ├── public/
+│   │   ├── sitemap.xml            # SEO sitemap
+│   │   └── robots.txt
 │   └── src/
 │       ├── API/                   # Axios API service
 │       ├── assets/                # Images and logos
 │       ├── components/
 │       │   ├── adminPage/         # Admin UI components
 │       │   ├── clientPage/        # Client dashboard components
-│       │   ├── notifications/     # Toast notification system
+│       │   │   └── DocumentList.jsx  # Shared document list component
+│       │   ├── notifications/     # Toast notification system (with local CSS)
 │       │   ├── Header.jsx
-│       │   ├── footer.jsx
+│       │   ├── Footer.jsx
 │       │   ├── LanguageSwitcher.jsx
+│       │   ├── LegalArticles.jsx
 │       │   ├── ProtectedRoute.jsx
-│       │   └── PublicLayout.jsx
+│       │   ├── PublicLayout.jsx
+│       │   └── ScrollToTop.jsx
 │       ├── context/
 │       │   ├── AuthContext.jsx    # Global auth state
 │       │   ├── LanguageContext.jsx
 │       │   └── translations.js   # All UI strings (he/fr)
 │       ├── hooks/                 # Custom React hooks
+│       │   ├── useAdminAuth.jsx
+│       │   ├── useClientSearch.js
+│       │   ├── useDocuments.js
+│       │   ├── useSlug.js
+│       │   ├── useTabsNav.js
+│       │   └── useTokenManager.js
 │       ├── pages/
 │       │   ├── admin/             # Admin dashboard
 │       │   ├── auth/              # Login, ChangePassword
 │       │   ├── client/            # Client dashboard
-│       │   └── public/            # About, Team, Contact, etc.
+│       │   └── public/            # About, Team, Contact, PracticeAreas, etc.
 │       └── styles/                # Per-component CSS files
 │
 ├── server/                        # Express backend
@@ -137,7 +153,7 @@ NNC-Lawyers/
 │   ├── routes/
 │   │   ├── authRoutes.js
 │   │   ├── emailRoutes.js
-│   │   ├── userRoutes.js (clientRoutes)
+│   │   ├── userRoutes.js
 │   │   ├── legalArticleRoutes.js
 │   │   └── makeDocRouter.js       # Dynamic document router factory
 │   ├── services/
@@ -145,17 +161,19 @@ NNC-Lawyers/
 │   │   ├── documentService.js
 │   │   ├── legalArticleService.js
 │   │   └── SQLRequest.js          # Generic safe query helpers
+│   ├── templates/
+│   │   └── emailTemplates.js      # Email templates (he/fr)
 │   ├── tools/
-│   │   ├── db.js                  # MySQL connection pool
+│   │   ├── db.js                  # MySQL connection pool (Railway or local)
 │   │   ├── mailer.js              # Nodemailer transporter
 │   │   └── tokenUtils.js          # signToken, setTokenCookie
-│   ├── config/
-│   │   └── emailContent.js        # Email templates (he/fr)
 │   ├── uploads/                   # Uploaded files (served statically)
+│   │   └── .gitkeep               # Keeps folder in git without files
 │   └── app.js                     # Express app entry point
 │
 └── database/
-    └── schema.sql                 # Full DB schema + seed data
+    ├── schema.sql                 # DB schema — safe to run (CREATE IF NOT EXISTS)
+    └── import-db.js               # One-time script to initialize DB on new environment
 ```
 
 ---
@@ -191,6 +209,14 @@ See [Environment Variables](#environment-variables) below.
 mysql -u root -p < database/schema.sql
 ```
 
+Or use the import script:
+```bash
+cd database
+node import-db.js
+```
+
+> **Note:** `schema.sql` uses `CREATE TABLE IF NOT EXISTS` — safe to run on existing databases without data loss.
+
 ### 5. Run the application
 ```bash
 # Terminal 1 — Start the server
@@ -215,11 +241,13 @@ DB_HOST=localhost
 DB_USER=root
 DB_PASSWORD=your_mysql_password
 DB_NAME=nnc_law
+DATABASE_URL=mysql://user:password@host:port/dbname
 PORT=3000
 JWT_SECRET=your_jwt_secret
 EMAIL_USER=your_gmail@gmail.com
 EMAIL_PASS=your_gmail_app_password
 GOOGLE_CLIENT_ID=your_google_client_id
+SERVER_URL=http://localhost:3000
 ```
 
 ### `client/.env`
@@ -228,8 +256,10 @@ VITE_API_URL=http://localhost:3000/api
 VITE_GOOGLE_CLIENT_ID=your_google_client_id
 ```
 
-> **Note:** `EMAIL_PASS` must be a **Gmail App Password**, not your regular Gmail password.  
-> Generate one at: Google Account → Security → 2-Step Verification → App Passwords
+> **Notes:**
+> - `EMAIL_PASS` must be a **Gmail App Password** — generate at: Google Account → Security → 2-Step Verification → App Passwords
+> - In production (Railway), `MYSQL_URL` or `MYSQL_PUBLIC_URL` are injected automatically — no manual DB config needed
+> - `DATABASE_URL` is used only by `database/import-db.js`
 
 ---
 
@@ -244,12 +274,15 @@ The schema creates the following tables:
 | `rental_agreements` | Rental agreement files per client |
 | `identity_documents` | Identity document files per client |
 | `insurance_policies` | Insurance policy files per client |
+| `power_of_attorney` | Power of attorney files per client |
+| `photos` | Photo files per client |
+| `miscellaneous` | Miscellaneous files per client |
 | `legal_articles` | Bilingual legal articles (Hebrew + French) |
 
-To add the `must_change_password` column to an existing database:
-```sql
-ALTER TABLE clients ADD COLUMN IF NOT EXISTS must_change_password TINYINT(1) DEFAULT 0;
-```
+### File Storage
+- **Local:** files saved to `server/uploads/`
+- **Production:** files saved to `/app/uploads/` on Railway persistent volume
+- Uploaded files are **not committed to git** (see `.gitignore`)
 
 ---
 
@@ -278,7 +311,7 @@ ALTER TABLE clients ADD COLUMN IF NOT EXISTS must_change_password TINYINT(1) DEF
 | PUT | `/:id` | Self/Admin | Update client |
 | DELETE | `/:id` | Admin | Delete client |
 
-### Documents — `/api/financial-reports`, `/api/rental-agreements`, `/api/insurance-policies`, `/api/identity-documents`
+### Documents — `/api/financial-reports`, `/api/rental-agreements`, `/api/insurance-policies`, `/api/identity-documents`, `/api/power-of-attorney`, `/api/photos`, `/api/miscellaneous`
 | Method | Endpoint | Auth | Description |
 |---|---|---|---|
 | GET | `/:clientId` | Self/Admin | Get documents for client |
@@ -336,3 +369,17 @@ ALTER TABLE clients ADD COLUMN IF NOT EXISTS must_change_password TINYINT(1) DEF
 | Manage legal articles | ❌ | ✅ |
 | Access admin dashboard | ❌ | ✅ |
 | View public pages | ✅ | ✅ |
+
+---
+
+## Accessibility
+
+The site is built to **WCAG 2.1 AA** standards:
+- Full keyboard navigation
+- ARIA attributes on all interactive elements
+- RTL/LTR support per language
+- Color contrast compliant
+- Screen reader compatible
+- Responsive for all screen sizes
+
+See the live [Accessibility Statement](https://www.nnc-law.com/accessibility) for full details.
