@@ -10,25 +10,10 @@ CREATE DATABASE IF NOT EXISTS nnc_law
 USE nnc_law;
 
 -- ================================================
--- מחיקת טבלאות קיימות (סדר חשוב - קודם תלויות)
--- ================================================
-
-SET FOREIGN_KEY_CHECKS = 0;
-
-DROP TABLE IF EXISTS financial_reports;
-DROP TABLE IF EXISTS rental_agreements;
-DROP TABLE IF EXISTS identity_documents;
-DROP TABLE IF EXISTS insurance_policies;
-DROP TABLE IF EXISTS legal_articles;
-DROP TABLE IF EXISTS clients;
-
-SET FOREIGN_KEY_CHECKS = 1;
-
--- ================================================
 -- טבלת לקוחות
 -- ================================================
 
-CREATE TABLE clients (
+CREATE TABLE IF NOT EXISTS clients (
     id                   INT AUTO_INCREMENT PRIMARY KEY,
     full_name            VARCHAR(100)  NOT NULL,
     email                VARCHAR(100)  NOT NULL UNIQUE,
@@ -43,7 +28,7 @@ CREATE TABLE clients (
 -- טבלת דוחות כספיים
 -- ================================================
 
-CREATE TABLE financial_reports (
+CREATE TABLE IF NOT EXISTS financial_reports (
     id          INT AUTO_INCREMENT PRIMARY KEY,
     client_id   INT          NOT NULL,
     title       VARCHAR(255) NOT NULL,
@@ -57,7 +42,7 @@ CREATE TABLE financial_reports (
 -- טבלת הסכמי שכירות
 -- ================================================
 
-CREATE TABLE rental_agreements (
+CREATE TABLE IF NOT EXISTS rental_agreements (
     id          INT AUTO_INCREMENT PRIMARY KEY,
     client_id   INT          NOT NULL,
     title       VARCHAR(255) NOT NULL,
@@ -71,7 +56,7 @@ CREATE TABLE rental_agreements (
 -- טבלת תעודות זהות
 -- ================================================
 
-CREATE TABLE identity_documents (
+CREATE TABLE IF NOT EXISTS identity_documents (
     id          INT AUTO_INCREMENT PRIMARY KEY,
     client_id   INT          NOT NULL,
     title       VARCHAR(255) NOT NULL,
@@ -85,7 +70,7 @@ CREATE TABLE identity_documents (
 -- טבלת מאמרים משפטיים
 -- ================================================
 
-CREATE TABLE legal_articles (
+CREATE TABLE IF NOT EXISTS legal_articles (
     id         INT AUTO_INCREMENT PRIMARY KEY,
     title_he   VARCHAR(255) NOT NULL,
     content_he TEXT         NOT NULL,
@@ -98,7 +83,7 @@ CREATE TABLE legal_articles (
 -- טבלת פוליסות ביטוח
 -- ================================================
 
-CREATE TABLE insurance_policies (
+CREATE TABLE IF NOT EXISTS insurance_policies (
     id          INT AUTO_INCREMENT PRIMARY KEY,
     client_id   INT          NOT NULL,
     title       VARCHAR(255) NOT NULL,
@@ -108,39 +93,37 @@ CREATE TABLE insurance_policies (
     FOREIGN KEY (client_id) REFERENCES clients(id) ON DELETE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS power_of_attorney(
-    id INT AUTO_INCREMENT PRIMARY KEY, 
-    client_id INT, title VARCHAR(255),
-    year INT,
-    file_url TEXT,
+CREATE TABLE IF NOT EXISTS power_of_attorney (
+    id        INT AUTO_INCREMENT PRIMARY KEY,
+    client_id INT,
+    title     VARCHAR(255),
+    year      INT,
+    file_url  TEXT,
     FOREIGN KEY (client_id) REFERENCES clients(id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS photos (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    client_id INT, title VARCHAR(255),
-    year INT,
-    file_url TEXT,
+    id        INT AUTO_INCREMENT PRIMARY KEY,
+    client_id INT,
+    title     VARCHAR(255),
+    year      INT,
+    file_url  TEXT,
     FOREIGN KEY (client_id) REFERENCES clients(id) ON DELETE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS miscellaneous (  
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    client_id INT, title VARCHAR(255), 
-    year INT, 
-    file_url TEXT,
+CREATE TABLE IF NOT EXISTS miscellaneous (
+    id        INT AUTO_INCREMENT PRIMARY KEY,
+    client_id INT,
+    title     VARCHAR(255),
+    year      INT,
+    file_url  TEXT,
     FOREIGN KEY (client_id) REFERENCES clients(id) ON DELETE CASCADE
 );
 
 -- ================================================
--- נתוני לקוחות
--- סיסמה של כולם: 123456
+-- נתוני ברירת מחדל — מנהל מערכת
+-- סיסמה: 123456
 -- ================================================
 
-INSERT INTO clients (full_name, email, password_hash, phone, role) VALUES
-('מנהל מערכת',             'admin@nnc-law.co.il',   '$2b$10$LNAeyyn6lf.T9PSqhhqAKeqNv2w8mpIRyYSiM6kcUlpCwhX3xaN12', '050-1111111', 'admin')
-
-
-
-
-
+INSERT IGNORE INTO clients (full_name, email, password_hash, phone, role) VALUES
+('מנהל מערכת', 'nnc@nnc-law.co.il', '$2b$10$LNAeyyn6lf.T9PSqhhqAKeqNv2w8mpIRyYSiM6kcUlpCwhX3xaN12', '02-6437311', 'admin');

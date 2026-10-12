@@ -10,3 +10,11 @@ build/
 
 # Logs
 *.log
+
+# Uploads — client files, not for git
+server/uploads/*
+!server/uploads/.gitkeep
+
+# Database exports — contain sensitive data
+database/*.sql
+!database/schema.sql
