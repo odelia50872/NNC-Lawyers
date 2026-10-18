@@ -279,7 +279,7 @@ const translations = {
         },
         accessibility: {
             title: 'הצהרת נגישות',
-            updated: 'עדכון אחרון: יוני 2026',
+            updated: 'עדכון אחרון: יולי 2026',
             intro: 'משרד עורכי הדין NNC-Law מחויב להנגיש את אתר האינטרנט שלו לאנשים עם מוגבלויות, בהתאם לתקנות שוויון זכויות לאנשים עם מוגבלות (התאמות נגישות לשירות), התשע"ג-2013, ובהתאם לתקן הישראלי ת"י 5568 המבוסס על WCAG 2.1 ברמה AA.',
             sections: [
                 {
@@ -307,6 +307,7 @@ const translations = {
                         'אייקונים דקורטיביים מוגדרים כ-aria-hidden',
                         'תמיכה בניווט מקלדת בקארדים אינטראקטיביים',
                         'שפת הממשק מתעדכנת דינמית ב-HTML lang',
+                        'שילוב תוסף נגישות NagishLi v3 המאפשר התאמות תצוגה ידניות למשתמש',
                     ],
                 },
                 {
@@ -627,7 +628,7 @@ Cette gestion personnalisée permet aux propriétaires, notamment ceux résidant
         },
         accessibility: {
         title: 'Déclaration d\'accessibilité',
-        updated: 'Dernière mise à jour : Juin 2026',
+        updated: 'Dernière mise à jour : Juillet 2026',
         intro: 'Le cabinet NNC-Law s\'engage à rendre son site internet accessible aux personnes handicapées, conformément à la réglementation israélienne sur l\'égalité des droits des personnes handicapées et à la norme israélienne T"I 5568, basée sur WCAG 2.1 niveau AA.',
         sections: [
             {
@@ -655,6 +656,7 @@ Cette gestion personnalisée permet aux propriétaires, notamment ceux résidant
                     'Icônes décoratives définies comme aria-hidden',
                     'Navigation au clavier sur les cartes interactives',
                     'Langue de l\'interface mise à jour dynamiquement via HTML lang',
+                    'Intégration du plugin d\'accessibilité NagishLi v3 permettant des ajustements d\'affichage personnalisés',
                 ],
             },
             {
