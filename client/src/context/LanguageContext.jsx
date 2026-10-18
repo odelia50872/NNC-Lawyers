@@ -17,6 +17,9 @@ export function LanguageProvider({ children }) {
             localStorage.setItem('lang', newLang);
             document.documentElement.lang = newLang;
             document.documentElement.dir = newLang === 'he' ? 'rtl' : 'ltr';
+            if (window.nagishli_config) {
+                window.nagishli_config.language = newLang === 'he' ? 'he' : 'en';
+            }
             setFading(false);
         }, 250);
     };
