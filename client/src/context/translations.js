@@ -307,7 +307,7 @@ const translations = {
                         'אייקונים דקורטיביים מוגדרים כ-aria-hidden',
                         'תמיכה בניווט מקלדת בקארדים אינטראקטיביים',
                         'שפת הממשק מתעדכנת דינמית ב-HTML lang',
-                        'שילוב תוסף נגישות NagishLi v3 המאפשר התאמות תצוגה ידניות למשתמש',
+                        'שילוב תוסף נגישות UserWay המאפשר התאמות תצוגה ידניות למשתמש (גודל טקסט, ניגודיות, קורא מסך ועוד)',
                     ],
                 },
                 {
@@ -656,7 +656,7 @@ Cette gestion personnalisée permet aux propriétaires, notamment ceux résidant
                     'Icônes décoratives définies comme aria-hidden',
                     'Navigation au clavier sur les cartes interactives',
                     'Langue de l\'interface mise à jour dynamiquement via HTML lang',
-                    'Intégration du plugin d\'accessibilité NagishLi v3 permettant des ajustements d\'affichage personnalisés',
+                    'Intégration du widget d\'accessibilité UserWay permettant des ajustements d\'affichage personnalisés (taille du texte, contraste, lecteur d\'écran, etc.)',
                 ],
             },
             {
