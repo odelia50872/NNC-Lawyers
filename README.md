@@ -1,8 +1,21 @@
-# NNC-Law — Law Firm Client Portal
+# NNC-Law - Law Firm Client Portal
 
 A full-stack web application for **NNC Law**, a bilingual (Hebrew/French) law firm based in Jerusalem. The platform provides a secure client portal for document management, a powerful admin dashboard, and a public-facing website.
 
 > **Live Production Project:** This platform is fully deployed and actively used in production by the law firm and its clients. You can visit the live application here: [https://www.nnc-law.com](https://www.nnc-law.com)
+
+---
+
+## 📸 Preview
+<div align="center">
+  <img src="docs/images/homepage.png" alt="NNC-Law Public Website" width="800px" />
+  <p><em>האתר הציבורי - אודות המשרד</em></p>
+</div>
+
+<div align="center">
+  <img src="docs/images/admin-dashboard.png" alt="Admin Dashboard" width="800px" />
+  <p><em>לוח בקרה ניהולי - ניהול לקוחות ומסמכים</em></p>
+</div>
 
 ---
 
@@ -257,7 +270,7 @@ VITE_GOOGLE_CLIENT_ID=your_google_client_id
 ```
 
 > **Notes:**
-> - `EMAIL_PASS` must be a **Gmail App Password** — generate at: Google Account → Security → 2-Step Verification → App Passwords
+> - `EMAIL_PASS` must be a **Gmail App Password** - generate at: Google Account → Security → 2-Step Verification → App Passwords
 > - In production (Railway), `MYSQL_URL` or `MYSQL_PUBLIC_URL` are injected automatically — no manual DB config needed
 > - `DATABASE_URL` is used only by `database/import-db.js`
 
@@ -288,7 +301,7 @@ The schema creates the following tables:
 
 ## API Reference
 
-### Auth — `/api/auth`
+### Auth - `/api/auth`
 | Method | Endpoint | Auth | Description |
 |---|---|---|---|
 | POST | `/login` | — | Email/password login |
@@ -300,7 +313,7 @@ The schema creates the following tables:
 | POST | `/refresh-token` | JWT | Refresh JWT token |
 | GET | `/me` | — | Get current user from cookie |
 
-### Clients — `/api/clients`
+### Clients - `/api/clients`
 | Method | Endpoint | Auth | Description |
 |---|---|---|---|
 | GET | `/` | Admin | Get all clients |
@@ -311,7 +324,7 @@ The schema creates the following tables:
 | PUT | `/:id` | Self/Admin | Update client |
 | DELETE | `/:id` | Admin | Delete client |
 
-### Documents — `/api/financial-reports`, `/api/rental-agreements`, `/api/insurance-policies`, `/api/identity-documents`, `/api/power-of-attorney`, `/api/photos`, `/api/miscellaneous`
+### Documents - `/api/financial-reports`, `/api/rental-agreements`, `/api/insurance-policies`, `/api/identity-documents`, `/api/power-of-attorney`, `/api/photos`, `/api/miscellaneous`
 | Method | Endpoint | Auth | Description |
 |---|---|---|---|
 | GET | `/:clientId` | Self/Admin | Get documents for client |
@@ -319,7 +332,7 @@ The schema creates the following tables:
 | PUT | `/:id` | Admin | Update document metadata |
 | DELETE | `/:id` | Admin | Delete document + file |
 
-### Legal Articles — `/api/legal-articles`
+### Legal Articles - `/api/legal-articles`
 | Method | Endpoint | Auth | Description |
 |---|---|---|---|
 | GET | `/` | — | Get all articles |
@@ -327,7 +340,7 @@ The schema creates the following tables:
 | PUT | `/:id` | Admin | Update article |
 | DELETE | `/:id` | Admin | Delete article |
 
-### Email — `/api/contact`
+### Email - `/api/contact`
 | Method | Endpoint | Auth | Description |
 |---|---|---|---|
 | POST | `/` | — | Send contact form email |
