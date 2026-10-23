@@ -105,7 +105,7 @@ function AdminLegalArticle() {
             {(showForm || editArticle) && (
                 <form className="legal-admin-form" onSubmit={editArticle ? handleUpdate : handleSubmit}>
                     <div className="legal-admin-form-title">
-                        {editArticle ? t.confirm.update : t.confirm.add} — {t.legalArticles.title}
+                        {editArticle ? t.confirm.update : t.confirm.add} - {t.legalArticles.title}
                     </div>
                     <div className="legal-admin-form-grid">
                         <div className="legal-admin-field">

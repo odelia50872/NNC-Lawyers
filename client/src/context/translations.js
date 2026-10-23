@@ -259,7 +259,7 @@ const translations = {
             emailLangFr: 'צרפתית',
             editTitle: 'עריכת לקוח',
             editSuccess: 'הלקוח עודכן בהצלחה',
-            editEmailSuccess: 'המייל עודכן — סיסמה חדשה נשלחה ללקוח',
+            editEmailSuccess: 'המייל עודכן - סיסמה חדשה נשלחה ללקוח',
         },
         identityDocuments: {
             title: 'תעודות זיהוי',
@@ -328,7 +328,7 @@ const translations = {
                     title: 'מגבלות ידועות',
                     text: 'אנו עובדים על שיפור מתמיד. להלן מגבלות ידועות:',
                     items: [
-                        'חלק מהמסמכים PDF עשויים שלא להיות נגישים במלואם — ניתן לבקש גרסה נגישה בפנייה ישירה למשרד',
+                        'חלק מהמסמכים PDF עשויים שלא להיות נגישים במלואם - ניתן לבקש גרסה נגישה בפנייה ישירה למשרד',
                     ],
                 },
                 {
@@ -359,7 +359,7 @@ const translations = {
         },
         home: {
             hero: 'Cabinet d\'avocats NNC-Law',
-            subtitle: 'Expérience, professionnalisme et fiabilité — à vos côtés à chaque étape',
+            subtitle: 'Expérience, professionnalisme et fiabilité - à vos côtés à chaque étape',
             cta: 'Contactez-nous',
         },
         about: {
@@ -608,7 +608,7 @@ Cette gestion personnalisée permet aux propriétaires, notamment ceux résidant
             emailLangFr: 'Français',
             editTitle: 'Modifier le client',
             editSuccess: 'Client mis à jour avec succès',
-            editEmailSuccess: 'Email mis à jour — un nouveau mot de passe a été envoyé au client',
+            editEmailSuccess: 'Email mis à jour - un nouveau mot de passe a été envoyé au client',
         },
         identityDocuments: {
             title: 'Pièces d\'identité',
@@ -677,7 +677,7 @@ Cette gestion personnalisée permet aux propriétaires, notamment ceux résidant
                 title: 'Limitations connues',
                 text: 'Nous travaillons à une amélioration continue. Limitations connues :',
                 items: [
-                    'Certains documents PDF peuvent ne pas être entièrement accessibles — une version accessible peut être demandée directement au cabinet',
+                    'Certains documents PDF peuvent ne pas être entièrement accessibles - une version accessible peut être demandée directement au cabinet',
                 ],
             },
             {

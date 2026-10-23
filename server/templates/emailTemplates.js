@@ -73,7 +73,7 @@ ${autoReplyFooter.fr}</div>`,
 
 const resetPasswordEmailContent = {
     he: (name, newPassword) => ({
-        subject: 'איפוס סיסמה — NNC-Law',
+        subject: 'איפוס סיסמה - NNC-Law',
         html: `<div dir="rtl" style="font-family:Arial,sans-serif;font-size:15px;color:#222;">
 <p>שלום ${name},</p>
 <p>קיבלנו בקשה לאיפוס הסיסמה שלך. להלן <strong>סיסמה זמנית</strong> לכניסה לחשבונך:</p>
@@ -84,7 +84,7 @@ ${passwordBox(newPassword, 'rtl')}
 ${autoReplyFooter.he}</div>`,
     }),
     fr: (name, newPassword) => ({
-        subject: 'Réinitialisation du mot de passe — NNC-Law',
+        subject: 'Réinitialisation du mot de passe - NNC-Law',
         html: `<div dir="ltr" style="font-family:Arial,sans-serif;font-size:15px;color:#222;">
 <p>Bonjour ${name},</p>
 <p>Nous avons reçu une demande de réinitialisation de votre mot de passe. Voici votre <strong>mot de passe temporaire</strong> :</p>
