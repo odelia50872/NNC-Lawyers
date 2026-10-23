@@ -8,8 +8,7 @@ A full-stack web application for **NNC Law**, a bilingual (Hebrew/French) law fi
 
 ## 📸 Preview
 <div align="center">
-  <img src="<img width="1882" height="872" alt="צילום מסך 2026-10-23 125539" src="https://github.com/user-attachments/assets/c55f68ed-17b3-42bf-aa7f-24837a65888a" />
-" alt="NNC-Law Public Website" width="800px" />
+  <img src="https://github.com/user-attachments/assets/c55f68ed-17b3-42bf-aa7f-24837a65888a" alt="NNC-Law Public Website" width="800px" />
   <p><em>האתר הציבורי - אודות המשרד</em></p>
 </div>
 
