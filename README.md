@@ -13,7 +13,7 @@ A full-stack web application for **NNC Law**, a bilingual (Hebrew/French) law fi
 </div>
 
 <div align="center">
-  <img src="<img width="1852" height="867" alt="צילום מסך 2026-10-23 125911" src="https://github.com/user-attachments/assets/99cce098-ca6d-4dfd-9609-e0ec46e60252" />
+  <img src="https://github.com/user-attachments/assets/99cce098-ca6d-4dfd-9609-e0ec46e60252
 " alt="Admin Dashboard" width="800px" />
   <p><em>לוח בקרה ניהולי - ניהול לקוחות ומסמכים</em></p>
 </div>
